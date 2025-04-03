@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Setup Oscilloscope</title>
+    <link rel="icon" href="assets/img/icon-480.png" type="image/png">
+    <link rel="stylesheet" href="assets/css/main.css">
+    <meta property="og:title" content="Oscilloscope Online V2" />
+    <meta property="og:description"
+        content="Oscilloscope Online is a serial graph plotter.A more customizable alternative of Arduino IDE complete with dynamic inputs and customizable grid as well as colors" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://mumarshahbaz.github.io/Oscilloscope-Online-V2/" />
+    <meta property="og:image" content="https://mumarshahbaz.github.io/Oscilloscope-Online-V2/assets/img/icon-480.png" />
+</head>
+
+<body>
+    <div id="container">
+        <header>
+            <div>
+                <h1 class="primary">Oscilloscope Online V2</h1>
+                <h2>M. Umar Shahbaz</h2>
+            </div>
+            <img src="assets/img/icon-480.png" alt="Oscilloscope Online Logo" class="logo">
+        </header>
+        <hr>
+        <main>
+            <div class="center-align">
+                <h1 class="primary">Setup Oscilloscope</h1>
+            </div>
+            <section id="setup">
+                <form id="setup-form">
+                    <div>
+                        <div class="center-align">
+                            <h3 class="primary">Serial</h3>
+                        </div>
+                        <div>
+                            <label for="baud">Baud rate :</label>
+                            <input id="baud" list="baud-rates" type="number" value="9600" required>
+                            <datalist id="baud-rates">
+                                <option value="300">
+                                <option value="1200">
+                                <option value="2400">
+                                <option value="4800">
+                                <option value="9600">
+                                <option value="14400">
+                                <option value="19200">
+                                <option value="28800">
+                                <option value="38400">
+                                <option value="57600">
+                                <option value="115200">
+                                <option value="230400">
+                                <option value="250000">
+                                <option value="460800">
+                                <option value="500000">
+                                <option value="921600">
+                                <option value="1000000">
+                                <option value="2000000">
+                            </datalist>
+                        </div>
+                        <br>
+                        <div>
+                            <label for="break_char">Break character :</label>
+                            <input id="break_char" type="text" value="/" required>
+                        </div>
+                    </div>
+                    <hr>
+                    <div>
+                        <div class="center-align">
+                            <h3 class="primary">Grid</h3>
+                        </div>
+                        <div>
+                            <label for="title">Chart Title :</label>
+                            <input id="title" type="text" value="Oscilloscope" required>
+                        </div>
+                        <br>
+                        <div>
+                            <label for="xTitle">X axis Title :</label>
+                            <input id="xTitle" type="text" value="Index" required>
+                        </div>
+                        <br>
+                        <div>
+                            <label for="yTitle">Y axis Title :</label>
+                            <input id="yTitle" type="text" value="Value" required>
+                        </div>
+                        <br>
+                        <br>
+                        <div>
+                            <label for="xType">X axis Type :</label>
+                            <select id="xType" required disabled>
+                                <option value="linear">Linear</option>
+                                <option value="time">Time</option>
+                                <option value="ordinal">Text</option>
+                            </select>
+                        </div>
+                        <br>
+                        <div id="xFieldsC">
+                            <div id="xMinC">
+                                <label for="xMin">X axis Min :</label>
+                                <input id="xMin" type="number" value="0" required>
+                            </div>
+                            <br>
+                            <div id="xMaxC">
+                                <label for="xMax">X axis Max :</label>
+                                <input id="xMax" type="number" value="500" required>
+                            </div>
+                        </div>
+                        <br>
+                        <br>
+                        <div>
+                            <label for="yType">Y axis Type :</label>
+                            <select id="yType" required disabled>
+                                <option value="linear">Linear</option>
+                                <option value="log">Logarithmic</option>
+                            </select>
+                        </div>
+                        <br>
+                        <div>
+                            <label for="auto">Auto scale :</label>
+                            <select id="auto" required>
+                                <option value="true">True</option>
+                                <option value="false">False</option>
+                            </select>
+                        </div>
+                        <br>
+                        <div id="yFieldsC">
+                            <div id="yMinC">
+                                <label for="yMin">Y axis Min :</label>
+                                <input id="yMin" type="number" value="0" required>
+                            </div>
+                            <br>
+                            <div id="yMaxC">
+                                <label for="yMax">Y axis Max :</label>
+                                <input id="yMax" type="number" value="1023" required>
+                            </div>
+                        </div>
+                    </div>
+                    <hr>
+                    <div>
+                        <div class="center-align">
+                            <h3 class="primary">Graph</h3>
+                        </div>
+                        <div>
+                            <label for="points">Show as points :</label>
+                            <select id="points" required>
+                                <option value="true">True</option>
+                                <option value="false" selected>False</option>
+                            </select>
+                        </div>
+                        <br>
+                        <div>
+                            <label for="fill">Fill area below :</label>
+                            <select id="fill" required>
+                                <option value="true">True</option>
+                                <option value="false" selected>False</option>
+                            </select>
+                        </div>
+                        <br>
+                        <div>
+                            <label for="graphNum">Graphs to plot :</label>
+                            <input id="graphNum" type="number" value="1" min="1" required>
+                        </div>
+                        <br>
+                        <br>
+                        <br>
+                        <div id="graphFields"></div>
+                    </div>
+                </form>
+                <hr>
+                <div class="center-align">
+                    <button class="button" id="submit">Begin Plot</button>
+                    <button class="button" onclick="window.location.href='help.html'">Help</button>
+                </div>
+            </section>
+        </main>
+    </div>
+</body>
+<script defer src="assets/scripts/dynamicSetup.js"></script>
+<script defer src="assets/scripts/exportSetup.js"></script>
+
+</html>
