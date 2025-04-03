@@ -1,0 +1,221 @@
+/* Alignment and Sizing */
+
+body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+#container header {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+}
+
+#container header img {
+    width: 100px;
+    height: 100px;
+}
+
+.button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 40px;
+}
+
+.center-align {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+hr {
+    margin: 20px 0px;
+}
+
+.vertical-hr {
+    margin: 0px 20px;
+}
+
+.forms {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.setup-form {
+    width:30%;
+}
+
+.setup-form input,
+.setup-form select {
+    width: 50%;
+    float: right;
+}
+
+#plot {
+    display: block;
+    margin: 10px;
+    width: 100%;
+    height: 100%;
+    min-height: 400px;
+}
+
+#theme-selector {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    width: 50px;
+    height: 50px;
+    padding: 10px;
+}
+
+@media (max-width:1200px) {
+
+    .forms {
+        display: block;
+    }
+
+    .setup-form{
+        width: 100%;
+    }
+}
+
+@media (max-width: 610px) {
+    body {
+        display: block;
+        margin: 0px;
+        padding: 0px;
+    }
+
+    #container header {
+        flex-direction: column;
+    }
+
+    #container header img {
+        width: 200px;
+        height: 200px;
+    }
+
+    #plot {
+        margin: 0px;
+    }
+}
+
+@media (max-width: 450px) {
+    #setup-form input,
+    #setup-form select {
+        width: 100%;
+        float: none;
+        margin-top: 2px;
+    }
+}
+
+/* Colors and Styles */
+
+body {
+    background-image:  var(--background-image);
+    background-repeat: repeat;
+    background-size: auto;
+    background-color: var(--background-color);
+    color: var(--text-color);
+    font-family: sans-serif;
+}
+
+#container {
+    background-color: var(--container-background-color);
+    padding: 50px;
+    border-radius: 15px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+
+#container header {
+    text-align: center;
+}
+
+#container header img {
+    border: 1px solid var(--image-border-color);
+    border-radius: 5px;
+}
+
+#container #description ol {
+    margin: 20px 0px;
+}
+
+#container #description li {
+    margin: 10px 0px;
+}
+
+#container footer {
+    font-family: monospace;
+    text-align: center;
+}
+
+.button {
+    background-color: var(--button-background-color);
+    border: 1px solid var(--button-background-color);
+    border-radius: 5px;
+    padding: 10px 20px;
+    color: var(--button-text-color);
+    fill: var(--button-text-color);
+    font-weight: bold;
+    font-size: 16px;
+    text-decoration: none;
+    cursor: pointer;
+    box-shadow: 2px 2px 5px var(--button-shadow-color);
+}
+
+.button:hover {
+    background-color: var(--button-hover-background-color);
+    color: var(--button-hover-text-color);
+    fill: var(--button-hover-text-color);
+    translate: 0px -5px;
+    transition: all 0.15s ease-in-out;
+}
+
+.title {
+    color: var(--title-color);
+}
+
+.setup-form {
+    font-family: monospace;
+    font-size: x-large;
+    font-weight: bold;
+}
+
+.setup-form input,
+.setup-form select {
+    font-family: monospace;
+    font-size: x-large;
+}
+
+#plot-page {
+    background-color: var(--background-color);
+}
+
+.uplot canvas {
+    background-color: white;
+}
+
+.uplot table {
+    background-color: var(--container-background-color);
+    border-radius: 0 0 5px 5px;
+}
+
+.uplot .u-title {
+    background-color: var(--container-background-color);
+    border-radius: 5px 5px 0 0;
+}
+
+@media (max-width: 610px) {
+    #container {
+        border-radius: 0px;
+        box-shadow: none;
+        padding: 15px;
+    }
+}
