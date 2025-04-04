@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Setup Oscilloscope</title>
+    <link rel="icon" href="assets/img/icon-480.png" type="image/png">
+    <link rel="stylesheet" href="assets/css/main.css">
+    <meta property="og:title" content="Oscilloscope Online V2" />
+    <meta property="og:description" content="Oscilloscope Online is a serial graph plotter.A more customizable alternative of Arduino IDE complete with dynamic inputs and customizable grid as well as colors" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://mumarshahbaz.github.io/Oscilloscope-Online-V2/" />
+    <meta property="og:image" content="https://mumarshahbaz.github.io/Oscilloscope-Online-V2/assets/img/icon-480.png" />
+</head>
+<body>
+    <div id="container">
+        <header>
+            <div>
+                <h1 class="primary">Setup Oscilloscope</h1>
+                <h2>M. Umar Shahbaz</h2>
+            </div>
+            <img src="assets/img/icon-480.png" alt="Oscilloscope Online Logo" class="logo">
+        </header>
+        <hr>
+        <main>
+            <section id="setup">
+                <form id="setup-form">
+                    <div class="center-align">
+                        <h3 class="primary">Miscellaneous</h3>
+                    </div>
+                    <label for="baud">Baud rate :</label>
+                    <input id="baud" list="baud-rates" type="number" value="9600" required>
+                    <datalist id="baud-rates">
+                        <option value="300">
+                        <option value="1200">
+                        <option value="2400">
+                        <option value="4800">
+                        <option value="9600">
+                        <option value="14400">
+                        <option value="19200">
+                        <option value="28800">
+                        <option value="38400">
+                        <option value="57600">
+                        <option value="115200">
+                        <option value="230400">
+                        <option value="250000">
+                        <option value="460800">
+                        <option value="500000">
+                        <option value="921600">
+                        <option value="1000000">
+                        <option value="2000000">
+                    </datalist>
+                    <br><br>
+                    <label for="timescale">Timescale :</label>
+                    <select id="timescale" required>
+                        <option value="none">None</option>
+                        <option value="auto">Auto</option>
+                        <option value="manual">Manual</option>
+                    </select>
+                    <br><br>
+                    <label for="x-title">X axis Title :</label>
+                    <input id="x-title" type="text" value="Reading Number" required>
+                    <br><br>
+                    <label for="y-title">Y axis Title :</label>
+                    <input id="y-title" type="text" value="Reading" required>
+                    <hr>
+                    <div class="center-align">
+                        <h3 class="primary">Graph</h3>
+                    </div>
+                    <hr>
+                    <div class="center-align">
+                        <h3 class="primary">Grid</h3>
+                    </div>
+                    <label for="x-min">X axis Min :</label>
+                    <input id="x-min" type="number" value="0" required>
+                    <br><br>
+                    <label for="x-max">X axis Max :</label>
+                    <input id="x-max" type="number" value="1023" required>
+                    <br><br>
+                    <label for="x-interval">X axis Interval :</label>
+                    <input id="x-interval" type="number" value="100" required>
+                    <br><br><br><br>
+                    <label for="y-min">Y axis Min :</label>
+                    <input id="y-min" type="number" value="0" required>
+                    <br><br>
+                    <label for="y-max">Y axis Max :</label>
+                    <input id="y-max" type="number" value="1000" required>
+                    <br><br>
+                    <label for="y-interval">Y axis Interval :</label>
+                    <input id="y-interval" type="number" value="200" required>
+                    <hr>
+                    <div class="center-align">
+                        <input class="button" type="submit" value="Start">
+                    </div>
+                </form>
+            </section>
+        </main>
+    </div>
+</body>
+</html>
