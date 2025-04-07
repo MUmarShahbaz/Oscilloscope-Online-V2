@@ -1,12 +1,14 @@
 // Serial Port Connection
 let serial;
 let reader;
+let startTime;
 
 document.getElementById('connect').addEventListener('click', async () => {
     try {
         serial = await navigator.serial.requestPort();
         await serial.open({ baudRate: baud });
-        console.log("Serial port opened");
+        startTime = Date.now() / 1000;
+        console.log("Serial port opened at ", startTime);
 
         if (reader) reader.releaseLock();
         reader = serial.readable.getReader();
@@ -47,31 +49,57 @@ async function readSerialData() {
     }
 }
 
+let count = (xType === 'linear' || xType === 'time');
 let counter = 0;
-const maxDataPoints = xMax - xMin + 1;
+let maxDataPoints = (xType === 'linear') ? (xMax - xMin + 1) : null;
+maxDataPoints = (xType === 'time') ? xTimeMax : maxDataPoints;
+
+console.log("Max data points:", maxDataPoints);
 
 // Data Processor
 function DataProcessor(message) {
-    const messageData = message.split(break_char);
-    console.log(messageData);
 
-    // Add data to datasets
-    messageData.forEach((value, i) => {
-        const parsedValue = parseFloat(value);
-        if (!isNaN(parsedValue)) {
-            data[i + 1].push(parsedValue);
-        } else {
-            console.warn(`Invalid data value at index ${i}:`, value);
-        }
-    });
-
-    chart.setData(data);
-
-    counter++;
-    if (counter > maxDataPoints) {
+    if (message == "%") {   // Reset data
         for (let i = 1; i < data.length; i++) {
             data[i] = [];
         }
-        counter = 0;
+    } else {
+        if (xType === 'time') {
+            const currentTime = Date.now() / 1000;
+            data[0].push(currentTime);
+        }
+        const messageData = message.split(break_char);
+        console.log(messageData);
+
+        // Add data to datasets
+        messageData.forEach((value, i) => {
+            const parsedValue = parseFloat(value);
+            if (!isNaN(parsedValue)) {
+                data[i + 1].push(parsedValue);
+            } else {
+                console.warn(`Invalid data value at index ${i}:`, value);
+            }
+        });
+
+        chart.setData(data);
+        if (!auto) {
+            chart.setScale('y', {
+                min: yMin,
+                max: yMax
+            });
+        }
+
+        if (count) {
+            counter++;
+            if (counter > maxDataPoints) {
+                if (xType === 'time') {
+                    data[0] = [];
+                }
+                for (let i = 1; i < data.length; i++) {
+                    data[i] = [];
+                }
+                counter = 0;
+            }
+        }
     }
 }

@@ -21,6 +21,7 @@ tr:hover {
     transition: background-color 0.5s ease;
 }
 
-td, th {
+td,
+th {
     border: 1px solid #ddd;
 }

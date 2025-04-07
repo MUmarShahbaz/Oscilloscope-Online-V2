@@ -8,16 +8,18 @@ document.addEventListener('DOMContentLoaded', () => {
         const title = document.getElementById('title').value;
         const xTitle = document.getElementById('xTitle').value;
         const yTitle = document.getElementById('yTitle').value;
-        
+
         const xType = document.getElementById('xType').value;
         const xMin = (xType === 'linear') ? document.getElementById('xMin').value : null;
         const xMax = (xType === 'linear') ? document.getElementById('xMax').value : null;
-        
+        const xTime = (xType === 'time') ? document.getElementById('xTime').value : null;
+        const xTimeMax = (xType === 'time') ? document.getElementById('xTimeMax').value : null;
+
         const yType = document.getElementById('yType').value;
         const auto = document.getElementById('auto').value === 'true';
         const yMin = auto ? null : document.getElementById('yMin').value;
         const yMax = auto ? null : document.getElementById('yMax').value;
-        
+
         // Graph Values
         const points = document.getElementById('points').value === 'true';
         const fill = document.getElementById('fill').value === 'true';
@@ -44,6 +46,8 @@ document.addEventListener('DOMContentLoaded', () => {
             xType,
             xMin,
             xMax,
+            xTime,
+            xTimeMax,
             yType,
             auto,
             yMin,

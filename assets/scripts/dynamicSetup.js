@@ -1,11 +1,16 @@
 document.addEventListener('DOMContentLoaded', () => {
     // X axis Fields
     const X_Axis_Type = document.getElementById('xType');
-    const X_Axis_Fields = document.getElementById('xFieldsC');
+    const X_Axis_Linear = document.getElementById('xLinearC');
+    const X_Axis_Time = document.getElementById('xTimeC');
 
     const toggle_X_Fields = () => {
-        const display_X_Fields = X_Axis_Type.value === 'linear';
-        X_Axis_Fields.style.display = display_X_Fields ? 'block' : 'none';
+        const display_X_Linear = X_Axis_Type.value === 'linear';
+        X_Axis_Linear.style.display = display_X_Linear ? 'block' : 'none';
+
+        const display_X_Time = X_Axis_Type.value === 'time';
+        X_Axis_Time.style.display = display_X_Time ? 'block' : 'none';
+
     }
 
     X_Axis_Type.addEventListener('change', toggle_X_Fields);
@@ -51,7 +56,7 @@ document.addEventListener('DOMContentLoaded', () => {
         Graph_Fields.innerHTML = '';
         const total_Graphs = parseInt(Graph_Num.value, 10);
 
-        
+
         for (let i = 1; i <= total_Graphs; i++) {
             const random_Color = `#${Math.floor(Math.random() * 16777215).toString(16).padStart(6, '0')}`;
 

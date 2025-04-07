@@ -39,7 +39,7 @@ body {
 }
 
 
-.button{
+.button {
     background-color: rgb(0, 136, 255);
     border: 1px solid rgb(0, 136, 255);
     border-radius: 5px;
@@ -87,7 +87,8 @@ hr {
     font-weight: bold;
 }
 
-#setup-form input, #setup-form select {
+#setup-form input,
+#setup-form select {
     font-family: monospace;
     font-size: x-large;
     width: 50%;
@@ -103,6 +104,7 @@ hr {
     display: block;
 }
 
-#plot-page{
-    background-color: white;;
+#plot-page {
+    background-color: white;
+    ;
 }

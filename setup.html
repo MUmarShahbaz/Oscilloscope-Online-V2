@@ -88,22 +88,40 @@
                         <br>
                         <div>
                             <label for="xType">X axis Type :</label>
-                            <select id="xType" required disabled>
+                            <select id="xType" required>
                                 <option value="linear">Linear</option>
                                 <option value="time">Time</option>
-                                <option value="ordinal">Text</option>
+                                <option value="ordinal" disabled>Text</option>
                             </select>
                         </div>
                         <br>
-                        <div id="xFieldsC">
-                            <div id="xMinC">
+                        <div id="xLinearC">
+                            <div>
                                 <label for="xMin">X axis Min :</label>
                                 <input id="xMin" type="number" value="0" required>
                             </div>
                             <br>
-                            <div id="xMaxC">
+                            <div>
                                 <label for="xMax">X axis Max :</label>
                                 <input id="xMax" type="number" value="500" required>
+                            </div>
+                            <br>
+                        </div>
+                        <div id="xTimeC">
+                            <div>
+                                <label for="xTime">Elapsed Time F :</label>
+                                <select id="xTime" required>
+                                    <option value="ms">ms</option>
+                                    <option value="s.ms">s.ms</option>
+                                    <option value="m:s">m:s</option>
+                                    <option value="h:m:s">h:m:s</option>
+                                    <option value="d-h:m">d h:m</option>
+                                </select>
+                            </div>
+                            <br>
+                            <div>
+                                <label for="xTimeMax">Max readings :</label>
+                                <input id="xTimeMax" type="number" value="5000" required>
                             </div>
                         </div>
                         <br>
