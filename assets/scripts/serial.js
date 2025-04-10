@@ -50,20 +50,22 @@ async function readSerialData() {
     }
 }
 
-let count = (xType === 'linear' || xType === 'time');
 let counter = 0;
-let maxDataPoints = (xType === 'linear') ? (xMax - xMin + 1) : null;
-maxDataPoints = (xType === 'time') ? xTimeMax : maxDataPoints;
+const maxDataPoints = (xType === 'linear') ? (xMax - xMin + 1) : xTimeMax;
 
 console.log("Max data points:", maxDataPoints);
 
 // Data Processor
 function DataProcessor(message) {
 
-    if (message == "%") {   // Reset data
+    if (message == cls) {   // Clear data
+        if (xType === 'time') {
+            data[0] = [];
+        }
         for (let i = 1; i < data.length; i++) {
             data[i] = [];
         }
+        counter = 0;        
     } else {
         if (xType === 'time') {
             const currentTime = Date.now() / 1000;
@@ -79,6 +81,7 @@ function DataProcessor(message) {
                 data[i + 1].push(parsedValue);
             } else {
                 console.warn(`Invalid data value at index ${i}:`, value);
+                data[i + 1].push(null);
             }
         });
 
@@ -90,17 +93,15 @@ function DataProcessor(message) {
             });
         }
 
-        if (count) {
-            counter++;
-            if (counter > maxDataPoints) {
-                if (xType === 'time') {
-                    data[0] = [];
-                }
-                for (let i = 1; i < data.length; i++) {
-                    data[i] = [];
-                }
-                counter = 0;
+        counter++;
+        if (counter > maxDataPoints) {
+            if (xType === 'time') {
+                data[0] = [];
             }
+            for (let i = 1; i < data.length; i++) {
+                data[i] = [];
+            }
+            counter = 0;
         }
     }
 }

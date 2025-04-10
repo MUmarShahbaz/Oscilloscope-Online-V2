@@ -16,13 +16,13 @@ document.addEventListener('DOMContentLoaded', () => {
     X_Axis_Type.addEventListener('change', toggle_X_Fields);
 
 
-    /*// Y axis Fields Log
+    // Y axis Fields Log
     const Y_Axis_Type = document.getElementById("yType");
     const Y_Min = document.getElementById("yMin");
     const Y_Max = document.getElementById("yMax");
 
     function update_Y_Fields() {
-        if (Y_Axis_Type.value === 'log') {
+        if (Y_Axis_Type.value != 'linear') {
         Y_Min.min = "1";
         Y_Max.min = "1";
 
@@ -35,7 +35,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    Y_Axis_Type.addEventListener("change", update_Y_Fields);*/
+    Y_Axis_Type.addEventListener("change", update_Y_Fields);
 
     // Y axis Fields auto
     const Y_Axis_Auto = document.getElementById('auto');

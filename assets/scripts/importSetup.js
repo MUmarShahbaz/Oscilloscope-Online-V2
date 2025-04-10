@@ -8,6 +8,7 @@ console.log("Retrieved Setup Data:", savedData);
 // Serial Configuration
 const baud = parseInt(savedData.baud, 10);
 const break_char = savedData.breakChar;
+const cls = savedData.cls;
 
 // Grid Variables
 const title = savedData.title;

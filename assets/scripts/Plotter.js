@@ -17,6 +17,7 @@ dataset_labels.forEach(element => {
 
 // Scale Initialization
 const time = xType === 'time';
+const log = yType != 'linear' ? parseInt(yType) : false;
 
 const scale = {
     x: {
@@ -26,6 +27,11 @@ const scale = {
     y: {
         type: yType
     }
+}
+
+if (log) {
+    scale.y.distr = 3;
+    scale.y.log = log;
 }
 
 if (!auto) {
