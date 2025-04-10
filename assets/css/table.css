@@ -5,23 +5,29 @@ table {
 }
 
 th {
-    background-color: black;
-    color: white;
+    background-color: var(--th-background-color);
+    color: var(--th-text-color);
     text-align: center;
     padding: 10px;
 }
 
 td {
+    color: var(--td-text-color);
     padding: 8px;
     text-align: left;
+    height: 50px;
+}
+
+tr {
+    background-color: var(--tr-background-color);
 }
 
 tr:hover {
-    background-color: #f1f1f1;
-    transition: background-color 0.5s ease;
+    background-color: var(--tr-hover-background-color);
+    transition: 0.5s ease;
 }
 
 td,
 th {
-    border: 1px solid #ddd;
+    border: 1px solid var(--border-color);
 }

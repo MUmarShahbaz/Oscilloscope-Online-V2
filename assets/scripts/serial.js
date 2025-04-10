@@ -15,6 +15,7 @@ document.getElementById('connect').addEventListener('click', async () => {
         readSerialData();
     } catch (err) {
         console.error('Error opening serial port:', err);
+        alert('Error opening serial port!\nDoes your browser support Web Serial API?\nHave you allowed access to the serial port?\nGo to the console for more details!');
     }
 });
 
