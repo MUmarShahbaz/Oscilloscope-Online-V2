@@ -21,7 +21,10 @@ body {
 }
 
 .button {
-    height: 62px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 40px;
 }
 
 .center-align {
@@ -91,6 +94,9 @@ hr {
 /* Colors and Styles */
 
 body {
+    background-image:  var(--background-image);
+    background-repeat: repeat;
+    background-size: auto;
     background-color: var(--background-color);
     color: var(--text-color);
     font-family: sans-serif;
@@ -134,6 +140,7 @@ body {
     fill: var(--button-text-color);
     font-weight: bold;
     font-size: 16px;
+    text-decoration: none;
     cursor: pointer;
     box-shadow: 2px 2px 5px var(--button-shadow-color);
 }
