@@ -3,6 +3,7 @@ document.addEventListener('DOMContentLoaded', () => {
         // Serial Values
         const baud = document.getElementById('baud').value;
         const breakChar = document.getElementById('break_char').value;
+        const cls = document.getElementById('cls_char').value;
 
         // Grid Values
         const title = document.getElementById('title').value;
@@ -40,6 +41,7 @@ document.addEventListener('DOMContentLoaded', () => {
         return {
             baud,
             breakChar,
+            cls,
             title,
             xTitle,
             yTitle,

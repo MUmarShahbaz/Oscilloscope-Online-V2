@@ -92,6 +92,11 @@
                             <label for="break_char">Break character :</label>
                             <input id="break_char" type="text" value="/" required>
                         </div>
+                        <br>
+                        <div>
+                            <label for="cls_char">CLS character :</label>
+                            <input id="cls_char" type="text" value="%" required>
+                        </div>
                     </div>
                     <hr>
                     <div>
@@ -119,7 +124,6 @@
                             <select id="xType" required>
                                 <option value="linear">Linear</option>
                                 <option value="time">Time</option>
-                                <option value="ordinal" disabled>Text</option>
                             </select>
                         </div>
                         <br>
@@ -156,9 +160,10 @@
                         <br>
                         <div>
                             <label for="yType">Y axis Type :</label>
-                            <select id="yType" required disabled>
+                            <select id="yType" required>
                                 <option value="linear">Linear</option>
-                                <option value="log">Logarithmic</option>
+                                <option value="10">Log 10</option>
+                                <option value="2">Log 2</option>
                             </select>
                         </div>
                         <br>
