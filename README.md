@@ -16,7 +16,7 @@ Whether you’re a **student, hobbyist, or engineer**, I built this for people l
 ---
 
  🧠 **Not just for signals!**  
- Oscilloscope Online V2 can plot **any numeric data** coming from a serial device—sensor readings, calculated values, or even data streamed from an **SD card**.  
+ Oscilloscope Online can plot **any numeric data** coming from a serial device—sensor readings, calculated values, or even data streamed from an **SD card**.  
    
  If you're plotting logged data, set ```X Axis Type``` tp ```Time``` : the **first value** in each line will be used as the X-axis (time).
 
@@ -31,7 +31,7 @@ Whether you’re a **student, hobbyist, or engineer**, I built this for people l
 
 ## ✅ Supported Browsers
 
-Oscilloscope Online V2 relies on the **Web Serial API**, which is only available in modern Chromium-based browsers:
+Oscilloscope Online relies on the **Web Serial API**, which is only available in modern Chromium-based browsers:
 
 - Google Chrome  
 - Microsoft Edge  
@@ -88,7 +88,7 @@ Oscilloscope Online V2 relies on the **Web Serial API**, which is only available
 
 ## 🚀 Getting Started
 
-1. Open [Oscilloscope Online V2](https://mumarshahbaz.github.io/Oscilloscope-Online-V2/) in Chrome, Opera or Edge.  
+1. Open [Oscilloscope Online](https://mumarshahbaz.github.io/Oscilloscope-Online-V2/) in Chrome, Opera or Edge.  
 2. Visit the Setup Page by clicking **Start Plotting**.
 3. Choose your settings (baud rate, labels, plot colors, etc.)
 4. Click **Begin Plotting**
