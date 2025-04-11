@@ -38,8 +38,22 @@ hr {
     margin: 20px 0px;
 }
 
-#setup-form input,
-#setup-form select {
+.vertical-hr {
+    margin: 0px 20px;
+}
+
+.forms {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.setup-form {
+    width:30%;
+}
+
+.setup-form input,
+.setup-form select {
     width: 50%;
     float: right;
 }
@@ -59,6 +73,17 @@ hr {
     width: 50px;
     height: 50px;
     padding: 10px;
+}
+
+@media (max-width:1200px) {
+
+    .forms {
+        display: block;
+    }
+
+    .setup-form{
+        width: 100%;
+    }
 }
 
 @media (max-width: 610px) {
@@ -157,14 +182,14 @@ body {
     color: var(--title-color);
 }
 
-#setup-form {
+.setup-form {
     font-family: monospace;
     font-size: x-large;
     font-weight: bold;
 }
 
-#setup-form input,
-#setup-form select {
+.setup-form input,
+.setup-form select {
     font-family: monospace;
     font-size: x-large;
 }
