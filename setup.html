@@ -58,7 +58,8 @@
                 <h1 class="title">Setup Oscilloscope</h1>
             </div>
             <section id="setup">
-                <form id="setup-form">
+                <div class="forms">
+                <form class="setup-form">
                     <div>
                         <div class="center-align">
                             <h3 class="title">Serial</h3>
@@ -89,16 +90,19 @@
                         </div>
                         <br>
                         <div>
-                            <label for="break_char">Break character :</label>
+                            <label for="break_char">Break char :</label>
                             <input id="break_char" type="text" value="/" required>
                         </div>
                         <br>
                         <div>
-                            <label for="cls_char">CLS character :</label>
+                            <label for="cls_char">CLS char :</label>
                             <input id="cls_char" type="text" value="%" required>
                         </div>
+                        <br>
                     </div>
-                    <hr>
+                </form>
+                <hr class="vertical-hr">
+                <form class="setup-form">
                     <div>
                         <div class="center-align">
                             <h3 class="title">Grid</h3>
@@ -187,13 +191,15 @@
                             </div>
                         </div>
                     </div>
-                    <hr>
+                </form>
+                <hr class="vertical-hr">
+                <form class="setup-form">
                     <div>
                         <div class="center-align">
                             <h3 class="title">Graph</h3>
                         </div>
                         <div>
-                            <label for="points">Show as points :</label>
+                            <label for="points">Show points :</label>
                             <select id="points" required>
                                 <option value="true">True</option>
                                 <option value="false" selected>False</option>
@@ -201,7 +207,7 @@
                         </div>
                         <br>
                         <div>
-                            <label for="fill">Fill area below :</label>
+                            <label for="fill">Fill area :</label>
                             <select id="fill" required>
                                 <option value="true">True</option>
                                 <option value="false" selected>False</option>
@@ -209,7 +215,7 @@
                         </div>
                         <br>
                         <div>
-                            <label for="graphNum">Graphs to plot :</label>
+                            <label for="graphNum">Graphs :</label>
                             <input id="graphNum" type="number" value="1" min="1" required>
                         </div>
                         <br>
@@ -218,6 +224,7 @@
                         <div id="graphFields"></div>
                     </div>
                 </form>
+                </div>
                 <hr>
                 <div class="center-align">
                     <a class="button" id="submit">Begin Plot</a>
