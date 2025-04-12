@@ -15,6 +15,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const xMax = (xType === 'linear') ? document.getElementById('xMax').value : null;
         const xTime = (xType === 'time') ? document.getElementById('xTime').value : null;
         const xTimeMax = (xType === 'time') ? document.getElementById('xTimeMax').value : null;
+        const xTimeManual = (xType === 'time') ? document.getElementById('xTimeManual').value : null;
 
         const yType = document.getElementById('yType').value;
         const auto = document.getElementById('auto').value === 'true';
@@ -50,6 +51,7 @@ document.addEventListener('DOMContentLoaded', () => {
             xMax,
             xTime,
             xTimeMax,
+            xTimeManual,
             yType,
             auto,
             yMin,
