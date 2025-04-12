@@ -21,8 +21,8 @@ const log = yType != 'linear' ? parseInt(yType) : false;
 
 const scale = {
     x: {
-        type: xType,
-        time: time,
+        type: 'linear',
+        time: false,
     },
     y: {
         type: yType
@@ -86,7 +86,6 @@ const chart = new uPlot(options, data, document.getElementById("plot"));
 console.log("Chart initialized:", chart);
 
 function formatElapsed(ms, format) {
-    ms = Math.round((ms - startTime) * 1000);
     const sec = Math.floor(ms / 1000);
     const msec = ms % 1000;
     const s = sec % 60;

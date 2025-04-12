@@ -20,6 +20,7 @@ const xMin = (xType === 'linear') ? parseFloat(savedData.xMin) : null;
 const xMax = (xType === 'linear') ? parseFloat(savedData.xMax) : null;
 const xTime = (xType === 'time') ? savedData.xTime : null;
 const xTimeMax = (xType === 'time') ? parseFloat(savedData.xTimeMax) : null;
+const xTimeManual = (xType === 'time') ? savedData.xTimeManual === 'true' : null;
 
 const yType = savedData.yType;
 const auto = savedData.auto;
