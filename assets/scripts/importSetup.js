@@ -9,6 +9,9 @@ console.log("Retrieved Setup Data:", savedData);
 const baud = parseInt(savedData.baud, 10);
 const break_char = savedData.breakChar;
 const cls = savedData.cls;
+const csv = savedData.csv;
+const png = savedData.png;
+const svg = savedData.svg;
 
 // Grid Variables
 const title = savedData.title;
