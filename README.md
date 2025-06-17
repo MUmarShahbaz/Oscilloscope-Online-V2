@@ -1,113 +1,142 @@
-# Oscilloscope Online V2
 <div align="center">
-    <img style="width:300px; height;300px" src="assets/img/icon-480.png">
-</div>
+<a href="https://mumarshahbaz.github.io/Oscilloscope-Online-V2/" target="_blank">
+<img src="https://img.shields.io/badge/Open_Oscilloscope_Online_V2-%23000?style=for-the-badge&color=%230AF" style="height:60px"></a></div>
 
 ---
-
-I built **Oscilloscope Online** to solve a simple problem: I needed a quick and accessible way to visualize electronic signals without relying on bulky hardware or expensive equipment.
-
-As someone who works with microcontrollers like **Arduino** and **ESP32**, I wanted a tool that could display waveforms directly in a **web browser**—no extra software, no hassle.
-
-With this project, I made it possible to connect a microcontroller, send data over serial, and instantly see real-time waveforms on-screen. I added features like adjustable scaling, time base control, and measurement tools to make debugging signals easier.
-
-Whether you’re a **student, hobbyist, or engineer**, I built this for people like me—those who want a **fast, simple, and effective oscilloscope** without the extra cost.
-
----
-
- 🧠 **Not just for signals!**  
- Oscilloscope Online can plot **any numeric data** coming from a serial device—sensor readings, calculated values, or even data streamed from an **SD card**.  
-   
- If you're plotting logged data, set ```X Axis Type``` tp ```Time``` : the **first value** in each line will be used as the X-axis (time).
-
- Alternatively, if you choose ```Text```, then the first part of the string (from beginning to before the break character) will become the X Axis Value.
-
----
-
-🔗 **Homepage:**  
-[https://mumarshahbaz.github.io/Oscilloscope-Online-V2/](https://mumarshahbaz.github.io/Oscilloscope-Online-V2/)
-
----
-
-## ✅ Supported Browsers
-
-Oscilloscope Online relies on the **Web Serial API**, which is only available in modern Chromium-based browsers:
-
-- Google Chrome  
-- Microsoft Edge  
-- Opera  
-
-> ❌ Not supported in Firefox, Safari, or iOS browsers.
-> 
-> More info: [Web Serial API on MDN](https://developer.mozilla.org/en-US/docs/Web/API/Web_Serial_API)
-
----
-
-## 📸 Screenshots
 
 <div align="center">
-<img style="width:300px" src="assets/img/Screenshots/Screenshot%20(1).png">
-<img style="width:300px" src="assets/img/Screenshots/Screenshot%20(2).png">
-<img style="width:500px" src="assets/img/Screenshots/Screenshot%20(3).png">
-<img style="width:1000px" src="assets/img/Screenshots/Screenshot%20(4).png">
+<img src="assets/gif/Live Plot.gif" style="width: 1000px"></div>
+
+# Benefit
+
+<div align="center">
+<img src="assets/img/Comparision.jpg" style="width: 1000px"></div>
+
+## 🔧 Key Features
+
+- **Enhanced User Interface**  
+  A cleaner, more intuitive UI for a seamless user experience.
+
+- **Light & Dark Mode Support**  
+  Switch between light and dark themes based on your preference or environment.
+
+- **Plug and Play**  
+  No installation required—simply open the link and start using immediately.
+
+- **Offline Access**  
+  Fully local functionality—download the repo and host the site locally for use without an internet connection.
+
+- **Unlimited Plotting**  
+  Visualize as many data streams as you need without restrictions.
+
+- **Custom Communication Settings**  
+  Define your own baud rate, break characters, and clear screen (CLS) characters for flexible serial communication.
+
+- **Real-Time Console Logging**  
+  View raw serial data logs alongside plotted visuals.
+
+- **Flexible Plotting Options**  
+  Plot data by index or timestamp depending on your use case.
+
+- **Multiple Scale Types**  
+  Choose between linear, logarithmic (base 2), and logarithmic (base 10) scales.
+
+- **Auto-Scaling Y-Axis**  
+  Automatically adjusts the Y-axis range for optimal data visibility.
+
+- **Support for Null Values**  
+  Handles incomplete or missing data gracefully during plotting.
+
+- **Auto CLS**
+  Automatically clears screen after the number of collected data has passed a pre-defined threshold.
+
+- **Interactive Visualization**  
+  Zoom in and explore plots dynamically with a responsive, interactive graphing interface.
+
+### Example of Interactivity
+<div align="center">
+<img src="assets/gif/Zoom.gif" style="width: 1000px"></div>
+
+---
+
+## 📈 Plotting Modes
+
+The plotter supports three distinct modes to fit a variety of use cases, ranging from general-purpose visualization to precision timing:
+
+- **Index Mode**  
+  Plots data against its sequence index. This mode creates a consistent and unchanging X-axis where each point represents the order in which the data was received.
+
+- **Automatic Time Scaling**  
+  Utilizes the system's internal clock to timestamp data upon arrival and uses those values on the X-axis. Suitable for general time-based plotting, but may not offer precise millisecond accuracy due to background processing delays.
+
+- **Manual Time Scaling**  
+  Treats the first value in each data packet as the timestamp (typically in milliseconds). Ideal for high-precision plots—especially when using functions like `millis()` in Arduino-based applications. This mode offers the most reliable timing accuracy for microcontroller data.
+
+### Example of Time Scale feature
+<div align="center">
+<img src="assets/gif/Time Scale.gif" style="width: 1000px"></div>
+
+## 📤 Data Format
+
+The plotter expects incoming data to follow this structure:
+
+<div align="center">
+<span style="font-family: monospace; font-size: x-large; font-weight: bold;">Value1 &lt;break_char&gt; Value2 &lt;break_char&gt; Value3 ...\n</span></div>
+
+- Each value should be separated by the configured **break character**.
+- The data line must end with a newline (`\n`).
+
+### 🧹 Clear Screen Command
+
+To clear all previously collected data, simply send:
+
+<div align="center"><span style="font-family: monospace; font-size: x-large; font-weight: bold;">CLS_char\n</span></div>
+
+This will reset the plotter and erase existing data.
+
+### ⏱ Manual Time Scaling Note
+
+If you're using **Manual Time Scale** mode, the first value (<span style="font-family: monospace; font-size: large; font-weight: bold;">Value1</span>) is treated as the **timestamp in milliseconds**.  
+This is ideal for use with <span style="font-family: monospace; font-size: large; font-weight: bold;">millis()</span> in Arduino or similar microcontrollers.
+
+## ⚙️ Setup Page
+
+All configuration options are available on the **Setup** page.  
+You can customize parameters such as baud rate, break/CLS characters, plot types, and more.
+
+A built-in **Help** section is also provided to explain the purpose and functionality of each setting—perfect for new users or quick reference.
+
+<div align="center">
+<img src="assets/img/Screenshots/Screenshot (3).png" style="width: 1000px"></div>
+
+## 🎨 Themes
+
+The application supports both **Light** and **Dark** themes to suit different environments and user preferences.
+
+You can toggle between themes anytime.  
+Your selected theme is automatically applied across all pages for a consistent visual experience.
+
+<div align="center">
+<img src="assets/gif/Light - Dark Mode.gif" style="width: 1000px"></div>
+
+
+## 🌐 Browser Requirements
+
+To ensure full functionality, your browser must support the following:
+
+- **Web Serial API** – Required for direct communication with serial devices.  
+  *Supported in Chromium-based browsers like Chrome, Edge, and Opera.*
+
+- **JavaScript** – Core functionality and interactivity rely heavily on JavaScript.
+
+- **HTML5** – Ensures proper rendering of structural elements.
+
+- **CSS3** – Required for styling, responsive layout, and theming (Light/Dark Mode).
+
+## Made with uPlot
+<div class="card-container" style="display: flex; align-items:center; flex-direction: row; justify-content: center; gap: 10px;">
+<a href="https://github.com/leeoniya/uPlot" rel="external nofollow noopener" target="_blank">
+  <img alt="leeoniya/uPlot" src="https://github-readme-stats.vercel.app/api/pin/?username=leeoniya&amp;repo=uPlot&amp;theme=default&amp;show_owner=false&amp;description_lines_count=3">
+</a>
+<img src="assets/img/uPlot.svg" style="width: 200px">
 </div>
-
----
-
-## ⚙️ Configuration Options
-
-| **Input** | **Description** |
-|----------|-----------------|
-| **Serial** | |
-| Baud rate | The baud rate of the connected serial device. |
-| Break character | The character used to separate the output from the serial device. |
-| **Grid** | |
-| Chart, X & Y Titles | Text to be displayed above, below, and beside the chart. |
-| X & Y Axis Type | *Coming soon — currently not applicable.* |
-| Auto Scale | Automatically adjusts the Y-axis limits. |
-| X & Y Min/Max | The manual limits for the X and Y axes. |
-| **Graph** | |
-| Show points | Displays a small circle at each data point. |
-| Fill area below | Fills the area beneath each graph line. |
-| Graph *n* Name | Label for each graph (shown in legend). |
-| Graph *n* Color | Color for each graph (shown in legend). |
-
----
-
-## 🛠 Features
-
-- 📊 Real-time plotting of serial data  
-- 🔌 Easy device connection using the **Web Serial API**  
-- ⚡ Ultra-fast plotting with [uPlot](https://github.com/leeoniya/uPlot)  
-- 🌙 Clean dark mode interface  
-- 🔧 Adjustable time scale & Y-axis scaling  
-- 📈 Supports multiple data channels and labels  
-- 💾 Plot logged data with manual time axis support
-
----
-
-## 🚀 Getting Started
-
-1. Open [Oscilloscope Online](https://mumarshahbaz.github.io/Oscilloscope-Online-V2/) in Chrome, Opera or Edge.  
-2. Visit the Setup Page by clicking **Start Plotting**.
-3. Choose your settings (baud rate, labels, plot colors, etc.)
-4. Click **Begin Plotting**
-5. Click **Connect** and choose your serial device.  
-6. Watch your data stream live in real-time!
-
----
-
-## 📄 License
-
-Licensed under the **Apache 2.0 License**.  
-Full details available in [`LICENSE.md`](LICENSE.md).
-
----
-
-## 💡 Built With
-
-- [Web Serial API](https://developer.mozilla.org/en-US/docs/Web/API/Web_Serial_API) – Serial communication  
-- [uPlot](https://github.com/leeoniya/uPlot) – Tiny, fast plotting library  
-- HTML, CSS, and JavaScript (Vanilla)
-
----
