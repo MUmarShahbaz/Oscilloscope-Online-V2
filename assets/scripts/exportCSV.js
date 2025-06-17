@@ -1,5 +1,5 @@
-const exportButton = document.getElementById('export');
-exportButton.addEventListener('click', () => {
+const exportCSV = document.getElementById('export-csv');
+exportCSV.addEventListener('click', () => {
     // Extract data
     const index = data[0];
     const columns = data.slice(1);

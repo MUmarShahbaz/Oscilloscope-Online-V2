@@ -15,10 +15,12 @@
     <!--Scripts-->
     <script src="assets/scripts/theme.js"></script>
     <script defer src="https://cdn.jsdelivr.net/npm/uplot/dist/uPlot.iife.min.js"></script>
+    <script defer src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
     <script defer src="assets/scripts/importSetup.js"></script>
     <script defer src="assets/scripts/Plotter.js"></script>
     <script defer src="assets/scripts/serial.js"></script>
-    <script defer src="assets/scripts/export.js"></script>
+    <script defer src="assets/scripts/exportCSV.js"></script>
+    <script defer src="assets/scripts/exportPNG.js"></script>
 
     <!--Meta-->
     <meta charset="UTF-8">
@@ -71,7 +73,11 @@
                     </path>
                 </svg></a>
             <a class="button" href='help.html'>Help</a>
-            <a class="button" id="export">Export</a>
+        </div>
+        <br>
+        <div class="center-align">
+            <a class="button" id="export-csv">Export CSV</a>
+            <a class="button" id="export-png">Export PNG</a>
         </div>
     </div>
     <div id="plot"></div>
