@@ -4,6 +4,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const baud = document.getElementById('baud').value;
         const breakChar = document.getElementById('break_char').value;
         const cls = document.getElementById('cls_char').value;
+        const csv = document.getElementById('csv_char').value;
 
         // Grid Values
         const title = document.getElementById('title').value;
@@ -43,6 +44,7 @@ document.addEventListener('DOMContentLoaded', () => {
             baud,
             breakChar,
             cls,
+            csv,
             title,
             xTitle,
             yTitle,

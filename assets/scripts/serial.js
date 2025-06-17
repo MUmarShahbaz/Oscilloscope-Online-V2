@@ -86,6 +86,8 @@ function DataProcessor(message, time) {
             data[i] = [];
         }
         counter = 0;        
+    } else if (message == csv) {
+        document.getElementById('export-csv').click();
     } else {
         const messageData = message.split(break_char);
         if (xTimeManual) {
