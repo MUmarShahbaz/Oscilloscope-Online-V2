@@ -92,6 +92,10 @@
                         <td>The character used to clear the screen (empty the data) from the serial device.</td>
                     </tr>
                     <tr>
+                        <td>CSV character</td>
+                        <td>The character used to trigger download of the current data in .csv format.</td>
+                    </tr>
+                    <tr>
                         <th colspan="2">Grid</th>
                     </tr>
                     <tr>
@@ -150,6 +154,27 @@
                         <td>The color of the graph, which will be displayed in the legend.</td>
                     </tr>
                 </table>
+                <h1>Exporting and Importing Data</h1>
+                <table>
+                    <tr>
+                        <th>Button</th>
+                        <th>Description</th>
+                    </tr>
+                    <tr>
+                        <td>Export PNG</td>
+                        <td>Captures a screenshot of the current graph in the form of an image.</td>
+                    </tr>
+                    <tr>
+                        <td>Export CSV</td>
+                        <td>Captures the current data displayed on the graph and outputs as a .csv file. Each Graph/Series will be a collumn.</td>
+                    </tr>
+                    <tr>
+                        <td>Import</td>
+                        <td>Imports a previously exported data and plots it.</td>
+                    </tr>
+                </table>
+                <br>
+                <p><b>NOTE:</b> When importing a .csv file with time, make sure to set xTimeManual to true. Using xTimeManual as false will cause the timescale to use the time at which each row is immported.</p>
             </section>
             <hr>
             <section>
