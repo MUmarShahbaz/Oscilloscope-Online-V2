@@ -19,6 +19,7 @@
     <script defer src="assets/scripts/importSetup.js"></script>
     <script defer src="assets/scripts/Plotter.js"></script>
     <script defer src="assets/scripts/serial.js"></script>
+    <script defer src="assets/scripts/importCSV.js"></script>
     <script defer src="assets/scripts/exportCSV.js"></script>
     <script defer src="assets/scripts/exportPNG.js"></script>
 
@@ -64,6 +65,7 @@
         <hr>
         <div class="center-align">
             <a class="button" id="connect">Connect</a>
+            <a class="button" id="import">Import</a>
             <a class="button"
                 href='https://github.com/MUmarShahbaz/Oscilloscope-Online-V2'><svg height="32"
                     aria-hidden="true" viewBox="0 0 24 24" version="1.1" width="32" data-view-component="true"
@@ -80,6 +82,7 @@
             <a class="button" id="export-png">Export PNG</a>
         </div>
     </div>
+    <input type="file" id="hiddenInput" accept=".csv" style="display:none"/>
     <div id="plot"></div>
     <button class="button" id="theme-selector">
         <svg style="display: block;" id="sun-icon" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="30"
