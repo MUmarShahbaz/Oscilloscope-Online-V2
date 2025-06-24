@@ -16,12 +16,14 @@
     <script src="assets/scripts/theme.js"></script>
     <script defer src="https://cdn.jsdelivr.net/npm/uplot/dist/uPlot.iife.min.js"></script>
     <script defer src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <script defer src="https://d3js.org/d3.v7.min.js"></script>
     <script defer src="assets/scripts/importSetup.js"></script>
     <script defer src="assets/scripts/Plotter.js"></script>
     <script defer src="assets/scripts/serial.js"></script>
     <script defer src="assets/scripts/importCSV.js"></script>
     <script defer src="assets/scripts/exportCSV.js"></script>
     <script defer src="assets/scripts/exportPNG.js"></script>
+    <script defer src="assets/scripts/exportSVG.js"></script>
 
     <!--Meta-->
     <meta charset="UTF-8">
@@ -80,6 +82,7 @@
         <div class="center-align">
             <a class="button" id="export-csv">Export CSV</a>
             <a class="button" id="export-png">Export PNG</a>
+            <a class="button" id="export-svg">Export SVG</a>
         </div>
     </div>
     <input type="file" id="hiddenInput" accept=".csv" style="display:none"/>

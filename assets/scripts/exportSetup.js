@@ -5,6 +5,8 @@ document.addEventListener('DOMContentLoaded', () => {
         const breakChar = document.getElementById('break_char').value;
         const cls = document.getElementById('cls_char').value;
         const csv = document.getElementById('csv_char').value;
+        const png = document.getElementById('png_char').value;
+        const svg = document.getElementById('svg_char').value;
 
         // Grid Values
         const title = document.getElementById('title').value;
@@ -45,6 +47,8 @@ document.addEventListener('DOMContentLoaded', () => {
             breakChar,
             cls,
             csv,
+            png,
+            svg,
             title,
             xTitle,
             yTitle,

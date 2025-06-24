@@ -88,6 +88,10 @@ function DataProcessor(message, time) {
         counter = 0;        
     } else if (message == csv) {
         document.getElementById('export-csv').click();
+    } else if (message == png) {
+        document.getElementById('export-png').click();
+    } else if (message == svg) {
+        document.getElementById('export-svg').click();
     } else {
         const messageData = message.split(break_char);
         if (xTimeManual) {

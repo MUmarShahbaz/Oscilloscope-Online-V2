@@ -96,6 +96,14 @@
                         <td>The character used to trigger download of the current data in .csv format.</td>
                     </tr>
                     <tr>
+                        <td>PNG character</td>
+                        <td>The character used to trigger download of the current data as a .png file.</td>
+                    </tr>
+                    <tr>
+                        <td>SVG character</td>
+                        <td>The character used to trigger download of the current data as a .png file.</td>
+                    </tr>
+                    <tr>
                         <th colspan="2">Grid</th>
                     </tr>
                     <tr>
@@ -161,12 +169,16 @@
                         <th>Description</th>
                     </tr>
                     <tr>
+                        <td>Export CSV</td>
+                        <td>Captures the current data displayed on the graph and outputs as a .csv file.<br>Each Graph/Series will be a collumn.</td>
+                    </tr>
+                    <tr>
                         <td>Export PNG</td>
                         <td>Captures a screenshot of the current graph in the form of an image.</td>
                     </tr>
                     <tr>
-                        <td>Export CSV</td>
-                        <td>Captures the current data displayed on the graph and outputs as a .csv file. Each Graph/Series will be a collumn.</td>
+                        <td>Export SVG</td>
+                        <td>Captures the current data displayed on the graph and outputs as a SVG file.<br>No support for Log Y scales, Log graphs are converted to linear autommatically.</td>
                     </tr>
                     <tr>
                         <td>Import</td>
@@ -174,7 +186,7 @@
                     </tr>
                 </table>
                 <br>
-                <p><b>NOTE:</b> When importing a .csv file with time, make sure to set xTimeManual to true. Using xTimeManual as false will cause the timescale to use the time at which each row is immported.</p>
+                <p><b>NOTE:</b> When importing a .csv file with time, make sure to set xTimeManual to true.<br>Using xTimeManual as false will cause the timescale to use the time at which each row is immported.</p>
             </section>
             <hr>
             <section>
