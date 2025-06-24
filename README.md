@@ -23,14 +23,23 @@
 - **Plug and Play**  
   No installation required—simply open the link and start using immediately.
 
+- **Multiple Export Options**  
+  Export as a `.csv`, `.png` and even `.svg`
+
+- **Import from CSV**  
+  CSV files which follow the pattern `Time, Graph1, Graph2...` where the first line is the headings, can be imported. This is also the format of the exports. (Time is always in ms).
+
+- **MCU Commands**  
+  Trigger exporting and clear data commands via custom special chars from the MCU.
+
+- **Custom Communication Settings**  
+  Define your own baud rate, break characters for flexible serial communication.
+  
 - **Offline Access**  
   Fully local functionality—download the repo and host the site locally for use without an internet connection.
 
 - **Unlimited Plotting**  
   Visualize as many data streams as you need without restrictions.
-
-- **Custom Communication Settings**  
-  Define your own baud rate, break characters, and clear screen (CLS) characters for flexible serial communication.
 
 - **Real-Time Console Logging**  
   View raw serial data logs alongside plotted visuals.
