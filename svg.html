@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!--Title and Icon-->
+    <title>Oscilloscope Online - Configuration</title>
+    <link rel="icon" href="assets/img/icon-480.png" type="image/png">
+
+    <!--Stylesheets-->
+    <link rel="stylesheet" href="assets/css/main.css">
+    <link rel="stylesheet" href="assets/css/themes.css">
+
+    <!--Scripts-->
+    <script src="assets/scripts/theme.js"></script>
+    <script defer src="assets/scripts/createConfig.js"></script>
+    <script defer src="assets/scripts/createSVG.js"></script>
+    <script>
+        // Import Parameters
+        const graphData = JSON.parse(sessionStorage.getItem('GraphData'));
+        if (!graphData) {
+            throw new Error("GraphData not found in sessionStorage. Please create a graph first.");
+        }
+        console.log("Retrieved Graph Data:", graphData);
+    </script>
+
+    <!--Meta-->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description"
+        content="A web oscilloscope and serial plotter for Arduino and ESP users. Collect, plot, and visualize data online with customizable timescale and graphing options.">
+    <meta name="keywords"
+        content="oscilloscope, online oscilloscope, serial plotter, Web Serial API, data visualization, uPlot, Arduino, real-time data, graphing tool, web-based oscilloscope, data analysis, interactive plotter">
+    <meta name="author" content="M. Umar Shahbaz">
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Oscilloscope Online - Configuration">
+    <meta property="og:description"
+        content="A web oscilloscope and serial plotter for Arduino and ESP users. Collect, plot, and visualize data online with customizable timescale and graphing options.">
+    <meta property="og:image" content="https://mumarshahbaz.github.io/Oscilloscope-Online-V2/assets/img/icon-480.png">
+    <meta property="og:url" content="https://mumarshahbaz.github.io/Oscilloscope-Online-V2/">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Oscilloscope Online - Configuration">
+    <meta name="twitter:description"
+        content="A web oscilloscope and serial plotter for Arduino and ESP users. Collect, plot, and visualize data online with customizable timescale and graphing options.">
+    <meta name="twitter:image" content="https://mumarshahbaz.github.io/Oscilloscope-Online-V2/assets/img/icon-480.png">
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-ENJEDRBRTP"></script>
+<script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+
+    gtag('config', 'G-ENJEDRBRTP');
+</script>
+</head>
+
+<body>
+    <div id="container">
+        <header>
+            <div>
+                <h1 class="title">Oscilloscope Online</h1>
+                <h2>M. Umar Shahbaz</h2>
+            </div>
+            <img src="assets/img/icon-480.png" alt="Oscilloscope Online Logo" class="logo">
+        </header>
+        <hr>
+        <main>
+            <div class="center-align">
+                <h1 class="title">SVG Export Configuration</h1>
+            </div>
+            <div class="center-align">
+            <section id="svg" style="width: 85vw; height: auto;"></section>
+            </div><br>
+            <section id="setup">
+                <div class="forms">
+                <form class="setup-form">
+                    <div>
+                        <div class="center-align">
+                            <h3 class="title">Dimensions</h3>
+                        </div>
+                        <div>
+                            <label for="transparent-bg">Background :</label>
+                            <select id="transparent-bg">
+                                <option value="true">True</option>
+                                <option value="false" selected>False</option>
+                            </select>
+                        </div>
+                        <br>
+                        <div id="bgC">
+                            <label for="bg-color">BG Color :</label>
+                            <input id="bg-color" type="color" value="#FFFFFF" required>
+                        </div>
+                        <br>
+                        <br>
+                        <div>
+                            <label for="width">Width :</label>
+                            <input id="width" list="image-widths" type="number" step="1" value="1280" required>
+                            <datalist id="image-widths">
+                                <option value="320">
+                                <option value="480">
+                                <option value="640">
+                                <option value="800">
+                                <option value="1024">
+                                <option value="1280">
+                                <option value="1366">
+                                <option value="1440">
+                                <option value="1600">
+                                <option value="1920">
+                                <option value="2048">
+                                <option value="2560">
+                                <option value="3840">
+                                <option value="4096">
+                            </datalist>
+                        </div>
+                        <br>
+                        <div>
+                            <label for="height">Height :</label>
+                            <input id="height" list="image-heights" type="number" step="1" value="720" required>
+                            <datalist id="image-heights">
+                                <option value="240">
+                                <option value="320">
+                                <option value="360">
+                                <option value="480">
+                                <option value="600">
+                                <option value="720">
+                                <option value="768">
+                                <option value="800">
+                                <option value="900">
+                                <option value="1080">
+                                <option value="1152">
+                                <option value="1200">
+                                <option value="1440">
+                                <option value="2160">
+                            </datalist>
+                        </div>
+                        <br>
+                        <br>
+                        <div>
+                            <label for="m-left">Left :</label>
+                            <input id="m-left" type="number" step="1" value="50" required>
+                        </div>
+                        <br>
+                        <div>
+                            <label for="m-right">Right :</label>
+                            <input id="m-right" type="number" step="1" value="50" required>
+                        </div>
+                        <br>
+                        <div>
+                            <label for="m-top">Top :</label>
+                            <input id="m-top" type="number" step="1" value="50" required>
+                        </div>
+                        <br>
+                        <div>
+                            <label for="m-bottom">Bottom :</label>
+                            <input id="m-bottom" type="number" step="1" value="50" required>
+                        </div>
+                        <br>
+                    </div>
+                </form>
+                <hr class="vertical-hr">
+                <form class="setup-form">
+                    <div>
+                        <div class="center-align">
+                            <h3 class="title">Grid</h3>
+                        </div>
+                        <div>
+                            <label for="x-gap-by">X Gap :</label>
+                            <select id="x-gap-by" required>
+                                <option value="val">by Value</option>
+                                <option value="px" selected>by Pixels</option>
+                            </select>
+                        </div>
+                        <br>
+                        <div>
+                            <label for="x-gap-val">Gap Value :</label>
+                            <input id="x-gap-val" type="number" step="0.1" value="100" required>
+                        </div>
+                        <br>
+                        <br>
+                        <div>
+                            <label for="y-gap-by">Y Gap :</label>
+                            <select id="y-gap-by" required>
+                                <option value="val">by Value</option>
+                                <option value="px" selected>by Pixels</option>
+                            </select>
+                        </div>
+                        <br>
+                        <div>
+                            <label for="y-gap-val">Gap Value :</label>
+                            <input id="y-gap-val" type="number" step="0.1" value="100" required>
+                        </div>
+                        <br>
+                        <br>
+                        <div>
+                            <label for="axis-color">Axis Color :</label>
+                            <input id="axis-color" type="color" value="#000000" required>
+                        </div>
+                        <br>
+                        <div>
+                            <label for="axis-width">Axis Width :</label>
+                            <input id="axis-width" type="number" step="0.1" value="2" required>
+                        </div>
+                        <br>
+                        <br>
+                        <div>
+                            <label for="grid-color">Grid Color :</label>
+                            <input id="grid-color" type="color" value="#CCCCCC" required>
+                        </div>
+                        <br>
+                        <div>
+                            <label for="grid-width">Grid Width :</label>
+                            <input id="grid-width" type="number" step="0.1" value="1" required>
+                        </div>
+                        <br>
+                        <br>
+                        <div>
+                            <label for="font-color">Font Color :</label>
+                            <input id="font-color" type="color" value="#000000" required>
+                        </div>
+                        <br>
+                        <div>
+                            <label for="font-size">Font Size :</label>
+                            <input id="font-size" type="number" step="1" value="10" required>
+                        </div>
+                        <br>
+                    </div>
+                </form>
+                <hr class="vertical-hr">
+                <form class="setup-form">
+                    <div>
+                        <div class="center-align">
+                            <h3 class="title">Line/Graph</h3>
+                        </div>
+                        <div>
+                            <label for="line-width">Width :</label>
+                            <input id="line-width" type="number" step="0.1" value="1.5" required>
+                        </div>
+                        <br>
+                        <div>
+                            <label for="line-alpha">Alpha :</label>
+                            <input id="line-alpha" type="number" step="0.1" value="1" required>
+                        </div>
+                        <br>
+                        <br>
+                        <div>
+                            <label for="points">Show points :</label>
+                            <select id="points" required>
+                                <option value="true">True</option>
+                                <option value="false" selected>False</option>
+                            </select>
+                        </div>
+                        <br>
+                        <div id="pointsC" style="display: none;">
+                            <div>
+                                <label for="points-radius">Point Radius :</label>
+                                <input id="points-radius" type="number" step="1" value="7" required>
+                            </div>
+                            <br>
+                            <div>
+                                <label for="points-alpha">Point Alpha :</label>
+                                <input id="points-alpha" type="number" step="0.1" value="0.5" required>
+                            </div>
+                        </div>
+                        <br>
+                        <br>
+                        <div>
+                            <label for="fill">Fill area :</label>
+                            <select id="fill" required>
+                                <option value="true">True</option>
+                                <option value="false" selected>False</option>
+                            </select>
+                        </div>
+                        <br>
+                        <div id="fillC" style="display: none;">
+                            <label for="fill-alpha">Fill Alpha :</label>
+                            <input id="fill-alpha" type="number" step="0.1" value="0.1" required>
+                        </div>
+                    </div>
+                </form>
+                </div>
+                <hr>
+                <div class="center-align">
+                    <a class="button" id="preview-svg">Preview SVG</a>
+                    <a class="button" id="download-svg">Download SVG</a>
+                    <a class="button" id="download-json">Download JSON</a>
+                    <a class="button" href='help.html'>Help</a>
+                </div>
+            </section>
+        </main>
+    </div>
+    <button class="button" id="theme-selector">
+        <svg style="display: block;" id="sun-icon" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="30"
+            viewBox="0 0 24 24">
+            <path
+                d="M 12 0 C 11.4 0 11 0.4 11 1 L 11 2 C 11 2.6 11.4 3 12 3 C 12.6 3 13 2.6 13 2 L 13 1 C 13 0.4 12.6 0 12 0 z M 4.1992188 3.1992188 C 3.9492188 3.1992187 3.7 3.3 3.5 3.5 C 3.1 3.9 3.1 4.5003906 3.5 4.9003906 L 4.1992188 5.5996094 C 4.5992187 5.9996094 5.1996094 5.9996094 5.5996094 5.5996094 C 5.9996094 5.1996094 5.9996094 4.5992188 5.5996094 4.1992188 L 4.9003906 3.5 C 4.7003906 3.3 4.4492188 3.1992188 4.1992188 3.1992188 z M 19.800781 3.1992188 C 19.550781 3.1992188 19.299609 3.3 19.099609 3.5 L 18.400391 4.1992188 C 18.000391 4.5992187 18.000391 5.1996094 18.400391 5.5996094 C 18.800391 5.9996094 19.400781 5.9996094 19.800781 5.5996094 L 20.5 4.9003906 C 20.9 4.5003906 20.9 3.9 20.5 3.5 C 20.3 3.3 20.050781 3.1992188 19.800781 3.1992188 z M 12 5 A 7 7 0 0 0 5 12 A 7 7 0 0 0 12 19 A 7 7 0 0 0 19 12 A 7 7 0 0 0 12 5 z M 1 11 C 0.4 11 0 11.4 0 12 C 0 12.6 0.4 13 1 13 L 2 13 C 2.6 13 3 12.6 3 12 C 3 11.4 2.6 11 2 11 L 1 11 z M 22 11 C 21.4 11 21 11.4 21 12 C 21 12.6 21.4 13 22 13 L 23 13 C 23.6 13 24 12.6 24 12 C 24 11.4 23.6 11 23 11 L 22 11 z M 4.9003906 18.099609 C 4.6503906 18.099609 4.3992188 18.200391 4.1992188 18.400391 L 3.5 19.099609 C 3.1 19.499609 3.1 20.1 3.5 20.5 C 3.9 20.9 4.5003906 20.9 4.9003906 20.5 L 5.5996094 19.800781 C 5.9996094 19.400781 5.9996094 18.800391 5.5996094 18.400391 C 5.3996094 18.200391 5.1503906 18.099609 4.9003906 18.099609 z M 19.099609 18.099609 C 18.849609 18.099609 18.600391 18.200391 18.400391 18.400391 C 18.000391 18.800391 18.000391 19.400781 18.400391 19.800781 L 19.099609 20.5 C 19.499609 20.9 20.1 20.9 20.5 20.5 C 20.9 20.1 20.9 19.499609 20.5 19.099609 L 19.800781 18.400391 C 19.600781 18.200391 19.349609 18.099609 19.099609 18.099609 z M 12 21 C 11.4 21 11 21.4 11 22 L 11 23 C 11 23.6 11.4 24 12 24 C 12.6 24 13 23.6 13 23 L 13 22 C 13 21.4 12.6 21 12 21 z">
+            </path>
+        </svg>
+        <svg style="display: none;" id="moon-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 122.56 122.88">
+            <path class="cls-1"
+                d="M121.85,87.3A64.31,64.31,0,1,1,36.88.4c2.94-1.37,5.92.91,4.47,4.47a56.29,56.29,0,0,0,75.75,77.4l.49-.27a3.41,3.41,0,0,1,4.61,4.61l-.35.69ZM92.46,74.67H92A16.11,16.11,0,0,0,76.2,58.93v-.52a15.08,15.08,0,0,0,11-4.72,15.19,15.19,0,0,0,4.72-11h.51a15.12,15.12,0,0,0,4.72,11,15.12,15.12,0,0,0,11,4.72v.51A16.13,16.13,0,0,0,92.46,74.67Zm10.09-46.59h-.27a7.94,7.94,0,0,0-2.49-5.81A7.94,7.94,0,0,0,94,19.78v-.27A7.94,7.94,0,0,0,99.79,17a8,8,0,0,0,2.49-5.8h.27A8,8,0,0,0,105,17a8,8,0,0,0,5.81,2.49v.27A8,8,0,0,0,105,22.27a7.94,7.94,0,0,0-2.49,5.81Zm-41.5,8h-.41a12.06,12.06,0,0,0-3.78-8.82A12.06,12.06,0,0,0,48,23.5v-.41a12.07,12.07,0,0,0,8.82-3.78,12.09,12.09,0,0,0,3.78-8.82h.41a12.08,12.08,0,0,0,3.77,8.82,12.09,12.09,0,0,0,8.83,3.78v.41a12.09,12.09,0,0,0-8.83,3.78,12.08,12.08,0,0,0-3.77,8.82Z" />
+        </svg>
+    </button>
+    <script>
+        const preview = document.getElementById('preview-svg');
+        const download = document.getElementById('download-svg');
+        const download_json = document.getElementById('download-json');
+
+        preview.addEventListener('click', () => {
+            // Create SVG
+            const export_svg = create_svg();
+            // APPEND SVG
+            document.getElementById('svg').innerHTML = '';
+            document.getElementById('svg').appendChild(export_svg);
+        });
+
+        download.addEventListener('click', () => {
+            // Serialize the SVG XML
+            const serializer = new XMLSerializer();
+            let source = serializer.serializeToString(create_svg());
+
+            // Add XML namespace if missing
+            if (!source.match(/^<svg[^>]+xmlns="/)) {
+                source = source.replace(
+                /^<svg/,
+                '<svg xmlns="http://www.w3.org/2000/svg"'
+                );
+            }
+
+            // Add XML declaration
+            source = '<?xml version="1.0" standalone="no"?>\n' + source;
+
+            // Create Blob and download
+            const blob = new Blob([source], { type: "image/svg+xml;charset=utf-8" });
+            const url = URL.createObjectURL(blob);
+
+            const link = document.createElement("a");
+            link.href = url;
+            link.download = `${new Date().toISOString().split('T')[0]}-OO2.svg`;
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+            URL.revokeObjectURL(url);
+        });
+
+        download_json.addEventListener('click', () => {
+            const blob = new Blob([JSON.stringify(graphData, null, 2)], { type: "application/json" });
+            const url = URL.createObjectURL(blob);
+            const link = document.createElement("a");
+            link.href = url;
+            link.download = `${new Date().toISOString().split('T')[0]}-OO2.json`;
+            link.click();
+            URL.revokeObjectURL(url);
+        });
+    </script>
+    <script>
+        const bg_bool = document.getElementById('transparent-bg');
+        const bg_var = document.getElementById('bgC');
+        const points_bool = document.getElementById('points');
+        const points_var = document.getElementById('pointsC');
+        const fill_bool = document.getElementById('fill');
+        const fill_var  = document.getElementById('fillC');
+
+        bg_bool.addEventListener('change', () => {
+            bg_var.style.display = bg_bool.value === 'true' ? 'none' : 'block';
+        });
+        
+        points_bool.addEventListener('change', () => {
+            points_var.style.display = points_bool.value === 'true' ? 'block' : 'none';
+        });
+
+        fill_bool.addEventListener('change', () => {
+            fill_var.style.display = fill_bool.value === 'true' ? 'block' : 'none';
+        });
+    </script>
+</body>
+</html>
