@@ -43,36 +43,52 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // Return the data as an object
         return {
-            baud,
-            breakChar,
-            cls,
-            csv,
-            png,
-            svg,
-            title,
-            xTitle,
-            yTitle,
-            xType,
-            xMin,
-            xMax,
-            xTime,
-            xTimeMax,
-            xTimeManual,
-            yType,
-            auto,
-            yMin,
-            yMax,
-            points,
-            fill,
-            dataset_labels,
-            dataset_colors
+            title: title,
+            serial: {
+                baud_rate: baud,
+                break: breakChar,
+                mcu_commands: {
+                    cls: cls,
+                    csv: csv,
+                    png: png,
+                    svg: svg
+                }
+            },
+            datasets: {
+                labels: dataset_labels,
+                colors: dataset_colors,
+                points: points,
+                fill: fill
+            },
+            axes: {
+                x: {
+                    title: xTitle,
+                    type: xType,
+                    time: {
+                        format: xTime,
+                        max_readings: xTimeMax,
+                        manual: xTimeManual
+                    },
+                    linear: {
+                        min: xMin,
+                        max: xMax
+                    }
+                },
+                y: {
+                    title: yTitle,
+                    type: yType,
+                    autoscale: auto,
+                    min: yMin,
+                    max: yMax
+                }
+            }
         };
     };
 
     const submitButton = document.getElementById('submit');
     submitButton.addEventListener('click', () => {
         const data = exportData();
-        sessionStorage.setItem('SetupData', JSON.stringify(data));
+        sessionStorage.setItem('settings', JSON.stringify(data));
         window.location.href = 'plotter.html';
     });
 });
