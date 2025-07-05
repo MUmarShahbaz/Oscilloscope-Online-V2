@@ -1,7 +1,7 @@
 document.addEventListener('DOMContentLoaded', () => {
     const exportData = () => {
         // Serial Values
-        const baud = document.getElementById('baud').value;
+        const baud = parseInt(document.getElementById('baud').value);
         const breakChar = document.getElementById('break_char').value;
         const cls = document.getElementById('cls_char').value;
         const csv = document.getElementById('csv_char').value;
@@ -14,16 +14,16 @@ document.addEventListener('DOMContentLoaded', () => {
         const yTitle = document.getElementById('yTitle').value;
 
         const xType = document.getElementById('xType').value;
-        const xMin = (xType === 'linear') ? document.getElementById('xMin').value : null;
-        const xMax = (xType === 'linear') ? document.getElementById('xMax').value : null;
+        const xMin = (xType === 'linear') ? parseInt(document.getElementById('xMin').value) : null;
+        const xMax = (xType === 'linear') ? parseInt(document.getElementById('xMax').value) : null;
         const xTime = (xType === 'time') ? document.getElementById('xTime').value : null;
-        const xTimeMax = (xType === 'time') ? document.getElementById('xTimeMax').value : null;
-        const xTimeManual = (xType === 'time') ? document.getElementById('xTimeManual').value : null;
+        const xTimeMax = (xType === 'time') ? parseInt(document.getElementById('xTimeMax').value) : null;
+        const xTimeManual = (xType === 'time') ? (document.getElementById('xTimeManual').value === 'true') : null;
 
         const yType = document.getElementById('yType').value;
         const auto = document.getElementById('auto').value === 'true';
-        const yMin = auto ? null : document.getElementById('yMin').value;
-        const yMax = auto ? null : document.getElementById('yMax').value;
+        const yMin = auto ? null : parseInt(document.getElementById('yMin').value);
+        const yMax = auto ? null : parseInt(document.getElementById('yMax').value);
 
         // Graph Values
         const points = document.getElementById('points').value === 'true';
