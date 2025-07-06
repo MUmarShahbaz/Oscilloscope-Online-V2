@@ -49,7 +49,7 @@ hr {
 }
 
 .setup-form {
-    width:30%;
+    width: 30%;
 }
 
 .setup-form input,
@@ -87,7 +87,7 @@ hr {
         display: block;
     }
 
-    .setup-form{
+    .setup-form {
         width: 100%;
     }
 }
@@ -114,6 +114,7 @@ hr {
 }
 
 @media (max-width: 450px) {
+
     #setup-form input,
     #setup-form select {
         width: 100%;
@@ -125,7 +126,7 @@ hr {
 /* Colors and Styles */
 
 body {
-    background-image:  var(--background-image);
+    background-image: var(--background-image);
     background-repeat: repeat;
     background-size: auto;
     background-color: var(--background-color);

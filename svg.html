@@ -42,15 +42,15 @@
     <meta name="twitter:description"
         content="A web oscilloscope and serial plotter for Arduino and ESP users. Collect, plot, and visualize data online with customizable timescale and graphing options.">
     <meta name="twitter:image" content="https://mumarshahbaz.github.io/Oscilloscope-Online-V2/assets/img/icon-480.png">
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-ENJEDRBRTP"></script>
-<script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag() { dataLayer.push(arguments); }
-    gtag('js', new Date());
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-ENJEDRBRTP"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
 
-    gtag('config', 'G-ENJEDRBRTP');
-</script>
+        gtag('config', 'G-ENJEDRBRTP');
+    </script>
 </head>
 
 <body>
@@ -68,218 +68,219 @@
                 <h1 class="title">SVG Export Configuration</h1>
             </div>
             <div class="center-align">
-            <section id="svg" style="width: 85vw; height: auto;"></section>
+                <section id="svg" style="width: 85vw; height: auto;"></section>
             </div><br>
             <section id="setup">
                 <div class="forms">
-                <form class="setup-form">
-                    <div>
-                        <div class="center-align">
-                            <h3 class="title">Dimensions</h3>
-                        </div>
+                    <form class="setup-form">
                         <div>
-                            <label for="transparent-bg">Background :</label>
-                            <select id="transparent-bg">
-                                <option value="true">True</option>
-                                <option value="false" selected>False</option>
-                            </select>
-                        </div>
-                        <br>
-                        <div id="bgC">
-                            <label for="bg-color">BG Color :</label>
-                            <input id="bg-color" type="color" value="#FFFFFF" required>
-                        </div>
-                        <br>
-                        <br>
-                        <div>
-                            <label for="width">Width :</label>
-                            <input id="width" list="image-widths" type="number" step="1" value="1280" required>
-                            <datalist id="image-widths">
-                                <option value="320">
-                                <option value="480">
-                                <option value="640">
-                                <option value="800">
-                                <option value="1024">
-                                <option value="1280">
-                                <option value="1366">
-                                <option value="1440">
-                                <option value="1600">
-                                <option value="1920">
-                                <option value="2048">
-                                <option value="2560">
-                                <option value="3840">
-                                <option value="4096">
-                            </datalist>
-                        </div>
-                        <br>
-                        <div>
-                            <label for="height">Height :</label>
-                            <input id="height" list="image-heights" type="number" step="1" value="720" required>
-                            <datalist id="image-heights">
-                                <option value="240">
-                                <option value="320">
-                                <option value="360">
-                                <option value="480">
-                                <option value="600">
-                                <option value="720">
-                                <option value="768">
-                                <option value="800">
-                                <option value="900">
-                                <option value="1080">
-                                <option value="1152">
-                                <option value="1200">
-                                <option value="1440">
-                                <option value="2160">
-                            </datalist>
-                        </div>
-                        <br>
-                        <br>
-                        <div>
-                            <label for="m-left">Left :</label>
-                            <input id="m-left" type="number" step="1" value="50" required>
-                        </div>
-                        <br>
-                        <div>
-                            <label for="m-right">Right :</label>
-                            <input id="m-right" type="number" step="1" value="50" required>
-                        </div>
-                        <br>
-                        <div>
-                            <label for="m-top">Top :</label>
-                            <input id="m-top" type="number" step="1" value="50" required>
-                        </div>
-                        <br>
-                        <div>
-                            <label for="m-bottom">Bottom :</label>
-                            <input id="m-bottom" type="number" step="1" value="50" required>
-                        </div>
-                        <br>
-                    </div>
-                </form>
-                <hr class="vertical-hr">
-                <form class="setup-form">
-                    <div>
-                        <div class="center-align">
-                            <h3 class="title">Grid</h3>
-                        </div>
-                        <div>
-                            <label for="x-gap-by">X Gap :</label>
-                            <select id="x-gap-by" required>
-                                <option value="val">by Value</option>
-                                <option value="px" selected>by Pixels</option>
-                            </select>
-                        </div>
-                        <br>
-                        <div>
-                            <label for="x-gap-val">Gap Value :</label>
-                            <input id="x-gap-val" type="number" step="0.1" value="100" required>
-                        </div>
-                        <br>
-                        <br>
-                        <div>
-                            <label for="y-gap-by">Y Gap :</label>
-                            <select id="y-gap-by" required>
-                                <option value="val">by Value</option>
-                                <option value="px" selected>by Pixels</option>
-                            </select>
-                        </div>
-                        <br>
-                        <div>
-                            <label for="y-gap-val">Gap Value :</label>
-                            <input id="y-gap-val" type="number" step="0.1" value="100" required>
-                        </div>
-                        <br>
-                        <br>
-                        <div>
-                            <label for="axis-color">Axis Color :</label>
-                            <input id="axis-color" type="color" value="#000000" required>
-                        </div>
-                        <br>
-                        <div>
-                            <label for="axis-width">Axis Width :</label>
-                            <input id="axis-width" type="number" step="0.1" value="2" required>
-                        </div>
-                        <br>
-                        <br>
-                        <div>
-                            <label for="grid-color">Grid Color :</label>
-                            <input id="grid-color" type="color" value="#CCCCCC" required>
-                        </div>
-                        <br>
-                        <div>
-                            <label for="grid-width">Grid Width :</label>
-                            <input id="grid-width" type="number" step="0.1" value="1" required>
-                        </div>
-                        <br>
-                        <br>
-                        <div>
-                            <label for="font-color">Font Color :</label>
-                            <input id="font-color" type="color" value="#000000" required>
-                        </div>
-                        <br>
-                        <div>
-                            <label for="font-size">Font Size :</label>
-                            <input id="font-size" type="number" step="1" value="10" required>
-                        </div>
-                        <br>
-                    </div>
-                </form>
-                <hr class="vertical-hr">
-                <form class="setup-form">
-                    <div>
-                        <div class="center-align">
-                            <h3 class="title">Line/Graph</h3>
-                        </div>
-                        <div>
-                            <label for="line-width">Width :</label>
-                            <input id="line-width" type="number" step="0.1" value="1.5" required>
-                        </div>
-                        <br>
-                        <div>
-                            <label for="line-alpha">Alpha :</label>
-                            <input id="line-alpha" type="number" step="0.1" value="1" required>
-                        </div>
-                        <br>
-                        <br>
-                        <div>
-                            <label for="points">Show points :</label>
-                            <select id="points" required>
-                                <option value="true">True</option>
-                                <option value="false" selected>False</option>
-                            </select>
-                        </div>
-                        <br>
-                        <div id="pointsC" style="display: none;">
+                            <div class="center-align">
+                                <h3 class="title">Dimensions</h3>
+                            </div>
                             <div>
-                                <label for="points-radius">Point Radius :</label>
-                                <input id="points-radius" type="number" step="1" value="7" required>
+                                <label for="transparent-bg">Background :</label>
+                                <select id="transparent-bg">
+                                    <option value="false" selected>True</option>
+                                    <option value="true">False</option>
+                                </select>
+                            </div>
+                            <br>
+                            <div id="bgC">
+                                <label for="bg-color">BG Color :</label>
+                                <input id="bg-color" type="color" value="#FFFFFF" required>
+                            </div>
+                            <br>
+                            <br>
+                            <div>
+                                <label for="width">Width :</label>
+                                <input id="width" list="image-widths" type="number" step="1" value="1280" required>
+                                <datalist id="image-widths">
+                                    <option value="320">
+                                    <option value="480">
+                                    <option value="640">
+                                    <option value="800">
+                                    <option value="1024">
+                                    <option value="1280">
+                                    <option value="1366">
+                                    <option value="1440">
+                                    <option value="1600">
+                                    <option value="1920">
+                                    <option value="2048">
+                                    <option value="2560">
+                                    <option value="3840">
+                                    <option value="4096">
+                                </datalist>
                             </div>
                             <br>
                             <div>
-                                <label for="points-alpha">Point Alpha :</label>
-                                <input id="points-alpha" type="number" step="0.1" value="0.5" required>
+                                <label for="height">Height :</label>
+                                <input id="height" list="image-heights" type="number" step="1" value="720" required>
+                                <datalist id="image-heights">
+                                    <option value="240">
+                                    <option value="320">
+                                    <option value="360">
+                                    <option value="480">
+                                    <option value="600">
+                                    <option value="720">
+                                    <option value="768">
+                                    <option value="800">
+                                    <option value="900">
+                                    <option value="1080">
+                                    <option value="1152">
+                                    <option value="1200">
+                                    <option value="1440">
+                                    <option value="2160">
+                                </datalist>
+                            </div>
+                            <br>
+                            <br>
+                            <div>
+                                <label for="m-left">Left :</label>
+                                <input id="m-left" type="number" step="1" value="50" required>
+                            </div>
+                            <br>
+                            <div>
+                                <label for="m-right">Right :</label>
+                                <input id="m-right" type="number" step="1" value="50" required>
+                            </div>
+                            <br>
+                            <div>
+                                <label for="m-top">Top :</label>
+                                <input id="m-top" type="number" step="1" value="50" required>
+                            </div>
+                            <br>
+                            <div>
+                                <label for="m-bottom">Bottom :</label>
+                                <input id="m-bottom" type="number" step="1" value="50" required>
+                            </div>
+                            <br>
+                        </div>
+                    </form>
+                    <hr class="vertical-hr">
+                    <form class="setup-form">
+                        <div>
+                            <div class="center-align">
+                                <h3 class="title">Grid</h3>
+                            </div>
+                            <div>
+                                <label for="x-gap-by">X Gap :</label>
+                                <select id="x-gap-by" required>
+                                    <option value="val">by Value</option>
+                                    <option value="px" selected>by Pixels</option>
+                                </select>
+                            </div>
+                            <br>
+                            <div>
+                                <label for="x-gap-val">Gap Value :</label>
+                                <input id="x-gap-val" type="number" step="0.1" value="100" required>
+                            </div>
+                            <br>
+                            <div id="y-gap">
+                                <br>
+                                <div>
+                                    <label for="y-gap-by">Y Gap :</label>
+                                    <select id="y-gap-by" required>
+                                        <option value="val">by Value</option>
+                                        <option value="px" selected>by Pixels</option>
+                                    </select>
+                                </div>
+                                <br>
+                                <div>
+                                    <label for="y-gap-val">Gap Value :</label>
+                                    <input id="y-gap-val" type="number" step="0.1" value="100" required>
+                                </div>
+                                <br>
+                            </div>
+                            <br>
+                            <div>
+                                <label for="axis-color">Axis Color :</label>
+                                <input id="axis-color" type="color" value="#000000" required>
+                            </div>
+                            <br>
+                            <div>
+                                <label for="axis-width">Axis Width :</label>
+                                <input id="axis-width" type="number" step="0.1" value="2" required>
+                            </div>
+                            <br>
+                            <br>
+                            <div>
+                                <label for="grid-color">Grid Color :</label>
+                                <input id="grid-color" type="color" value="#CCCCCC" required>
+                            </div>
+                            <br>
+                            <div>
+                                <label for="grid-width">Grid Width :</label>
+                                <input id="grid-width" type="number" step="0.1" value="1" required>
+                            </div>
+                            <br>
+                            <br>
+                            <div>
+                                <label for="font-color">Font Color :</label>
+                                <input id="font-color" type="color" value="#000000" required>
+                            </div>
+                            <br>
+                            <div>
+                                <label for="font-size">Font Size :</label>
+                                <input id="font-size" type="number" step="1" value="10" required>
+                            </div>
+                            <br>
+                        </div>
+                    </form>
+                    <hr class="vertical-hr">
+                    <form class="setup-form">
+                        <div>
+                            <div class="center-align">
+                                <h3 class="title">Line/Graph</h3>
+                            </div>
+                            <div>
+                                <label for="line-width">Width :</label>
+                                <input id="line-width" type="number" step="0.1" value="1.5" required>
+                            </div>
+                            <br>
+                            <div>
+                                <label for="line-alpha">Alpha :</label>
+                                <input id="line-alpha" type="number" step="0.1" value="1" required>
+                            </div>
+                            <br>
+                            <br>
+                            <div>
+                                <label for="points">Show points :</label>
+                                <select id="points" required>
+                                    <option value="true">True</option>
+                                    <option value="false" selected>False</option>
+                                </select>
+                            </div>
+                            <br>
+                            <div id="pointsC" style="display: none;">
+                                <div>
+                                    <label for="points-radius">Point Radius :</label>
+                                    <input id="points-radius" type="number" step="1" value="7" required>
+                                </div>
+                                <br>
+                                <div>
+                                    <label for="points-alpha">Point Alpha :</label>
+                                    <input id="points-alpha" type="number" step="0.1" value="0.5" required>
+                                </div>
+                            </div>
+                            <br>
+                            <br>
+                            <div>
+                                <label for="fill">Fill area :</label>
+                                <select id="fill" required>
+                                    <option value="true">True</option>
+                                    <option value="false" selected>False</option>
+                                </select>
+                            </div>
+                            <br>
+                            <div id="fillC" style="display: none;">
+                                <label for="fill-alpha">Fill Alpha :</label>
+                                <input id="fill-alpha" type="number" step="0.1" value="0.1" required>
                             </div>
                         </div>
-                        <br>
-                        <br>
-                        <div>
-                            <label for="fill">Fill area :</label>
-                            <select id="fill" required>
-                                <option value="true">True</option>
-                                <option value="false" selected>False</option>
-                            </select>
-                        </div>
-                        <br>
-                        <div id="fillC" style="display: none;">
-                            <label for="fill-alpha">Fill Alpha :</label>
-                            <input id="fill-alpha" type="number" step="0.1" value="0.1" required>
-                        </div>
-                    </div>
-                </form>
+                    </form>
                 </div>
                 <hr>
                 <div class="center-align">
-                    <a class="button" id="preview-svg">Preview SVG</a>
                     <a class="button" id="download-svg">Download SVG</a>
                     <a class="button" id="download-json">Download JSON</a>
                     <a class="button" href='help.html'>Help</a>
@@ -300,17 +301,13 @@
         </svg>
     </button>
     <script>
-        const preview = document.getElementById('preview-svg');
         const download = document.getElementById('download-svg');
         const download_json = document.getElementById('download-json');
 
-        preview.addEventListener('click', () => {
-            // Create SVG
-            const export_svg = create_svg();
-            // APPEND SVG
+        document.querySelectorAll('select, input').forEach(element => element.addEventListener('change', () => {
             document.getElementById('svg').innerHTML = '';
-            document.getElementById('svg').appendChild(export_svg);
-        });
+            document.getElementById('svg').appendChild(create_svg());
+        }));
 
         download.addEventListener('click', () => {
             // Serialize the SVG XML
@@ -320,8 +317,8 @@
             // Add XML namespace if missing
             if (!source.match(/^<svg[^>]+xmlns="/)) {
                 source = source.replace(
-                /^<svg/,
-                '<svg xmlns="http://www.w3.org/2000/svg"'
+                    /^<svg/,
+                    '<svg xmlns="http://www.w3.org/2000/svg"'
                 );
             }
 
@@ -352,17 +349,18 @@
         });
     </script>
     <script>
+        const y_gap_var = document.getElementById('y-gap');
         const bg_bool = document.getElementById('transparent-bg');
         const bg_var = document.getElementById('bgC');
         const points_bool = document.getElementById('points');
         const points_var = document.getElementById('pointsC');
         const fill_bool = document.getElementById('fill');
-        const fill_var  = document.getElementById('fillC');
+        const fill_var = document.getElementById('fillC');
 
         bg_bool.addEventListener('change', () => {
             bg_var.style.display = bg_bool.value === 'true' ? 'none' : 'block';
         });
-        
+
         points_bool.addEventListener('change', () => {
             points_var.style.display = points_bool.value === 'true' ? 'block' : 'none';
         });
@@ -370,6 +368,9 @@
         fill_bool.addEventListener('change', () => {
             fill_var.style.display = fill_bool.value === 'true' ? 'block' : 'none';
         });
+
+        if (graphData.grid.y.type !== 'linear') y_gap_var.style.display = 'none';
     </script>
 </body>
+
 </html>

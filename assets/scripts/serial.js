@@ -62,7 +62,7 @@ async function readSerialData() {
         console.error('Serial read error:', err);
         await Disconnect();
     } finally {
-        try { reader.releaseLock(); } catch {}
+        try { reader.releaseLock(); } catch { }
         console.log('Serial port closed.');
         serial.close();
         connected = false;
@@ -85,7 +85,7 @@ function DataProcessor(message, time) {
         for (let i = 1; i < data.length; i++) {
             data[i] = [];
         }
-        counter = 0;        
+        counter = 0;
     } else if (message == settings.serial.mcu_commands.csv) {
         document.getElementById('export-csv').click();
     } else if (message == settings.serial.mcu_commands.png) {
@@ -99,7 +99,7 @@ function DataProcessor(message, time) {
         if (settings.axes.x.type === 'time') {
             data[0].push(time);
         }
-        console.log(messageData , `at time ${time}`);
+        console.log(messageData, `at time ${time}`);
 
         // Add data to datasets
         messageData.forEach((value, i) => {

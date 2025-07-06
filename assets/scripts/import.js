@@ -40,11 +40,11 @@ function revert_format(time) {
     if ((/^\d+:\d+:\d+$/).test(time)) {
         hours = parseInt(time.match(/^(\d+):\d+:\d+$/)[1], 10);
         minutes = parseInt(time.match(/^\d+:(\d+):\d+$/)[1], 10);
-        seconds =  parseInt(time.match(/^\d+:\d+:(\d+)$/)[1], 10);
+        seconds = parseInt(time.match(/^\d+:\d+:(\d+)$/)[1], 10);
     }
     if ((/^\d+:\d+$/).test(time)) {
         minutes = parseInt(time.match(/^(\d+):\d+$/)[1], 10);
-        seconds =  parseInt(time.match(/^\d+:(\d+)$/)[1], 10);
+        seconds = parseInt(time.match(/^\d+:(\d+)$/)[1], 10);
     }
     if ((/^\d+\.\d+s$/).test(time)) {
         seconds = parseInt(time.match(/^(\d+)\.\d+s$/)[1], 10);
@@ -53,6 +53,6 @@ function revert_format(time) {
     if ((/^\d+ms$/).test(time)) {
         ms = parseInt(time.match(/^(\d+)ms$/)[1], 10);
     }
-    const reverted = ms + seconds*1000 + minutes*60*1000 + hours*60*60*1000 + days*24*60*60*1000;
+    const reverted = ms + seconds * 1000 + minutes * 60 * 1000 + hours * 60 * 60 * 1000 + days * 24 * 60 * 60 * 1000;
     return reverted.toString();
 }
