@@ -18,10 +18,8 @@
     <script defer src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
     <script defer src="assets/scripts/plotter.js"></script>
     <script defer src="assets/scripts/serial.js"></script>
-    <script defer src="assets/scripts/importCSV.js"></script>
-    <script defer src="assets/scripts/exportCSV.js"></script>
-    <script defer src="assets/scripts/exportPNG.js"></script>
-    <script defer src="assets/scripts/exportJSON.js"></script>
+    <script defer src="assets/scripts/import.js"></script>
+    <script defer src="assets/scripts/json.js"></script>
     <script>
         // Import Parameters
         const settings = JSON.parse(sessionStorage.getItem('settings'));
@@ -105,5 +103,53 @@
         </svg>
     </button>
 </body>
+<script>
+    document.getElementById('export-png').addEventListener('click', () => {
+        html2canvas(document.getElementById("plot")).then(canvas => {
+            const link = document.createElement("a");
+            link.download = "uplot-full-export.png";
+            link.href = canvas.toDataURL("image/png");
+            link.click();
+        });
+    });
+
+    document.getElementById('export-csv').addEventListener('click', () => {
+        // Extract data
+        const index = data[0];
+        const columns = data.slice(1);
+        const rowCount = index.length;
+
+        // Create headings
+        let headings = [(settings.axes.x.type === 'linear' ? "Index" : "Time")];
+        series.slice(1).forEach((dataset) => {
+            headings.push(dataset.label);
+        });
+
+        // Parse CSV
+        let csv = headings.join(',') + '\n';
+        for (let i = 0; i < rowCount; i++) {
+            let reading_index = settings.axes.x.type === 'linear' ? index[i] : formatElapsed(index[i], settings.axes.x.time.format);
+            let row = reading_index + ',' + columns.map(col => col[i] !== undefined ? col[i] : '').join(',');
+            csv += row + '\n';
+            console.log(row);
+        }
+
+        // Download CSV
+        const blob = new Blob([csv], { type: 'text/csv' });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = 'data.csv';
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        URL.revokeObjectURL(url);
+    });
+
+    document.getElementById('export-svg').addEventListener('click', () => {
+        sessionStorage.setItem('GraphData', JSON.stringify(data_parser()));
+        window.location.href = 'svg.html';
+    });
+</script>
 
 </html>

@@ -12,6 +12,7 @@
 
     <!--Scripts-->
     <script src="assets/scripts/theme.js"></script>
+    <script defer src="assets/scripts/json.js"></script>
 
     <!--Meta-->
     <meta charset="UTF-8">
@@ -360,6 +361,11 @@
     //update_Y_Fields();
     update_Graph_Fields();
 </script>
-<script defer src="assets/scripts/exportSetup.js"></script>
+<script>
+    document.getElementById('submit').addEventListener('click', () => {
+        sessionStorage.setItem('settings', JSON.stringify(create_settings()));
+        window.location.href = 'plotter.html';
+    });
+</script>
 
 </html>
