@@ -12,6 +12,7 @@
 
     <!--Scripts-->
     <script src="assets/scripts/theme.js"></script>
+    <script defer src="assets/scripts/json.js"></script>
 
     <!--Meta-->
     <meta charset="UTF-8">
@@ -32,15 +33,15 @@
     <meta name="twitter:description"
         content="A web oscilloscope and serial plotter for Arduino and ESP users. Collect, plot, and visualize data online with customizable timescale and graphing options.">
     <meta name="twitter:image" content="https://mumarshahbaz.github.io/Oscilloscope-Online-V2/assets/img/icon-480.png">
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-ENJEDRBRTP"></script>
-<script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag() { dataLayer.push(arguments); }
-    gtag('js', new Date());
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-ENJEDRBRTP"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
 
-    gtag('config', 'G-ENJEDRBRTP');
-</script>
+        gtag('config', 'G-ENJEDRBRTP');
+    </script>
 </head>
 
 <body>
@@ -59,194 +60,194 @@
             </div>
             <section id="setup">
                 <div class="forms">
-                <form class="setup-form">
-                    <div>
-                        <div class="center-align">
-                            <h3 class="title">Serial</h3>
-                        </div>
+                    <form class="setup-form">
                         <div>
-                            <label for="baud">Baud rate :</label>
-                            <input id="baud" list="baud-rates" type="number" value="9600" required>
-                            <datalist id="baud-rates">
-                                <option value="300">
-                                <option value="1200">
-                                <option value="2400">
-                                <option value="4800">
-                                <option value="9600">
-                                <option value="14400">
-                                <option value="19200">
-                                <option value="28800">
-                                <option value="38400">
-                                <option value="57600">
-                                <option value="115200">
-                                <option value="230400">
-                                <option value="250000">
-                                <option value="460800">
-                                <option value="500000">
-                                <option value="921600">
-                                <option value="1000000">
-                                <option value="2000000">
-                            </datalist>
-                        </div>
-                        <br>
-                        <div>
-                            <label for="break_char">Break char :</label>
-                            <input id="break_char" type="text" value="/" required>
-                        </div>
-                        <br>
-                        <div>
-                            <label for="cls_char">CLS char :</label>
-                            <input id="cls_char" type="text" value="%" required>
-                        </div>
-                        <br>
-                        <div>
-                            <label for="csv_char">CSV char :</label>
-                            <input id="csv_char" type="text" value="@" required>
-                        </div>
-                        <br>
-                        <div>
-                            <label for="png_char">PNG char :</label>
-                            <input id="png_char" type="text" value="&" required>
-                        </div>
-                        <br>
-                        <div>
-                            <label for="svg_char">SVG char :</label>
-                            <input id="svg_char" type="text" value="$" required>
-                        </div>
-                        <br>
-                    </div>
-                </form>
-                <hr class="vertical-hr">
-                <form class="setup-form">
-                    <div>
-                        <div class="center-align">
-                            <h3 class="title">Grid</h3>
-                        </div>
-                        <div>
-                            <label for="title">Chart Title :</label>
-                            <input id="title" type="text" value="Oscilloscope" required>
-                        </div>
-                        <br>
-                        <div>
-                            <label for="xTitle">X axis Title :</label>
-                            <input id="xTitle" type="text" value="Index" required>
-                        </div>
-                        <br>
-                        <div>
-                            <label for="yTitle">Y axis Title :</label>
-                            <input id="yTitle" type="text" value="Value" required>
-                        </div>
-                        <br>
-                        <br>
-                        <div>
-                            <label for="xType">X axis Type :</label>
-                            <select id="xType" required>
-                                <option value="linear">Linear</option>
-                                <option value="time">Time</option>
-                            </select>
-                        </div>
-                        <br>
-                        <div id="xLinearC">
+                            <div class="center-align">
+                                <h3 class="title">Serial</h3>
+                            </div>
                             <div>
-                                <label for="xMin">X axis Min :</label>
-                                <input id="xMin" type="number" value="0" required>
+                                <label for="baud">Baud rate :</label>
+                                <input id="baud" list="baud-rates" type="number" value="9600" required>
+                                <datalist id="baud-rates">
+                                    <option value="300">
+                                    <option value="1200">
+                                    <option value="2400">
+                                    <option value="4800">
+                                    <option value="9600">
+                                    <option value="14400">
+                                    <option value="19200">
+                                    <option value="28800">
+                                    <option value="38400">
+                                    <option value="57600">
+                                    <option value="115200">
+                                    <option value="230400">
+                                    <option value="250000">
+                                    <option value="460800">
+                                    <option value="500000">
+                                    <option value="921600">
+                                    <option value="1000000">
+                                    <option value="2000000">
+                                </datalist>
                             </div>
                             <br>
                             <div>
-                                <label for="xMax">X axis Max :</label>
-                                <input id="xMax" type="number" value="500" required>
+                                <label for="break_char">Break char :</label>
+                                <input id="break_char" type="text" value="/" required>
+                            </div>
+                            <br>
+                            <div>
+                                <label for="cls_char">CLS char :</label>
+                                <input id="cls_char" type="text" value="%" required>
+                            </div>
+                            <br>
+                            <div>
+                                <label for="csv_char">CSV char :</label>
+                                <input id="csv_char" type="text" value="@" required>
+                            </div>
+                            <br>
+                            <div>
+                                <label for="png_char">PNG char :</label>
+                                <input id="png_char" type="text" value="&" required>
+                            </div>
+                            <br>
+                            <div>
+                                <label for="svg_char">SVG char :</label>
+                                <input id="svg_char" type="text" value="$" required>
                             </div>
                             <br>
                         </div>
-                        <div id="xTimeC">
+                    </form>
+                    <hr class="vertical-hr">
+                    <form class="setup-form">
+                        <div>
+                            <div class="center-align">
+                                <h3 class="title">Grid</h3>
+                            </div>
                             <div>
-                                <label for="xTimeManual">Manual Time :</label>
-                                <select id="xTimeManual" required>
+                                <label for="title">Chart Title :</label>
+                                <input id="title" type="text" value="Oscilloscope" required>
+                            </div>
+                            <br>
+                            <div>
+                                <label for="xTitle">X axis Title :</label>
+                                <input id="xTitle" type="text" value="Index" required>
+                            </div>
+                            <br>
+                            <div>
+                                <label for="yTitle">Y axis Title :</label>
+                                <input id="yTitle" type="text" value="Value" required>
+                            </div>
+                            <br>
+                            <br>
+                            <div>
+                                <label for="xType">X axis Type :</label>
+                                <select id="xType" required>
+                                    <option value="linear">Linear</option>
+                                    <option value="time">Time</option>
+                                </select>
+                            </div>
+                            <br>
+                            <div id="xLinearC">
+                                <div>
+                                    <label for="xMin">X axis Min :</label>
+                                    <input id="xMin" type="number" value="0" required>
+                                </div>
+                                <br>
+                                <div>
+                                    <label for="xMax">X axis Max :</label>
+                                    <input id="xMax" type="number" value="500" required>
+                                </div>
+                                <br>
+                            </div>
+                            <div id="xTimeC">
+                                <div>
+                                    <label for="xTimeManual">Manual Time :</label>
+                                    <select id="xTimeManual" required>
+                                        <option value="true">True</option>
+                                        <option value="false" selected>False</option>
+                                    </select>
+                                </div>
+                                <br>
+                                <div>
+                                    <label for="xTime">Elapsed Time F :</label>
+                                    <select id="xTime" required>
+                                        <option value="ms">ms</option>
+                                        <option value="s.ms">s.ms</option>
+                                        <option value="m:s">m:s</option>
+                                        <option value="h:m:s">h:m:s</option>
+                                        <option value="d-h:m">d h:m</option>
+                                    </select>
+                                </div>
+                                <br>
+                                <div>
+                                    <label for="xTimeMax">Max readings :</label>
+                                    <input id="xTimeMax" type="number" value="5000" required>
+                                </div>
+                            </div>
+                            <br>
+                            <br>
+                            <div>
+                                <label for="yType">Y axis Type :</label>
+                                <select id="yType" required>
+                                    <option value="linear">Linear</option>
+                                    <option value="10">Log 10</option>
+                                    <option value="2">Log 2</option>
+                                </select>
+                            </div>
+                            <br>
+                            <div>
+                                <label for="auto">Auto scale :</label>
+                                <select id="auto" required>
+                                    <option value="true">True</option>
+                                    <option value="false">False</option>
+                                </select>
+                            </div>
+                            <br>
+                            <div id="yFieldsC">
+                                <div id="yMinC">
+                                    <label for="yMin">Y axis Min :</label>
+                                    <input id="yMin" type="number" value="0" required>
+                                </div>
+                                <br>
+                                <div id="yMaxC">
+                                    <label for="yMax">Y axis Max :</label>
+                                    <input id="yMax" type="number" value="1023" required>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                    <hr class="vertical-hr">
+                    <form class="setup-form">
+                        <div>
+                            <div class="center-align">
+                                <h3 class="title">Graph</h3>
+                            </div>
+                            <div>
+                                <label for="points">Show points :</label>
+                                <select id="points" required>
                                     <option value="true">True</option>
                                     <option value="false" selected>False</option>
                                 </select>
                             </div>
                             <br>
                             <div>
-                                <label for="xTime">Elapsed Time F :</label>
-                                <select id="xTime" required>
-                                    <option value="ms">ms</option>
-                                    <option value="s.ms">s.ms</option>
-                                    <option value="m:s">m:s</option>
-                                    <option value="h:m:s">h:m:s</option>
-                                    <option value="d-h:m">d h:m</option>
+                                <label for="fill">Fill area :</label>
+                                <select id="fill" required>
+                                    <option value="true">True</option>
+                                    <option value="false" selected>False</option>
                                 </select>
                             </div>
                             <br>
                             <div>
-                                <label for="xTimeMax">Max readings :</label>
-                                <input id="xTimeMax" type="number" value="5000" required>
-                            </div>
-                        </div>
-                        <br>
-                        <br>
-                        <div>
-                            <label for="yType">Y axis Type :</label>
-                            <select id="yType" required>
-                                <option value="linear">Linear</option>
-                                <option value="10">Log 10</option>
-                                <option value="2">Log 2</option>
-                            </select>
-                        </div>
-                        <br>
-                        <div>
-                            <label for="auto">Auto scale :</label>
-                            <select id="auto" required>
-                                <option value="true">True</option>
-                                <option value="false">False</option>
-                            </select>
-                        </div>
-                        <br>
-                        <div id="yFieldsC">
-                            <div id="yMinC">
-                                <label for="yMin">Y axis Min :</label>
-                                <input id="yMin" type="number" value="0" required>
+                                <label for="graphNum">Graphs :</label>
+                                <input id="graphNum" type="number" value="1" min="1" required>
                             </div>
                             <br>
-                            <div id="yMaxC">
-                                <label for="yMax">Y axis Max :</label>
-                                <input id="yMax" type="number" value="1023" required>
-                            </div>
+                            <br>
+                            <br>
+                            <div id="graphFields"></div>
                         </div>
-                    </div>
-                </form>
-                <hr class="vertical-hr">
-                <form class="setup-form">
-                    <div>
-                        <div class="center-align">
-                            <h3 class="title">Graph</h3>
-                        </div>
-                        <div>
-                            <label for="points">Show points :</label>
-                            <select id="points" required>
-                                <option value="true">True</option>
-                                <option value="false" selected>False</option>
-                            </select>
-                        </div>
-                        <br>
-                        <div>
-                            <label for="fill">Fill area :</label>
-                            <select id="fill" required>
-                                <option value="true">True</option>
-                                <option value="false" selected>False</option>
-                            </select>
-                        </div>
-                        <br>
-                        <div>
-                            <label for="graphNum">Graphs :</label>
-                            <input id="graphNum" type="number" value="1" min="1" required>
-                        </div>
-                        <br>
-                        <br>
-                        <br>
-                        <div id="graphFields"></div>
-                    </div>
-                </form>
+                    </form>
                 </div>
                 <hr>
                 <div class="center-align">
@@ -269,7 +270,102 @@
         </svg>
     </button>
 </body>
-<script defer src="assets/scripts/dynamicSetup.js"></script>
-<script defer src="assets/scripts/exportSetup.js"></script>
+<script> // Dynamic Setup
+    // X axis Fields
+    const X_Axis_Type = document.getElementById('xType');
+    const X_Axis_Linear = document.getElementById('xLinearC');
+    const X_Axis_Time = document.getElementById('xTimeC');
+
+    const toggle_X_Fields = () => {
+        const display_X_Linear = X_Axis_Type.value === 'linear';
+        X_Axis_Linear.style.display = display_X_Linear ? 'block' : 'none';
+
+        const display_X_Time = X_Axis_Type.value === 'time';
+        X_Axis_Time.style.display = display_X_Time ? 'block' : 'none';
+
+    }
+
+    X_Axis_Type.addEventListener('change', toggle_X_Fields);
+
+
+    // Y axis Fields Log
+    const Y_Axis_Type = document.getElementById("yType");
+    const Y_Min = document.getElementById("yMin");
+    const Y_Max = document.getElementById("yMax");
+
+    function update_Y_Fields() {
+        if (Y_Axis_Type.value != 'linear') {
+            Y_Min.min = "1";
+            Y_Max.min = "1";
+
+            if (parseFloat(Y_Min.value) <= 0) Y_Min.value = "1";
+            if (parseFloat(Y_Max.value) <= 0) Y_Max.value = "1000";
+
+        } else {
+            Y_Min.removeAttribute("min");
+            Y_Max.removeAttribute("min");
+        }
+    }
+
+    Y_Axis_Type.addEventListener("change", update_Y_Fields);
+
+    // Y axis Fields auto
+    const Y_Axis_Auto = document.getElementById('auto');
+    const Y_Axis_Fields = document.getElementById('yFieldsC');
+
+    const toggle_Y_Fields = () => {
+        const display_Y_Fields = Y_Axis_Auto.value === 'false';
+        Y_Axis_Fields.style.display = display_Y_Fields ? 'block' : 'none';
+    }
+
+    Y_Axis_Auto.addEventListener('change', toggle_Y_Fields);
+
+    // Graph Fields
+    const Graph_Num = document.getElementById('graphNum');
+    const Graph_Fields = document.getElementById('graphFields');
+
+    const update_Graph_Fields = () => {
+        Graph_Fields.innerHTML = '';
+        const total_Graphs = parseInt(Graph_Num.value, 10);
+
+
+        for (let i = 1; i <= total_Graphs; i++) {
+            const random_Color = `#${Math.floor(Math.random() * 16777215).toString(16).padStart(6, '0')}`;
+
+            const graph_Name = document.createElement('div');
+            graph_Name.innerHTML = `
+                <label for="graph${i}Name">Graph ${i} Name:</label>
+                <input id="graph${i}Name" type="text" value="Graph ${i}" required>
+            `;
+            const br = document.createElement('br');
+            const graph_Color = document.createElement('div');
+            graph_Color.innerHTML = `
+                <label for="graph${i}Color">Graph ${i} Color:</label>
+                <input id="graph${i}Color" type="color" value="${random_Color}" required>
+            `;
+
+            Graph_Fields.appendChild(graph_Name);
+            Graph_Fields.appendChild(br);
+            Graph_Fields.appendChild(graph_Color);
+            Graph_Fields.appendChild(br.cloneNode(true));
+            Graph_Fields.appendChild(br.cloneNode(true));
+            Graph_Fields.appendChild(br.cloneNode(true));
+        }
+    };
+
+    Graph_Num.addEventListener('change', update_Graph_Fields);
+
+    // Initial setup
+    toggle_X_Fields();
+    toggle_Y_Fields();
+    //update_Y_Fields();
+    update_Graph_Fields();
+</script>
+<script>
+    document.getElementById('submit').addEventListener('click', () => {
+        sessionStorage.setItem('settings', JSON.stringify(create_settings()));
+        window.location.href = 'plotter.html';
+    });
+</script>
 
 </html>

@@ -16,14 +16,18 @@
     <script src="assets/scripts/theme.js"></script>
     <script defer src="https://cdn.jsdelivr.net/npm/uplot/dist/uPlot.iife.min.js"></script>
     <script defer src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
-    <script defer src="https://d3js.org/d3.v7.min.js"></script>
-    <script defer src="assets/scripts/importSetup.js"></script>
-    <script defer src="assets/scripts/Plotter.js"></script>
+    <script defer src="assets/scripts/plotter.js"></script>
     <script defer src="assets/scripts/serial.js"></script>
-    <script defer src="assets/scripts/importCSV.js"></script>
-    <script defer src="assets/scripts/exportCSV.js"></script>
-    <script defer src="assets/scripts/exportPNG.js"></script>
-    <script defer src="assets/scripts/exportJSON.js"></script>
+    <script defer src="assets/scripts/import.js"></script>
+    <script defer src="assets/scripts/json.js"></script>
+    <script>
+        // Import Parameters
+        const settings = JSON.parse(sessionStorage.getItem('settings'));
+        if (!settings) {
+            throw new Error("Settings not found in session storage. Please configure the setup first.");
+        }
+        console.log("Retrieved Setup Data:", settings);
+    </script>
 
     <!--Meta-->
     <meta charset="UTF-8">
@@ -44,15 +48,15 @@
     <meta name="twitter:description"
         content="A web oscilloscope and serial plotter for Arduino and ESP users. Collect, plot, and visualize data online with customizable timescale and graphing options.">
     <meta name="twitter:image" content="https://mumarshahbaz.github.io/Oscilloscope-Online-V2/assets/img/icon-480.png">
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-ENJEDRBRTP"></script>
-<script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag() { dataLayer.push(arguments); }
-    gtag('js', new Date());
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-ENJEDRBRTP"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
 
-    gtag('config', 'G-ENJEDRBRTP');
-</script>
+        gtag('config', 'G-ENJEDRBRTP');
+    </script>
 </head>
 
 <body id="plot-page">
@@ -68,8 +72,7 @@
         <div class="center-align">
             <a class="button" id="connect">Connect</a>
             <a class="button" id="import">Import</a>
-            <a class="button"
-                href='https://github.com/MUmarShahbaz/Oscilloscope-Online-V2'><svg height="32"
+            <a class="button" href='https://github.com/MUmarShahbaz/Oscilloscope-Online-V2'><svg height="32"
                     aria-hidden="true" viewBox="0 0 24 24" version="1.1" width="32" data-view-component="true"
                     class="octicon octicon-mark-github v-align-middle color-fg-default">
                     <path
@@ -85,7 +88,7 @@
             <a class="button" id="export-svg">Export SVG</a>
         </div>
     </div>
-    <input type="file" id="hiddenInput" accept=".csv" style="display:none"/>
+    <input type="file" id="hiddenInput" accept=".csv" style="display:none" />
     <div id="plot"></div>
     <button class="button" id="theme-selector">
         <svg style="display: block;" id="sun-icon" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="30"
@@ -100,5 +103,53 @@
         </svg>
     </button>
 </body>
+<script>
+    document.getElementById('export-png').addEventListener('click', () => {
+        html2canvas(document.getElementById("plot")).then(canvas => {
+            const link = document.createElement("a");
+            link.download = "uplot-full-export.png";
+            link.href = canvas.toDataURL("image/png");
+            link.click();
+        });
+    });
+
+    document.getElementById('export-csv').addEventListener('click', () => {
+        // Extract data
+        const index = data[0];
+        const columns = data.slice(1);
+        const rowCount = index.length;
+
+        // Create headings
+        let headings = [(settings.axes.x.type === 'linear' ? "Index" : "Time")];
+        series.slice(1).forEach((dataset) => {
+            headings.push(dataset.label);
+        });
+
+        // Parse CSV
+        let csv = headings.join(',') + '\n';
+        for (let i = 0; i < rowCount; i++) {
+            let reading_index = settings.axes.x.type === 'linear' ? index[i] : formatElapsed(index[i], settings.axes.x.time.format);
+            let row = reading_index + ',' + columns.map(col => col[i] !== undefined ? col[i] : '').join(',');
+            csv += row + '\n';
+            console.log(row);
+        }
+
+        // Download CSV
+        const blob = new Blob([csv], { type: 'text/csv' });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = 'data.csv';
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        URL.revokeObjectURL(url);
+    });
+
+    document.getElementById('export-svg').addEventListener('click', () => {
+        sessionStorage.setItem('GraphData', JSON.stringify(data_parser()));
+        window.location.href = 'svg.html';
+    });
+</script>
 
 </html>

@@ -25,7 +25,7 @@ Connect_Button.addEventListener('click', async () => {
 });
 
 async function Connect() {
-    await serial.open({ baudRate: baud });
+    await serial.open({ baudRate: settings.serial.baud_rate });
     startTime = Date.now();
     connected = true;
     console.log("Serial port opened at ", startTime);
@@ -71,34 +71,32 @@ async function readSerialData() {
 }
 
 let counter = 0;
-const maxDataPoints = (xType === 'linear') ? (xMax - xMin + 1) : xTimeMax;
+const maxDataPoints = (settings.axes.x.type === 'linear') ? (settings.axes.x.linear.max - settings.axes.x.linear.min + 1) : settings.axes.x.time.max_readings;
 
 console.log("Max data points:", maxDataPoints);
 
 // Data Processor
 function DataProcessor(message, time) {
 
-    if (message == cls) {   // Clear data
-        if (xType === 'time') {
+    if (message == settings.serial.mcu_commands.cls) {   // Clear data
+        if (settings.axes.x.type === 'time') {
             data[0] = [];
         }
         for (let i = 1; i < data.length; i++) {
             data[i] = [];
         }
         counter = 0;        
-    } else if (message == csv) {
+    } else if (message == settings.serial.mcu_commands.csv) {
         document.getElementById('export-csv').click();
-    } else if (message == png) {
+    } else if (message == settings.serial.mcu_commands.png) {
         document.getElementById('export-png').click();
-    } else if (message == svg) {
-        document.getElementById('export-svg').click();
     } else {
-        const messageData = message.split(break_char);
-        if (xTimeManual) {
+        const messageData = message.split(settings.serial.break);
+        if (settings.axes.x.time.manual) {
             time = parseInt(messageData[0]);
             messageData.shift();
         }
-        if (xType === 'time') {
+        if (settings.axes.x.type === 'time') {
             data[0].push(time);
         }
         console.log(messageData , `at time ${time}`);
@@ -115,16 +113,16 @@ function DataProcessor(message, time) {
         });
 
         chart.setData(data);
-        if (!auto) {
+        if (!settings.axes.y.autoscale) {
             chart.setScale('y', {
-                min: yMin,
-                max: yMax
+                min: settings.axes.y.min,
+                max: settings.axes.y.max
             });
         }
 
         counter++;
         if (counter > maxDataPoints) {
-            if (xType === 'time') {
+            if (settings.axes.x.type === 'time') {
                 data[0] = [];
             }
             for (let i = 1; i < data.length; i++) {
