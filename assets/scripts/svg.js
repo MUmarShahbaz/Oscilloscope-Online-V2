@@ -283,3 +283,9 @@ function create_svg() {
 
     return export_svg;
 }
+
+// Initial load
+document.addEventListener('DOMContentLoaded', () => {
+    document.getElementById('svg').innerHTML = '';
+    document.getElementById('svg').appendChild(create_svg());
+});
