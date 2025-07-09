@@ -1,3 +1,0 @@
-User-agent: *
-Allow: /
-Sitemap: https://mumarshahbaz.github.io/Oscilloscope-Online-V2/sitemap.xml
