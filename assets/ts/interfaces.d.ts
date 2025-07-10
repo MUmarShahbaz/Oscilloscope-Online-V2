@@ -35,7 +35,7 @@ interface ESSENTIAL_CONFIG {
             title: string;
             type: 'linear' | 'time';
             time: null | {
-                format: 'ms' | 's.ms' | 'm:s' | 'h:m:s' | 'd-h:m';
+                format: time_format;
                 manual: boolean;
             };
             linear: null | {
@@ -67,7 +67,7 @@ interface DATA {
                 max: number;
                 range: number;
             };
-            time_format: null | 'ms' | 's.ms' | 'm:s' | 'h:m:s' | 'd-h:m';
+            time_format: null | time_format;
         };
         y: {
             title: string;
