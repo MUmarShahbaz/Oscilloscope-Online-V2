@@ -17,41 +17,12 @@
 *   DATA.grid.y.base
 */
 
-
-type color = `#{string}`;
-
-interface SVG_CONFIG {
-    bg: null | color;
-    dimensions: {
-        width: { image: number; plot: number; };
-        height: { image: number; plot: number; };
-        margins: { left: number; right: number; top: number; bottom: number; };
-    };
-    grid: {
-        gaps: {
-            x: { gap_by: 'val' | 'px'; val: number; };
-            y: null | { gap_by: 'val' | 'px'; val: number; };
-        };
-        lines: {
-            axes: { color: color; width: number; };
-            main: { color: color; width: number; };
-            font: { color: color; size: number; };
-        };
-    };
-    series: {
-        width: number;
-        alpha: number;
-        point: null | { radius: number; alpha: number; };
-        fill: null | { alpha: number; };
-    };
-}
-
 interface ESSENTIAL_CONFIG {
     title: string;
     serial: {
-        baud: 300 | 1200 | 2400 | 4800 | 9600 | 14400 | 19200 | 28800 | 38400 | 57600 | 115200 | 230400 | 250000 | 460800 | 500000 | 921600 | 1000000 | 2000000;
+        baud: baud_rate;
         break: string;
-        mcu_commands: { csv: string; json: string; png: string; svg: string; };
+        mcu_commands: { cls: string; csv: string; json: string; png: string; svg: string; };
     };
     series: {
         labels: Array<string>;
@@ -110,4 +81,30 @@ interface DATA {
         };
     };
     series: Array<{ label: string; color: color; data: Array<number>; }>;
+}
+
+interface SVG_CONFIG {
+    bg: null | color;
+    dimensions: {
+        width: { image: number; plot: number; };
+        height: { image: number; plot: number; };
+        margins: { left: number; right: number; top: number; bottom: number; };
+    };
+    grid: {
+        gaps: {
+            x: { gap_by: gap_mode; val: number; };
+            y: null | { gap_by: gap_mode; val: number; };
+        };
+        lines: {
+            axes: { color: color; width: number; };
+            main: { color: color; width: number; };
+            font: { color: color; size: number; };
+        };
+    };
+    series: {
+        width: number;
+        alpha: number;
+        point: null | { radius: number; alpha: number; };
+        fill: null | { alpha: number; };
+    };
 }
