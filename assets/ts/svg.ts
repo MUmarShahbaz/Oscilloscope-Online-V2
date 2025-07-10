@@ -1,4 +1,4 @@
-type data_func = (new_data?: DATA, refresh_grid?: boolean) => SVGElement;
+type data_func = (append?: boolean, new_data?: DATA, refresh_grid?: boolean) => SVGElement;
 type init_func = (parent?: HTMLElement) => SVGElement;
 type grid_func = (append?: boolean) => SVGElement;
 
@@ -13,9 +13,9 @@ function SVG_GENERATOR(_config: SVG_CONFIG, _data: DATA, _id: string): { id: str
     const data_line = _config.series;
     const data_point = _config.series.point;
     const data_fill = _config.series.fill;
-    const series = _data.series;
-    const x_data = _data.grid.x;
-    const y_data = _data.grid.y;
+    let series = _data.series;
+    let x_data = _data.grid.x;
+    let y_data = _data.grid.y;
     const boundaries = { top: dimensions.margins.top, left: dimensions.margins.left, bottom: dimensions.margins.top + dimensions.height.plot, right: dimensions.margins.left + dimensions.width.plot };
 
     // HELPERS
@@ -144,7 +144,6 @@ function SVG_GENERATOR(_config: SVG_CONFIG, _data: DATA, _id: string): { id: str
             const new_text = document.createElementNS(SVG_NS, 'text');
             new_text.setAttribute('x', px_x(i).toString());
             new_text.setAttribute('y', (boundaries.bottom + 20).toString());
-            new_text.setAttribute('fill', 'black');
             new_text.setAttribute('font-size', grid_lines.font.size.toString());
             new_text.setAttribute('text-anchor', 'middle');
             new_text.setAttribute('fill', grid_lines.font.color);
@@ -166,7 +165,6 @@ function SVG_GENERATOR(_config: SVG_CONFIG, _data: DATA, _id: string): { id: str
                 const new_text = document.createElementNS(SVG_NS, 'text');
                 new_text.setAttribute('x', (boundaries.left - 10).toString());
                 new_text.setAttribute('y', px_y(i).toString());
-                new_text.setAttribute('fill', 'black');
                 new_text.setAttribute('font-size', grid_lines.font.size.toString());
                 new_text.setAttribute('text-anchor', 'end');
                 new_text.setAttribute('fill', grid_lines.font.color);
@@ -183,7 +181,6 @@ function SVG_GENERATOR(_config: SVG_CONFIG, _data: DATA, _id: string): { id: str
                 const new_text = document.createElementNS(SVG_NS, 'text');
                 new_text.setAttribute('x', (boundaries.left - 10).toString());
                 new_text.setAttribute('y', px_y(i, y_data.base!).toString());
-                new_text.setAttribute('fill', 'black');
                 new_text.setAttribute('font-size', grid_lines.font.size.toString());
                 new_text.setAttribute('text-anchor', 'end');
                 new_text.setAttribute('fill', grid_lines.font.color);
@@ -203,7 +200,6 @@ function SVG_GENERATOR(_config: SVG_CONFIG, _data: DATA, _id: string): { id: str
                         const new_text = document.createElementNS(SVG_NS, 'text');
                         new_text.setAttribute('x', (boundaries.left - 10).toString());
                         new_text.setAttribute('y', px_y(j, y_data.base!).toString());
-                        new_text.setAttribute('fill', 'black');
                         new_text.setAttribute('font-size', grid_lines.font.size.toString());
                         new_text.setAttribute('text-anchor', 'end');
                         new_text.setAttribute('fill', grid_lines.font.color);
@@ -229,7 +225,6 @@ function SVG_GENERATOR(_config: SVG_CONFIG, _data: DATA, _id: string): { id: str
                     const new_text = document.createElementNS(SVG_NS, 'text');
                     new_text.setAttribute('x', (boundaries.left - 10).toString());
                     new_text.setAttribute('y', px_y(j, y_data.base!).toString());
-                    new_text.setAttribute('fill', 'black');
                     new_text.setAttribute('font-size', grid_lines.font.size.toString());
                     new_text.setAttribute('text-anchor', 'end');
                     new_text.setAttribute('fill', grid_lines.font.color);
@@ -240,6 +235,13 @@ function SVG_GENERATOR(_config: SVG_CONFIG, _data: DATA, _id: string): { id: str
                 }
             }
         }
+        // DRAW AXES
+        const axes_g = document.createElementNS(SVG_NS, 'g');
+        axes_g.appendChild(create_line(boundaries.left, boundaries.right, boundaries.bottom, boundaries.bottom, add_alpha(grid_lines.axes.color, 1), grid_lines.axes.width));
+        axes_g.appendChild(create_line(boundaries.left, boundaries.left, boundaries.bottom, boundaries.top, add_alpha(grid_lines.axes.color, 1), grid_lines.axes.width));
+        grid.appendChild(axes_g);
+
+
         grid.appendChild(y_grid_g);
         if (append) {
             document.getElementById(_id)?.querySelector(`#${_id}_grid`)?.remove();
@@ -247,12 +249,46 @@ function SVG_GENERATOR(_config: SVG_CONFIG, _data: DATA, _id: string): { id: str
         }
         return grid;
     }
-    function data(new_data: DATA | false = false, refresh_grid: boolean = false): SVGElement {
-        if (new_data) _data = new_data;
+    function data(append: boolean = false, new_data: DATA | false = false, refresh_grid: boolean = false): SVGElement {
+        if (new_data) {_data = new_data; series = new_data.series; x_data = new_data.grid.x; y_data = new_data.grid.y; }
         if (refresh_grid) grid();
 
         const datasets = document.createElementNS(SVG_NS, 'g');
+        datasets.setAttribute('id', `${_id}_datasets`);
 
+        for (let i = 0; i < series.length; i++) {
+            const graph_g = document.createElementNS(SVG_NS, 'g');
+            graph_g.setAttribute('id', `${_id}_dataset_${i}`);
+
+            const line_g = document.createElementNS(SVG_NS, 'g');
+            for (let j = 0; j < series[i].data.length - 1; j++) {
+                const x1 = x_data.ticks.raw[j];
+                const x2 = x_data.ticks.raw[j + 1];
+                const y1 = series[i].data[j];
+                const y2 = series[i].data[j + 1];
+                const line_color = add_alpha(series[i].color, data_line.alpha);
+                if (y1 !== null && y2 !== null) {
+                    line_g.appendChild(create_line(px_x(x1), px_x(x2), px_y(y1, y_data.base), px_y(y2, y_data.base), line_color, data_line.width));
+                    if (data_fill !== null) {
+                        const fill_color = add_alpha(series[i].color, data_fill.alpha);
+                        line_g.appendChild(create_fill(px_x(x1), px_x(x2), px_y(y1, y_data.base), px_y(y2, y_data.base), fill_color));
+                    }
+                    if (data_point !== null) {
+                        const point_color = add_alpha(series[i].color, data_point.alpha);
+                        line_g.appendChild(create_point(px_x(x1), px_y(y1, y_data.base), data_point.radius, point_color));
+                        if (j === series[i].data.length - 2) line_g.appendChild(create_point(px_x(x2), px_y(y2, y_data.base), data_point.radius, point_color));
+                    }
+                }
+            }
+            graph_g.appendChild(line_g);
+
+            datasets.appendChild(graph_g);
+        }
+
+        if (append) {
+            document.getElementById(_id)?.querySelector(`#${_id}_datasets`)?.remove();
+            document.getElementById(_id)?.appendChild(datasets);
+        }
         return datasets;
     }
 
