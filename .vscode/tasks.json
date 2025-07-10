@@ -1,0 +1,32 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "tsc build",
+      "type": "shell",
+      "command": "cmd.exe",
+      "args": ["/c", "tsc"],
+      "problemMatcher": "$tsc",
+      "group": "build"
+    },
+    {
+      "label": "start server",
+      "type": "shell",
+      "command": "cmd.exe",
+      "args": ["/c", "http-server . -p 8080"],
+      "isBackground": false,
+      "presentation": {
+        "reveal": "always"
+      }
+    },
+    {
+      "label": "test",
+      "dependsOn": ["tsc build", "start server"],
+      "dependsOrder": "sequence",
+      "group": {
+        "kind": "test",
+        "isDefault": true
+      }
+    }
+  ]
+}
