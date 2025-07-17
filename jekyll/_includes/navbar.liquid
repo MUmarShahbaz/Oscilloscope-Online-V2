@@ -1,0 +1,86 @@
+<nav class="navbar navbar-expand-lg bg-black">
+  <div class="container-fluid">
+
+    <!-- Title -->
+    <a class="navbar-brand" href="{{ '/' | absolute_url }}">
+      <span class="fw-bolder text-white">{{ site.title }}</span>
+    </a>
+
+    <!-- Menu Button -->
+    <button
+      class="navbar-toggler bg-white p-1 rounded"
+      type="button"
+      data-bs-toggle="collapse"
+      data-bs-target="#navbarSupportedContent"
+      aria-controls="navbarSupportedContent"
+      aria-expanded="false"
+      aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <!-- Navebar content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+
+      <!-- Navbar URLs -->
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        {% assign sorted_pages = site.pages | sort: 'nav-order' %}
+
+        <!-- For each page -->
+        {% for this_page in sorted_pages %}
+
+          <!-- Dropdown Link -->
+          {% if this_page.sections and this_page.disabled != true %}
+            <li class="nav-item dropdown">
+
+              <!-- Dropdown Name -->
+              <a
+                class="nav-link text-white dropdown-toggle{% if this_page.url == page.url %} active"
+                aria-current="page{% endif %}"
+                href="{{ this_page.url | absolute_url }}"
+                id="navbarDropdown{{ forloop.index }}"
+                role="button"
+                data-bs-toggle="dropdown"
+                aria-expanded="false">{{ this_page.title }}</a>
+
+              <!-- Dropdown content -->
+              <ul class="dropdown-menu" aria-labelledby="navbarDropdown{{ forloop.index }}">
+                {% for drp_section in this_page.sections %}
+                  {% for drp_link in drp_section[1] %}
+                    <li>
+                      <a class="dropdown-item text-black" href="{{ this_page.url | absolute_url | append: '#' | append: drp_link.id }}">{{ drp_link.name }}</a>
+                    </li>
+                  {% endfor %}
+                  {% unless forloop.last %}
+                    <li><hr class="dropdown-divider"></li>
+                  {% endunless %}
+                {% endfor %}
+              </ul>
+            </li>
+
+          <!-- Normal Link -->
+          {% else %}
+            <li class="nav-item">
+              <a
+                class="nav-link text-white{% if this_page.disabled %} disabled{% endif %}{% if this_page.url == page.url %} active"
+                aria-current="page{% endif %}"
+                {% if this_page.disabled %}
+                aria-disabled="true"
+                {% endif %}
+                href="{{ this_page.url | absolute_url }}">{{ this_page.title }}</a>
+            </li>
+          {% endif %}
+        {% endfor %}
+      </ul>
+
+      <!-- Search Bar -->
+      <form class="d-flex" role="search">
+        <input
+          class="form-control me-2"
+          type="search"
+          placeholder="Search"
+          aria-label="Search" />
+        <button class="btn btn-secondary" type="submit">Search</button>
+      </form>
+    </div>
+  </div>
+</nav>
