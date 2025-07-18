@@ -3,13 +3,13 @@ layout: default
 permalink: /
 title: Home
 nav-order: 1
-urls:
-  setup: "https://mumarshahbaz.github.io/Oscilloscope-Online-V2/setup.html"
-  github: "https://github.com/MUmarShahbaz/Oscilloscope-Online-V2"
-  help: "https://mumarshahbaz.github.io/Oscilloscope-Online-V2/help.html"
-  v1: "https://mumarshahbaz.github.io/Oscilloscope-Online/"
-  processing_library: "https://github.com/MUmarShahbaz/Graph-Plotter/"
 ---
+
+{% assign setup_url = site.data.urls.setup | absolute_url %}
+{% assign github_url = site.data.urls.github %}
+{% assign help_url = site.data.urls.help %}
+{% assign v1_url = site.data.urls.v1 %}
+{% assign processing_library_url = site.data.urls.processing_library %}
 
 <!-- Hero Section -->
 <div class="bg-dark text-white py-5">
@@ -21,13 +21,13 @@ urls:
         <p class="lead">A powerful web-based serial graph plotter with advanced features and customization options</p>
         <p class="mb-4">The ultimate alternative to Arduino IDE's serial plotter with unlimited graphs, export capabilities, and real-time data visualization.</p>
         <div class="d-flex gap-3 flex-wrap">
-          <a href="{{ page.urls.setup }}" class="btn btn-primary btn-lg">
+          <a href="{{ setup_url }}" class="btn btn-primary btn-lg">
             <i class="fas fa-play me-2"></i>Start Plotting
           </a>
-          <a href="{{ page.urls.github }}" class="btn btn-outline-light btn-lg">
+          <a href="{{ github_url }}" class="btn btn-outline-light btn-lg">
             <i class="fab fa-github me-2"></i>View on GitHub
           </a>
-          <a href="{{ page.urls.help }}" class="btn btn-outline-light btn-lg">
+          <a href="{{ help_url }}" class="btn btn-outline-light btn-lg">
             <i class="fas fa-question-circle me-2"></i>Help
           </a>
         </div>
@@ -266,10 +266,10 @@ urls:
         <h2 class="display-5 fw-bold mb-4">Ready to Get Started?</h2>
         <p class="lead mb-4">Experience the power of advanced serial plotting with Oscilloscope Online V2. Start visualizing your data today!</p>
         <div class="d-flex gap-3 justify-content-center flex-wrap">
-          <a href="{{ page.urls.setup }}" class="btn btn-light btn-lg">
+          <a href="{{ setup_url }}" class="btn btn-light btn-lg">
             <i class="fas fa-rocket me-2"></i>Start Plotting Now
           </a>
-          <a href="{{ page.urls.help }}" class="btn btn-outline-light btn-lg">
+          <a href="{{ help_url }}" class="btn btn-outline-light btn-lg">
             <i class="fas fa-book me-2"></i>Read Documentation
           </a>
         </div>
@@ -289,12 +289,12 @@ urls:
     </div>
     <div class="row justify-content-center">
       <div class="col-md-4 mb-3">
-        <a href="{{ page.urls.v1 }}" class="btn btn-outline-primary btn-lg w-100">
+        <a href="{{ v1_url }}" class="btn btn-outline-primary btn-lg w-100">
           <i class="fas fa-chart-area me-2"></i>Oscilloscope Online V1
         </a>
       </div>
       <div class="col-md-4 mb-3">
-        <a href="{{ page.urls.processing_library }}" class="btn btn-outline-secondary btn-lg w-100">
+        <a href="{{ processing_library_url }}" class="btn btn-outline-secondary btn-lg w-100">
           <i class="fas fa-code me-2"></i>Processing IDE Library
         </a>
       </div>

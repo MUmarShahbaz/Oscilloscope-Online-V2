@@ -1,0 +1,431 @@
+---
+layout: default
+permalink: /setup.html
+title: Setup
+nav-order: 2
+---
+
+{% assign help_url = site.data.urls.help %}
+
+<!-- Hero Section -->
+<div class="bg-primary text-white py-4">
+  <div class="container">
+    <div class="row align-items-center">
+      <div class="my-5">
+        <h1 class="display-5 fw-bold">Setup Oscilloscope</h1>
+        <p class="lead mb-0">Configure your serial communication, grid settings, and graph parameters</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Setup Form -->
+<div class="py-5">
+  <div class="container">
+    <form id="oscilloscopeSetup" class="needs-validation" novalidate>
+      <!-- Serial Configuration -->
+      <div class="card mb-4 shadow-sm">
+        <div class="card-header bg-dark text-white">
+          <h3 class="card-title mb-0">
+            <i class="fas fa-plug me-2"></i>Serial Configuration
+          </h3>
+        </div>
+        <div class="card-body">
+          <div class="row g-3">
+            <div class="col-md-6">
+              <label for="baudRate" class="form-label">Baud Rate</label>
+              <input type="number" class="form-control" id="baudRate" name="baudRate" value="9600" min="1" required list="baudRateList" />
+              <datalist id="baudRateList">
+                <option value="9600"></option>
+                <option value="19200"></option>
+                <option value="38400"></option>
+                <option value="57600"></option>
+                <option value="115200"></option>
+                <option value="230400"></option>
+                <option value="460800"></option>
+                <option value="921600"></option>
+              </datalist>
+              <div class="form-text">Communication speed with your device (enter custom value or select from suggestions)</div>
+            </div>
+
+            <div class="col-md-6">
+              <label for="breakChar" class="form-label">Break Character</label>
+              <input type="text" class="form-control" id="breakChar" name="breakChar" value="/" maxlength="1" required />
+              <div class="form-text">Character to separate data points</div>
+            </div>
+
+            <div class="col-md-3">
+              <label for="clsChar" class="form-label">CLS Character</label>
+              <input type="text" class="form-control" id="clsChar" name="clsChar" value="%" maxlength="1" required />
+              <div class="form-text">Clear screen command</div>
+            </div>
+
+            <div class="col-md-3">
+              <label for="csvChar" class="form-label">CSV Character</label>
+              <input type="text" class="form-control" id="csvChar" name="csvChar" value="@" maxlength="1" required />
+              <div class="form-text">CSV export trigger</div>
+            </div>
+
+            <div class="col-md-3">
+              <label for="pngChar" class="form-label">PNG Character</label>
+              <input type="text" class="form-control" id="pngChar" name="pngChar" value="&" maxlength="1" required />
+              <div class="form-text">PNG export trigger</div>
+            </div>
+
+            <div class="col-md-3">
+              <label for="svgChar" class="form-label">JSON Character</label>
+              <input type="text" class="form-control" id="svgChar" name="svgChar" value="$" maxlength="1" required />
+              <div class="form-text">JSON export trigger</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Grid Settings -->
+      <div class="card mb-4 shadow-sm">
+        <div class="card-header bg-success text-white">
+          <h3 class="card-title mb-0">
+            <i class="fas fa-th me-2"></i>Grid Settings
+          </h3>
+        </div>
+        <div class="card-body">
+          <div class="row g-3">
+            <div class="col-md-12">
+              <label for="chartTitle" class="form-label">Chart Title</label>
+              <input type="text" class="form-control" id="chartTitle" name="chartTitle" value="Oscilloscope" required />
+              <div class="form-text">Main title for your plot</div>
+            </div>
+
+            <div class="col-md-6">
+              <div class="row">
+                <div class="col-12">
+                  <label for="xAxisTitle" class="form-label">X-Axis Title</label>
+                  <input type="text" class="form-control" id="xAxisTitle" name="xAxisTitle" value="Index" required />
+                  <div class="form-text">Label for the horizontal axis</div>
+                </div>
+                <div class="col-12">
+                  <label for="xAxisType" class="form-label">X-Axis Type</label>
+                  <select class="form-select" id="xAxisType" name="xAxisType" required>
+                    <option value="linear" selected>Linear</option>
+                    <option value="time">Time</option>
+                  </select>
+                  <div class="form-text">Scale type for X-axis</div>
+                </div>
+                <div id="linearSettings">
+                  <div class="col-12">
+                    <div class="row">
+                      <div class="col-md-6">
+                        <label for="xAxisMin" class="form-label">X-Axis Min</label>
+                        <input type="number" class="form-control" id="xAxisMin" name="xAxisMin" value="0" step="any" />
+                        <div class="form-text">Minimum X value</div>
+                      </div>
+
+                      <div class="col-md-6">
+                        <label for="xAxisMax" class="form-label">X-Axis Max</label>
+                        <input type="number" class="form-control" id="xAxisMax" name="xAxisMax" value="500" step="any" />
+                        <div class="form-text">Maximum X value</div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <!-- Time Settings (shown when X-Axis Type = Time) -->
+                <div id="timeSettings" style="display: none">
+                  <div class="col-12">
+                    <div class="form-check form-switch mt-4">
+                      <input class="form-check-input" type="checkbox" id="manualTime" name="manualTime" />
+                      <label class="form-check-label" for="manualTime">
+                        <strong>Manual Time</strong>
+                      </label>
+                      <div class="form-text">Manually control time scale</div>
+                    </div>
+                  </div>
+                  <div class="col-12">
+                    <div class="row g-3">
+                      <div class="col-md-6">
+                        <label for="timeFormat" class="form-label">Time Format</label>
+                        <select class="form-select" id="timeFormat" name="timeFormat">
+                          <option value="ms" selected>ms</option>
+                          <option value="s.ms">s.ms</option>
+                          <option value="m:s">m:s</option>
+                          <option value="h:m:s">h:m:s</option>
+                          <option value="d-h:m">d-h:m</option>
+                        </select>
+                        <div class="form-text">Time display format</div>
+                      </div>
+
+                      <div class="col-md-6">
+                        <label for="maxReadings" class="form-label">Max Readings</label>
+                        <input type="number" class="form-control" id="maxReadings" name="maxReadings" value="1000" min="1" />
+                        <div class="form-text">Maximum number of readings to display</div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-md-6">
+              <div class="row">
+                <div class="col-12">
+                  <label for="yAxisTitle" class="form-label">Y-Axis Title</label>
+                  <input type="text" class="form-control" id="yAxisTitle" name="yAxisTitle" value="Value" required />
+                  <div class="form-text">Label for the vertical axis</div>
+                </div>
+                <div class="col-12">
+                  <label for="yAxisType" class="form-label">Y-Axis Type</label>
+                  <select class="form-select" id="yAxisType" name="yAxisType" required>
+                    <option value="linear" selected>Linear</option>
+                    <option value="log10">Log10</option>
+                    <option value="log2">Log2</option>
+                  </select>
+                  <div class="form-text">Scale type for Y-axis</div>
+                </div>
+                <div class="col-12">
+                  <div class="form-check form-switch mt-4">
+                    <input class="form-check-input" type="checkbox" id="autoScale" name="autoScale" checked />
+                    <label class="form-check-label" for="autoScale">
+                      <strong>Auto Scale Y-Axis</strong>
+                    </label>
+                    <div class="form-text">Automatically adjust Y-axis range based on data</div>
+                  </div>
+                </div>
+                <!-- Manual Y-Axis Range (shown when Auto Scale is disabled and Y-Axis is Linear) -->
+                <div id="manualYRange" class="col-12" style="display: none">
+                  <div class="row g-3">
+                    <div class="col-md-6">
+                      <label for="yAxisMin" class="form-label">Y-Axis Min</label>
+                      <input type="number" class="form-control" id="yAxisMin" name="yAxisMin" value="0" step="any" />
+                      <div class="form-text">Minimum Y value</div>
+                    </div>
+
+                    <div class="col-md-6">
+                      <label for="yAxisMax" class="form-label">Y-Axis Max</label>
+                      <input type="number" class="form-control" id="yAxisMax" name="yAxisMax" value="100" step="any" />
+                      <div class="form-text">Maximum Y value</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Graph Settings -->
+      <div class="card mb-4 shadow-sm">
+        <div class="card-header bg-info text-white">
+          <h3 class="card-title mb-0">
+            <i class="fas fa-chart-line me-2"></i>Graph Settings
+          </h3>
+        </div>
+        <div class="card-body">
+          <div class="row g-3 mb-4">
+            <div class="col-md-6">
+              <div class="form-check form-switch">
+                <input class="form-check-input" type="checkbox" id="showPoints" name="showPoints" />
+                <label class="form-check-label" for="showPoints">
+                  <strong>Show Data Points</strong>
+                </label>
+                <div class="form-text">Display individual data points on the graph</div>
+              </div>
+            </div>
+
+            <div class="col-md-6">
+              <div class="form-check form-switch">
+                <input class="form-check-input" type="checkbox" id="fillArea" name="fillArea" />
+                <label class="form-check-label" for="fillArea">
+                  <strong>Fill Area Under Curve</strong>
+                </label>
+                <div class="form-text">Fill the area between the line and X-axis</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="row g-3 mb-3">
+            <div class="col-md-6">
+              <label for="graphCount" class="form-label">Number of Graphs</label>
+              <input type="number" class="form-control" id="graphCount" name="graphCount" value="1" min="1" required />
+              <div class="form-text">How many graphs to plot simultaneously</div>
+            </div>
+          </div>
+
+          <!-- Dynamic Graph Configuration -->
+          <div id="graphsContainer">
+            <div class="border rounded p-3 mb-3 graph-config" data-graph="1">
+              <h5 class="mb-3">Graph 1 Configuration</h5>
+              <div class="row g-3">
+                <div class="col-md-6">
+                  <label for="graph1Name" class="form-label">Graph Name</label>
+                  <input type="text" class="form-control" id="graph1Name" name="graph1Name" value="Graph 1" required />
+                </div>
+                <div class="col-md-6">
+                  <label for="graph1Color" class="form-label">Graph Color</label>
+                  <input type="color" class="form-control form-control-color" id="graph1Color" name="graph1Color" value="#007bff" required />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Action Buttons -->
+      <div class="card shadow-sm">
+        <div class="card-body">
+          <div class="d-flex gap-3 justify-content-center flex-wrap">
+            <button type="submit" class="btn btn-success btn-lg">
+              <i class="fas fa-play me-2"></i>Begin Plot
+            </button>
+            <button type="reset" class="btn btn-secondary btn-lg" onclick="location.reload()">
+              <i class="fas fa-undo me-2"></i>Reset to Defaults
+            </button>
+            <button type="button" class="btn btn-info btn-lg" onclick="exportConfig()">
+              <i class="fas fa-download me-2"></i>Export Config
+            </button>
+            <button type="button" class="btn btn-warning btn-lg" onclick="importConfig()">
+              <i class="fas fa-upload me-2"></i>Import Config
+            </button>
+            <a href="{{ help_url }}" class="btn btn-outline-primary btn-lg">
+              <i class="fas fa-question-circle me-2"></i>Help
+            </a>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- JavaScript for Dynamic Graph Configuration -->
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    // Get DOM elements
+    const graphCountInput = document.getElementById("graphCount");
+    const graphsContainer = document.getElementById("graphsContainer");
+    const xAxisTypeSelect = document.getElementById("xAxisType");
+    const yAxisTypeSelect = document.getElementById("yAxisType");
+    const autoScaleCheckbox = document.getElementById("autoScale");
+    const timeSettings = document.getElementById("timeSettings");
+    const linearSettings = document.getElementById("linearSettings");
+    const manualYRange = document.getElementById("manualYRange");
+    const form = document.getElementById("oscilloscopeSetup");
+
+    // Event listeners
+    graphCountInput.addEventListener("change", function () {
+      updateGraphConfigs(parseInt(this.value));
+    });
+
+    xAxisTypeSelect.addEventListener("change", toggleTimeSettings);
+    yAxisTypeSelect.addEventListener("change", updateAutoScaleLogic);
+    autoScaleCheckbox.addEventListener("change", updateAutoScaleLogic);
+    form.addEventListener("submit", handleFormSubmit);
+
+    // Initialize visibility on page load
+    toggleTimeSettings();
+    updateAutoScaleLogic();
+
+    // Toggle between time and linear settings
+    function toggleTimeSettings() {
+      if (xAxisTypeSelect.value === "time") {
+        timeSettings.style.display = "block";
+        linearSettings.style.display = "none";
+      } else {
+        timeSettings.style.display = "none";
+        linearSettings.style.display = "block";
+      }
+    }
+
+    // Update auto scale logic based on Y-axis type
+    function updateAutoScaleLogic() {
+      const isLogScale = yAxisTypeSelect.value === "log10" || yAxisTypeSelect.value === "log2";
+
+      if (isLogScale) {
+        // Force auto scale for logarithmic Y-axis
+        autoScaleCheckbox.checked = true;
+        autoScaleCheckbox.disabled = true;
+        manualYRange.style.display = "none";
+      } else {
+        // Enable auto scale checkbox for linear Y-axis
+        autoScaleCheckbox.disabled = false;
+        manualYRange.style.display = autoScaleCheckbox.checked ? "none" : "block";
+      }
+    }
+
+    // Update graph configurations based on count
+    function updateGraphConfigs(count) {
+      graphsContainer.innerHTML = "";
+      const colors = [
+        "#007bff", "#28a745", "#dc3545", "#ffc107", "#17a2b8",
+        "#6f42c1", "#fd7e14", "#20c997", "#6c757d", "#343a40"
+      ];
+
+      for (let i = 1; i <= count; i++) {
+        const graphDiv = document.createElement("div");
+        graphDiv.className = "border rounded p-3 mb-3 graph-config";
+        graphDiv.setAttribute("data-graph", i);
+
+        const color = colors[(i - 1) % colors.length];
+        graphDiv.innerHTML = `
+          <h5 class="mb-3">Graph ${i} Configuration</h5>
+          <div class="row g-3">
+            <div class="col-md-6">
+              <label for="graph${i}Name" class="form-label">Graph Name</label>
+              <input type="text" class="form-control" id="graph${i}Name" name="graph${i}Name" value="Graph ${i}" required>
+            </div>
+            <div class="col-md-6">
+              <label for="graph${i}Color" class="form-label">Graph Color</label>
+              <input type="color" class="form-control form-control-color" id="graph${i}Color" name="graph${i}Color" value="${color}" required>
+            </div>
+          </div>
+        `;
+        graphsContainer.appendChild(graphDiv);
+      }
+    }
+
+    // Handle form submission
+    function handleFormSubmit(event) {
+      event.preventDefault();
+
+      if (form.checkValidity()) {
+        const formData = new FormData(form);
+        const config = {};
+
+        for (let [key, value] of formData.entries()) {
+          config[key] = value;
+        }
+
+        console.log("Configuration:", config);
+        alert("Configuration saved! Ready to begin plotting.");
+        // Here you would typically send the config to your oscilloscope application
+      } else {
+        form.classList.add("was-validated");
+      }
+    }
+  });
+</script>
+
+<style>
+  /* Color picker styling */
+  .form-control-color {
+    width: 100%;
+    height: 38px;
+  }
+
+  /* Graph configuration styling */
+  .graph-config {
+    background-color: #f8f9fa;
+    border: 2px solid #dee2e6 !important;
+  }
+
+  .graph-config:nth-child(even) {
+    background-color: #ffffff;
+  }
+
+  /* Card styling */
+  .card-header {
+    border-bottom: 2px solid rgba(0, 0, 0, 0.125);
+  }
+
+  /* Form text styling */
+  .form-text {
+    font-size: 0.875em;
+  }
+</style>
