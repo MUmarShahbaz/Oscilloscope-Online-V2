@@ -31,50 +31,34 @@ nav-order: 2
           </h3>
         </div>
         <div class="card-body">
-          <div class="row g-3">
-            <div class="col-md-6">
-              <label for="baudRate" class="form-label">Baud Rate</label>
-              <input type="number" class="form-control" id="baudRate" name="baudRate" value="9600" min="1" required list="baudRateList" />
-              <datalist id="baudRateList">
-                <option value="9600"></option>
-                <option value="19200"></option>
-                <option value="38400"></option>
-                <option value="57600"></option>
-                <option value="115200"></option>
-                <option value="230400"></option>
-                <option value="460800"></option>
-                <option value="921600"></option>
-              </datalist>
-              <div class="form-text">Communication speed with your device (enter custom value or select from suggestions)</div>
-            </div>
-
-            <div class="col-md-6">
+          <div class="row g-3 d-flex justify-content-between">
+            <div class="col-sm-6 col-md-4 col-lg-2">
               <label for="breakChar" class="form-label">Break Character</label>
               <input type="text" class="form-control" id="breakChar" name="breakChar" value="/" maxlength="1" required />
-              <div class="form-text">Character to separate data points</div>
+              <div class="form-text">Value separator</div>
             </div>
 
-            <div class="col-md-3">
+            <div class="col-sm-6 col-md-4 col-lg-2">
               <label for="clsChar" class="form-label">CLS Character</label>
               <input type="text" class="form-control" id="clsChar" name="clsChar" value="%" maxlength="1" required />
               <div class="form-text">Clear screen command</div>
             </div>
 
-            <div class="col-md-3">
+            <div class="col-sm-6 col-md-4 col-lg-2">
               <label for="csvChar" class="form-label">CSV Character</label>
               <input type="text" class="form-control" id="csvChar" name="csvChar" value="@" maxlength="1" required />
               <div class="form-text">CSV export trigger</div>
             </div>
 
-            <div class="col-md-3">
+            <div class="col-sm-6 col-md-4 col-lg-2">
               <label for="pngChar" class="form-label">PNG Character</label>
               <input type="text" class="form-control" id="pngChar" name="pngChar" value="&" maxlength="1" required />
               <div class="form-text">PNG export trigger</div>
             </div>
 
-            <div class="col-md-3">
-              <label for="svgChar" class="form-label">JSON Character</label>
-              <input type="text" class="form-control" id="svgChar" name="svgChar" value="$" maxlength="1" required />
+            <div class="col-sm-6 col-md-4 col-lg-2">
+              <label for="jsonChar" class="form-label">JSON Character</label>
+              <input type="text" class="form-control" id="jsonChar" name="jsonChar" value="$" maxlength="1" required />
               <div class="form-text">JSON export trigger</div>
             </div>
           </div>
@@ -271,22 +255,32 @@ nav-order: 2
       <!-- Action Buttons -->
       <div class="card shadow-sm">
         <div class="card-body">
-          <div class="d-flex gap-3 justify-content-center flex-wrap">
-            <button type="submit" class="btn btn-success btn-lg">
-              <i class="fas fa-play me-2"></i>Begin Plot
-            </button>
-            <button type="reset" class="btn btn-secondary btn-lg" onclick="location.reload()">
-              <i class="fas fa-undo me-2"></i>Reset to Defaults
-            </button>
-            <button type="button" class="btn btn-info btn-lg" onclick="exportConfig()">
-              <i class="fas fa-download me-2"></i>Export Config
-            </button>
-            <button type="button" class="btn btn-warning btn-lg" onclick="importConfig()">
-              <i class="fas fa-upload me-2"></i>Import Config
-            </button>
-            <a href="{{ help_url }}" class="btn btn-outline-primary btn-lg">
-              <i class="fas fa-question-circle me-2"></i>Help
-            </a>
+          <div class="row g-3 d-flex justify-content-center">
+            <div class="col-lg-2 col-md-4 col-sm-6">
+              <button type="submit" class="btn btn-success btn-lg w-100">
+                <i class="fas fa-play me-2"></i>Begin
+              </button>
+            </div>
+            <div class="col-lg-2 col-md-4 col-sm-6">
+              <button type="reset" class="btn btn-secondary btn-lg w-100" onclick="location.reload()">
+                <i class="fas fa-undo me-2"></i>Reset
+              </button>
+            </div>
+            <div class="col-lg-2 col-md-4 col-sm-6">
+              <button type="button" class="btn btn-dark btn-lg w-100">
+                <i class="fas fa-upload me-2"></i>Export
+              </button>
+            </div>
+            <div class="col-lg-2 col-md-4 col-sm-6">
+              <button type="button" class="btn btn-dark btn-lg w-100">
+                <i class="fas fa-download me-2"></i>Import
+              </button>
+            </div>
+            <div class="col-lg-2 col-md-4 col-sm-6">
+              <a href="{{ help_url }}" class="btn btn-outline-primary btn-lg w-100">
+                <i class="fas fa-question-circle me-2"></i>Help
+              </a>
+            </div>
           </div>
         </div>
       </div>
