@@ -1,10 +1,20 @@
 ---
 permalink: /404.html
-layout: page
+layout: default
 ---
 
 <style type="text/css" media="screen">
-  .container {
+  body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+  }
+  #body{
+    flex: 1;
+    display: flex;
+    align-items: center;
+  }
+  .container-404 {
     margin: 10px auto;
     max-width: 600px;
     text-align: center;
@@ -17,7 +27,7 @@ layout: page
   }
 </style>
 
-<div class="container">
+<div class="container-404">
   <h1>404</h1>
 
   <p><strong>Page not found :(</strong></p>

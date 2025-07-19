@@ -1,0 +1,247 @@
+---
+layout: default
+permalink: /plotter.html
+title: Plotter
+nav-order: 3
+dynamic_assets:
+  presets: uPlot
+---
+
+<style>
+  .plotter-container {
+    max-width: 100%;
+    margin: 0 auto;
+    padding: 20px;
+  }
+  
+  .controls-panel {
+    background: #f8f9fa;
+    border: 1px solid #dee2e6;
+    border-radius: 8px;
+    padding: 20px;
+    margin-bottom: 20px;
+  }
+  
+  .chart-container {
+    background: white;
+    border: 1px solid #dee2e6;
+    border-radius: 8px;
+    padding: 20px;
+    margin-bottom: 20px;
+  }
+  
+  .status-bar {
+    background: #e9ecef;
+    border-radius: 4px;
+    padding: 10px;
+    margin-bottom: 20px;
+    font-family: monospace;
+    font-size: 14px;
+  }
+  
+  .btn-group-custom {
+    gap: 10px;
+  }
+  
+  .form-control-inline {
+    width: auto;
+    display: inline-block;
+    margin: 0 5px;
+  }
+  
+  #plotDiv {
+    height: 600px;
+    width: 100%;
+    background: #f8f9fa;
+    border: 2px dashed #dee2e6;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #6c757d;
+    font-size: 18px;
+  }
+  
+  .connection-status {
+    display: inline-block;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background-color: #dc3545;
+    margin-right: 8px;
+  }
+  
+  .connection-status.connected {
+    background-color: #28a745;
+  }
+  
+  .data-table {
+    max-height: 200px;
+    overflow-y: auto;
+    border: 1px solid #dee2e6;
+    border-radius: 4px;
+  }
+  
+  .export-section {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    align-items: center;
+  }
+</style>
+
+<div class="plotter-container">
+  <!-- Header -->
+  <div class="row mb-4">
+    <div class="col-12">
+      <h1 class="display-4 text-center">
+        <i class="fas fa-chart-line me-3"></i>Plotter
+      </h1>
+      <p class="text-center text-muted">Real-time serial data visualization and analysis</p>
+    </div>
+  </div>
+
+  <!-- Status Bar -->
+  <div class="status-bar">
+    <span class="connection-status" id="connectionStatus"></span>
+    <span id="statusText">Disconnected - Click Connect to start plotting</span>
+  </div>
+
+  <!-- Controls Panel -->
+  <div class="controls-panel">
+    <div class="row">
+      <!-- Connection Controls -->
+      <div class="col-md-6 mb-3">
+        <h5><i class="fas fa-plug me-2"></i>Connection</h5>
+        <div class="d-flex flex-wrap btn-group-custom">
+          <button class="btn btn-primary" id="connectBtn">
+            <i class="fas fa-link me-2"></i>Connect
+          </button>
+          <button class="btn btn-danger" id="disconnectBtn" disabled>
+            <i class="fas fa-unlink me-2"></i>Disconnect
+          </button>
+          <button class="btn btn-secondary" id="importBtn">
+            <i class="fas fa-file-import me-2"></i>Import Data
+          </button>
+        </div>
+      </div>
+
+      <!-- Chart Controls -->
+      <div class="col-md-6 mb-3">
+        <h5><i class="fas fa-cog me-2"></i>Chart Controls</h5>
+        <div class="d-flex flex-wrap btn-group-custom">
+          <button class="btn btn-success" id="startBtn" disabled>
+            <i class="fas fa-play me-2"></i>Start
+          </button>
+          <button class="btn btn-warning" id="pauseBtn" disabled>
+            <i class="fas fa-pause me-2"></i>Pause
+          </button>
+          <button class="btn btn-info" id="clearBtn">
+            <i class="fas fa-trash-alt me-2"></i>Clear
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <!-- Settings -->
+      <div class="col-md-8 mb-3">
+        <h6><i class="fas fa-sliders-h me-2"></i>Settings</h6>
+        <div class="d-flex flex-wrap align-items-center">
+          <label class="me-2">Baud Rate:</label>
+          <select class="form-control form-control-inline" id="baudRate">
+            <option value="9600">9600</option>
+            <option value="19200">19200</option>
+            <option value="38400">38400</option>
+            <option value="57600">57600</option>
+            <option value="115200" selected>115200</option>
+            <option value="230400">230400</option>
+          </select>
+          
+          <label class="me-2 ms-3">Update Rate (ms):</label>
+          <input type="number" class="form-control form-control-inline" id="updateRate" value="50" min="10" max="1000">
+        </div>
+      </div>
+
+      <!-- Export Controls -->
+      <div class="col-md-4 mb-3">
+        <h6><i class="fas fa-download me-2"></i>Export</h6>
+        <div class="export-section">
+          <button class="btn btn-outline-primary btn-sm" id="exportCsv">
+            <i class="fas fa-file-csv me-1"></i>CSV
+          </button>
+          <button class="btn btn-outline-primary btn-sm" id="exportPng">
+            <i class="fas fa-image me-1"></i>PNG
+          </button>
+          <button class="btn btn-outline-primary btn-sm" id="exportSvg">
+            <i class="fas fa-vector-square me-1"></i>SVG
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Chart Container -->
+  <div class="chart-container">
+    <div id="plotDiv">
+      <i class="fas fa-chart-line me-2"></i>Chart will be rendered here
+    </div>
+  </div>
+
+  <!-- Data Display -->
+  <div class="row">
+    <div class="col-md-8">
+      <div class="card">
+        <div class="card-header">
+          <h6><i class="fas fa-table me-2"></i>Latest Data</h6>
+        </div>
+        <div class="card-body">
+          <div class="text-center text-muted p-4">
+            <i class="fas fa-table fa-3x mb-3"></i>
+            <p>Data table will be displayed here</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-4">
+      <div class="card">
+        <div class="card-header">
+          <h6><i class="fas fa-info-circle me-2"></i>Statistics</h6>
+        </div>
+        <div class="card-body">
+          <div id="statsDisplay">
+            <p><strong>Data Points:</strong> <span id="dataPointCount">0</span></p>
+            <p><strong>Sample Rate:</strong> <span id="sampleRate">0 Hz</span></p>
+            <p><strong>Duration:</strong> <span id="duration">0:00</span></p>
+            <p><strong>Channels:</strong> <span id="channelCount">0</span></p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Help Section -->
+  <div class="card mt-4">
+    <div class="card-header">
+      <h6><i class="fas fa-question-circle me-2"></i>How to Use</h6>
+    </div>
+    <div class="card-body">
+      <div class="row">
+        <div class="col-md-6">
+          <h6>Serial Connection:</h6>
+          <ol>
+            <li>Click "Connect" to select your serial port</li>
+            <li>Choose the appropriate baud rate</li>
+            <li>Click "Start" to begin plotting</li>
+          </ol>
+        </div>
+        <div class="col-md-6">
+          <h6>Data Format:</h6>
+          <p>Send data in the format: <code>value1/value2/value3/value4</code></p>
+          <p>Each value must be separated by the configured break character</p>
+          <p>Each line should end with a newline character (\n)</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
