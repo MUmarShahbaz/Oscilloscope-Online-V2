@@ -2,5 +2,8 @@
   "scripts": {
     "parse" : "tsc && node terser_minify.js",
     "host" : "npm run parse && http-server . -p 8080"
+  },
+  "dependencies": {
+    "yaml": "^2.8.0"
   }
 }
