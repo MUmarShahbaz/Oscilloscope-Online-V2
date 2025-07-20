@@ -1,7 +1,9 @@
 {
   "scripts": {
-    "parse" : "tsc && node terser_minify.js",
-    "host" : "npm run parse && http-server . -p 8080"
+    "parse" : "tsc && node ./scripts/terser_minify.js",
+    "build-dev"  : "npm run parse && node ./scripts/build-prepare.js --dev  && cd ./jekyll && bundle exec jekyll build",
+    "build-prod" : "npm run parse && node ./scripts/build-prepare.js --prod && cd ./jekyll && bundle exec jekyll build",
+    "host" : "npm run build-dev && http-server ./jekyll/_site -p 8080 && node ./scripts/build-cleanup.js"
   },
   "dependencies": {
     "yaml": "^2.8.0"
