@@ -1,8 +1,8 @@
 function SVG_GENERATOR(
-  _config: SVG_CONFIG,
-  _data: DATA,
+  _config: SVG_PLOTTER.SVG_CONFIG,
+  _data: SVG_PLOTTER.DATA,
   _id: string
-): SVG_OBJECT {
+): SVG_PLOTTER.SVG_OBJECT {
   const SVG_NS = "http://www.w3.org/2000/svg";
   // Divide config and data
   const dimensions = _config.dimensions;
@@ -23,7 +23,7 @@ function SVG_GENERATOR(
 
   // HELPERS
   // TIME FORMATTER
-  function formatElapsed(ms: number, format: time_format) {
+  function formatElapsed(ms: number, format: SVG_PLOTTER.time_format) {
     const sec = Math.floor(ms / 1000);
     const msec = ms % 1000;
     const s = sec % 60;
@@ -108,7 +108,7 @@ function SVG_GENERATOR(
   }
 
   // HEX to RGBA
-  function add_alpha(h: color, a: number): rgba {
+  function add_alpha(h: SVG_PLOTTER.color, a: number): SVG_PLOTTER.rgba {
     let hex = h.replace("#", "");
     if (hex.length === 3)
       hex = hex
@@ -125,7 +125,7 @@ function SVG_GENERATOR(
     x2: number,
     y1: number,
     y2: number,
-    color: rgba,
+    color: SVG_PLOTTER.rgba,
     width: number
   ) {
     const new_line = document.createElementNS(SVG_NS, "line");
@@ -138,7 +138,12 @@ function SVG_GENERATOR(
     return new_line;
   }
 
-  function create_point(x: number, y: number, r: number, color: rgba) {
+  function create_point(
+    x: number,
+    y: number,
+    r: number,
+    color: SVG_PLOTTER.rgba
+  ) {
     const new_point = document.createElementNS(SVG_NS, "circle");
     new_point.setAttribute("cx", x.toString());
     new_point.setAttribute("cy", y.toString());
@@ -154,7 +159,7 @@ function SVG_GENERATOR(
     x2: number,
     y1: number,
     y2: number,
-    color: rgba
+    color: SVG_PLOTTER.rgba
   ) {
     const trapezium = document.createElementNS(SVG_NS, "polygon");
     const points = [
@@ -393,7 +398,7 @@ function SVG_GENERATOR(
   }
   function data(
     append: boolean = true,
-    new_data: DATA | false = false,
+    new_data: SVG_PLOTTER.DATA | false = false,
     refresh_grid: boolean = false
   ): SVGElement {
     if (new_data) {
