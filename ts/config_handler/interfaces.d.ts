@@ -42,6 +42,10 @@ namespace CONFIG_HANDLER {
 				title: string;
 				base: number;
 			};
+			options: {
+				points: boolean;
+				fill: boolean;
+			};
 		};
 		datasets: Array<{ label: string; color: color; }>;
 	}
