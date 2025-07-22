@@ -25,7 +25,7 @@ if (mode === '--dev') {
 
 // Update directories
 config.logo = `${assets_dir}/img/icon.svg`;
-config.dynamic_assets.source.assets = `${assets_dir}`;
+config.dynamic_assets.source.asset_dir = `${assets_dir}`;
 
 // Save as _config.yml
 fs.writeFileSync('./jekyll/_config.yml', yaml.stringify(config), 'utf8');
