@@ -1,4 +1,4 @@
-function oscilloscope_config(form : HTMLFormElement) : CONFIG_HANDLER.CONFIG {
+function create_oscilloscope_config(form : HTMLFormElement) : CONFIG_HANDLER.CONFIG {
     const setup = new FormData(form);
 
     const serial_info : CONFIG_HANDLER.CONFIG['serial'] = {
@@ -80,3 +80,62 @@ function oscilloscope_config(form : HTMLFormElement) : CONFIG_HANDLER.CONFIG {
         datasets: datasets
     };
 }
+
+function set_config(form : HTMLFormElement, config : CONFIG_HANDLER.CONFIG) {
+    const { serial, chart, datasets } = config;
+    const { title, x, y, options } = chart;
+    
+    // Set serial configuration
+    (form.elements.namedItem('breakChar') as HTMLInputElement).value = serial.break;
+    (form.elements.namedItem('clsChar') as HTMLInputElement).value = serial.mcu_commands.cls;
+    (form.elements.namedItem('csvChar') as HTMLInputElement).value = serial.mcu_commands.csv;
+    (form.elements.namedItem('pngChar') as HTMLInputElement).value = serial.mcu_commands.png;
+    (form.elements.namedItem('jsonChar') as HTMLInputElement).value = serial.mcu_commands.json;
+    
+    // Set chart title
+    (form.elements.namedItem('chartTitle') as HTMLInputElement).value = title;
+    
+    // Set X-axis configuration
+    if (x.type === 'linear') {
+        (form.elements.namedItem('xAxisType') as HTMLInputElement).value = 'linear';
+        (form.elements.namedItem('xAxisTitle') as HTMLInputElement).value = x.title;
+        (form.elements.namedItem('xAxisMin') as HTMLInputElement).value = x.min.toString();
+        (form.elements.namedItem('xAxisMax') as HTMLInputElement).value = x.max.toString();
+    } else {
+        (form.elements.namedItem('xAxisType') as HTMLInputElement).value = 'time';
+        (form.elements.namedItem('xAxisTitle') as HTMLInputElement).value = x.title;
+        (form.elements.namedItem('manualTime') as HTMLInputElement).checked = x.manual;
+        (form.elements.namedItem('timeFormat') as HTMLSelectElement).value = x.format;
+        (form.elements.namedItem('maxReadings') as HTMLInputElement).value = x.max.toString();
+    }
+    
+    // Set Y-axis configuration
+    if (y.type === 'linear-auto') {
+        (form.elements.namedItem('yAxisType') as HTMLInputElement).value = 'linear';
+        (form.elements.namedItem('yAxisTitle') as HTMLInputElement).value = y.title;
+        (form.elements.namedItem('autoScale') as HTMLInputElement).checked = true;
+    } else if (y.type === 'linear-manual') {
+        (form.elements.namedItem('yAxisType') as HTMLInputElement).value = 'linear';
+        (form.elements.namedItem('yAxisTitle') as HTMLInputElement).value = y.title;
+        (form.elements.namedItem('autoScale') as HTMLInputElement).checked = false;
+        (form.elements.namedItem('yAxisMin') as HTMLInputElement).value = y.min.toString();
+        (form.elements.namedItem('yAxisMax') as HTMLInputElement).value = y.max.toString();
+    } else {
+        (form.elements.namedItem('yAxisType') as HTMLInputElement).value = y.base === 2 ? 'log2' : 'log10';
+        (form.elements.namedItem('yAxisTitle') as HTMLInputElement).value = y.title;
+    }
+    
+    // Set chart options
+    (form.elements.namedItem('showPoints') as HTMLInputElement).checked = options.points;
+    (form.elements.namedItem('fillArea') as HTMLInputElement).checked = options.fill;
+    
+    // Set datasets configuration
+    (form.elements.namedItem('graphCount') as HTMLInputElement).value = datasets.length.toString();
+    
+    for (let i = 0; i < datasets.length; i++) {
+        const dataset = datasets[i];
+        const graphNum = i + 1;
+        (form.elements.namedItem(`graph${graphNum}Name`) as HTMLInputElement).value = dataset.label;
+        (form.elements.namedItem(`graph${graphNum}Color`) as HTMLInputElement).value = dataset.color;
+    }
+} 
