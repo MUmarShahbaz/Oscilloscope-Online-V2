@@ -3,6 +3,8 @@ layout: default
 permalink: /setup.html
 title: Setup
 nav-order: 2
+dynamic_assets:
+  presets: setup
 ---
 
 {% assign help_url = site.data.urls.help %}
@@ -22,7 +24,7 @@ nav-order: 2
 <!-- Setup Form -->
 <div class="py-5">
   <div class="container">
-    <form id="oscilloscopeSetup" class="needs-validation" novalidate>
+    <form id="oscilloscopeSetup" class="needs-validation" onsubmit="console.log(oscilloscope_config(this))" novalidate>
       <!-- Serial Configuration -->
       <div class="card mb-4 shadow-sm">
         <div class="card-header bg-dark text-white">
