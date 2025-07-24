@@ -24,7 +24,7 @@ dynamic_assets:
 <!-- Setup Form -->
 <div class="py-5">
   <div class="container">
-    <form id="oscilloscopeSetup" class="needs-validation" onsubmit="console.log(oscilloscope_config(this))" novalidate>
+    <form id="oscilloscopeSetup" class="needs-validation" novalidate>
       <!-- Serial Configuration -->
       <div class="card mb-4 shadow-sm">
         <div class="card-header bg-dark text-white">
@@ -36,7 +36,8 @@ dynamic_assets:
           <div class="row g-3 d-flex justify-content-between">
             <div class="col-sm-6 col-md-4 col-lg-2">
               <label for="breakChar" class="form-label">Break Character</label>
-              <input type="text" class="form-control" id="breakChar" name="breakChar" value="/" maxlength="1" required />
+              <input type="text" class="form-control" id="breakChar" name="breakChar" value="/" maxlength="1"
+                required />
               <div class="form-text">Value separator</div>
             </div>
 
@@ -108,7 +109,8 @@ dynamic_assets:
 
                       <div class="col-md-6">
                         <label for="xAxisMax" class="form-label">X-Axis Max</label>
-                        <input type="number" class="form-control" id="xAxisMax" name="xAxisMax" value="500" step="any" />
+                        <input type="number" class="form-control" id="xAxisMax" name="xAxisMax" value="500"
+                          step="any" />
                         <div class="form-text">Maximum X value</div>
                       </div>
                     </div>
@@ -141,7 +143,8 @@ dynamic_assets:
 
                       <div class="col-md-6">
                         <label for="maxReadings" class="form-label">Max Readings</label>
-                        <input type="number" class="form-control" id="maxReadings" name="maxReadings" value="1000" min="1" />
+                        <input type="number" class="form-control" id="maxReadings" name="maxReadings" value="1000"
+                          min="1" />
                         <div class="form-text">Maximum number of readings to display</div>
                       </div>
                     </div>
@@ -246,7 +249,8 @@ dynamic_assets:
                 </div>
                 <div class="col-md-6">
                   <label for="graph1Color" class="form-label">Graph Color</label>
-                  <input type="color" class="form-control form-control-color" id="graph1Color" name="graph1Color" value="#007bff" required />
+                  <input type="color" class="form-control form-control-color" id="graph1Color" name="graph1Color"
+                    value="#007bff" required />
                 </div>
               </div>
             </div>
@@ -264,17 +268,17 @@ dynamic_assets:
               </button>
             </div>
             <div class="col-lg-2 col-md-4 col-sm-6">
-              <button type="reset" class="btn btn-secondary btn-lg w-100" onclick="location.reload()">
+              <button type="reset" class="btn btn-secondary btn-lg w-100" id="reset_config">
                 <i class="fas fa-undo me-2"></i>Reset
               </button>
             </div>
             <div class="col-lg-2 col-md-4 col-sm-6">
-              <button type="button" class="btn btn-dark btn-lg w-100">
+              <button type="button" class="btn btn-dark btn-lg w-100" id="export_config">
                 <i class="fas fa-upload me-2"></i>Export
               </button>
             </div>
             <div class="col-lg-2 col-md-4 col-sm-6">
-              <button type="button" class="btn btn-dark btn-lg w-100">
+              <button type="button" class="btn btn-dark btn-lg w-100" id="import_config">
                 <i class="fas fa-download me-2"></i>Import
               </button>
             </div>
@@ -289,113 +293,65 @@ dynamic_assets:
     </form>
   </div>
 </div>
+<input type="file" id="jsonFileInput" style="display: none;" />
 
 <!-- JavaScript for Dynamic Graph Configuration -->
 <script>
-  document.addEventListener("DOMContentLoaded", function () {
-    // Get DOM elements
-    const graphCountInput = document.getElementById("graphCount");
-    const graphsContainer = document.getElementById("graphsContainer");
-    const xAxisTypeSelect = document.getElementById("xAxisType");
-    const yAxisTypeSelect = document.getElementById("yAxisType");
-    const autoScaleCheckbox = document.getElementById("autoScale");
-    const timeSettings = document.getElementById("timeSettings");
-    const linearSettings = document.getElementById("linearSettings");
-    const manualYRange = document.getElementById("manualYRange");
-    const form = document.getElementById("oscilloscopeSetup");
+  let refresh_form;
+  let form;
 
-    // Event listeners
-    graphCountInput.addEventListener("change", function () {
-      updateGraphConfigs(parseInt(this.value));
+  document.addEventListener('DOMContentLoaded', () => {
+    // Get Elements
+    const elements = {
+      xType: document.getElementById("xAxisType"),
+      yType: document.getElementById("yAxisType"),
+      auto: document.getElementById("autoScale"),
+      graphs: document.getElementById("graphCount"),
+      timeS: document.getElementById("timeSettings"),
+      linearS: document.getElementById("linearSettings"),
+      graphsS: document.getElementById("graphsContainer"),
+      yRange: document.getElementById("manualYRange")
+    }
+    const buttons = {
+      reset: document.getElementById("reset_config"),
+      export: document.getElementById("export_config"),
+      import: document.getElementById("import_config"),
+    };
+    const jsonFileInput = document.getElementById('jsonFileInput');
+    form = document.getElementById("oscilloscopeSetup");
+    
+    // Create UI refresher
+    refresh_form = setup_ui(elements, form);
+
+    // Add Event Listeners
+    elements.xType.addEventListener('change', refresh_form.x);
+    elements.yType.addEventListener('change', refresh_form.y);
+    elements.auto.addEventListener('change', refresh_form.y);
+    elements.graphs.addEventListener('change', refresh_form.graphs);
+
+    form.addEventListener('submit', handleFormSubmit);
+    buttons.reset.addEventListener('click',  function () { refresh_form.reset() });
+    buttons.export.addEventListener('click', function () { download_json(create_oscilloscope_config(form)) });
+    buttons.import.addEventListener('click', function () { jsonFileInput.click() });
+
+    jsonFileInput.addEventListener('change', function (event) {
+      import_json(event.target.files[0])
+      .then(new_config => set_config(form, new_config, refresh_form.all));
     });
-
-    xAxisTypeSelect.addEventListener("change", toggleTimeSettings);
-    yAxisTypeSelect.addEventListener("change", updateAutoScaleLogic);
-    autoScaleCheckbox.addEventListener("change", updateAutoScaleLogic);
-    form.addEventListener("submit", handleFormSubmit);
-
-    // Initialize visibility on page load
-    toggleTimeSettings();
-    updateAutoScaleLogic();
-
-    // Toggle between time and linear settings
-    function toggleTimeSettings() {
-      if (xAxisTypeSelect.value === "time") {
-        timeSettings.style.display = "block";
-        linearSettings.style.display = "none";
-      } else {
-        timeSettings.style.display = "none";
-        linearSettings.style.display = "block";
-      }
-    }
-
-    // Update auto scale logic based on Y-axis type
-    function updateAutoScaleLogic() {
-      const isLogScale = yAxisTypeSelect.value === "log10" || yAxisTypeSelect.value === "log2";
-
-      if (isLogScale) {
-        // Force auto scale for logarithmic Y-axis
-        autoScaleCheckbox.checked = true;
-        autoScaleCheckbox.disabled = true;
-        manualYRange.style.display = "none";
-      } else {
-        // Enable auto scale checkbox for linear Y-axis
-        autoScaleCheckbox.disabled = false;
-        manualYRange.style.display = autoScaleCheckbox.checked ? "none" : "block";
-      }
-    }
-
-    // Update graph configurations based on count
-    function updateGraphConfigs(count) {
-      graphsContainer.innerHTML = "";
-      const colors = [
-        "#007bff", "#28a745", "#dc3545", "#ffc107", "#17a2b8",
-        "#6f42c1", "#fd7e14", "#20c997", "#6c757d", "#343a40"
-      ];
-
-      for (let i = 1; i <= count; i++) {
-        const graphDiv = document.createElement("div");
-        graphDiv.className = "border rounded p-3 mb-3 graph-config";
-        graphDiv.setAttribute("data-graph", i);
-
-        const color = colors[(i - 1) % colors.length];
-        graphDiv.innerHTML = `
-          <h5 class="mb-3">Graph ${i} Configuration</h5>
-          <div class="row g-3">
-            <div class="col-md-6">
-              <label for="graph${i}Name" class="form-label">Graph Name</label>
-              <input type="text" class="form-control" id="graph${i}Name" name="graph${i}Name" value="Graph ${i}" required>
-            </div>
-            <div class="col-md-6">
-              <label for="graph${i}Color" class="form-label">Graph Color</label>
-              <input type="color" class="form-control form-control-color" id="graph${i}Color" name="graph${i}Color" value="${color}" required>
-            </div>
-          </div>
-        `;
-        graphsContainer.appendChild(graphDiv);
-      }
-    }
-
-    // Handle form submission
-    function handleFormSubmit(event) {
-      event.preventDefault();
-
-      if (form.checkValidity()) {
-        const formData = new FormData(form);
-        const config = {};
-
-        for (let [key, value] of formData.entries()) {
-          config[key] = value;
-        }
-
-        console.log("Configuration:", config);
-        alert("Configuration saved! Ready to begin plotting.");
-        // Here you would typically send the config to your oscilloscope application
-      } else {
-        form.classList.add("was-validated");
-      }
-    }
   });
+
+  // Handle form submission
+  function handleFormSubmit(event) {
+    event.preventDefault();
+
+    if (form.checkValidity()) {
+      const config = create_oscilloscope_config(form);
+
+      console.log("Configuration:", config);
+    } else {
+      form.classList.add("was-validated");
+    }
+  }
 </script>
 
 <style>

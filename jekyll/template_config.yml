@@ -41,3 +41,4 @@ dynamic_assets:
     setup:
      - config_handler.js::defer-js
      - import_export.js::defer-js
+     - UI.js::defer-js

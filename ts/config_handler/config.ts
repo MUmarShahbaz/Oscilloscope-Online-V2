@@ -81,8 +81,7 @@ function create_oscilloscope_config(form: HTMLFormElement): CONFIG_HANDLER.CONFI
     };
 }
 
-function set_config(form: HTMLFormElement, config: CONFIG_HANDLER.CONFIG, graph_updater: Function) {
-    console.log(config);
+function set_config(form: HTMLFormElement, config: CONFIG_HANDLER.CONFIG, form_updater: Function) {
     const { serial, chart, datasets } = config;
     const { title, x, y, options } = chart;
 
@@ -132,7 +131,7 @@ function set_config(form: HTMLFormElement, config: CONFIG_HANDLER.CONFIG, graph_
 
     // Set datasets configuration
     (form.elements.namedItem('graphCount') as HTMLInputElement).value = datasets.length.toString();
-    graph_updater(datasets.length);
+    form_updater();
 
     for (let i = 0; i < datasets.length; i++) {
         const dataset = datasets[i];
@@ -141,17 +140,3 @@ function set_config(form: HTMLFormElement, config: CONFIG_HANDLER.CONFIG, graph_
         (form.elements.namedItem(`graph${graphNum}Color`) as HTMLInputElement).value = dataset.color;
     }
 }
-
-const default_config = {
-    serial: {
-        break: "/",
-        mcu_commands: { cls: "%", csv: "@", png: "&", json: "$" }
-    },
-    chart: {
-        title: "Oscilloscope",
-        x: { type: "linear", title: "Index", min: 500, max: 0 },
-        y: { type: "linear-auto", title: "Value" },
-        options: { points: false, fill: false }
-    },
-    datasets: [{ label: "Graph 1", color: "#007bff" }]
-};
