@@ -1,7 +1,7 @@
-function create_oscilloscope_config(form : HTMLFormElement) : CONFIG_HANDLER.CONFIG {
+function create_oscilloscope_config(form: HTMLFormElement): CONFIG_HANDLER.CONFIG {
     const setup = new FormData(form);
 
-    const serial_info : CONFIG_HANDLER.CONFIG['serial'] = {
+    const serial_info: CONFIG_HANDLER.CONFIG['serial'] = {
         break: setup.get('breakChar')! as string,
         mcu_commands: {
             cls: setup.get('clsChar')! as string,
@@ -10,8 +10,8 @@ function create_oscilloscope_config(form : HTMLFormElement) : CONFIG_HANDLER.CON
             json: setup.get('jsonChar')! as string,
         }
     };
-    let x_axis : CONFIG_HANDLER.CONFIG['chart']['x'];
-    let y_axis : CONFIG_HANDLER.CONFIG['chart']['y'];
+    let x_axis: CONFIG_HANDLER.CONFIG['chart']['x'];
+    let y_axis: CONFIG_HANDLER.CONFIG['chart']['y'];
 
     if (setup.get('xAxisType') === 'linear') {
         x_axis = {
@@ -53,7 +53,7 @@ function create_oscilloscope_config(form : HTMLFormElement) : CONFIG_HANDLER.CON
         };
     }
 
-    let opt : CONFIG_HANDLER.CONFIG['chart']['options'] = {
+    let opt: CONFIG_HANDLER.CONFIG['chart']['options'] = {
         points: setup.get('showPoints') !== null,
         fill: setup.get('fillArea') !== null
     };
@@ -61,10 +61,10 @@ function create_oscilloscope_config(form : HTMLFormElement) : CONFIG_HANDLER.CON
 
     const num_of_graphs = parseInt(setup.get('graphCount') as string);
 
-    let datasets : CONFIG_HANDLER.CONFIG['datasets'] = [];
+    let datasets: CONFIG_HANDLER.CONFIG['datasets'] = [];
     for (let i = 1; i <= num_of_graphs; i++) {
-        let label : string = setup.get(`graph${i}Name`) as string;
-        let color : CONFIG_HANDLER.color = setup.get(`graph${i}Color`) as CONFIG_HANDLER.color;
+        let label: string = setup.get(`graph${i}Name`) as string;
+        let color: CONFIG_HANDLER.color = setup.get(`graph${i}Color`) as CONFIG_HANDLER.color;
 
         datasets.push({ label: label, color: color });
     }
@@ -81,20 +81,21 @@ function create_oscilloscope_config(form : HTMLFormElement) : CONFIG_HANDLER.CON
     };
 }
 
-function set_config(form : HTMLFormElement, config : CONFIG_HANDLER.CONFIG) {
+function set_config(form: HTMLFormElement, config: CONFIG_HANDLER.CONFIG, graph_updater: Function) {
+    console.log(config);
     const { serial, chart, datasets } = config;
     const { title, x, y, options } = chart;
-    
+
     // Set serial configuration
     (form.elements.namedItem('breakChar') as HTMLInputElement).value = serial.break;
     (form.elements.namedItem('clsChar') as HTMLInputElement).value = serial.mcu_commands.cls;
     (form.elements.namedItem('csvChar') as HTMLInputElement).value = serial.mcu_commands.csv;
     (form.elements.namedItem('pngChar') as HTMLInputElement).value = serial.mcu_commands.png;
     (form.elements.namedItem('jsonChar') as HTMLInputElement).value = serial.mcu_commands.json;
-    
+
     // Set chart title
     (form.elements.namedItem('chartTitle') as HTMLInputElement).value = title;
-    
+
     // Set X-axis configuration
     if (x.type === 'linear') {
         (form.elements.namedItem('xAxisType') as HTMLInputElement).value = 'linear';
@@ -108,7 +109,7 @@ function set_config(form : HTMLFormElement, config : CONFIG_HANDLER.CONFIG) {
         (form.elements.namedItem('timeFormat') as HTMLSelectElement).value = x.format;
         (form.elements.namedItem('maxReadings') as HTMLInputElement).value = x.max.toString();
     }
-    
+
     // Set Y-axis configuration
     if (y.type === 'linear-auto') {
         (form.elements.namedItem('yAxisType') as HTMLInputElement).value = 'linear';
@@ -124,18 +125,33 @@ function set_config(form : HTMLFormElement, config : CONFIG_HANDLER.CONFIG) {
         (form.elements.namedItem('yAxisType') as HTMLInputElement).value = y.base === 2 ? 'log2' : 'log10';
         (form.elements.namedItem('yAxisTitle') as HTMLInputElement).value = y.title;
     }
-    
+
     // Set chart options
     (form.elements.namedItem('showPoints') as HTMLInputElement).checked = options.points;
     (form.elements.namedItem('fillArea') as HTMLInputElement).checked = options.fill;
-    
+
     // Set datasets configuration
     (form.elements.namedItem('graphCount') as HTMLInputElement).value = datasets.length.toString();
-    
+    graph_updater(datasets.length);
+
     for (let i = 0; i < datasets.length; i++) {
         const dataset = datasets[i];
         const graphNum = i + 1;
         (form.elements.namedItem(`graph${graphNum}Name`) as HTMLInputElement).value = dataset.label;
         (form.elements.namedItem(`graph${graphNum}Color`) as HTMLInputElement).value = dataset.color;
     }
-} 
+}
+
+const default_config = {
+    serial: {
+        break: "/",
+        mcu_commands: { cls: "%", csv: "@", png: "&", json: "$" }
+    },
+    chart: {
+        title: "Oscilloscope",
+        x: { type: "linear", title: "Index", min: 500, max: 0 },
+        y: { type: "linear-auto", title: "Value" },
+        options: { points: false, fill: false }
+    },
+    datasets: [{ label: "Graph 1", color: "#007bff" }]
+};

@@ -40,3 +40,4 @@ dynamic_assets:
      - uPlot<</uPlot.iife.min.js
     setup:
      - config_handler.js::defer-js
+     - import_export.js::defer-js
