@@ -4,9 +4,13 @@
     "build-dev"  : "npm run parse && node ./scripts/build-prepare.js --dev  && cd ./jekyll && bundle exec jekyll build",
     "build-prod" : "npm run parse && node ./scripts/build-prepare.js --prod && cd ./jekyll && bundle exec jekyll build",
     "clean": "node ./scripts/build-cleanup.js",
-    "host" : "npm run build-dev && http-server ./jekyll/_site -p 8080 && npm run clean"
+    "host" : "npm run build-dev && http-server ./jekyll/_site -p 8080 && npm run clean",
+    "dependencies" : "npm install && cd jekyll && bundle install"
   },
   "dependencies": {
-    "yaml": "^2.8.0"
+    "yaml": "^2.8.0",
+    "terser": "^5.36.0",
+    "typescript": "^5.7.2",
+    "http-server": "^14.1.1"
   }
 }
