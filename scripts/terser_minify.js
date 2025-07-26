@@ -1,60 +1,54 @@
-// minify-folders.js
 const fs = require('fs');
 const path = require('path');
-const { execSync } = require('child_process');
+const { minify } = require('terser');
 
-const inputDir = path.resolve('ts-output');
-const outputDir = path.resolve('assets/scripts');
+const input = './ts-output';
+const output = './assets/scripts';
 
-console.log(`🔍 Looking for folders in: ${inputDir}`);
-console.log(`📦 Output will be written to: ${outputDir}`);
-
-// Ensure output directory exists
-if (!fs.existsSync(outputDir)) {
-  fs.mkdirSync(outputDir, { recursive: true });
-  console.log(`📁 Created output directory: ${outputDir}`);
+if (fs.existsSync(path.resolve(output))) {
+  fs.rmSync(path.resolve(output), { recursive: true, force: true });
 }
 
-const folders = fs.readdirSync(inputDir, { withFileTypes: true }).filter(dirent => dirent.isDirectory());
-
-if (folders.length === 0) {
-  console.log(`⚠️  No subfolders found in "${inputDir}".`);
-  process.exit(0);
+try {
+  fs.mkdirSync(path.resolve(output), { recursive: true });
+  console.log('Directory created successfully!');
+} catch (err) {
+  console.error('Error creating directory:', err);
 }
 
-let processedCount = 0;
-
-folders.forEach((entry) => {
-  const folderName = entry.name;
-  const folderPath = path.join(inputDir, folderName);
-  console.log(`\n📂 Processing folder: ${folderName}`);
-
-  const jsFiles = fs.readdirSync(folderPath).filter(file => file.endsWith('.js'));
-
-  if (jsFiles.length === 0) {
-    console.warn(`⚠️  No JS files found in "${folderPath}". Skipping.`);
+fs.readdir(input, async (err, files) => {
+  if (err) {
+    console.error('Failed to read directory:', err);
     return;
   }
 
-  if (jsFiles.length > 1) {
-    console.warn(`⚠️  Multiple JS files in "${folderPath}". Only the first will be used.`);
+  for (const file of files) {
+    const filePath = path.join(input, file);
+
+    if (path.extname(file) === '.js' && !file.endsWith('.min.js')) {
+      try {
+        const code = fs.readFileSync(filePath, 'utf8');
+        const result = await minify(code, {
+          compress: true,
+          mangle: true
+        });
+
+        const minFilePath = path.join(output, path.basename(file, '.js') + '.min.js');
+        fs.writeFileSync(minFilePath, result.code, 'utf8');
+        console.log(`Minified: ${file} -> ${path.basename(minFilePath)}`);
+      } catch (e) {
+        console.error(`Error minifying ${file}:`, e);
+      }
+    }
   }
-
-  const inputFile = path.join(folderPath, jsFiles[0]);
-  const outputFile = path.join(outputDir, `${folderName}.js`);
-
-  console.log(`📄 Found file: ${inputFile}`);
-  console.log(`➡️  Will output to: ${outputFile}`);
-
-  try {
-    execSync(`npx terser "${inputFile}" -o "${outputFile}" --compress --mangle`, { stdio: 'inherit' });
-    console.log(`✅ Minified: ${outputFile}`);
-    processedCount++;
-  } catch (err) {
-    console.error(`❌ Error processing ${inputFile}:`, err.message);
-  }
+  del_tsc();
 });
 
-fs.rmSync(path.resolve('ts-output'), { recursive: true, force: true });
 
-console.log(`\n🎉 Done. Processed ${processedCount} folder(s).\n`);
+const del_tsc = () => {
+  const ts_output = './ts-output';
+
+  if (fs.existsSync(path.resolve(ts_output))) {
+    fs.rmSync(path.resolve(ts_output), { recursive: true, force: true });
+  }
+};
