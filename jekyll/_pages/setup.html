@@ -4,7 +4,9 @@ permalink: /setup.html
 title: Setup
 nav-order: 2
 dynamic_assets:
-  presets: setup
+  files:
+   - forms.min.js::defer-js
+   - json.min.js::defer-js
 ---
 
 {% assign help_url = site.data.urls.help %}
@@ -321,7 +323,7 @@ dynamic_assets:
     form = document.getElementById("oscilloscopeSetup");
     
     // Create UI refresher
-    refresh_form = setup_ui(elements, form);
+    refresh_form = setup_form.ui(elements, form);
 
     // Add Event Listeners
     elements.xType.addEventListener('change', refresh_form.x);
@@ -331,12 +333,12 @@ dynamic_assets:
 
     form.addEventListener('submit', handleFormSubmit);
     buttons.reset.addEventListener('click',  function () { refresh_form.reset() });
-    buttons.export.addEventListener('click', function () { download_json(create_oscilloscope_config(form)) });
+    buttons.export.addEventListener('click', function () { download_json(setup_form.create_config(form)) });
     buttons.import.addEventListener('click', function () { jsonFileInput.click() });
 
     jsonFileInput.addEventListener('change', function (event) {
       import_json(event.target.files[0])
-      .then(new_config => set_config(form, new_config, refresh_form.all));
+      .then(new_config => setup_form.set_config(form, new_config, refresh_form.all));
     });
   });
 
@@ -345,7 +347,7 @@ dynamic_assets:
     event.preventDefault();
 
     if (form.checkValidity()) {
-      const config = create_oscilloscope_config(form);
+      const config = setup_form.create_config(form);
 
       console.log("Configuration:", config);
     } else {
