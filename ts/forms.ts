@@ -1,8 +1,8 @@
 namespace setup_form {
-    export function create_config(form: HTMLFormElement): uPlot.CONFIG {
+    export function create_config(form: HTMLFormElement): uPlot_Controller.CONFIG {
         const setup = new FormData(form);
 
-        const serial_info: uPlot.CONFIG['serial'] = {
+        const serial_info: uPlot_Controller.CONFIG['serial'] = {
             break: setup.get('breakChar')! as string,
             mcu_commands: {
                 cls: setup.get('clsChar')! as string,
@@ -11,8 +11,8 @@ namespace setup_form {
                 json: setup.get('jsonChar')! as string,
             }
         };
-        let x_axis: uPlot.CONFIG['chart']['x'];
-        let y_axis: uPlot.CONFIG['chart']['y'];
+        let x_axis: uPlot_Controller.CONFIG['chart']['x'];
+        let y_axis: uPlot_Controller.CONFIG['chart']['y'];
 
         if (setup.get('xAxisType') === 'linear') {
             x_axis = {
@@ -26,7 +26,7 @@ namespace setup_form {
                 type: 'time',
                 title: setup.get('xAxisTitle')! as string,
                 manual: setup.get('manualTime') !== null,
-                format: setup.get('timeFormat')! as uPlot.time_format,
+                format: setup.get('timeFormat')! as uPlot_Controller.time_format,
                 max: parseInt(setup.get('maxReadings')! as string)
             }
         }
@@ -54,7 +54,7 @@ namespace setup_form {
             };
         }
 
-        let opt: uPlot.CONFIG['chart']['options'] = {
+        let opt: uPlot_Controller.CONFIG['chart']['options'] = {
             points: setup.get('showPoints') !== null,
             fill: setup.get('fillArea') !== null
         };
@@ -62,10 +62,10 @@ namespace setup_form {
 
         const num_of_graphs = parseInt(setup.get('graphCount') as string);
 
-        let datasets: uPlot.CONFIG['datasets'] = [];
+        let datasets: uPlot_Controller.CONFIG['datasets'] = [];
         for (let i = 1; i <= num_of_graphs; i++) {
             let label: string = setup.get(`graph${i}Name`) as string;
-            let color: uPlot.color = setup.get(`graph${i}Color`) as uPlot.color;
+            let color: uPlot_Controller.color = setup.get(`graph${i}Color`) as uPlot_Controller.color;
 
             datasets.push({ label: label, color: color });
         }
@@ -82,7 +82,7 @@ namespace setup_form {
         };
     }
 
-    export function set_config(form: HTMLFormElement, config: uPlot.CONFIG, form_updater: Function) {
+    export function set_config(form: HTMLFormElement, config: uPlot_Controller.CONFIG, form_updater: Function) {
         const { serial, chart, datasets } = config;
         const { title, x, y, options } = chart;
 
@@ -208,7 +208,7 @@ namespace setup_form {
             updateGraphConfigs();
         }
 
-        const default_config: uPlot.CONFIG = {
+        const default_config: uPlot_Controller.CONFIG = {
             "serial": {
                 "break": "/",
                 "mcu_commands": {

@@ -5,7 +5,7 @@
     "build-prod" : "npm run parse && node ./scripts/build-prepare.js --prod && cd ./jekyll && bundle exec jekyll build",
     "clean": "node ./scripts/build-cleanup.js",
     "host" : "npm run build-dev && http-server ./jekyll/_site -p 8080 && npm run clean",
-    "dependencies" : "npm install && cd jekyll && bundle install",
+    "dependencies" : "npm install && cd ./jekyll && bundle install",
     "dual-host" : "npm run parse && node ./scripts/build-prepare.js --dev &&  node ./scripts/dual-host.js"
   },
   "dependencies": {

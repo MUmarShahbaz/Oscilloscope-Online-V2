@@ -1,6 +1,19 @@
-namespace uPlot {
+namespace uPlot_Controller {
     type color = `#${string}`;
     type time_format = "ms" | "s.ms" | "m:s" | "h:m:s" | "d-h:m";
+
+    declare class uPlot {
+        constructor(
+            options: any,
+            data: number[][],
+            target: HTMLElement
+        );
+
+        setData(data: number[][]): void;
+        setScale(scale: string, val: { min: number; max: number;}): void;
+        destroy(): void;
+        // Add other methods/properties if needed
+    }
 
     interface CONFIG {
         serial: {
