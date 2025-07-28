@@ -12,7 +12,7 @@ nav-order: 1
 {% assign processing_library_url = site.data.urls.processing_library %}
 
 <!-- Hero Section -->
-<div class="bg-dark text-white py-5">
+<header class="bg-dark text-white py-5">
   <div class="container">
     <div class="row align-items-center text-center text-lg-start">
       <div class="col-lg-8 mb-4 mb-lg-0">
@@ -21,13 +21,13 @@ nav-order: 1
         <p class="lead">A powerful web-based serial graph plotter with advanced features and customization options</p>
         <p class="mb-4">The ultimate alternative to Arduino IDE's serial plotter with unlimited graphs, export capabilities, and real-time data visualization.</p>
         <div class="d-flex gap-3 flex-wrap justify-content-center">
-          <a href="{{ setup_url }}" class="btn btn-primary btn-lg">
+          <a href="{{ setup_url }}" class="btn btn-primary btn-lg" aria-label="Start plotting with Oscilloscope Online V2">
             <i class="fas fa-play me-2"></i>Start Plotting
           </a>
-          <a href="{{ github_url }}" class="btn btn-outline-light btn-lg">
+          <a href="{{ github_url }}" class="btn btn-outline-light btn-lg" aria-label="View source code on GitHub">
             <i class="fab fa-github me-2"></i>View on GitHub
           </a>
-          <a href="{{ help_url }}" class="btn btn-outline-light btn-lg">
+          <a href="{{ help_url }}" class="btn btn-outline-light btn-lg" aria-label="Get help and documentation">
             <i class="fas fa-question-circle me-2"></i>Help
           </a>
         </div>
@@ -37,10 +37,10 @@ nav-order: 1
       </div>
     </div>
   </div>
-</div>
+</header>
 
 <!-- Features Overview -->
-<div class="py-5">
+<section class="py-5">
   <div class="container">
     <div class="row text-center mb-5">
       <div class="col-12">
@@ -87,10 +87,10 @@ nav-order: 1
       </div>
     </div>
   </div>
-</div>
+</section>
 
 <!-- Key Features Section -->
-<div class="bg-light py-5">
+<section class="bg-light py-5">
   <div class="container">
     <div class="row">
       <div class="col-12 text-center mb-5">
@@ -201,10 +201,10 @@ nav-order: 1
       </div>
     </div>
   </div>
-</div>
+</section>
 
 <!-- Comparison Section -->
-<div class="py-5">
+<section class="py-5">
   <div class="container">
     <div class="row text-center mb-5">
       <div class="col-12">
@@ -256,30 +256,30 @@ nav-order: 1
       </div>
     </div>
   </div>
-</div>
+</section>
 
 <!-- Call to Action -->
-<div class="bg-primary text-white py-5">
+<section class="bg-primary text-white py-5">
   <div class="container text-center">
     <div class="row">
       <div class="col-lg-8 mx-auto">
         <h2 class="display-5 fw-bold mb-4">Ready to Get Started?</h2>
         <p class="lead mb-4">Experience the power of advanced serial plotting with Oscilloscope Online V2. Start visualizing your data today!</p>
         <div class="d-flex gap-3 justify-content-center flex-wrap">
-          <a href="{{ setup_url }}" class="btn btn-light btn-lg">
+          <a href="{{ setup_url }}" class="btn btn-light btn-lg" aria-label="Start plotting data now with Oscilloscope Online V2">
             <i class="fas fa-rocket me-2"></i>Start Plotting Now
           </a>
-          <a href="{{ help_url }}" class="btn btn-outline-light btn-lg">
+          <a href="{{ help_url }}" class="btn btn-outline-light btn-lg" aria-label="Read documentation and help guides">
             <i class="fas fa-book me-2"></i>Read Documentation
           </a>
         </div>
       </div>
     </div>
   </div>
-</div>
+</section>
 
 <!-- Other Versions -->
-<div class="py-5 bg-light">
+<section class="py-5 bg-light">
   <div class="container">
     <div class="row text-center">
       <div class="col-12 mb-4">
@@ -289,15 +289,15 @@ nav-order: 1
     </div>
     <div class="row justify-content-center">
       <div class="col-md-4 mb-3">
-        <a href="{{ v1_url }}" class="btn btn-outline-primary btn-lg w-100">
+        <a href="{{ v1_url }}" class="btn btn-outline-primary btn-lg w-100" aria-label="Access Oscilloscope Online Version 1">
           <i class="fas fa-chart-area me-2"></i>Oscilloscope Online V1
         </a>
       </div>
       <div class="col-md-4 mb-3">
-        <a href="{{ processing_library_url }}" class="btn btn-outline-secondary btn-lg w-100">
+        <a href="{{ processing_library_url }}" class="btn btn-outline-secondary btn-lg w-100" aria-label="Download Processing IDE Library">
           <i class="fas fa-code me-2"></i>Processing IDE Library
         </a>
       </div>
     </div>
   </div>
-</div>
+</section>
