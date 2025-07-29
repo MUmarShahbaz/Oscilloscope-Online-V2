@@ -14,13 +14,13 @@ let config = yaml.parse(fs.readFileSync('./jekyll/template_config.yml', 'utf8'))
 
 // Determine which assets directory to use
 const mode = process.argv[2] || '--dev';
-console.log(`${mode === '--dev' ? 'Development' : 'Production'} mode`);
+console.log(`${mode === '--prod' ? 'Production' : 'Development'} mode`);
 
 const commit_hash = execSync('git log origin/assets -1 --format=%H').toString().trim();
 const assets_dir = mode === '--prod' ? `https://cdn.jsdelivr.net/gh/MUmarShahbaz/Oscilloscope-Online-V2@${commit_hash}` : '/assets';
 console.log(`Assets: ${assets_dir}`);
 
-if (mode === '--dev') {
+if (mode === '--dev' || mode === '--prep') {
     console.log('Updating URLs to use private IP Address');
     // Use local assets and host appropriate to http-server
     const interface = os.networkInterfaces();
@@ -42,11 +42,12 @@ config.dynamic_assets.source.base = `${assets_dir}`;
 // Save as _config.yml
 fs.writeFileSync('./jekyll/_config.yml', yaml.stringify(config), 'utf8');
 console.log('Done');
-
-const bundler = check_package('bundle -v');
-if (bundler.present) {
-    create_child('Jekyll => Build', 'bundle exec jekyll build', './jekyll');
-} else {
-    console.log('Bundler was not detected! Could not continue.');
-    console.log(bundler.error);
+if (!mode === '--prep') {
+    const bundler = check_package('bundle -v');
+    if (bundler.present) {
+        create_child('Jekyll => Build', 'bundle exec jekyll build', './jekyll');
+    } else {
+        console.log('Bundler was not detected! Could not continue.');
+        console.log(bundler.error);
+    }
 }
