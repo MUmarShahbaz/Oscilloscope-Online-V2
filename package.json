@@ -1,6 +1,5 @@
 {
   "scripts": {
-    "parse" : "tsc && node ./scripts/terser_minify.js",
     "build-dev"  : "npm run parse && node ./scripts/build-prepare.js --dev  && cd ./jekyll && bundle exec jekyll build",
     "build-prod" : "npm run parse && node ./scripts/build-prepare.js --prod && cd ./jekyll && bundle exec jekyll build",
     "clean": "node ./scripts/build-cleanup.js",
@@ -9,6 +8,7 @@
     "dual-host" : "npm run parse && node ./scripts/build-prepare.js --dev &&  node ./scripts/dual-host.js",
 
     "dependencies" : "node ./scripts/dependency_installer.js",
+    "parse": "node ./scripts/typescript_parser.js"
   },
   "dependencies": {
     "yaml": "^2.8.0",
