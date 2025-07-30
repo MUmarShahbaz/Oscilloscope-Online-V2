@@ -12,10 +12,20 @@ process.on('SIGINT', () => quit_all(children));
 console.log('Reading template config');
 let config = yaml.parse(fs.readFileSync('./jekyll/template_config.yml', 'utf8'));
 
-// Determine which assets directory to use
 const mode = process.argv[2] || '--dev';
-console.log(`${mode === '--prod' ? 'Production' : 'Development'} mode`);
+switch (mode) {
+    case '--prod':
+        console.log('Production mode');
+        break;
+    case '--prep':
+        console.log('Build Preparation only mode');
+        break;
+    default:
+        console.log('Development mode');
+        break;
+}
 
+// Determine which assets directory to use
 const commit_hash = execSync('git log origin/assets -1 --format=%H').toString().trim();
 const assets_dir = mode === '--prod' ? `https://cdn.jsdelivr.net/gh/MUmarShahbaz/Oscilloscope-Online-V2@${commit_hash}` : '/assets';
 console.log(`Assets: ${assets_dir}`);

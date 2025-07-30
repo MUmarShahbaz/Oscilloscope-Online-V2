@@ -11,14 +11,18 @@ function create_child(label, command, dir = process.cwd(), pad = null) {
             const texts = `${err}`.split('\n');
             console.log(`[${label}]\tFailed to start:`);
             texts.forEach(element => {
-                console.log(`[${label}]\t${element}`);
+                if (element.trim() !== '') {
+                    console.log(`[${label}]\t${element}`);
+                }
             });
         });
 
         child.stdout.on('data', (data) => {
             const texts = `${data}`.split('\n');
             texts.forEach(element => {
-                console.log(`[${label}]\t${element}`);
+                if (element.trim() !== '') {
+                    console.log(`[${label}]\t${element}`);
+                }
             });
         });
 
@@ -26,7 +30,9 @@ function create_child(label, command, dir = process.cwd(), pad = null) {
             const texts = `${err}`.split('\n');
             console.log(`[${label}]\tAn Error Occured:`);
             texts.forEach(element => {
-                console.log(`[${label}]\t${element}`);
+                if (element.trim() !== '') {
+                    console.log(`[${label}]\t${element}`);
+                }
             });
         });
 

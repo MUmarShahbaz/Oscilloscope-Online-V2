@@ -1,17 +1,18 @@
 {
   "scripts": {
-    "dependencies" : "node ./scripts/dependency_installer.js",
+    "dependencies": "node ./scripts/dependency_installer.js",
     "parse": "node ./scripts/typescript_parser.js",
-    "build-dev"  : "node ./scripts/build.js --dev",
-    "build-prod" : "node ./scripts/build.js --prod",
+    "build-dev": "node ./scripts/build.js --dev",
+    "build-prod": "node ./scripts/build.js --prod",
     "clean": "node ./scripts/build_cleanup.js",
-    "host" : "npm run parse && npm run build-dev && http-server ./jekyll/_site -p 8080 && npm run clean",
-    "live-host" : "npm run parse && node ./scripts/build.js --prep && node ./scripts/live_host.js && npm run clean"
+    "host": "npm run parse && npm run build-dev && http-server ./jekyll/_site -p 8080 && npm run clean",
+    "live-host": "node ./scripts/build.js --prep && node ./scripts/live_host.js && npm run clean"
   },
   "dependencies": {
-    "yaml": "^2.8.0",
+    "chokidar": "^4.0.3",
+    "http-server": "^14.1.1",
     "terser": "^5.36.0",
     "typescript": "^5.7.2",
-    "http-server": "^14.1.1"
+    "yaml": "^2.8.0"
   }
 }

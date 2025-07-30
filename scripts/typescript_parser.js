@@ -1,6 +1,6 @@
 const fs = require('fs');
 const path = require('path');
-const { exec } = require('child_process');
+const { exec, execSync } = require('child_process');
 const { create_child, quit_all, check_package } = require('./sub_mgmt');
 
 let children = [];
@@ -31,6 +31,37 @@ if (terser.present) {
 }
 
 console.log('Starting....\n\n');
+if (process.argv[2] === '--live') {
+    const chokidar = require('chokidar');
+    console.log('Live Mode');
+
+    // Live MINIMAL TS Parser
+    const watch_dir = path.resolve('./ts');
+
+    const watcher = chokidar.watch(watch_dir, {
+        persistent: true,
+        ignoreInitial: true,
+        depth: 99,
+        awaitWriteFinish: {
+            stabilityThreshold: 100,
+            pollInterval: 10
+        }
+    });
+
+    const watch_events = ['add', 'change', 'unlink', 'addDir', 'unlinkDir'];
+
+    watch_events.forEach(event => {
+        watcher.on(event, (file) => {
+            console.log(`Parsing at event: ${event}`);
+            console.log(`File: ${file}`);
+            execSync('tsc');
+            if (path.extname(file) === '.ts' && !file.endsWith('.d.ts')) {
+                const file_name = path.parse(file).name;
+                minify(file_name, 'triggered');
+            }
+        });
+    });
+}
 
 
 exec('tsc', (error, stdout, stdin) => {
@@ -70,7 +101,11 @@ function minify(file_name, files_length) {
     create_child(`Terser => ${file_name}`, `terser ./ts-output/${file_name}.js -c -m -o ./assets/scripts/${file_name}.min.js`, undefined, 18)
         .then((child) => {
             children.push(child);
-            if (children.length === files_length) del_tso();
+            if (process.argv[2] === '--live' && files_length === 'triggered') {
+                const label = `Terser => ${file_name}`;
+                console.log(`[${label.padEnd(18, ' ')}]\tCopying assets to ./jekyll`);
+                fs.cpSync(path.resolve('./assets'), path.resolve('./jekyll/assets'), { recursive: true });
+            } else if (children.length === files_length) del_tso();
         })
         .catch(e => console.log(e));
 }

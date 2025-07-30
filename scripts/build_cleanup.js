@@ -14,3 +14,10 @@ if (fs.existsSync(assets_folder)) {
   console.log('Removing copies of assets');
   fs.rmSync(assets_folder, { recursive: true, force: true });
 }
+
+// Deleting tsc output folder
+const tso_folder = path.resolve('./ts-output');
+if (fs.existsSync(tso_folder)) {
+  console.log('Removing output of TSC');
+  fs.rmSync(tso_folder, { recursive: true, force: true });
+}
