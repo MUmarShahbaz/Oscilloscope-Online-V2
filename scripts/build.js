@@ -41,8 +41,9 @@ config.dynamic_assets.source.base = `${assets_dir}`;
 
 // Save as _config.yml
 fs.writeFileSync('./jekyll/_config.yml', yaml.stringify(config), 'utf8');
-console.log('Done');
-if (!mode === '--prep') {
+console.log('Finised preparation');
+if (mode !== '--prep') {
+    console.log('Starting build......');
     const bundler = check_package('bundle -v');
     if (bundler.present) {
         create_child('Jekyll => Build', 'bundle exec jekyll build', './jekyll');
