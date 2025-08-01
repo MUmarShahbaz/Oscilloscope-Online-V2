@@ -72,7 +72,7 @@ customizable styling options" %}
         y: {
             title: string;
             type: "linear" | "log";
-            ticks: null | {
+            ticks: {
                 min: number;
                 max: number;
                 range: number;
@@ -106,15 +106,16 @@ customizable styling options" %}
                         <div class="col-12">
                             <div class="row">
                                 <div class="col-md-6 d-flex align-items-center form-check px-5">
-                                    <input class="form-check-input" type="checkbox" id="bgTransparent" name="bgTransparent" />
+                                    <input class="form-check-input" type="checkbox" id="bgTransparent"
+                                        name="bgTransparent" />
                                     <label class="form-check-label mx-2" for="bgTransparent">
                                         Transparent Background
                                     </label>
                                 </div>
                                 <div class="col-md-6" id="bgColorContainer">
                                     <label for="bgColor" class="form-label">BG Color</label>
-                                    <input type="color" class="form-control form-control-color w-100" id="bgColor" name="bgColor"
-                                        value="#ffffff" />
+                                    <input type="color" class="form-control form-control-color w-100" id="bgColor"
+                                        name="bgColor" value="#ffffff" />
                                 </div>
                             </div>
                         </div>
@@ -122,31 +123,35 @@ customizable styling options" %}
                             <div class="row">
                                 <div class="col-md-3 my-3">
                                     <label for="imageWidth" class="form-label">Width</label>
-                                    <input type="number" class="form-control" id="imageWidth" name="imageWidth" value="1280" min="100"
-                                        max="3000" />
+                                    <input type="number" class="form-control" id="imageWidth" name="imageWidth"
+                                        value="1280" min="100" max="3000" />
                                 </div>
                                 <div class="col-md-3 my-3">
                                     <label for="imageHeight" class="form-label">Height</label>
-                                    <input type="number" class="form-control" id="imageHeight" name="imageHeight" value="720" min="100"
-                                        max="3000" />
+                                    <input type="number" class="form-control" id="imageHeight" name="imageHeight"
+                                        value="720" min="100" max="3000" />
                                 </div>
                                 <div class="col-md-6 my-3">
                                     <div class="row">
                                         <div class="col-md-3">
                                             <label for="marginLeft" class="form-label">Left</label>
-                                            <input type="number" class="form-control" id="marginLeft" name="marginLeft" value="50" />
+                                            <input type="number" class="form-control" id="marginLeft" name="marginLeft"
+                                                value="50" />
                                         </div>
                                         <div class="col-md-3">
                                             <label for="marginRight" class="form-label">Right</label>
-                                            <input type="number" class="form-control" id="marginRight" name="marginRight" value="50" />
+                                            <input type="number" class="form-control" id="marginRight"
+                                                name="marginRight" value="50" />
                                         </div>
                                         <div class="col-md-3">
                                             <label for="marginTop" class="form-label">Top</label>
-                                            <input type="number" class="form-control" id="marginTop" name="marginTop" value="50" />
+                                            <input type="number" class="form-control" id="marginTop" name="marginTop"
+                                                value="50" />
                                         </div>
                                         <div class="col-md-3">
                                             <label for="marginBottom" class="form-label">Bottom</label>
-                                            <input type="number" class="form-control" id="marginBottom" name="marginBottom" value="50" />
+                                            <input type="number" class="form-control" id="marginBottom"
+                                                name="marginBottom" value="50" />
                                         </div>
                                     </div>
                                 </div>
@@ -163,7 +168,8 @@ customizable styling options" %}
                             <div class="row">
                                 <div class="col-md-3 my-3">
                                     <label for="gridXGap" class="form-label">X Gap</label>
-                                    <input type="number" class="form-control" id="gridXGap" name="gridXGap" value="100" />
+                                    <input type="number" class="form-control" id="gridXGap" name="gridXGap"
+                                        value="100" />
                                 </div>
                                 <div class="col-md-3 my-3">
                                     <label for="gridXGapMode" class="form-label">Gap Value</label>
@@ -172,19 +178,22 @@ customizable styling options" %}
                                         <option value="val">Value</option>
                                     </select>
                                 </div>
-                                <div id="yGapOptions" class="col-md-6"><div class="row">
-                                    <div class="col-md-6 my-3">
-                                        <label for="gridYGap" class="form-label">Y Gap</label>
-                                        <input type="number" class="form-control" id="gridYGap" name="gridYGap" value="100" />
+                                <div id="yGapOptions" class="col-md-6">
+                                    <div class="row">
+                                        <div class="col-md-6 my-3">
+                                            <label for="gridYGap" class="form-label">Y Gap</label>
+                                            <input type="number" class="form-control" id="gridYGap" name="gridYGap"
+                                                value="100" />
+                                        </div>
+                                        <div class="col-md-6 my-3">
+                                            <label for="gridYGapMode" class="form-label">Gap Value</label>
+                                            <select class="form-select" id="gridYGapMode" name="gridYGapMode">
+                                                <option value="px">Pixels</option>
+                                                <option value="val">Value</option>
+                                            </select>
+                                        </div>
                                     </div>
-                                    <div class="col-md-6 my-3">
-                                        <label for="gridYGapMode" class="form-label">Gap Value</label>
-                                        <select class="form-select" id="gridYGapMode" name="gridYGapMode">
-                                            <option value="px">Pixels</option>
-                                            <option value="val">Value</option>
-                                        </select>
-                                    </div>
-                                </div></div>
+                                </div>
                             </div>
                         </div>
 
@@ -192,12 +201,13 @@ customizable styling options" %}
                             <div class="row">
                                 <div class="col-md-6">
                                     <label for="axesWidth" class="form-label">Axis Width</label>
-                                    <input type="number" class="form-control" id="axesWidth" name="axesWidth" value="2" />
+                                    <input type="number" class="form-control" id="axesWidth" name="axesWidth"
+                                        value="2" />
                                 </div>
                                 <div class="col-md-6">
                                     <label for="axesColor" class="form-label">Axis Color</label>
-                                    <input type="color" class="form-control form-control-color w-100" id="axesColor" name="axesColor"
-                                        value="#000000" />
+                                    <input type="color" class="form-control form-control-color w-100" id="axesColor"
+                                        name="axesColor" value="#000000" />
                                 </div>
                             </div>
                         </div>
@@ -205,12 +215,13 @@ customizable styling options" %}
                             <div class="row">
                                 <div class="col-md-6">
                                     <label for="gridWidth" class="form-label">Grid Width</label>
-                                    <input type="number" class="form-control" id="gridWidth" name="gridWidth" value="1" />
+                                    <input type="number" class="form-control" id="gridWidth" name="gridWidth"
+                                        value="1" />
                                 </div>
                                 <div class="col-md-6">
                                     <label for="gridColor" class="form-label">Grid Color</label>
-                                    <input type="color" class="form-control form-control-color w-100" id="gridColor" name="gridColor"
-                                        value="#cccccc" />
+                                    <input type="color" class="form-control form-control-color w-100" id="gridColor"
+                                        name="gridColor" value="#cccccc" />
                                 </div>
                             </div>
                         </div>
@@ -219,12 +230,13 @@ customizable styling options" %}
                             <div class="row">
                                 <div class="col-md-6">
                                     <label for="fontSize" class="form-label">Font Size</label>
-                                    <input type="number" class="form-control" id="fontSize" name="fontSize" value="10" />
+                                    <input type="number" class="form-control" id="fontSize" name="fontSize"
+                                        value="10" />
                                 </div>
                                 <div class="col-md-6">
                                     <label for="fontColor" class="form-label">Font Color</label>
-                                    <input type="color" class="form-control form-control-color w-100" id="fontColor" name="fontColor"
-                                        value="#000000" />
+                                    <input type="color" class="form-control form-control-color w-100" id="fontColor"
+                                        name="fontColor" value="#000000" />
                                 </div>
                             </div>
                         </div>
@@ -240,11 +252,13 @@ customizable styling options" %}
                             <div class="row">
                                 <div class="col-md-6">
                                     <label for="seriesWidth" class="form-label">Width</label>
-                                    <input type="number" class="form-control" id="seriesWidth" name="seriesWidth" value="1.5" />
+                                    <input type="number" class="form-control" id="seriesWidth" name="seriesWidth"
+                                        value="1.5" />
                                 </div>
                                 <div class="col-md-6">
                                     <label for="seriesAlpha" class="form-label">Alpha</label>
-                                    <input type="number" class="form-control" id="seriesAlpha" name="seriesAlpha" value="1" />
+                                    <input type="number" class="form-control" id="seriesAlpha" name="seriesAlpha"
+                                        value="1" />
                                 </div>
                             </div>
                         </div>
@@ -253,7 +267,8 @@ customizable styling options" %}
                             <div class="row">
                                 <div class="col-md-4">
                                     <div class="form-check mt-4">
-                                        <input class="form-check-input" type="checkbox" id="showPoints" name="showPoints" />
+                                        <input class="form-check-input" type="checkbox" id="showPoints"
+                                            name="showPoints" />
                                         <label class="form-check-label" for="showPoints">
                                             Show points
                                         </label>
@@ -263,11 +278,13 @@ customizable styling options" %}
                                     <div class="row mb-4" id="pointOptions" style="display: none;">
                                         <div class="col-md-6">
                                             <label for="pointRadius" class="form-label">Point Size</label>
-                                            <input type="number" class="form-control" id="pointRadius" name="pointRadius" value="3"  />
+                                            <input type="number" class="form-control" id="pointRadius"
+                                                name="pointRadius" value="3" />
                                         </div>
                                         <div class="col-md-6">
                                             <label for="pointAlpha" class="form-label">Point Alpha</label>
-                                            <input type="number" class="form-control" id="pointAlpha" name="pointAlpha" value="1" />
+                                            <input type="number" class="form-control" id="pointAlpha" name="pointAlpha"
+                                                value="1" />
                                         </div>
                                     </div>
                                 </div>
@@ -287,7 +304,8 @@ customizable styling options" %}
                                     <div class="row g-3 mb-4" id="fillOptions" style="display: none;">
                                         <div class="col-md-6">
                                             <label for="fillAlpha" class="form-label">Fill Alpha</label>
-                                            <input type="number" class="form-control" id="fillAlpha" name="fillAlpha" value="0.3" />
+                                            <input type="number" class="form-control" id="fillAlpha" name="fillAlpha"
+                                                value="0.3" />
                                         </div>
                                     </div>
                                 </div>
@@ -298,7 +316,7 @@ customizable styling options" %}
                     <hr>
 
                     <!-- Action Buttons -->
-                     <div class="row g-3 d-flex justify-content-center">
+                    <div class="row g-3 d-flex justify-content-center">
                         <div class="col-lg-2 col-md-4 col-sm-6">
                             <button type="submit" class="btn btn-success btn-lg w-100">
                                 <i class="fas fa-play me-2"></i>Generate
@@ -392,7 +410,7 @@ customizable styling options" %}
         elements.fill.addEventListener('change', refresh_form.fill);
 
         form.addEventListener('submit', handleFormSubmit);
-        buttons.reset.addEventListener('click', function () { refresh_form.reset() });
+        buttons.reset.addEventListener('click', function () { refresh_form.reset(); alerts.info('Reset the form', { dismissable: true, autoClose: 3000 }) });
         buttons.export.addEventListener('click', function () { download_json(svg_form.create_config(form), `Oscilloscope-Online-svg_config-${Date.now()}`) });
         buttons.import.addEventListener('click', function () { jsonFileInput.click() });
         buttons.download.addEventListener('click', function () {
@@ -402,18 +420,32 @@ customizable styling options" %}
                 download_svg(svg, `Oscilloscope-Online-svg_export-${Date.now()}`);
             }
         });
-        
+
         buttons.load.addEventListener('click', function () {
-            import_json(dataInput.files[0]).then(new_data => { 
-                data = new_data; 
-                refresh_form = svg_form.ui(elements, form, data.grid.y.type === 'log');
-                refresh_form.yGap();
-            });
+            if (!dataInput.files[0]) { alerts.error('No data was loaded', { dismissable: true, autoClose: 3000 }); return; }
+            try {
+                import_json(dataInput.files[0]).then(new_data => {
+                    try {
+                        data = new_data;
+                        refresh_form = svg_form.ui(elements, form, data.grid.y.type === 'log');
+                        refresh_form.yGap();
+                        alerts.success('Data was successfully loaded', { dismissable: true, autoClose: 3000 });
+                    } catch (e) {
+                        alerts.error('Failed to load data', { dismissable: true, autoClose: 3000 });
+                    }
+                });
+            } catch (e) {
+                alerts.error('Failed to load data', { dismissable: true, autoClose: 3000 });
+            }
         });
 
         jsonFileInput.addEventListener('change', function (event) {
-            import_json(event.target.files[0])
-            .then(new_config => svg_form.set_config(form, new_config, refresh_form.all));
+            try {
+                import_json(event.target.files[0])
+                    .then(new_config => svg_form.set_config(form, new_config, refresh_form.all));
+            } catch (e) {
+                alerts.error('Failed to load configuration', { dismissable: true, autoClose: 3000 });
+            }
         });
     });
 
@@ -422,22 +454,27 @@ customizable styling options" %}
 
         if (form.checkValidity()) {
             const config = svg_form.create_config(form);
-            if (data !== null) {
+            if (data !== null && data !== undefined) {
                 container.innerHTML = '';
                 container.appendChild(generateSVG(config, data));
                 document.getElementById('OO2-out').setAttribute('width', '100%');
                 document.getElementById('download_svg').disabled = false;
-            }
+                alerts.success('Successfully generated the SVG', { dismissable: true, autoClose: 3000 });
+            } else alerts.error('No data was loaded', { dismissable: true, autoClose: 3000 });
         } else {
             form.classList.add("was-validated");
         }
     }
 
     function generateSVG(config, data) {
-        const svg_g = SVG_GENERATOR(config, data, `OO2-out`);
-        const svg = svg_g.init();
-        svg.appendChild(svg_g.updateGrid());
-        svg.appendChild(svg_g.updateData());
-        return svg;
+        try {
+            const svg_g = SVG_GENERATOR(config, data, `OO2-out`);
+            const svg = svg_g.init();
+            svg.appendChild(svg_g.updateGrid());
+            svg.appendChild(svg_g.updateData());
+            return svg;
+        } catch (e) {
+            alerts.error('SVG Generation failed', { dismissable: true, autoClose: 3000 });
+        }
     }
 </script>

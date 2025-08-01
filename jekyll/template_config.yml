@@ -33,6 +33,7 @@ dynamic_assets:
    - bootstrap<</js/bootstrap.bundle.min.js::defer-js
    - bootstrap<</css/bootstrap.min.css
    - font_awesome<</css/all.min.css
+   - status.min.js::defer-js
   formats:
     defer-js: <script defer src="%s"></script>
   presets:
