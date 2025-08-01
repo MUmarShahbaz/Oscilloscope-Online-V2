@@ -6,7 +6,7 @@ nav-order: 2
 dynamic_assets:
   files:
    - forms.min.js::defer-js
-   - json.min.js::defer-js
+   - io.min.js::defer-js
 ---
 
 {% assign help_url = site.data.urls.help %}
@@ -323,7 +323,7 @@ dynamic_assets:
 
     form.addEventListener('submit', handleFormSubmit);
     buttons.reset.addEventListener('click',  function () { refresh_form.reset() });
-    buttons.export.addEventListener('click', function () { download_json(setup_form.create_config(form)) });
+    buttons.export.addEventListener('click', function () { download_json(setup_form.create_config(form), `Oscilloscope-Online-main_config-${Date.now()}`) });
     buttons.import.addEventListener('click', function () { jsonFileInput.click() });
 
     jsonFileInput.addEventListener('change', function (event) {

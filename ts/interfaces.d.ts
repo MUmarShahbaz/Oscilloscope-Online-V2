@@ -10,7 +10,7 @@ namespace uPlot_Controller {
         );
 
         setData(data: number[][]): void;
-        setScale(scale: string, val: { min: number; max: number;}): void;
+        setScale(scale: string, val: { min: number; max: number; }): void;
         destroy(): void;
         // Add other methods/properties if needed
     }
@@ -62,9 +62,66 @@ namespace uPlot_Controller {
         };
         datasets: Array<{ label: string; color: color; }>;
     }
+
+    interface EXPORT {
+        title: string;
+        grid: {
+            x: {
+                title: string;
+                type: "linear" | "time";
+                ticks: {
+                    raw: Array<number>;
+                    formatted: Array<string>;
+                    min: number;
+                    max: number;
+                    range: number;
+                };
+                time_format: null | time_format;
+            };
+            y: {
+                title: string;
+                type: "linear" | "log";
+                ticks: {
+                    min: number;
+                    max: number;
+                    range: number;
+                };
+                base: null | 10 | 2;
+            };
+        };
+        series: Array<{ label: string; color: color; data: Array<number> }>;
+    }
 }
 
-namespace SVG { }
+namespace SVG {
+    type gap_mode = "val" | "px";
+    type color = `#${string}`;
+    interface CONFIG {
+        bg: null | color;
+        dimensions: {
+            width: { image: number; plot: number };
+            height: { image: number; plot: number };
+            margins: { left: number; right: number; top: number; bottom: number };
+        };
+        grid: {
+            gaps: {
+                x: { gap_by: gap_mode; val: number };
+                y: null | { gap_by: gap_mode; val: number };
+            };
+            lines: {
+                axes: { color: color; width: number };
+                main: { color: color; width: number };
+                font: { color: color; size: number };
+            };
+        };
+        series: {
+            width: number;
+            alpha: number;
+            point: null | { radius: number; alpha: number };
+            fill: null | { alpha: number };
+        };
+    }
+}
 
 namespace Serial { }
 
@@ -88,6 +145,28 @@ namespace Forms {
             linearS: HTMLElement;
             graphsS: HTMLElement;
             yRange: HTMLElement;
+        };
+    }
+
+    namespace svg {
+        interface Refresher {
+            all: Function;
+            bg: Function;
+            points: Function;
+            fill: Function;
+            yGap: Function;
+            reset: Function;
+        };
+
+        interface DOM_Elements {
+            tbg: HTMLInputElement;
+            points: HTMLInputElement;
+            fill: HTMLInputElement;
+
+            bgS: HTMLElement;
+            pointsS: HTMLElement;
+            fillS: HTMLElement;
+            yGapS: HTMLElement;
         };
     }
 }

@@ -1,15 +1,24 @@
-function download_json(json : JSONValue) {
+function download_json(json : JSONValue, name: string) {
     const jsonStr = JSON.stringify(json, null, 2);
     const blob = new Blob([jsonStr], { type: "application/json" });
-    download_blob(blob);
+    download_blob(blob, name);
 }
 
-function download_blob(blob : Blob) {
+function download_svg(svg : SVGElement, name : string) {
+    const serializer = new XMLSerializer();
+    const svgString = serializer.serializeToString(svg);
+    const svgWithHeader = '<?xml version="1.0" encoding="UTF-8"?>\n' + svgString;
+    const blob = new Blob([svgWithHeader], { type: 'image/svg+xml' });
+    download_blob(blob, name);
+}
+
+
+function download_blob(blob : Blob, name : string) {
     const url = URL.createObjectURL(blob);
 
     const a = document.createElement("a");
     a.href = url;
-    a.download = "data.json";
+    a.download = name;
     document.body.appendChild(a);
     a.click();
     document.body.removeChild(a);

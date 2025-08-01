@@ -39,5 +39,3 @@ dynamic_assets:
     uPlot:
      - uPlot<</uPlot.min.css
      - uPlot<</uPlot.iife.min.js
-    svg:
-     - SVG_Plotter_Deprecated<</svg_plotter.min.js

@@ -256,3 +256,228 @@ namespace setup_form {
         };
     }
 }
+
+namespace svg_form {
+    export function create_config(form: HTMLFormElement): SVG.CONFIG {
+        const formData = new FormData(form);
+        
+        // Background configuration
+        let bg: SVG.CONFIG['bg'] = null;
+        if (!formData.get('bgTransparent')) {
+            bg = formData.get('bgColor') as SVG.color;
+        }
+
+        // Dimensions configuration
+        const imageWidth = parseInt(formData.get('imageWidth') as string);
+        const imageHeight = parseInt(formData.get('imageHeight') as string);
+        const marginLeft = parseInt(formData.get('marginLeft') as string);
+        const marginRight = parseInt(formData.get('marginRight') as string);
+        const marginTop = parseInt(formData.get('marginTop') as string);
+        const marginBottom = parseInt(formData.get('marginBottom') as string);
+
+        const dimensions: SVG.CONFIG['dimensions'] = {
+            width: {
+                image: imageWidth,
+                plot: imageWidth - marginLeft - marginRight
+            },
+            height: {
+                image: imageHeight,
+                plot: imageHeight - marginTop - marginBottom
+            },
+            margins: {
+                left: marginLeft,
+                right: marginRight,
+                top: marginTop,
+                bottom: marginBottom
+            }
+        };
+
+        // Grid configuration
+        const gridXGap = parseInt(formData.get('gridXGap') as string);
+        const gridXGapMode = formData.get('gridXGapMode') as SVG.gap_mode;
+        
+        let gridYGap: SVG.CONFIG['grid']['gaps']['y'] = null;
+        if (formData.get('gridYGap')) {
+            const yGapVal = parseInt(formData.get('gridYGap') as string);
+            const yGapMode = formData.get('gridYGapMode') as SVG.gap_mode;
+            gridYGap = { gap_by: yGapMode, val: yGapVal };
+        }
+
+        const axesWidth = parseFloat(formData.get('axesWidth') as string);
+        const axesColor = formData.get('axesColor') as SVG.color;
+        const gridWidth = parseFloat(formData.get('gridWidth') as string);
+        const gridColor = formData.get('gridColor') as SVG.color;
+        const fontSize = parseInt(formData.get('fontSize') as string);
+        const fontColor = formData.get('fontColor') as SVG.color;
+
+        const grid: SVG.CONFIG['grid'] = {
+            gaps: {
+                x: { gap_by: gridXGapMode, val: gridXGap },
+                y: gridYGap
+            },
+            lines: {
+                axes: { color: axesColor, width: axesWidth },
+                main: { color: gridColor, width: gridWidth },
+                font: { color: fontColor, size: fontSize }
+            }
+        };
+
+        // Series configuration
+        const seriesWidth = parseFloat(formData.get('seriesWidth') as string);
+        const seriesAlpha = parseFloat(formData.get('seriesAlpha') as string);
+
+        let point: SVG.CONFIG['series']['point'] = null;
+        if (formData.get('showPoints')) {
+            const pointRadius = parseFloat(formData.get('pointRadius') as string);
+            const pointAlpha = parseFloat(formData.get('pointAlpha') as string);
+            point = { radius: pointRadius, alpha: pointAlpha };
+        }
+
+        let fill: SVG.CONFIG['series']['fill'] = null;
+        if (formData.get('showFill')) {
+            const fillAlpha = parseFloat(formData.get('fillAlpha') as string);
+            fill = { alpha: fillAlpha };
+        }
+
+        const series: SVG.CONFIG['series'] = {
+            width: seriesWidth,
+            alpha: seriesAlpha,
+            point: point,
+            fill: fill
+        };
+
+        return {
+            bg: bg,
+            dimensions: dimensions,
+            grid: grid,
+            series: series
+        };
+    }
+    export function set_config(form: HTMLFormElement, config: SVG.CONFIG, form_updater: Function) {
+        const { bg, dimensions, grid, series } = config;
+
+        // Set background configuration
+        if (bg === null) {
+            (form.elements.namedItem('bgTransparent') as HTMLInputElement).checked = true;
+        } else {
+            (form.elements.namedItem('bgTransparent') as HTMLInputElement).checked = false;
+            (form.elements.namedItem('bgColor') as HTMLInputElement).value = bg;
+        }
+
+        // Set dimensions configuration
+        (form.elements.namedItem('imageWidth') as HTMLInputElement).value = dimensions.width.image.toString();
+        (form.elements.namedItem('imageHeight') as HTMLInputElement).value = dimensions.height.image.toString();
+        (form.elements.namedItem('marginLeft') as HTMLInputElement).value = dimensions.margins.left.toString();
+        (form.elements.namedItem('marginRight') as HTMLInputElement).value = dimensions.margins.right.toString();
+        (form.elements.namedItem('marginTop') as HTMLInputElement).value = dimensions.margins.top.toString();
+        (form.elements.namedItem('marginBottom') as HTMLInputElement).value = dimensions.margins.bottom.toString();
+
+        // Set grid configuration
+        (form.elements.namedItem('gridXGap') as HTMLInputElement).value = grid.gaps.x.val.toString();
+        (form.elements.namedItem('gridXGapMode') as HTMLSelectElement).value = grid.gaps.x.gap_by;
+        
+        if (grid.gaps.y !== null) {
+            (form.elements.namedItem('gridYGap') as HTMLInputElement).value = grid.gaps.y.val.toString();
+            (form.elements.namedItem('gridYGapMode') as HTMLSelectElement).value = grid.gaps.y.gap_by;
+        }
+
+        (form.elements.namedItem('axesWidth') as HTMLInputElement).value = grid.lines.axes.width.toString();
+        (form.elements.namedItem('axesColor') as HTMLInputElement).value = grid.lines.axes.color;
+        (form.elements.namedItem('gridWidth') as HTMLInputElement).value = grid.lines.main.width.toString();
+        (form.elements.namedItem('gridColor') as HTMLInputElement).value = grid.lines.main.color;
+        (form.elements.namedItem('fontSize') as HTMLInputElement).value = grid.lines.font.size.toString();
+        (form.elements.namedItem('fontColor') as HTMLInputElement).value = grid.lines.font.color;
+
+        // Set series configuration
+        (form.elements.namedItem('seriesWidth') as HTMLInputElement).value = series.width.toString();
+        (form.elements.namedItem('seriesAlpha') as HTMLInputElement).value = series.alpha.toString();
+
+        if (series.point !== null) {
+            (form.elements.namedItem('showPoints') as HTMLInputElement).checked = true;
+            (form.elements.namedItem('pointRadius') as HTMLInputElement).value = series.point.radius.toString();
+            (form.elements.namedItem('pointAlpha') as HTMLInputElement).value = series.point.alpha.toString();
+        } else {
+            (form.elements.namedItem('showPoints') as HTMLInputElement).checked = false;
+        }
+
+        if (series.fill !== null) {
+            (form.elements.namedItem('showFill') as HTMLInputElement).checked = true;
+            (form.elements.namedItem('fillAlpha') as HTMLInputElement).value = series.fill.alpha.toString();
+        } else {
+            (form.elements.namedItem('showFill') as HTMLInputElement).checked = false;
+        }
+
+        form_updater();
+    }
+
+    export function ui(DOM_Elements: Forms.svg.DOM_Elements, form: HTMLFormElement, log: boolean): Forms.svg.Refresher {
+        function bg() {
+            DOM_Elements.bgS.style.display = DOM_Elements.tbg.checked ? 'none' : 'block';
+        }
+
+        function points() {
+            if (DOM_Elements.points.checked) {
+                DOM_Elements.pointsS.removeAttribute('style');
+            } else {
+                DOM_Elements.pointsS.style.display = 'none';
+            }
+        }
+
+        function fill() {
+            DOM_Elements.fillS.style.display = DOM_Elements.fill.checked ? 'block' : 'none';
+        }
+
+        function yGap() {
+            if (log) {
+                DOM_Elements.yGapS.style.display = 'none';
+            } else {
+                DOM_Elements.yGapS.removeAttribute('style');
+            }
+        }
+
+        function all() {
+            bg();
+            points();
+            fill();
+            yGap();
+        }
+
+        function reset() {
+            const default_config: SVG.CONFIG = {
+                bg: "#ffffff",
+                dimensions: {
+                    width: { image: 1280, plot: 1180 },
+                    height: { image: 720, plot: 620 },
+                    margins: { left: 50, right: 50, top: 50, bottom: 50 }
+                },
+                grid: {
+                    gaps: {
+                        x: { gap_by: "px", val: 100 },
+                        y: { gap_by: "px", val: 100 }
+                    },
+                    lines: {
+                        axes: { color: "#000000", width: 2 },
+                        main: { color: "#cccccc", width: 1 },
+                        font: { color: "#000000", size: 10 }
+                    }
+                },
+                series: {
+                    width: 1.5,
+                    alpha: 1,
+                    point: null,
+                    fill: null
+                }
+            };
+            set_config(form, default_config, all);
+        }
+
+        return {
+            all: all,
+            bg: bg,
+            points: points,
+            fill: fill,
+            yGap: yGap,
+            reset: reset
+        };
+    }
+}
