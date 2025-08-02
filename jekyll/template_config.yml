@@ -26,6 +26,7 @@ dynamic_assets:
   source:
     base: # `${assets_dir}`
     font_awesome: https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0
+    dev_icons: https://cdn.jsdelivr.net/gh/devicons/devicon@latest
     bootstrap: https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist
     uPlot: https://cdn.jsdelivr.net/npm/uplot/dist
     SVG_Plotter_Deprecated: https://cdn.jsdelivr.net/gh/MUmarShahbaz/SVG-Plotter-deprecated@dist
