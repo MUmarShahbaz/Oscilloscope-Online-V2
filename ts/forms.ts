@@ -18,8 +18,8 @@ namespace setup_form {
             x_axis = {
                 type: 'linear',
                 title: setup.get('xAxisTitle')! as string,
-                min: parseInt(setup.get('xAxisMax')! as string),
-                max: parseInt(setup.get('xAxisMin')! as string)
+                min: parseInt(setup.get('xAxisMin')! as string),
+                max: parseInt(setup.get('xAxisMax')! as string)
             }
         } else {
             x_axis = {
@@ -41,8 +41,8 @@ namespace setup_form {
                 y_axis = {
                     type: 'linear-manual',
                     title: setup.get('yAxisTitle')! as string,
-                    min: parseInt(setup.get('yAxisMax')! as string),
-                    max: parseInt(setup.get('yAxisMin')! as string)
+                    min: parseInt(setup.get('yAxisMin')! as string),
+                    max: parseInt(setup.get('yAxisMax')! as string)
                 }
             }
 
@@ -223,8 +223,8 @@ namespace setup_form {
                 "x": {
                     "type": "linear",
                     "title": "Index",
-                    "min": 500,
-                    "max": 0
+                    "min": 0,
+                    "max": 500
                 },
                 "y": {
                     "type": "linear-auto",

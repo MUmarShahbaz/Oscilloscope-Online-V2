@@ -1,10 +1,11 @@
 namespace uPlot_Controller {
-    let chart : uPlot;
+    export let chart : uPlot;
     let width : number;
     let height : number;
     let data : Array<Array<number>> = [];
     let config : CONFIG;
     let container : HTMLElement;
+    export let length : number;
 
     export function init(new_config : CONFIG, new_container : HTMLElement) {
         // Helper Function
@@ -142,9 +143,11 @@ namespace uPlot_Controller {
             pixelRatio: window.devicePixelRatio || 1
         };
 
+        length = config.chart.x.type === 'linear' ? config.chart.x.max - config.chart.x.min : config.chart.x.max;
+
         // Create Chart
         try {
-            chart = new uPlot(options, data, container);
+            chart = UPLOT_MAKER(options, data, container);
         } catch (error) {
             throw new Error(`Failed to create uPlot chart: ${error}`);
         }
@@ -193,4 +196,50 @@ namespace uPlot_Controller {
     export function isInitialized(): boolean {
         return chart !== null && chart !== undefined;
     }
+
+    export function push(message : string, time : number) {
+        if (message === config.serial.mcu_commands.cls) {
+            data = [];
+            if (config.chart.x.type === 'linear') {
+                const x = config.chart.x as { type: "linear"; title: string; min: number; max: number; };
+                data.push(Array.from({ length: x.max - x.min + 1 }, (_, i) => x.min + i));
+            } else {
+                data.push([]);
+            }
+            config.datasets.forEach(element => {
+                data.push([]);
+            });
+        } else {
+            data.forEach((row, i) => {
+                if (i !== 0 && length === row.length) push(config.serial.mcu_commands.cls, time);
+            });
+
+            const messageData = message.split(config.serial.break);
+            if (config.chart.x.type === 'time') {
+                if (config.chart.x.manual) {
+                    time = parseInt(messageData[0]);
+                    messageData.shift();
+                } else data[0].push(time);
+            }
+            console.log(messageData, `at time ${time}`);
+
+            messageData.forEach((value, i) => {
+                const parsedValue = parseFloat(value);
+                if (!isNaN(parsedValue)) {
+                    data[i + 1].push(parsedValue);
+                } else {
+                    console.warn(`Invalid data value at index ${i}:`, value);
+                    data[i + 1].push(NaN);
+                }
+            });
+        }
+    }
+
+    export function refresh() {
+        update(data);
+    }
+}
+
+function UPLOT_MAKER(options : Object, data : Array<Array<number>>, container : HTMLElement) {
+    return new uPlot(options, data, container);
 }

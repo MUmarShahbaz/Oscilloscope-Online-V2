@@ -338,8 +338,8 @@ dynamic_assets:
 
     if (form.checkValidity()) {
       const config = setup_form.create_config(form);
-
-      console.log("Configuration:", config);
+      sessionStorage.setItem('main_config', JSON.stringify(config));
+      location.href = `{{ '/plotter.html' | absolute_url }}`
     } else {
       form.classList.add("was-validated");
     }

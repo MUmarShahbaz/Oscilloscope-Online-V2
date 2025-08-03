@@ -4,6 +4,10 @@ permalink: /plotter.html
 title: Plotter
 nav-order: 4
 dynamic_assets:
+  files:
+    - io.min.js::defer-js
+    - serial.min.js::defer-js
+    - uplot.min.js::defer-js
   presets: uPlot
 ---
 
@@ -12,7 +16,7 @@ dynamic_assets:
     height: 600px;
     width: 100%;
   }
-  
+
   .connection-status {
     display: inline-block;
     width: 12px;
@@ -21,13 +25,14 @@ dynamic_assets:
     background-color: var(--bs-danger);
     margin-right: 8px;
   }
-  
+
   .connection-status.connected {
     background-color: var(--bs-success);
   }
 </style>
 
-{% include hero.liquid heading="Oscilloscope" bg="success" text="Get live data from a serial port and display it as a graph" %}
+{% include hero.liquid heading="Oscilloscope" bg="success" text="Get live data from a serial port and display it as a
+graph" %}
 
 <div class="container-fluid px-4 py-3">
 
@@ -148,8 +153,10 @@ dynamic_assets:
                   Auto Update Chart
                 </label>
               </div>
-              <label for="updateRate" class="form-label">Update Rate (ms)</label>
-              <input type="number" class="form-control" id="updateRate" value="50" min="10" max="1000">
+              <div id="rateContainer" style="display: none;">
+                <label for="updateRate" class="form-label">Update Rate (ms)</label>
+                <input type="number" class="form-control" id="updateRate" value="50" min="10" max="1000">
+              </div>
             </div>
           </div>
         </div>
@@ -168,8 +175,8 @@ dynamic_assets:
         <small class="text-muted font-monospace" id="statusText">Ready to plot</small>
       </div>
     </div>
-    <div class="card-body p-0">
-      <div id="plotDiv" class="bg-light border-bottom d-flex align-items-center justify-content-center text-muted fs-5">
+    <div class="card-body p-5">
+      <div id="plotDiv" class="border d-flex align-items-center justify-content-center text-muted fs-5">
         <div class="text-center">
           <i class="fas fa-chart-line fa-3x mb-3 opacity-25"></i>
           <p class="mb-0">Chart will be rendered here</p>
@@ -189,10 +196,10 @@ dynamic_assets:
             <i class="fas fa-table me-2"></i>Live Data Stream
           </h6>
           <div class="btn-group btn-group-sm" role="group">
-            <button type="button" class="btn btn-outline-secondary" title="Auto-scroll">
+            <button type="button" class="btn btn-outline-secondary" title="Auto-scroll" id="autoScroll">
               <i class="fas fa-arrows-alt-v"></i>
             </button>
-            <button type="button" class="btn btn-outline-secondary" title="Pause updates">
+            <button type="button" class="btn btn-outline-secondary" title="Pause updates" id="tablePause">
               <i class="fas fa-pause"></i>
             </button>
           </div>
@@ -224,19 +231,19 @@ dynamic_assets:
               <div class="bg-light p-3 rounded">
                 <div class="d-flex justify-content-between align-items-center mb-2">
                   <span class="text-muted small">Data Points</span>
-                  <span class="badge bg-primary fs-6" id="dataPointCount">0</span>
+                  <span class="fs-6" id="dataPointCount">0</span>
                 </div>
                 <div class="d-flex justify-content-between align-items-center mb-2">
                   <span class="text-muted small">Sample Rate</span>
-                  <span class="badge bg-success fs-6" id="sampleRate">0 Hz</span>
+                  <span class="fs-6" id="sampleRate">0 Hz</span>
                 </div>
                 <div class="d-flex justify-content-between align-items-center mb-2">
                   <span class="text-muted small">Duration</span>
-                  <span class="badge bg-info fs-6" id="duration">0:00</span>
+                  <span class="fs-6" id="duration">0:00</span>
                 </div>
                 <div class="d-flex justify-content-between align-items-center">
                   <span class="text-muted small">Channels</span>
-                  <span class="badge bg-warning fs-6" id="channelCount">0</span>
+                  <span class="fs-6" id="channelCount">0</span>
                 </div>
               </div>
             </div>
@@ -314,10 +321,11 @@ dynamic_assets:
           <div class="mb-3">
             <label class="form-label small text-muted mb-1">Expected Format:</label>
             <div class="bg-dark text-light p-3 rounded font-monospace small">
-              value1<span class="text-warning">/</span>value2<span class="text-warning">/</span>value3<span class="text-warning">/</span>value4<span class="text-info">\n</span>
+              value1<span class="text-warning">/</span>value2<span class="text-warning">/</span>value3<span
+                class="text-warning">/</span>value4<span class="text-info">\n</span>
             </div>
           </div>
-          
+
           <div class="row g-3 small">
             <div class="col-6">
               <div class="d-flex align-items-center mb-2">
@@ -349,3 +357,80 @@ dynamic_assets:
     </div>
   </div>
 </div>
+
+<script>
+  const config = JSON.parse(sessionStorage.getItem('main_config'));
+  console.log(config);
+  let container;
+
+  document.addEventListener('DOMContentLoaded', function () {
+    Serial_Controller.test();
+    config === null ? alerts.error('Failed to load config, go to setup page', { dismissable: true }) : alerts.success('Configuration successfully applied!', { dismissible: true, autoClose: 3000 });;
+    const FORM_Elements = {
+      baud: document.getElementById('baudRate'),
+      auto: document.getElementById('autoUpdate'),
+      rate: document.getElementById('updateRate'),
+      rateS: document.getElementById('rateContainer')
+    }
+    const buttons = {
+      connect: document.getElementById('connectBtn'),
+      disconnect: document.getElementById('disconnectBtn'),
+      pause: document.getElementById('pauseBtn'),
+      play: document.getElementById('startBtn'),
+      import: document.getElementById('importBtn'),
+      clear: document.getElementById('clearBtn'),
+      export: {
+        csv: document.getElementById('exportCsv'),
+        png: document.getElementById('exportPng'),
+        json: document.getElementById('exportJson')
+      },
+      scroll: document.getElementById('autoScroll'),
+      table_pause: document.getElementById('tablePause')
+    };
+    container = document.getElementById('plotDiv');
+
+
+    FORM_Elements.auto.addEventListener('change', function () {
+      FORM_Elements.rateS.style.display = this.checked ? 'none' : 'block'
+    });
+
+    buttons.connect.addEventListener('click', function () {
+      Serial_Controller.init(parseInt(FORM_Elements.baud.value), push_sequence, function () {
+        container.innerHTML = '';
+        uPlot_Controller.init(config, container);
+        buttons.disconnect.disabled = false;
+        buttons.play.disabled = false;
+        buttons.connect.disabled = true;
+      });
+    });
+
+    buttons.play.addEventListener('click', function () {
+      Serial_Controller.start();
+      buttons.pause.disabled = false;
+      buttons.play.disabled = true;
+    });
+
+    buttons.pause.addEventListener('click', function () {
+      Serial_Controller.isReading = false;
+      Serial_Controller.stop();
+      buttons.play.disabled = false;
+      buttons.pause.disabled = true;
+    });
+
+    buttons.disconnect.addEventListener('click', function() {
+      Serial_Controller.isReading = false;
+      Serial_Controller.stop();
+      Serial_Controller.port = null;
+      buttons.connect.disabled = false;
+      buttons.play.disabled = true;
+      buttons.pause.disabled = true;
+      buttons.disconnect.disabled = true;
+    });
+    
+
+    function push_sequence(message, time) {
+      uPlot_Controller.push(message, time);
+      uPlot_Controller.refresh();
+    }
+  });
+</script>
