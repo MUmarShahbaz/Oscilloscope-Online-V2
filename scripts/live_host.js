@@ -31,5 +31,5 @@ if (bundle.present) {
 }
 
 create_child('ts_parser', 'node ./scripts/typescript_parser --live', undefined, 18);
-create_child('http-server', 'http-server -p 8080', './jekyll/_site', 18);
+create_child('http-server', 'http-server ./jekyll/_site -p 8080 -S -C ./temp/cert.pem -K ./temp/key.pem', undefined, 18);
 create_child('bundler => jekyll', 'bundle exec jekyll build --watch', './jekyll' , 18);

@@ -37,7 +37,7 @@ if (mode === '--dev' || mode === '--prep') {
     const ip = Object.values(interface)
         .flat()
         .find(i => i.family === 'IPv4' && !i.internal)?.address;
-    config.url = `http://${ip}:8080`;
+    config.url = `https://${ip}:8080`;
     config.baseurl = null;
 
     // Cloning assets internally

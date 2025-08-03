@@ -9,6 +9,7 @@
     "live-host": "node ./scripts/build.js --prep && node ./scripts/live_host.js && npm run clean"
   },
   "dependencies": {
+    "@types/w3c-web-serial": "^1.0.8",
     "chokidar": "^4.0.3",
     "http-server": "^14.1.1",
     "terser": "^5.36.0",
