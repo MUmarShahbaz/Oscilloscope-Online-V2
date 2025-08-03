@@ -39,15 +39,7 @@ namespace uPlot_Controller {
         height = new_container.clientHeight;
 
         // Init Data
-        if (config.chart.x.type === 'linear') {
-            const x = config.chart.x as { type: "linear"; title: string; min: number; max: number; };
-            data.push(Array.from({ length: x.max - x.min + 1 }, (_, i) => x.min + i));
-        } else {
-            data.push([]);
-        }
-        config.datasets.forEach(element => {
-            data.push([]);
-        });
+        clear()
 
         // Init Scales
         const yLog = config.chart.y.type === 'log' ? config.chart.y.base : false;
@@ -199,16 +191,7 @@ namespace uPlot_Controller {
 
     export function push(message : string, time : number) {
         if (message === config.serial.mcu_commands.cls) {
-            data = [];
-            if (config.chart.x.type === 'linear') {
-                const x = config.chart.x as { type: "linear"; title: string; min: number; max: number; };
-                data.push(Array.from({ length: x.max - x.min + 1 }, (_, i) => x.min + i));
-            } else {
-                data.push([]);
-            }
-            config.datasets.forEach(element => {
-                data.push([]);
-            });
+            clear();
         } else {
             data.forEach((row, i) => {
                 if (i !== 0 && length === row.length) push(config.serial.mcu_commands.cls, time);
@@ -237,6 +220,19 @@ namespace uPlot_Controller {
 
     export function refresh() {
         update(data);
+    }
+
+    export function clear()  {
+        data = [];
+        if (config.chart.x.type === 'linear') {
+            const x = config.chart.x as { type: "linear"; title: string; min: number; max: number; };
+            data.push(Array.from({ length: x.max - x.min + 1 }, (_, i) => x.min + i));
+        } else {
+            data.push([]);
+        }
+        config.datasets.forEach(element => {
+            data.push([]);
+        });
     }
 }
 

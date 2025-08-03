@@ -362,15 +362,21 @@ graph" %}
   const config = JSON.parse(sessionStorage.getItem('main_config'));
   console.log(config);
   let container;
+  let refresher = null;
 
   document.addEventListener('DOMContentLoaded', function () {
     Serial_Controller.test();
     config === null ? alerts.error('Failed to load config, go to setup page', { dismissable: true }) : alerts.success('Configuration successfully applied!', { dismissible: true, autoClose: 3000 });;
-    const FORM_Elements = {
+    const DOM_Elements = {
       baud: document.getElementById('baudRate'),
       auto: document.getElementById('autoUpdate'),
       rate: document.getElementById('updateRate'),
-      rateS: document.getElementById('rateContainer')
+      rateS: document.getElementById('rateContainer'),
+      status: {
+        icon: document.getElementById('connectionStatus'),
+        text: document.getElementById('statusText'),
+        time: document.getElementById('lastUpdate')
+      }
     }
     const buttons = {
       connect: document.getElementById('connectBtn'),
@@ -390,17 +396,20 @@ graph" %}
     container = document.getElementById('plotDiv');
 
 
-    FORM_Elements.auto.addEventListener('change', function () {
-      FORM_Elements.rateS.style.display = this.checked ? 'none' : 'block'
+    DOM_Elements.auto.addEventListener('change', function () {
+      DOM_Elements.rateS.style.display = this.checked ? 'none' : 'block'
     });
 
     buttons.connect.addEventListener('click', function () {
-      Serial_Controller.init(parseInt(FORM_Elements.baud.value), push_sequence, function () {
+      Serial_Controller.init(parseInt(DOM_Elements.baud.value), push_sequence, function () {
         container.innerHTML = '';
         uPlot_Controller.init(config, container);
         buttons.disconnect.disabled = false;
         buttons.play.disabled = false;
         buttons.connect.disabled = true;
+        DOM_Elements.status.icon.classList.add('connected');
+        DOM_Elements.status.text.innerText = `Connected - Baud : ${DOM_Elements.baud.value}`;
+        DOM_Elements.status.time.innerText = `${new Date().toTimeString().split(' ')[0]}`;
       });
     });
 
@@ -408,29 +417,43 @@ graph" %}
       Serial_Controller.start();
       buttons.pause.disabled = false;
       buttons.play.disabled = true;
+      if (!DOM_Elements.auto.checked) refresher = setInterval(() => {
+          uPlot_Controller.refresh();
+        }, parseInt(DOM_Elements.rate.value));
     });
 
     buttons.pause.addEventListener('click', function () {
       Serial_Controller.isReading = false;
-      Serial_Controller.stop();
       buttons.play.disabled = false;
       buttons.pause.disabled = true;
+      clearInterval(refresher);
+      refresher = null;
     });
 
     buttons.disconnect.addEventListener('click', function() {
       Serial_Controller.isReading = false;
-      Serial_Controller.stop();
+      Serial_Controller.quit();
       Serial_Controller.port = null;
       buttons.connect.disabled = false;
       buttons.play.disabled = true;
       buttons.pause.disabled = true;
       buttons.disconnect.disabled = true;
+      clearInterval(refresher);
+      refresher = null;
+      DOM_Elements.status.icon.classList.remove('connected');
+      DOM_Elements.status.text.innerText = 'Disconnected - Click Connect to start plotting';
+      DOM_Elements.status.time.innerText = `${new Date().toTimeString().split(' ')[0]}`;
+    });
+
+    buttons.clear.addEventListener('click', () => {
+      uPlot_Controller.clear();
+      uPlot_Controller.refresh();
     });
     
 
     function push_sequence(message, time) {
       uPlot_Controller.push(message, time);
-      uPlot_Controller.refresh();
+      if (refresher === null) uPlot_Controller.refresh();
     }
   });
 </script>

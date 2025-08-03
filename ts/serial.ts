@@ -69,10 +69,10 @@ namespace Serial_Controller {
             console.error('Error reading from serial port:', error);
             if (isReading) { // Only show error if we weren't intentionally stopping
                 alerts.error('Error reading from serial port', { dismissible: true });
-                await stop();
+                await quit();
             }
         } finally {
-            /*try {
+            try {
                 if (reader) {
                     reader.releaseLock();
                     reader = null;
@@ -81,11 +81,11 @@ namespace Serial_Controller {
                 console.warn('Error releasing reader lock:', err);
             }
             console.log('Serial port reading stopped.');
-            isReading = false;*/
+            isReading = false;
         }
     }
 
-    export async function stop() {
+    export async function quit() {
         isReading = false;
 
         if (reader) {
