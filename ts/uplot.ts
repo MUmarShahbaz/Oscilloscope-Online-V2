@@ -194,7 +194,7 @@ namespace uPlot_Controller {
             clear();
         } else {
             data.forEach((row, i) => {
-                if (i !== 0 && length === row.length) push(config.serial.mcu_commands.cls, time);
+                if (length === row.length) row.shift();
             });
 
             const messageData = message.split(config.serial.break);
@@ -202,7 +202,8 @@ namespace uPlot_Controller {
                 if (config.chart.x.manual) {
                     time = parseInt(messageData[0]);
                     messageData.shift();
-                } else data[0].push(time);
+                }
+                data[0].push(time);
             }
             console.log(messageData, `at time ${time}`);
 

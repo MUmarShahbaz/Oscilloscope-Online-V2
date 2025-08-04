@@ -171,8 +171,8 @@ graph" %}
         <i class="fas fa-chart-area me-2"></i>Live Chart
       </h5>
       <div class="d-flex align-items-center">
-        <span class="connection-status me-2" id="connectionStatus"></span>
-        <small class="text-muted font-monospace" id="statusText">Ready to plot</small>
+        <span class="connection-status me-2" id="plotStatus"></span>
+        <small class="text-muted font-monospace" id="plotText">Ready to plot</small>
       </div>
     </div>
     <div class="card-body p-5">
@@ -376,6 +376,10 @@ graph" %}
         icon: document.getElementById('connectionStatus'),
         text: document.getElementById('statusText'),
         time: document.getElementById('lastUpdate')
+      },
+      plot_status: {
+        icon: document.getElementById('plotStatus'),
+        text: document.getElementById('plotText')
       }
     }
     const buttons = {
@@ -420,6 +424,8 @@ graph" %}
       if (!DOM_Elements.auto.checked) refresher = setInterval(() => {
           uPlot_Controller.refresh();
         }, parseInt(DOM_Elements.rate.value));
+      DOM_Elements.plot_status.icon.classList.add('connected');
+      DOM_Elements.plot_status.text.innerText = 'Plotting';
     });
 
     buttons.pause.addEventListener('click', function () {
@@ -428,6 +434,8 @@ graph" %}
       buttons.pause.disabled = true;
       clearInterval(refresher);
       refresher = null;
+      DOM_Elements.plot_status.icon.classList.remove('connected');
+      DOM_Elements.plot_status.text.innerText = 'Ready to plot';
     });
 
     buttons.disconnect.addEventListener('click', function() {
@@ -443,6 +451,8 @@ graph" %}
       DOM_Elements.status.icon.classList.remove('connected');
       DOM_Elements.status.text.innerText = 'Disconnected - Click Connect to start plotting';
       DOM_Elements.status.time.innerText = `${new Date().toTimeString().split(' ')[0]}`;
+      DOM_Elements.plot_status.icon.classList.remove('connected');
+      DOM_Elements.plot_status.text.innerText = 'Ready to plot';
     });
 
     buttons.clear.addEventListener('click', () => {
