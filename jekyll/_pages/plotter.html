@@ -186,96 +186,6 @@ graph" %}
     </div>
   </div>
 
-  <!-- Data Display & Statistics -->
-  <div class="row g-4">
-    <!-- Data Table -->
-    <div class="col-lg-8">
-      <div class="card h-100">
-        <div class="card-header d-flex justify-content-between align-items-center">
-          <h6 class="card-title mb-0">
-            <i class="fas fa-table me-2"></i>Live Data Stream
-          </h6>
-          <div class="btn-group btn-group-sm" role="group">
-            <button type="button" class="btn btn-outline-secondary" title="Auto-scroll" id="autoScroll">
-              <i class="fas fa-arrows-alt-v"></i>
-            </button>
-            <button type="button" class="btn btn-outline-secondary" title="Pause updates" id="tablePause">
-              <i class="fas fa-pause"></i>
-            </button>
-          </div>
-        </div>
-        <div class="card-body">
-          <div class="text-center text-muted p-5" id="dataTablePlaceholder">
-            <i class="fas fa-table fa-3x mb-3 opacity-25"></i>
-            <h6>No Data Available</h6>
-            <p class="mb-0">Start plotting to see live data here</p>
-          </div>
-          <!-- Data table will be inserted here by JavaScript -->
-          <div id="dataTable" class="d-none"></div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Statistics Panel -->
-    <div class="col-lg-4">
-      <div class="card h-100">
-        <div class="card-header">
-          <h6 class="card-title mb-0">
-            <i class="fas fa-chart-pie me-2"></i>Statistics
-          </h6>
-        </div>
-        <div class="card-body">
-          <div class="row g-3">
-            <!-- Real-time Stats -->
-            <div class="col-12">
-              <div class="bg-light p-3 rounded">
-                <div class="d-flex justify-content-between align-items-center mb-2">
-                  <span class="text-muted small">Data Points</span>
-                  <span class="fs-6" id="dataPointCount">0</span>
-                </div>
-                <div class="d-flex justify-content-between align-items-center mb-2">
-                  <span class="text-muted small">Sample Rate</span>
-                  <span class="fs-6" id="sampleRate">0 Hz</span>
-                </div>
-                <div class="d-flex justify-content-between align-items-center mb-2">
-                  <span class="text-muted small">Duration</span>
-                  <span class="fs-6" id="duration">0:00</span>
-                </div>
-                <div class="d-flex justify-content-between align-items-center">
-                  <span class="text-muted small">Channels</span>
-                  <span class="fs-6" id="channelCount">0</span>
-                </div>
-              </div>
-            </div>
-
-            <!-- Channel Status -->
-            <div class="col-12">
-              <h6 class="text-muted mb-2">Channel Status</h6>
-              <div id="channelStatus" class="small">
-                <div class="text-center text-muted p-3">
-                  <i class="fas fa-signal opacity-25 fa-2x mb-2"></i>
-                  <p class="mb-0">No channels detected</p>
-                </div>
-              </div>
-            </div>
-
-            <!-- Buffer Info -->
-            <div class="col-12">
-              <h6 class="text-muted mb-2">Buffer Status</h6>
-              <div class="progress mb-2" style="height: 8px;">
-                <div class="progress-bar bg-info" role="progressbar" style="width: 0%" id="bufferProgress"></div>
-              </div>
-              <div class="d-flex justify-content-between small text-muted">
-                <span>Buffer Usage</span>
-                <span id="bufferUsage">0%</span>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-
   <!-- Help & Documentation -->
   <div class="row g-4 mt-2">
     <!-- Quick Start Guide -->
@@ -393,9 +303,7 @@ graph" %}
         csv: document.getElementById('exportCsv'),
         png: document.getElementById('exportPng'),
         json: document.getElementById('exportJson')
-      },
-      scroll: document.getElementById('autoScroll'),
-      table_pause: document.getElementById('tablePause')
+      }
     };
     container = document.getElementById('plotDiv');
 
@@ -414,6 +322,7 @@ graph" %}
         DOM_Elements.status.icon.classList.add('connected');
         DOM_Elements.status.text.innerText = `Connected - Baud : ${DOM_Elements.baud.value}`;
         DOM_Elements.status.time.innerText = `${new Date().toTimeString().split(' ')[0]}`;
+        buttons.play.click();
       });
     });
 
