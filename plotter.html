@@ -4,23 +4,21 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta charset="utf-8">
 
-    <!-- Icon -->
-  <link rel="apple-touch-icon" href="https://mumarshahbaz.github.io/Oscilloscope-Online-V2/assets/img/icon.svg">
-<link
-    rel="icon"
-    type="image/png"
-    href="https://mumarshahbaz.github.io/Oscilloscope-Online-V2/assets/img/icon.svg">
+  <!-- Icon -->
+  <link rel="apple-touch-icon" href="https://cdn.jsdelivr.net/gh/MUmarShahbaz/Oscilloscope-Online-V2@3c912e3adb784c50741da5c523aa55489fdb7b5a/img/icon.svg">
+  <link rel="icon" type="image/svg+xml" href="https://cdn.jsdelivr.net/gh/MUmarShahbaz/Oscilloscope-Online-V2@3c912e3adb784c50741da5c523aa55489fdb7b5a/img/icon.svg">
 
   <!-- Assets and SEO -->
   <script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-<script defer src="https://mumarshahbaz.github.io/Oscilloscope-Online-V2/assets/scripts/status.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/gh/MUmarShahbaz/Oscilloscope-Online-V2@3c912e3adb784c50741da5c523aa55489fdb7b5a/scripts/status.min.js"></script>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/uplot/dist/uPlot.min.css">
 <script src="https://cdn.jsdelivr.net/npm/uplot/dist/uPlot.iife.min.js"></script>
-<script defer src="https://mumarshahbaz.github.io/Oscilloscope-Online-V2/assets/scripts/io.min.js"></script>
-<script defer src="https://mumarshahbaz.github.io/Oscilloscope-Online-V2/assets/scripts/serial.min.js"></script>
-<script defer src="https://mumarshahbaz.github.io/Oscilloscope-Online-V2/assets/scripts/uplot.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/gh/MUmarShahbaz/Oscilloscope-Online-V2@3c912e3adb784c50741da5c523aa55489fdb7b5a/scripts/io.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/gh/MUmarShahbaz/Oscilloscope-Online-V2@3c912e3adb784c50741da5c523aa55489fdb7b5a/scripts/serial.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/gh/MUmarShahbaz/Oscilloscope-Online-V2@3c912e3adb784c50741da5c523aa55489fdb7b5a/scripts/uplot.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
   <!-- Begin Jekyll SEO tag v2.8.0 -->
 <title>Plotter | Oscilloscope Online 2</title>
 <meta name="generator" content="Jekyll v4.4.1" />
@@ -33,26 +31,33 @@
 <meta property="og:url" content="https://mumarshahbaz.github.io/Oscilloscope-Online-V2/plotter.html" />
 <meta property="og:site_name" content="Oscilloscope Online 2" />
 <meta property="og:type" content="article" />
-<meta property="article:published_time" content="2025-08-05T12:59:42+05:00" />
+<meta property="article:published_time" content="2025-08-08T21:55:38+00:00" />
 <meta name="twitter:card" content="summary" />
 <meta property="twitter:title" content="Plotter" />
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"M. Umar Shahbaz"},"dateModified":"2025-08-05T12:59:42+05:00","datePublished":"2025-08-05T12:59:42+05:00","description":"A web serial plotter with a huge variety of features and customisation","headline":"Plotter","mainEntityOfPage":{"@type":"WebPage","@id":"https://mumarshahbaz.github.io/Oscilloscope-Online-V2/plotter.html"},"publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"https://mumarshahbaz.github.io/Oscilloscope-Online-V2/assets/img/icon.svg"},"name":"M. Umar Shahbaz"},"url":"https://mumarshahbaz.github.io/Oscilloscope-Online-V2/plotter.html"}</script>
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"M. Umar Shahbaz"},"dateModified":"2025-08-08T21:55:38+00:00","datePublished":"2025-08-08T21:55:38+00:00","description":"A web serial plotter with a huge variety of features and customisation","headline":"Plotter","mainEntityOfPage":{"@type":"WebPage","@id":"https://mumarshahbaz.github.io/Oscilloscope-Online-V2/plotter.html"},"publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"https://cdn.jsdelivr.net/gh/MUmarShahbaz/Oscilloscope-Online-V2@3c912e3adb784c50741da5c523aa55489fdb7b5a/img/icon.svg"},"name":"M. Umar Shahbaz"},"url":"https://mumarshahbaz.github.io/Oscilloscope-Online-V2/plotter.html"}</script>
 <!-- End Jekyll SEO tag -->
 
 
-  <!-- Prevent FOUC -->
+  <!-- Prevent FOUC & Init GSC -->
   <style>
     html {
       visibility: hidden;
       opacity: 0;
     }
   </style>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-ENJEDRBRTP"></script>
   <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            document.documentElement.style.visibility = 'visible';
-            document.documentElement.style.opacity = 1;
-        });
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+    
+    gtag('config', 'G-ENJEDRBRTP');
+    
+    document.addEventListener('DOMContentLoaded', function() {
+      document.documentElement.style.visibility = 'visible';
+      document.documentElement.style.opacity = 1;
+    });
   </script>
 </head>
   <body>
@@ -161,7 +166,9 @@
       id="status_messages"
       class="position-fixed d-flex flex-column-reverse align-items-center w-100"
       style="top: 5%; z-index: 1000;"></div>
-    <main><style>
+    <main>
+
+<style>
   #plotDiv {
     height: 600px;
     width: 100%;
@@ -424,11 +431,18 @@ graph</p>
           <div class="mt-3 p-2 bg-light rounded small">
             <strong>Example:</strong> <code>12.5/34.2/56.8/78.1\n</code>
           </div>
+          
+          <div class="mt-3 text-center">
+            <a href="https://mumarshahbaz.github.io/Oscilloscope-Online-V2/help.html" class="btn btn-outline-primary btn-sm">
+              <i class="fas fa-book me-2"></i>View Complete Documentation
+            </a>
+          </div>
         </div>
       </div>
     </div>
   </div>
 </div>
+<input type="file" id="csv_importer">
 
 <script>
   const config = JSON.parse(sessionStorage.getItem('main_config'));
@@ -452,7 +466,8 @@ graph</p>
       plot_status: {
         icon: document.getElementById('plotStatus'),
         text: document.getElementById('plotText')
-      }
+      },
+      csv_importer: document.getElementById('csv_importer')
     }
     const buttons = {
       connect: document.getElementById('connectBtn'),
@@ -530,7 +545,34 @@ graph</p>
       uPlot_Controller.clear();
       uPlot_Controller.refresh();
     });
-    
+
+    buttons.export.json.addEventListener('click', function () {
+      download_json(uPlot_Controller.export_json(), `Oscilloscope-Online-json_export-${Date.now()}`);
+    });
+
+    buttons.export.png.addEventListener('click', function () {
+      html2canvas(container).then(canvas => {
+        const link = document.createElement("a");
+        link.download = `Oscilloscope-Online-png_export-${Date.now()}`;
+        link.href = canvas.toDataURL("image/png");
+        link.click();
+      });
+    });
+
+    buttons.export.csv.addEventListener('click', function () {
+      download_csv(uPlot_Controller.export_csv(), `Oscilloscope-Online-csv_export-${Date.now()}`);
+    });
+
+    buttons.import.addEventListener('click', () => {DOM_Elements.csv_importer.click()});
+
+    DOM_Elements.csv_importer.addEventListener('change', () => {
+      const imported_csv = DOM_Elements.csv_importer.files[0];
+      if (!imported_csv) return;
+
+      const reader = new FileReader();
+      reader.onload = e => { container.innerHTML = ''; uPlot_Controller.init(config, container); uPlot_Controller.import_csv(e.target.result); uPlot_Controller.refresh(); };
+      reader.readAsText(imported_csv);
+    });
 
     function push_sequence(message, time) {
       uPlot_Controller.push(message, time);
