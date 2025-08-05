@@ -1,0 +1,607 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta charset="utf-8">
+
+    <!-- Icon -->
+  <link rel="apple-touch-icon" href="https://mumarshahbaz.github.io/Oscilloscope-Online-V2/assets/img/icon.svg">
+<link
+    rel="icon"
+    type="image/png"
+    href="https://mumarshahbaz.github.io/Oscilloscope-Online-V2/assets/img/icon.svg">
+
+  <!-- Assets and SEO -->
+  <script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<script defer src="https://mumarshahbaz.github.io/Oscilloscope-Online-V2/assets/scripts/status.min.js"></script>
+<script defer src="https://mumarshahbaz.github.io/Oscilloscope-Online-V2/assets/scripts/forms.min.js"></script>
+<script defer src="https://mumarshahbaz.github.io/Oscilloscope-Online-V2/assets/scripts/io.min.js"></script>
+  <!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>Setup | Oscilloscope Online 2</title>
+<meta name="generator" content="Jekyll v4.4.1" />
+<meta property="og:title" content="Setup" />
+<meta name="author" content="M. Umar Shahbaz" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="A web serial plotter with a huge variety of features and customisation" />
+<meta property="og:description" content="A web serial plotter with a huge variety of features and customisation" />
+<link rel="canonical" href="https://mumarshahbaz.github.io/Oscilloscope-Online-V2/setup.html" />
+<meta property="og:url" content="https://mumarshahbaz.github.io/Oscilloscope-Online-V2/setup.html" />
+<meta property="og:site_name" content="Oscilloscope Online 2" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2025-08-05T12:59:42+05:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Setup" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"M. Umar Shahbaz"},"dateModified":"2025-08-05T12:59:42+05:00","datePublished":"2025-08-05T12:59:42+05:00","description":"A web serial plotter with a huge variety of features and customisation","headline":"Setup","mainEntityOfPage":{"@type":"WebPage","@id":"https://mumarshahbaz.github.io/Oscilloscope-Online-V2/setup.html"},"publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"https://mumarshahbaz.github.io/Oscilloscope-Online-V2/assets/img/icon.svg"},"name":"M. Umar Shahbaz"},"url":"https://mumarshahbaz.github.io/Oscilloscope-Online-V2/setup.html"}</script>
+<!-- End Jekyll SEO tag -->
+
+
+  <!-- Prevent FOUC -->
+  <style>
+    html {
+      visibility: hidden;
+      opacity: 0;
+    }
+  </style>
+  <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            document.documentElement.style.visibility = 'visible';
+            document.documentElement.style.opacity = 1;
+        });
+  </script>
+</head>
+  <body>
+    <nav class="navbar navbar-expand-lg bg-black">
+  <div class="container-fluid">
+
+    <!-- Title -->
+    <a class="navbar-brand" href="https://mumarshahbaz.github.io/Oscilloscope-Online-V2/">
+      <span class="fw-bolder text-white">Oscilloscope Online 2</span>
+    </a>
+
+    <!-- Menu Button -->
+    <button
+      class="navbar-toggler bg-white p-1 rounded"
+      type="button"
+      data-bs-toggle="collapse"
+      data-bs-target="#navbarSupportedContent"
+      aria-controls="navbarSupportedContent"
+      aria-expanded="false"
+      aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <!-- Navebar content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+
+      <!-- Navbar URLs -->
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        
+
+        <!-- For each page -->
+        
+
+          <!-- Dropdown Link -->
+          
+            <li class="nav-item">
+              <a
+                class="nav-link text-white"
+                
+                href="https://mumarshahbaz.github.io/Oscilloscope-Online-V2/">Home</a>
+            </li>
+          
+        
+
+          <!-- Dropdown Link -->
+          
+            <li class="nav-item">
+              <a
+                class="nav-link text-white"
+                
+                href="https://mumarshahbaz.github.io/Oscilloscope-Online-V2/about.html">About</a>
+            </li>
+          
+        
+
+          <!-- Dropdown Link -->
+          
+            <li class="nav-item">
+              <a
+                class="nav-link text-white active"
+                aria-current="page"
+                
+                href="https://mumarshahbaz.github.io/Oscilloscope-Online-V2/setup.html">Setup</a>
+            </li>
+          
+        
+
+          <!-- Dropdown Link -->
+          
+            <li class="nav-item">
+              <a
+                class="nav-link text-white"
+                
+                href="https://mumarshahbaz.github.io/Oscilloscope-Online-V2/plotter.html">Plotter</a>
+            </li>
+          
+        
+
+          <!-- Dropdown Link -->
+          
+            <li class="nav-item">
+              <a
+                class="nav-link text-white"
+                
+                href="https://mumarshahbaz.github.io/Oscilloscope-Online-V2/svg.html">SVG</a>
+            </li>
+          
+        
+
+          <!-- Dropdown Link -->
+          
+            <li class="nav-item">
+              <a
+                class="nav-link text-white"
+                
+                href="https://mumarshahbaz.github.io/Oscilloscope-Online-V2/help.html">Help</a>
+            </li>
+          
+        
+      </ul>
+
+    </div>
+  </div>
+</nav>
+    <div
+      id="status_messages"
+      class="position-fixed d-flex flex-column-reverse align-items-center w-100"
+      style="top: 5%; z-index: 1000;"></div>
+    <main>
+
+<!-- Hero Section -->
+<header>
+  <div class="bg-danger text-white py-4">
+    <div class="container">
+      <div class="row align-items-center">
+        <div class="my-5">
+          <h1 class="display-5 fw-bold">Setup Oscilloscope</h1>
+          <p class="lead mb-0">Configure your serial communication, grid settings, and graph parameters</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- Setup Form -->
+<section class="py-5">
+  <div class="container">
+    <form id="oscilloscopeSetup" class="needs-validation" novalidate>
+      <!-- Serial Configuration -->
+      <div class="card mb-4 shadow-sm">
+        <div class="card-header bg-dark text-white">
+          <h3 class="card-title mb-0">
+            <i class="fas fa-plug me-2"></i>Serial Configuration
+          </h3>
+        </div>
+        <div class="card-body">
+          <div class="row g-3 d-flex justify-content-between">
+            <div class="col-sm-6 col-md-4 col-lg-2">
+              <label for="breakChar" class="form-label">Break Character</label>
+              <input type="text" class="form-control" id="breakChar" name="breakChar" value="/" maxlength="1"
+                required />
+              <div class="form-text">Value separator</div>
+            </div>
+
+            <div class="col-sm-6 col-md-4 col-lg-2">
+              <label for="clsChar" class="form-label">CLS Character</label>
+              <input type="text" class="form-control" id="clsChar" name="clsChar" value="%" maxlength="1" required />
+              <div class="form-text">Clear screen command</div>
+            </div>
+
+            <div class="col-sm-6 col-md-4 col-lg-2">
+              <label for="csvChar" class="form-label">CSV Character</label>
+              <input type="text" class="form-control" id="csvChar" name="csvChar" value="@" maxlength="1" required />
+              <div class="form-text">CSV export trigger</div>
+            </div>
+
+            <div class="col-sm-6 col-md-4 col-lg-2">
+              <label for="pngChar" class="form-label">PNG Character</label>
+              <input type="text" class="form-control" id="pngChar" name="pngChar" value="&" maxlength="1" required />
+              <div class="form-text">PNG export trigger</div>
+            </div>
+
+            <div class="col-sm-6 col-md-4 col-lg-2">
+              <label for="jsonChar" class="form-label">JSON Character</label>
+              <input type="text" class="form-control" id="jsonChar" name="jsonChar" value="$" maxlength="1" required />
+              <div class="form-text">JSON export trigger</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Grid Settings -->
+      <div class="card mb-4 shadow-sm">
+        <div class="card-header bg-success text-white">
+          <h3 class="card-title mb-0">
+            <i class="fas fa-th me-2"></i>Grid Settings
+          </h3>
+        </div>
+        <div class="card-body">
+          <div class="row g-3">
+            <div class="col-md-12">
+              <label for="chartTitle" class="form-label">Chart Title</label>
+              <input type="text" class="form-control" id="chartTitle" name="chartTitle" value="Oscilloscope" required />
+              <div class="form-text">Main title for your plot</div>
+            </div>
+
+            <div class="col-md-6">
+              <div class="row">
+                <div class="col-12">
+                  <label for="xAxisTitle" class="form-label">X-Axis Title</label>
+                  <input type="text" class="form-control" id="xAxisTitle" name="xAxisTitle" value="Index" required />
+                  <div class="form-text">Label for the horizontal axis</div>
+                </div>
+                <div class="col-12">
+                  <label for="xAxisType" class="form-label">X-Axis Type</label>
+                  <select class="form-select" id="xAxisType" name="xAxisType" required>
+                    <option value="linear" selected>Linear</option>
+                    <option value="time">Time</option>
+                  </select>
+                  <div class="form-text">Scale type for X-axis</div>
+                </div>
+                <div id="linearSettings">
+                  <div class="col-12">
+                    <div class="row">
+                      <div class="col-md-6">
+                        <label for="xAxisMin" class="form-label">X-Axis Min</label>
+                        <input type="number" class="form-control" id="xAxisMin" name="xAxisMin" value="0" step="any" />
+                        <div class="form-text">Minimum X value</div>
+                      </div>
+
+                      <div class="col-md-6">
+                        <label for="xAxisMax" class="form-label">X-Axis Max</label>
+                        <input type="number" class="form-control" id="xAxisMax" name="xAxisMax" value="500"
+                          step="any" />
+                        <div class="form-text">Maximum X value</div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <!-- Time Settings (shown when X-Axis Type = Time) -->
+                <div id="timeSettings" style="display: none">
+                  <div class="col-12">
+                    <div class="form-check form-switch mt-4">
+                      <input class="form-check-input" type="checkbox" id="manualTime" name="manualTime" />
+                      <label class="form-check-label" for="manualTime">
+                        <strong>Manual Time</strong>
+                      </label>
+                      <div class="form-text">Manually control time scale</div>
+                    </div>
+                  </div>
+                  <div class="col-12">
+                    <div class="row g-3">
+                      <div class="col-md-6">
+                        <label for="timeFormat" class="form-label">Time Format</label>
+                        <select class="form-select" id="timeFormat" name="timeFormat">
+                          <option value="ms" selected>ms</option>
+                          <option value="s.ms">s.ms</option>
+                          <option value="m:s">m:s</option>
+                          <option value="h:m:s">h:m:s</option>
+                          <option value="d-h:m">d-h:m</option>
+                        </select>
+                        <div class="form-text">Time display format</div>
+                      </div>
+
+                      <div class="col-md-6">
+                        <label for="maxReadings" class="form-label">Max Readings</label>
+                        <input type="number" class="form-control" id="maxReadings" name="maxReadings" value="1000"
+                          min="1" />
+                        <div class="form-text">Maximum number of readings to display</div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-md-6">
+              <div class="row">
+                <div class="col-12">
+                  <label for="yAxisTitle" class="form-label">Y-Axis Title</label>
+                  <input type="text" class="form-control" id="yAxisTitle" name="yAxisTitle" value="Value" required />
+                  <div class="form-text">Label for the vertical axis</div>
+                </div>
+                <div class="col-12">
+                  <label for="yAxisType" class="form-label">Y-Axis Type</label>
+                  <select class="form-select" id="yAxisType" name="yAxisType" required>
+                    <option value="linear" selected>Linear</option>
+                    <option value="log10">Log10</option>
+                    <option value="log2">Log2</option>
+                  </select>
+                  <div class="form-text">Scale type for Y-axis</div>
+                </div>
+                <div class="col-12">
+                  <div class="form-check form-switch mt-4">
+                    <input class="form-check-input" type="checkbox" id="autoScale" name="autoScale" checked />
+                    <label class="form-check-label" for="autoScale">
+                      <strong>Auto Scale Y-Axis</strong>
+                    </label>
+                    <div class="form-text">Automatically adjust Y-axis range based on data</div>
+                  </div>
+                </div>
+                <!-- Manual Y-Axis Range (shown when Auto Scale is disabled and Y-Axis is Linear) -->
+                <div id="manualYRange" class="col-12" style="display: none">
+                  <div class="row g-3">
+                    <div class="col-md-6">
+                      <label for="yAxisMin" class="form-label">Y-Axis Min</label>
+                      <input type="number" class="form-control" id="yAxisMin" name="yAxisMin" value="0" step="any" />
+                      <div class="form-text">Minimum Y value</div>
+                    </div>
+
+                    <div class="col-md-6">
+                      <label for="yAxisMax" class="form-label">Y-Axis Max</label>
+                      <input type="number" class="form-control" id="yAxisMax" name="yAxisMax" value="100" step="any" />
+                      <div class="form-text">Maximum Y value</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Graph Settings -->
+      <div class="card mb-4 shadow-sm">
+        <div class="card-header bg-info text-white">
+          <h3 class="card-title mb-0">
+            <i class="fas fa-chart-line me-2"></i>Graph Settings
+          </h3>
+        </div>
+        <div class="card-body">
+          <div class="row g-3 mb-4">
+            <div class="col-md-6">
+              <div class="form-check form-switch">
+                <input class="form-check-input" type="checkbox" id="showPoints" name="showPoints" />
+                <label class="form-check-label" for="showPoints">
+                  <strong>Show Data Points</strong>
+                </label>
+                <div class="form-text">Display individual data points on the graph</div>
+              </div>
+            </div>
+
+            <div class="col-md-6">
+              <div class="form-check form-switch">
+                <input class="form-check-input" type="checkbox" id="fillArea" name="fillArea" />
+                <label class="form-check-label" for="fillArea">
+                  <strong>Fill Area Under Curve</strong>
+                </label>
+                <div class="form-text">Fill the area between the line and X-axis</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="row g-3 mb-3">
+            <div class="col-md-6">
+              <label for="graphCount" class="form-label">Number of Graphs</label>
+              <input type="number" class="form-control" id="graphCount" name="graphCount" value="1" min="1" required />
+              <div class="form-text">How many graphs to plot simultaneously</div>
+            </div>
+          </div>
+
+          <!-- Dynamic Graph Configuration -->
+          <div id="graphsContainer">
+            <div class="border rounded p-3 mb-3 graph-config" data-graph="1">
+              <h5 class="mb-3">Graph 1 Configuration</h5>
+              <div class="row g-3">
+                <div class="col-md-6">
+                  <label for="graph1Name" class="form-label">Graph Name</label>
+                  <input type="text" class="form-control" id="graph1Name" name="graph1Name" value="Graph 1" required />
+                </div>
+                <div class="col-md-6">
+                  <label for="graph1Color" class="form-label">Graph Color</label>
+                  <input type="color" class="form-control form-control-color" id="graph1Color" name="graph1Color"
+                    value="#007bff" required />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Action Buttons -->
+      <div class="card shadow-sm">
+        <div class="card-body">
+          <div class="row g-3 d-flex justify-content-center">
+            <div class="col-lg-2 col-md-4 col-sm-6">
+              <button type="submit" class="btn btn-success btn-lg w-100">
+                <i class="fas fa-play me-2"></i>Begin
+              </button>
+            </div>
+            <div class="col-lg-2 col-md-4 col-sm-6">
+              <button type="reset" class="btn btn-secondary btn-lg w-100" id="reset_config">
+                <i class="fas fa-undo me-2"></i>Reset
+              </button>
+            </div>
+            <div class="col-lg-2 col-md-4 col-sm-6">
+              <button type="button" class="btn btn-dark btn-lg w-100" id="export_config">
+                <i class="fas fa-upload me-2"></i>Export
+              </button>
+            </div>
+            <div class="col-lg-2 col-md-4 col-sm-6">
+              <button type="button" class="btn btn-dark btn-lg w-100" id="import_config">
+                <i class="fas fa-download me-2"></i>Import
+              </button>
+            </div>
+            <div class="col-lg-2 col-md-4 col-sm-6">
+              <a href="https://mumarshahbaz.github.io/Oscilloscope-Online-V2/help.html" class="btn btn-outline-primary btn-lg w-100">
+                <i class="fas fa-question-circle me-2"></i>Help
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+</section>
+<input type="file" id="jsonFileInput" style="display: none;" />
+
+<!-- JavaScript for Dynamic Graph Configuration -->
+<script>
+  let refresh_form;
+  let form;
+
+  document.addEventListener('DOMContentLoaded', () => {
+    // Get Elements
+    const elements = {
+      xType: document.getElementById("xAxisType"),
+      yType: document.getElementById("yAxisType"),
+      auto: document.getElementById("autoScale"),
+      graphs: document.getElementById("graphCount"),
+      timeS: document.getElementById("timeSettings"),
+      linearS: document.getElementById("linearSettings"),
+      graphsS: document.getElementById("graphsContainer"),
+      yRange: document.getElementById("manualYRange")
+    }
+    const buttons = {
+      reset: document.getElementById("reset_config"),
+      export: document.getElementById("export_config"),
+      import: document.getElementById("import_config"),
+    };
+    const jsonFileInput = document.getElementById('jsonFileInput');
+    form = document.getElementById("oscilloscopeSetup");
+    
+    // Create UI refresher
+    refresh_form = setup_form.ui(elements, form);
+
+    // Add Event Listeners
+    elements.xType.addEventListener('change', refresh_form.x);
+    elements.yType.addEventListener('change', refresh_form.y);
+    elements.auto.addEventListener('change', refresh_form.y);
+    elements.graphs.addEventListener('change', refresh_form.graphs);
+
+    form.addEventListener('submit', handleFormSubmit);
+    buttons.reset.addEventListener('click',  function () { refresh_form.reset() });
+    buttons.export.addEventListener('click', function () { download_json(setup_form.create_config(form), `Oscilloscope-Online-main_config-${Date.now()}`) });
+    buttons.import.addEventListener('click', function () { jsonFileInput.click() });
+
+    jsonFileInput.addEventListener('change', function (event) {
+      import_json(event.target.files[0])
+      .then(new_config => setup_form.set_config(form, new_config, refresh_form.all));
+    });
+  });
+
+  // Handle form submission
+  function handleFormSubmit(event) {
+    event.preventDefault();
+
+    if (form.checkValidity()) {
+      const config = setup_form.create_config(form);
+      sessionStorage.setItem('main_config', JSON.stringify(config));
+      location.href = `https://mumarshahbaz.github.io/Oscilloscope-Online-V2/plotter.html`
+    } else {
+      form.classList.add("was-validated");
+    }
+  }
+</script>
+
+<style>
+  /* Color picker styling */
+  .form-control-color {
+    width: 100%;
+    height: 38px;
+  }
+
+  /* Graph configuration styling */
+  .graph-config {
+    background-color: #f8f9fa;
+    border: 2px solid #dee2e6 !important;
+  }
+
+  .graph-config:nth-child(even) {
+    background-color: #ffffff;
+  }
+
+  /* Card styling */
+  .card-header {
+    border-bottom: 2px solid rgba(0, 0, 0, 0.125);
+  }
+
+  /* Form text styling */
+  .form-text {
+    font-size: 0.875em;
+  }
+</style></main>
+    <footer class="bg-dark text-white pt-5 pb-4">
+  <div class="container text-md-start text-center">
+    <div class="row">
+      <!-- Brand Column -->
+      <div class="col-md-4 mb-4">
+        <h5 class="text-uppercase fw-bold">Oscilloscope Online 2</h5>
+        <p>A web serial plotter with a huge variety of features and customisation</p>
+      </div>
+
+      <!-- Links Column -->
+      <div class="col-md-4 mb-4">
+        <h5 class="text-uppercase fw-bold">Quick Links</h5>
+        <ul class="list-unstyled">
+          
+          
+            <li>
+              <a href="https://mumarshahbaz.github.io/Oscilloscope-Online-V2/" class="text-white text-decoration-none">Home</a>
+            </li>
+          
+            <li>
+              <a href="https://mumarshahbaz.github.io/Oscilloscope-Online-V2/about.html" class="text-white text-decoration-none">About</a>
+            </li>
+          
+            <li>
+              <a href="https://mumarshahbaz.github.io/Oscilloscope-Online-V2/setup.html" class="text-white text-decoration-none">Setup</a>
+            </li>
+          
+            <li>
+              <a href="https://mumarshahbaz.github.io/Oscilloscope-Online-V2/plotter.html" class="text-white text-decoration-none">Plotter</a>
+            </li>
+          
+            <li>
+              <a href="https://mumarshahbaz.github.io/Oscilloscope-Online-V2/svg.html" class="text-white text-decoration-none">SVG</a>
+            </li>
+          
+            <li>
+              <a href="https://mumarshahbaz.github.io/Oscilloscope-Online-V2/help.html" class="text-white text-decoration-none">Help</a>
+            </li>
+          
+        </ul>
+      </div>
+
+      <!-- Social Column -->
+      <div class="col-md-4 mb-4">
+        <h5 class="text-uppercase fw-bold">Follow Me</h5>
+        <div class="d-flex gap-3 mt-2 justify-content-center justify-content-md-start">
+          
+            <a href="https://github.com/MUmarShahbaz" class="text-white fs-4">
+              <i class="fa-lg fab fa-github"></i>
+            </a>
+          
+            <a href="https://www.linkedin.com/in/m-umar-shahbaz" class="text-white fs-4">
+              <i class="fa-lg fab fa-linkedin"></i>
+            </a>
+          
+            <a href="https://m-umar.me/feed.xml" class="text-white fs-4">
+              <i class="fa-lg fas fa-rss"></i>
+            </a>
+          
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer Bottom -->
+  <div class="text-center mt-4 border-top pt-3">
+    <p class="mb-0">&copy; 2025 M. Umar Shahbaz. All rights reserved.</p>
+  </div>
+</footer>
+  </body>
+</html>
