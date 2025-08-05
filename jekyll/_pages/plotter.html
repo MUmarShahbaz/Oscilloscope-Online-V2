@@ -1,0 +1,416 @@
+---
+layout: default
+permalink: /plotter.html
+title: Plotter
+nav-order: 4
+dynamic_assets:
+  files:
+    - io.min.js::defer-js
+    - serial.min.js::defer-js
+    - uplot.min.js::defer-js
+    - html2canvas<</html2canvas.min.js
+  presets: uPlot
+---
+
+{% assign help_url = site.data.urls.help | absolute_url %}
+
+<style>
+  #plotDiv {
+    height: 600px;
+    width: 100%;
+  }
+
+  .connection-status {
+    display: inline-block;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background-color: var(--bs-danger);
+    margin-right: 8px;
+  }
+
+  .connection-status.connected {
+    background-color: var(--bs-success);
+  }
+</style>
+
+{% include hero.liquid heading="Oscilloscope" bg="success" text="Get live data from a serial port and display it as a
+graph" %}
+
+<div class="container-fluid px-4 py-3">
+
+  <!-- Status Bar -->
+  <div class="alert alert-light border d-flex align-items-center justify-content-between mb-4" role="alert">
+    <div class="d-flex align-items-center">
+      <span class="connection-status me-3" id="connectionStatus"></span>
+      <div>
+        <div class="fw-semibold">System Status</div>
+        <small class="text-muted font-monospace" id="statusText">Disconnected - Click Connect to start plotting</small>
+      </div>
+    </div>
+    <div class="d-flex align-items-center">
+      <small class="text-muted me-3">Last Update:</small>
+      <span class="badge bg-secondary font-monospace" id="lastUpdate">Never</span>
+    </div>
+  </div>
+
+  <!-- Controls Panel -->
+  <div class="row g-4 mb-4">
+    <!-- Connection & Chart Controls -->
+    <div class="col-xl-8">
+      <div class="card h-100">
+        <div class="card-header">
+          <h5 class="card-title mb-0">
+            <i class="fas fa-gamepad me-2"></i>Controls
+          </h5>
+        </div>
+        <div class="card-body">
+          <div class="row g-4">
+            <!-- Connection Controls -->
+            <div class="col-lg-4">
+              <h6 class="mb-3">
+                <i class="fas fa-plug me-2"></i>Connection
+              </h6>
+              <div class="d-grid gap-2">
+                <button class="btn btn-primary" id="connectBtn">
+                  <i class="fas fa-link me-2"></i>Connect
+                </button>
+                <button class="btn btn-danger" id="disconnectBtn" disabled>
+                  <i class="fas fa-unlink me-2"></i>Disconnect
+                </button>
+                <button class="btn btn-secondary" id="importBtn">
+                  <i class="fas fa-file-import me-2"></i>Import Data
+                </button>
+              </div>
+            </div>
+
+            <!-- Chart Controls -->
+            <div class="col-lg-4">
+              <h6 class="mb-3">
+                <i class="fas fa-chart-line me-2"></i>Chart
+              </h6>
+              <div class="d-grid gap-2">
+                <button class="btn btn-success" id="startBtn" disabled>
+                  <i class="fas fa-play me-2"></i>Start Plotting
+                </button>
+                <button class="btn btn-warning" id="pauseBtn" disabled>
+                  <i class="fas fa-pause me-2"></i>Pause
+                </button>
+                <button class="btn btn-secondary" id="clearBtn">
+                  <i class="fas fa-trash-alt me-2"></i>Clear Data
+                </button>
+              </div>
+            </div>
+
+            <!-- Export Controls -->
+            <div class="col-lg-4">
+              <h6 class="mb-3">
+                <i class="fas fa-download me-2"></i>Export
+              </h6>
+              <div class="d-grid gap-2">
+                <button class="btn btn-outline-primary" id="exportCsv">
+                  <i class="fas fa-file-csv me-2"></i>Export CSV
+                </button>
+                <button class="btn btn-outline-primary" id="exportPng">
+                  <i class="fas fa-image me-2"></i>Export PNG
+                </button>
+                <button class="btn btn-outline-primary" id="exportJson">
+                  <i class="fas fa-code me-2"></i>Export JSON
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Settings & Export -->
+    <div class="col-xl-4">
+      <div class="card h-100">
+        <div class="card-header">
+          <h5 class="card-title mb-0">
+            <i class="fas fa-cogs me-2"></i>Settings
+          </h5>
+        </div>
+        <div class="card-body">
+          <!-- Connection Settings -->
+          <div>
+            <h6 class="mb-3">
+              <i class="fas fa-sliders-h me-2"></i>Configuration
+            </h6>
+            <div class="mb-3">
+              <label for="baudRate" class="form-label">Baud Rate</label>
+              <select class="form-select" id="baudRate">
+                <option value="9600">9,600</option>
+                <option value="19200">19,200</option>
+                <option value="38400">38,400</option>
+                <option value="57600">57,600</option>
+                <option value="115200" selected>115,200</option>
+                <option value="230400">230,400</option>
+              </select>
+            </div>
+            <div class="mb-3">
+              <div class="form-check mb-2">
+                <input class="form-check-input" type="checkbox" id="autoUpdate" checked>
+                <label class="form-check-label" for="autoUpdate">
+                  Auto Update Chart
+                </label>
+              </div>
+              <div id="rateContainer" style="display: none;">
+                <label for="updateRate" class="form-label">Update Rate (ms)</label>
+                <input type="number" class="form-control" id="updateRate" value="50" min="10" max="1000">
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Chart Container -->
+  <div class="card mb-4">
+    <div class="card-header d-flex justify-content-between align-items-center">
+      <h5 class="card-title mb-0">
+        <i class="fas fa-chart-area me-2"></i>Live Chart
+      </h5>
+      <div class="d-flex align-items-center">
+        <span class="connection-status me-2" id="plotStatus"></span>
+        <small class="text-muted font-monospace" id="plotText">Ready to plot</small>
+      </div>
+    </div>
+    <div class="card-body p-5">
+      <div id="plotDiv" class="border d-flex align-items-center justify-content-center text-muted fs-5">
+        <div class="text-center">
+          <i class="fas fa-chart-line fa-3x mb-3 opacity-25"></i>
+          <p class="mb-0">Chart will be rendered here</p>
+          <small class="text-muted">Connect to a serial port to start plotting</small>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Help & Documentation -->
+  <div class="row g-4 mt-2">
+    <!-- Quick Start Guide -->
+    <div class="col-md-6">
+      <div class="card h-100">
+        <div class="card-header">
+          <h6 class="card-title mb-0">
+            <i class="fas fa-rocket me-2"></i>Quick Start
+          </h6>
+        </div>
+        <div class="card-body">
+          <div class="list-group list-group-flush">
+            <div class="list-group-item d-flex align-items-center px-0 py-2">
+              <span class="badge bg-primary rounded-pill me-3">1</span>
+              <span>Click <strong>Connect</strong> to select your serial port</span>
+            </div>
+            <div class="list-group-item d-flex align-items-center px-0 py-2">
+              <span class="badge bg-primary rounded-pill me-3">2</span>
+              <span>Configure the correct <strong>baud rate</strong></span>
+            </div>
+            <div class="list-group-item d-flex align-items-center px-0 py-2">
+              <span class="badge bg-primary rounded-pill me-3">3</span>
+              <span>Click <strong>Start Plotting</strong> to begin</span>
+            </div>
+            <div class="list-group-item d-flex align-items-center px-0 py-2">
+              <span class="badge bg-success rounded-pill me-3">✓</span>
+              <span class="text-success">View live data in real-time!</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Data Format Guide -->
+    <div class="col-md-6">
+      <div class="card h-100">
+        <div class="card-header">
+          <h6 class="card-title mb-0">
+            <i class="fas fa-code me-2"></i>Data Format
+          </h6>
+        </div>
+        <div class="card-body">
+          <div class="mb-3">
+            <label class="form-label small text-muted mb-1">Expected Format:</label>
+            <div class="bg-dark text-light p-3 rounded font-monospace small">
+              value1<span class="text-warning">/</span>value2<span class="text-warning">/</span>value3<span
+                class="text-warning">/</span>value4<span class="text-info">\n</span>
+            </div>
+          </div>
+
+          <div class="row g-3 small">
+            <div class="col-6">
+              <div class="d-flex align-items-center mb-2">
+                <i class="fas fa-check-circle text-success me-2"></i>
+                <span>Numeric values only</span>
+              </div>
+              <div class="d-flex align-items-center">
+                <i class="fas fa-check-circle text-success me-2"></i>
+                <span>Newline terminated</span>
+              </div>
+            </div>
+            <div class="col-6">
+              <div class="d-flex align-items-center mb-2">
+                <i class="fas fa-slash text-warning me-2"></i>
+                <span>Pre-configured separator</span>
+              </div>
+              <div class="d-flex align-items-center">
+                <i class="fas fa-clock text-info me-2"></i>
+                <span>Real-time streaming</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="mt-3 p-2 bg-light rounded small">
+            <strong>Example:</strong> <code>12.5/34.2/56.8/78.1\n</code>
+          </div>
+          
+          <div class="mt-3 text-center">
+            <a href="{{ help_url }}" class="btn btn-outline-primary btn-sm">
+              <i class="fas fa-book me-2"></i>View Complete Documentation
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<input type="file" id="csv_importer">
+
+<script>
+  const config = JSON.parse(sessionStorage.getItem('main_config'));
+  console.log(config);
+  let container;
+  let refresher = null;
+
+  document.addEventListener('DOMContentLoaded', function () {
+    Serial_Controller.test();
+    config === null ? alerts.error('Failed to load config, go to setup page', { dismissable: true }) : alerts.success('Configuration successfully applied!', { dismissible: true, autoClose: 3000 });;
+    const DOM_Elements = {
+      baud: document.getElementById('baudRate'),
+      auto: document.getElementById('autoUpdate'),
+      rate: document.getElementById('updateRate'),
+      rateS: document.getElementById('rateContainer'),
+      status: {
+        icon: document.getElementById('connectionStatus'),
+        text: document.getElementById('statusText'),
+        time: document.getElementById('lastUpdate')
+      },
+      plot_status: {
+        icon: document.getElementById('plotStatus'),
+        text: document.getElementById('plotText')
+      },
+      csv_importer: document.getElementById('csv_importer')
+    }
+    const buttons = {
+      connect: document.getElementById('connectBtn'),
+      disconnect: document.getElementById('disconnectBtn'),
+      pause: document.getElementById('pauseBtn'),
+      play: document.getElementById('startBtn'),
+      import: document.getElementById('importBtn'),
+      clear: document.getElementById('clearBtn'),
+      export: {
+        csv: document.getElementById('exportCsv'),
+        png: document.getElementById('exportPng'),
+        json: document.getElementById('exportJson')
+      }
+    };
+    container = document.getElementById('plotDiv');
+
+
+    DOM_Elements.auto.addEventListener('change', function () {
+      DOM_Elements.rateS.style.display = this.checked ? 'none' : 'block'
+    });
+
+    buttons.connect.addEventListener('click', function () {
+      Serial_Controller.init(parseInt(DOM_Elements.baud.value), push_sequence, function () {
+        container.innerHTML = '';
+        uPlot_Controller.init(config, container);
+        buttons.disconnect.disabled = false;
+        buttons.play.disabled = false;
+        buttons.connect.disabled = true;
+        DOM_Elements.status.icon.classList.add('connected');
+        DOM_Elements.status.text.innerText = `Connected - Baud : ${DOM_Elements.baud.value}`;
+        DOM_Elements.status.time.innerText = `${new Date().toTimeString().split(' ')[0]}`;
+        buttons.play.click();
+      });
+    });
+
+    buttons.play.addEventListener('click', function () {
+      Serial_Controller.start();
+      buttons.pause.disabled = false;
+      buttons.play.disabled = true;
+      if (!DOM_Elements.auto.checked) refresher = setInterval(() => {
+          uPlot_Controller.refresh();
+        }, parseInt(DOM_Elements.rate.value));
+      DOM_Elements.plot_status.icon.classList.add('connected');
+      DOM_Elements.plot_status.text.innerText = 'Plotting';
+    });
+
+    buttons.pause.addEventListener('click', function () {
+      Serial_Controller.isReading = false;
+      buttons.play.disabled = false;
+      buttons.pause.disabled = true;
+      clearInterval(refresher);
+      refresher = null;
+      DOM_Elements.plot_status.icon.classList.remove('connected');
+      DOM_Elements.plot_status.text.innerText = 'Ready to plot';
+    });
+
+    buttons.disconnect.addEventListener('click', function() {
+      Serial_Controller.isReading = false;
+      Serial_Controller.quit();
+      Serial_Controller.port = null;
+      buttons.connect.disabled = false;
+      buttons.play.disabled = true;
+      buttons.pause.disabled = true;
+      buttons.disconnect.disabled = true;
+      clearInterval(refresher);
+      refresher = null;
+      DOM_Elements.status.icon.classList.remove('connected');
+      DOM_Elements.status.text.innerText = 'Disconnected - Click Connect to start plotting';
+      DOM_Elements.status.time.innerText = `${new Date().toTimeString().split(' ')[0]}`;
+      DOM_Elements.plot_status.icon.classList.remove('connected');
+      DOM_Elements.plot_status.text.innerText = 'Ready to plot';
+    });
+
+    buttons.clear.addEventListener('click', () => {
+      uPlot_Controller.clear();
+      uPlot_Controller.refresh();
+    });
+
+    buttons.export.json.addEventListener('click', function () {
+      download_json(uPlot_Controller.export_json(), `Oscilloscope-Online-json_export-${Date.now()}`);
+    });
+
+    buttons.export.png.addEventListener('click', function () {
+      html2canvas(container).then(canvas => {
+        const link = document.createElement("a");
+        link.download = `Oscilloscope-Online-png_export-${Date.now()}`;
+        link.href = canvas.toDataURL("image/png");
+        link.click();
+      });
+    });
+
+    buttons.export.csv.addEventListener('click', function () {
+      download_csv(uPlot_Controller.export_csv(), `Oscilloscope-Online-csv_export-${Date.now()}`);
+    });
+
+    buttons.import.addEventListener('click', () => {DOM_Elements.csv_importer.click()});
+
+    DOM_Elements.csv_importer.addEventListener('change', () => {
+      const imported_csv = DOM_Elements.csv_importer.files[0];
+      if (!imported_csv) return;
+
+      const reader = new FileReader();
+      reader.onload = e => { container.innerHTML = ''; uPlot_Controller.init(config, container); uPlot_Controller.import_csv(e.target.result); uPlot_Controller.refresh(); };
+      reader.readAsText(imported_csv);
+    });
+
+    function push_sequence(message, time) {
+      uPlot_Controller.push(message, time);
+      if (refresher === null) uPlot_Controller.refresh();
+    }
+  });
+</script>

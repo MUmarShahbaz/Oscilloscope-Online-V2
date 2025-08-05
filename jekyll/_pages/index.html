@@ -1,0 +1,303 @@
+---
+layout: default
+permalink: /
+title: Home
+nav-order: 1
+---
+
+{% assign setup_url = site.data.urls.setup | absolute_url %}
+{% assign github_url = site.data.urls.github %}
+{% assign help_url = site.data.urls.help | absolute_url %}
+{% assign v1_url = site.data.urls.v1 %}
+{% assign processing_library_url = site.data.urls.processing_library %}
+
+<!-- Hero Section -->
+<header class="bg-dark text-white py-5">
+  <div class="container">
+    <div class="row align-items-center text-center text-lg-start">
+      <div class="col-lg-8 mb-4 mb-lg-0">
+        <h1 class="display-4 text-center fw-bold">Oscilloscope Online</h1>
+        <h2 class="text-center fw-bold">Version 2</h2>
+        <p class="lead">A powerful web-based serial graph plotter with advanced features and customization options</p>
+        <p class="mb-4">The ultimate alternative to Arduino IDE's serial plotter with unlimited graphs, export capabilities, and real-time data visualization.</p>
+        <div class="d-flex gap-3 flex-wrap justify-content-center">
+          <a href="{{ setup_url }}" class="btn btn-primary btn-lg" aria-label="Start plotting with Oscilloscope Online V2">
+            <i class="fas fa-play me-2"></i>Start Plotting
+          </a>
+          <a href="{{ github_url }}" class="btn btn-outline-light btn-lg" aria-label="View source code on GitHub">
+            <i class="fab fa-github me-2"></i>View on GitHub
+          </a>
+          <a href="{{ help_url }}" class="btn btn-outline-light btn-lg" aria-label="Get help and documentation">
+            <i class="fas fa-question-circle me-2"></i>Help
+          </a>
+        </div>
+      </div>
+      <div class="col-lg-4 text-center">
+        <img src="{{ site.logo }}" alt="Oscilloscope Online Logo" class="img-fluid" style="max-height: 400px;">
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- Features Overview -->
+<section class="py-5">
+  <div class="container">
+    <div class="row text-center mb-5">
+      <div class="col-12">
+        <h2 class="display-5 fw-bold">Why Choose Oscilloscope Online V2?</h2>
+        <p class="lead text-muted">A complete upgrade from V1 with powerful new features</p>
+      </div>
+    </div>
+    
+    <div class="row g-4">
+      <div class="col-md-4">
+        <div class="card h-100 border-0 shadow-sm">
+          <div class="card-body text-center p-4">
+            <div class="bg-primary text-white rounded-circle d-inline-flex align-items-center justify-content-center mb-3" style="width: 60px; height: 60px;">
+              <i class="fas fa-chart-line fa-lg"></i>
+            </div>
+            <h5 class="card-title">Unlimited Graphs</h5>
+            <p class="card-text">Plot unlimited graphs per plot with customizable colors for each graph. No more limitations!</p>
+          </div>
+        </div>
+      </div>
+      
+      <div class="col-md-4">
+        <div class="card h-100 border-0 shadow-sm">
+          <div class="card-body text-center p-4">
+            <div class="bg-success text-white rounded-circle d-inline-flex align-items-center justify-content-center mb-3" style="width: 60px; height: 60px;">
+              <i class="fas fa-download fa-lg"></i>
+            </div>
+            <h5 class="card-title">Multiple Export Formats</h5>
+            <p class="card-text">Export your data in MS Excel (CSV), PNG, and SVG formats. Perfect for documentation and analysis.</p>
+          </div>
+        </div>
+      </div>
+      
+      <div class="col-md-4">
+        <div class="card h-100 border-0 shadow-sm">
+          <div class="card-body text-center p-4">
+            <div class="bg-info text-white rounded-circle d-inline-flex align-items-center justify-content-center mb-3" style="width: 60px; height: 60px;">
+              <i class="fas fa-cog fa-lg"></i>
+            </div>
+            <h5 class="card-title">Advanced Scaling</h5>
+            <p class="card-text">Log10 and Log2 scales, automatic time scaling, and Y-axis auto scaling with manual override options.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Key Features Section -->
+<section class="bg-light py-5">
+  <div class="container">
+    <div class="row">
+      <div class="col-12 text-center mb-5">
+        <h2 class="display-5 fw-bold">New in Version 2</h2>
+        <p class="lead text-muted">Significant improvements and new capabilities</p>
+      </div>
+    </div>
+    
+    <div class="row g-4">
+      <div class="col-lg-6">
+        <div class="d-flex mb-4">
+          <div class="flex-shrink-0">
+            <div class="bg-primary text-white rounded-circle d-flex align-items-center justify-content-center" style="width: 40px; height: 40px;">
+              <i class="fas fa-file-excel"></i>
+            </div>
+          </div>
+          <div class="flex-grow-1 ms-3">
+            <h5>MS Excel (CSV) Export/Import</h5>
+            <p class="text-muted mb-0">Seamlessly export and import data in CSV format for further analysis in Excel or other tools.</p>
+          </div>
+        </div>
+        
+        <div class="d-flex mb-4">
+          <div class="flex-shrink-0">
+            <div class="bg-success text-white rounded-circle d-flex align-items-center justify-content-center" style="width: 40px; height: 40px;">
+              <i class="fas fa-image"></i>
+            </div>
+          </div>
+          <div class="flex-grow-1 ms-3">
+            <h5>PNG & SVG Export</h5>
+            <p class="text-muted mb-0">Save your plots as high-quality PNG images or scalable SVG files for presentations.</p>
+          </div>
+        </div>
+        
+        <div class="d-flex mb-4">
+          <div class="flex-shrink-0">
+            <div class="bg-warning text-white rounded-circle d-flex align-items-center justify-content-center" style="width: 40px; height: 40px;">
+              <i class="fas fa-terminal"></i>
+            </div>
+          </div>
+          <div class="flex-grow-1 ms-3">
+            <h5>MCU Commands</h5>
+            <p class="text-muted mb-0">Built-in CLS (clear screen) and Export commands for better microcontroller integration.</p>
+          </div>
+        </div>
+        
+        <div class="d-flex mb-4">
+          <div class="flex-shrink-0">
+            <div class="bg-info text-white rounded-circle d-flex align-items-center justify-content-center" style="width: 40px; height: 40px;">
+              <i class="fas fa-clock"></i>
+            </div>
+          </div>
+          <div class="flex-grow-1 ms-3">
+            <h5>Automatic Time Scale</h5>
+            <p class="text-muted mb-0">Smart time scaling adapts automatically to your data rate and timespan.</p>
+          </div>
+        </div>
+      </div>
+      
+      <div class="col-lg-6">
+        <div class="d-flex mb-4">
+          <div class="flex-shrink-0">
+            <div class="bg-danger text-white rounded-circle d-flex align-items-center justify-content-center" style="width: 40px; height: 40px;">
+              <i class="fas fa-palette"></i>
+            </div>
+          </div>
+          <div class="flex-grow-1 ms-3">
+            <h5>Customizable Colors</h5>
+            <p class="text-muted mb-0">Personalize each graph with custom colors for better data visualization and distinction.</p>
+          </div>
+        </div>
+        
+        <div class="d-flex mb-4">
+          <div class="flex-shrink-0">
+            <div class="bg-secondary text-white rounded-circle d-flex align-items-center justify-content-center" style="width: 40px; height: 40px;">
+              <i class="fas fa-mouse-pointer"></i>
+            </div>
+          </div>
+          <div class="flex-grow-1 ms-3">
+            <h5>Interactive Plot</h5>
+            <p class="text-muted mb-0">Zoom, pan, and interact with your plots in real-time for detailed data analysis.</p>
+          </div>
+        </div>
+        
+        <div class="d-flex mb-4">
+          <div class="flex-shrink-0">
+            <div class="bg-dark text-white rounded-circle d-flex align-items-center justify-content-center" style="width: 40px; height: 40px;">
+              <i class="fas fa-moon"></i>
+            </div>
+          </div>
+          <div class="flex-grow-1 ms-3">
+            <h5>Dark Mode</h5>
+            <p class="text-muted mb-0">Eye-friendly dark mode for comfortable viewing during long monitoring sessions.</p>
+          </div>
+        </div>
+        
+        <div class="d-flex mb-4">
+          <div class="flex-shrink-0">
+            <div class="text-white rounded-circle d-flex align-items-center justify-content-center" style="width: 40px; height: 40px; background-color: #6f42c1;">
+              <i class="fas fa-filter"></i>
+            </div>
+          </div>
+          <div class="flex-grow-1 ms-3">
+            <h5>Better Null Value Processing</h5>
+            <p class="text-muted mb-0">Improved handling of null and invalid data points for cleaner, more accurate plots.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Comparison Section -->
+<section class="py-5">
+  <div class="container">
+    <div class="row text-center mb-5">
+      <div class="col-12">
+        <h2 class="display-5 fw-bold">Arduino IDE Alternative</h2>
+        <p class="lead text-muted">See why Oscilloscope Online V2 is the superior choice</p>
+      </div>
+    </div>
+    
+    <div class="row">
+      <div class="col-lg-8 mx-auto">
+        <div class="table-responsive">
+          <table class="table table-striped">
+            <thead class="table-dark">
+              <tr>
+                <th>Feature</th>
+                <th>Arduino IDE</th>
+                <th>Oscilloscope Online V2</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Export Options</td>
+                <td>None</td>
+                <td><i class="fas fa-check text-success"></i> CSV, PNG, SVG</td>
+              </tr>
+              <tr>
+                <td>Customizable Colors</td>
+                <td><i class="fas fa-times text-danger"></i></td>
+                <td><i class="fas fa-check text-success"></i> Yes</td>
+              </tr>
+              <tr>
+                <td>Interactive Plots</td>
+                <td><i class="fas fa-times text-danger"></i></td>
+                <td><i class="fas fa-check text-success"></i> Yes</td>
+              </tr>
+              <tr>
+                <td>Dark Mode</td>
+                <td><i class="fas fa-times text-danger"></i></td>
+                <td><i class="fas fa-check text-success"></i> Yes</td>
+              </tr>
+              <tr>
+                <td>Auto Scaling</td>
+                <td>Basic</td>
+                <td><i class="fas fa-check text-success"></i> Advanced</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Call to Action -->
+<section class="bg-primary text-white py-5">
+  <div class="container text-center">
+    <div class="row">
+      <div class="col-lg-8 mx-auto">
+        <h2 class="display-5 fw-bold mb-4">Ready to Get Started?</h2>
+        <p class="lead mb-4">Experience the power of advanced serial plotting with Oscilloscope Online V2. Start visualizing your data today!</p>
+        <div class="d-flex gap-3 justify-content-center flex-wrap">
+          <a href="{{ setup_url }}" class="btn btn-light btn-lg" aria-label="Start plotting data now with Oscilloscope Online V2">
+            <i class="fas fa-rocket me-2"></i>Start Plotting Now
+          </a>
+          <a href="{{ help_url }}" class="btn btn-outline-light btn-lg" aria-label="Read documentation and help guides">
+            <i class="fas fa-book me-2"></i>Read Documentation
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Other Versions -->
+<section class="py-5 bg-light">
+  <div class="container">
+    <div class="row text-center">
+      <div class="col-12 mb-4">
+        <h3 class="fw-bold">Other Versions</h3>
+        <p class="text-muted">Explore our other tools and libraries</p>
+      </div>
+    </div>
+    <div class="row justify-content-center">
+      <div class="col-md-4 mb-3">
+        <a href="{{ v1_url }}" class="btn btn-outline-primary btn-lg w-100" aria-label="Access Oscilloscope Online Version 1">
+          <i class="fas fa-chart-area me-2"></i>Oscilloscope Online V1
+        </a>
+      </div>
+      <div class="col-md-4 mb-3">
+        <a href="{{ processing_library_url }}" class="btn btn-outline-secondary btn-lg w-100" aria-label="Download Processing IDE Library">
+          <i class="fas fa-code me-2"></i>Processing IDE Library
+        </a>
+      </div>
+    </div>
+  </div>
+</section>

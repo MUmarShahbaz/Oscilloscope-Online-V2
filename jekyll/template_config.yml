@@ -1,0 +1,44 @@
+url: "https://mumarshahbaz.github.io"
+baseurl: "/Oscilloscope-Online-V2"
+title: Oscilloscope Online 2
+description: A web serial plotter with a huge variety of features and customisation
+author: M. Umar Shahbaz
+logo: # `${assets_dir}/img/icon.svg`
+
+collections:
+  pages:
+    output: true
+
+plugins:
+  - jekyll-sitemap
+  - jekyll-seo-tag
+  - jekyll_dynamic_assets
+
+exclude:
+  - .bundle/
+  - .jekyll-cache/
+  - Gemfile
+  - Gemfile.lock
+  - template_config.yml
+
+dynamic_assets:
+  absolute: true
+  source:
+    base: # `${assets_dir}`
+    font_awesome: https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0
+    dev_icons: https://cdn.jsdelivr.net/gh/devicons/devicon@latest
+    bootstrap: https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist
+    uPlot: https://cdn.jsdelivr.net/npm/uplot/dist
+    SVG_Plotter_Deprecated: https://cdn.jsdelivr.net/gh/MUmarShahbaz/SVG-Plotter-deprecated@dist
+    html2canvas: https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1
+  master:
+   - bootstrap<</js/bootstrap.bundle.min.js::defer-js
+   - bootstrap<</css/bootstrap.min.css
+   - font_awesome<</css/all.min.css
+   - status.min.js::defer-js
+  formats:
+    defer-js: <script defer src="%s"></script>
+  presets:
+    uPlot:
+     - uPlot<</uPlot.min.css
+     - uPlot<</uPlot.iife.min.js

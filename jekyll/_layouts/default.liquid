@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html lang="en">
+  {% include head.liquid %}
+  <body>
+    {% include navbar.liquid %}
+    <div
+      id="status_messages"
+      class="position-fixed d-flex flex-column-reverse align-items-center w-100"
+      style="top: 5%; z-index: 1000;"></div>
+    <main>{{ page.content }}</main>
+    {% include footer.liquid %}
+  </body>
+</html>
