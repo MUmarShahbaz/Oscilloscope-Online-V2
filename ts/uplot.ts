@@ -235,6 +235,102 @@ namespace uPlot_Controller {
             data.push([]);
         });
     }
+
+    export function export_json() : EXPORT {
+        const title = config.chart.title;
+
+        // Helper function to format time values
+        function formatElapsed(ms: number, format: time_format): string {
+            const sec = Math.floor(ms / 1000);
+            const msec = ms % 1000;
+            const s = sec % 60;
+            const m = Math.floor((sec / 60) % 60);
+            const h = Math.floor((sec / 3600) % 24);
+            const d = Math.floor(sec / 86400);
+
+            switch (format) {
+                case "ms":
+                    return `${ms}ms`;
+                case "s.ms":
+                    return `${sec}.${msec.toString().padStart(3, '0')}s`;
+                case "m:s":
+                    return `${m}:${s.toString().padStart(2, '0')}`;
+                case "h:m:s":
+                    return `${h}:${m.toString().padStart(2, '0')}:${s.toString().padStart(2, '0')}`;
+                case "d-h:m":
+                    return `${d}-${h.toString().padStart(2, '0')}:${m.toString().padStart(2, '0')}`;
+                default:
+                    return `${ms}ms`;
+            }
+        }
+
+        // Extract X-axis data and create ticks
+        const xData = data[0] || [];
+        const xMin = Math.min(...xData);
+        const xMax = Math.max(...xData);
+        const xRange = xMax - xMin;
+        
+        const xTicks = {
+            raw: [...xData],
+            formatted: config.chart.x.type === 'time' 
+                ? xData.map(t => formatElapsed(t, (config.chart.x as any).format))
+                : xData.map(t => t.toString()),
+            min: xMin,
+            max: xMax,
+            range: xRange
+        };
+
+        // Extract Y-axis information
+        const allYData: number[] = [];
+        data.slice(1).forEach(series => {
+            series.forEach((val: number) => {
+                if (!isNaN(val)) {
+                    allYData.push(val);
+                }
+            });
+        });
+        
+        const yType = config.chart.y.type.split('-')[0] as "linear" | "log";
+        const yBase = config.chart.y.type === 'log' ? (config.chart.y as any).base : null;
+        
+        const dataMin = allYData.length > 0 ? Math.min(...allYData) : 0;
+        const dataMax = allYData.length > 0 ? Math.max(...allYData) : 0;
+        
+        const yMin = yBase === null ? dataMin : Math.pow(yBase, Math.floor(Math.log(dataMin) / Math.log(yBase)));
+        const yMax = yBase === null ? dataMax : Math.pow(yBase, Math.ceil(Math.log(dataMax) / Math.log(yBase)));
+        
+        const yRange = yMax - yMin;
+
+        // Create series data
+        const series = config.datasets.map((dataset, index) => ({
+            label: dataset.label,
+            color: dataset.color,
+            data: data[index + 1] || []
+        }));
+
+        return {
+            title,
+            grid: {
+                x: {
+                    title: config.chart.x.title,
+                    type: config.chart.x.type,
+                    ticks: xTicks,
+                    time_format: config.chart.x.type === 'time' ? (config.chart.x as any).format : null
+                },
+                y: {
+                    title: config.chart.y.title,
+                    type: yType,
+                    ticks: {
+                        min: yMin,
+                        max: yMax,
+                        range: yRange
+                    },
+                    base: yBase
+                }
+            },
+            series
+        };
+    }
 }
 
 function UPLOT_MAKER(options : Object, data : Array<Array<number>>, container : HTMLElement) {

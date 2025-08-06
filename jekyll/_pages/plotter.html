@@ -370,6 +370,10 @@ graph" %}
     });
     
 
+    buttons.export.json.addEventListener('click', function () {
+      download_json(uPlot_Controller.export_json(), `Oscilloscope-Online-json_export-${Date.now()}`);
+    });
+
     function push_sequence(message, time) {
       uPlot_Controller.push(message, time);
       if (refresher === null) uPlot_Controller.refresh();
