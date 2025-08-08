@@ -26,7 +26,7 @@ switch (mode) {
 }
 
 // Determine which assets directory to use
-const commit_hash = execSync('git log origin/assets -1 --format=%H').toString().trim();
+const commit_hash = 'lol';//execSync('git log origin/assets -1 --format=%H').toString().trim();
 const assets_dir = mode === '--prod' ? `https://cdn.jsdelivr.net/gh/MUmarShahbaz/Oscilloscope-Online-V2@${commit_hash}` : '/assets';
 console.log(`Assets: ${assets_dir}`);
 

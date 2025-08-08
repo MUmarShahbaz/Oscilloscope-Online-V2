@@ -245,13 +245,16 @@ namespace uPlot_Controller {
         return chart !== null && chart !== undefined;
     }
 
-    export function push(message : string, time : number) {
+    export function push(message : string, time : number, push_to: Function, clear_at: Function) {
         if (message === config.serial.mcu_commands.cls) {
             clear();
+            clear_at();
         } else {
             data.forEach((row, i) => {
                 if (length === row.length) row.shift();
             });
+
+            const push_to_data = [];
 
             const messageData = message.split(config.serial.break);
             if (config.chart.x.type === 'time') {
@@ -260,18 +263,22 @@ namespace uPlot_Controller {
                     messageData.shift();
                 }
                 data[0].push(time);
-            }
+                push_to_data.push(time);
+            } else push_to_data.push(null);
             console.log(messageData, `at time ${time}`);
 
             messageData.forEach((value, i) => {
                 const parsedValue = parseFloat(value);
                 if (!isNaN(parsedValue)) {
                     data[i + 1].push(parsedValue);
+                    push_to_data.push(parsedValue);
                 } else {
                     console.warn(`Invalid data value at index ${i}:`, value);
                     data[i + 1].push(NaN);
+                    push_to_data.push(NaN);
                 }
             });
+            push_to(push_to_data);
         }
     }
 

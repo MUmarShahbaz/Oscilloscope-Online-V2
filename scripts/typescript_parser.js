@@ -98,7 +98,7 @@ exec('tsc', (error, stdout, stdin) => {
 });
 
 function minify(file_name, files_length) {
-    create_child(`Terser => ${file_name}`, `terser ./ts-output/${file_name}.js -c -m -o ./assets/scripts/${file_name}.min.js`, undefined, 18)
+    create_child(`Terser => ${file_name}`, `terser ./ts-output/${file_name}.js -c -m -o ./assets/scripts/${file_name}.min.js`, undefined, 27)
         .then((child) => {
             children.push(child);
             if (process.argv[2] === '--live' && files_length === 'triggered') {

@@ -31,6 +31,7 @@ dynamic_assets:
     uPlot: https://cdn.jsdelivr.net/npm/uplot/dist
     SVG_Plotter_Deprecated: https://cdn.jsdelivr.net/gh/MUmarShahbaz/SVG-Plotter-deprecated@dist
     html2canvas: https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1
+    handsontable: https://cdn.jsdelivr.net/npm/handsontable
   master:
    - bootstrap<</js/bootstrap.bundle.min.js::defer-js
    - bootstrap<</css/bootstrap.min.css
@@ -42,3 +43,9 @@ dynamic_assets:
     uPlot:
      - uPlot<</uPlot.min.css
      - uPlot<</uPlot.iife.min.js
+     - uplot_controller.min.js::defer-js
+    handsontable:
+     - handsontable<</dist/handsontable.full.min.js::defer-js
+     - handsontable<</styles/handsontable.min.css
+     - handsontable<</styles/ht-theme-main.min.css
+     - handsontable_controller.min.js::defer-js
