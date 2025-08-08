@@ -12,6 +12,10 @@ function download_svg(svg : SVGElement, name : string) {
     download_blob(blob, name);
 }
 
+function download_csv(csv: string, name: string) {
+    const blob = new Blob([csv], { type: 'text/csv' });
+    download_blob(blob, name);
+}
 
 function download_blob(blob : Blob, name : string) {
     const url = URL.createObjectURL(blob);

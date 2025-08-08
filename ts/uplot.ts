@@ -7,31 +7,34 @@ namespace uPlot_Controller {
     let container : HTMLElement;
     export let length : number;
 
-    export function init(new_config : CONFIG, new_container : HTMLElement) {
-        // Helper Function
-        function formatElapsed(ms: number, format: time_format): string {
-            const sec = Math.floor(ms / 1000);
-            const msec = ms % 1000;
-            const s = sec % 60;
-            const m = Math.floor((sec / 60) % 60);
-            const h = Math.floor((sec / 3600) % 24);
-            const d = Math.floor(sec / 86400);
+    // Helper Function
+    function formatElapsed(ms: number, format: time_format): string {
+        const sec = Math.floor(ms / 1000);
+        const msec = ms % 1000;
+        const s = sec % 60;
+        const m = Math.floor((sec / 60) % 60);
+        const h = Math.floor((sec / 3600) % 24);
+        const d = Math.floor(sec / 86400);
 
-            switch (format) {
-                case "ms":
-                    return `${ms}ms`;
-                case "s.ms":
-                    return `${sec}.${msec.toString().padStart(3, '0')}s`;
-                case "m:s":
-                    return `${m}:${s.toString().padStart(2, '0')}`;
-                case "h:m:s":
-                    return `${h}:${m.toString().padStart(2, '0')}:${s.toString().padStart(2, '0')}`;
-                case "d-h:m":
-                    return `${d}-${h.toString().padStart(2, '0')}:${m.toString().padStart(2, '0')}`;
-                default:
-                    return `${ms}ms`; // fallback to ms format
-            }
+        switch (format) {
+            case "ms":
+                return `${ms}ms`;
+            case "s.ms":
+                return `${sec}.${msec.toString().padStart(3, '0')}s`;
+            case "m:s":
+                return `${m}:${s.toString().padStart(2, '0')}`;
+            case "h:m:s":
+                return `${h}:${m.toString().padStart(2, '0')}:${s.toString().padStart(2, '0')}`;
+            case "d-h:m":
+                return `${d}-${h.toString().padStart(2, '0')}:${m.toString().padStart(2, '0')}`;
+            default:
+                return `${ms}ms`; // fallback to ms format
         }
+    }
+
+    const capitalize = (str : string) => str.charAt(0).toUpperCase() + str.slice(1);
+
+    export function init(new_config : CONFIG, new_container : HTMLElement) {
         // Init Container and get config
         config = new_config;
         container = new_container;
@@ -330,6 +333,30 @@ namespace uPlot_Controller {
             },
             series
         };
+    }
+
+    export function export_csv() : string {
+        // Extract data
+        const index = data[0];
+        const columns = data.slice(1);
+        const rowCount = index.length;
+
+        // Create headings
+        let headings = [capitalize(config.chart.x.type)];
+        config.datasets.forEach((dataset) => {
+            headings.push(dataset.label);
+        });
+
+        // Parse CSV
+        let csv = headings.join(',') + '\n';
+        for (let i = 0; i < rowCount; i++) {
+            let reading_index = config.chart.x.type === 'linear' ? index[i] : formatElapsed(index[i],config.chart.x.format);
+            let row = reading_index + ',' + columns.map(col => col[i] !== undefined ? col[i] : '').join(',');
+            csv += row + '\n';
+            console.log(row);
+        }
+
+        return csv;
     }
 }
 

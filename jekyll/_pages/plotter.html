@@ -384,6 +384,10 @@ graph" %}
       });
     });
 
+    buttons.export.csv.addEventListener('click', function () {
+      download_csv(uPlot_Controller.export_csv(), `Oscilloscope-Online-csv_export-${Date.now()}`);
+    })
+
     function push_sequence(message, time) {
       uPlot_Controller.push(message, time);
       if (refresher === null) uPlot_Controller.refresh();
