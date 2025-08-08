@@ -7,6 +7,6 @@
     "strict": true,
     "skipLibCheck": true,
     "outDir": "./ts-output",
-    "rootDir": "./ts",
+    "rootDir": "./ts"
   }
 }
