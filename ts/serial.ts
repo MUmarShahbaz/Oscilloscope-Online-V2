@@ -23,10 +23,10 @@ namespace Serial_Controller {
             port = await navigator.serial!.requestPort();
             await port.open({ baudRate: baud });
             start_time = Date.now();
-            success();
         } catch (e) {
             alerts.error('Could not connect to port', { dismissible: true })
         }
+        success();
     }
 
     export async function start() {
