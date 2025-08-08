@@ -12,6 +12,8 @@ dynamic_assets:
   presets: uPlot
 ---
 
+{% assign help_url = site.data.urls.help | absolute_url %}
+
 <style>
   #plotDiv {
     height: 600px;
@@ -262,6 +264,12 @@ graph" %}
 
           <div class="mt-3 p-2 bg-light rounded small">
             <strong>Example:</strong> <code>12.5/34.2/56.8/78.1\n</code>
+          </div>
+          
+          <div class="mt-3 text-center">
+            <a href="{{ help_url }}" class="btn btn-outline-primary btn-sm">
+              <i class="fas fa-book me-2"></i>View Complete Documentation
+            </a>
           </div>
         </div>
       </div>
