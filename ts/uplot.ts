@@ -2,12 +2,65 @@ namespace uPlot_Controller {
     export let chart : uPlot;
     let width : number;
     let height : number;
-    let data : Array<Array<number>> = [];
+    export let data : Array<Array<number>> = [];
     let config : CONFIG;
     let container : HTMLElement;
     export let length : number;
 
-    // Helper Function
+    // Helper Functions
+    function revertTimeFormat(timeStr: string): number {
+        let days = 0;
+        let hours = 0;
+        let minutes = 0;
+        let seconds = 0;
+        let ms = 0;
+
+        // Pattern: d-h:m (e.g., "2-12:30")
+        if ((/^\d+-\d+:\d+$/).test(timeStr)) {
+            const match = timeStr.match(/^(\d+)-(\d+):(\d+)$/);
+            if (match) {
+                days = parseInt(match[1], 10);
+                hours = parseInt(match[2], 10);
+                minutes = parseInt(match[3], 10);
+            }
+        }
+        // Pattern: h:m:s (e.g., "12:30:45")
+        else if ((/^\d+:\d+:\d+$/).test(timeStr)) {
+            const match = timeStr.match(/^(\d+):(\d+):(\d+)$/);
+            if (match) {
+                hours = parseInt(match[1], 10);
+                minutes = parseInt(match[2], 10);
+                seconds = parseInt(match[3], 10);
+            }
+        }
+        // Pattern: m:s (e.g., "30:45")
+        else if ((/^\d+:\d+$/).test(timeStr)) {
+            const match = timeStr.match(/^(\d+):(\d+)$/);
+            if (match) {
+                minutes = parseInt(match[1], 10);
+                seconds = parseInt(match[2], 10);
+            }
+        }
+        // Pattern: s.ms (e.g., "45.123s")
+        else if ((/^\d+\.\d+s$/).test(timeStr)) {
+            const match = timeStr.match(/^(\d+)\.(\d+)s$/);
+            if (match) {
+                seconds = parseInt(match[1], 10);
+                ms = parseInt(match[2].padEnd(3, '0').substring(0, 3), 10); // Ensure 3 digits for milliseconds
+            }
+        }
+        // Pattern: ms (e.g., "1234ms")
+        else if ((/^\d+ms$/).test(timeStr)) {
+            const match = timeStr.match(/^(\d+)ms$/);
+            if (match) {
+                ms = parseInt(match[1], 10);
+            }
+        }
+
+        // Convert everything to milliseconds
+        return ms + seconds * 1000 + minutes * 60 * 1000 + hours * 60 * 60 * 1000 + days * 24 * 60 * 60 * 1000;
+    }
+
     function formatElapsed(ms: number, format: time_format): string {
         const sec = Math.floor(ms / 1000);
         const msec = ms % 1000;
@@ -357,6 +410,83 @@ namespace uPlot_Controller {
         }
 
         return csv;
+    }
+
+    export function import_csv(csvText: string): void {
+        try {
+            // Parse CSV text into array
+            const csvArray = csvText.trim().split('\n').map(row =>
+                row.split(',').map(cell => cell.trim())
+            );
+
+            if (csvArray.length < 2) {
+                throw new Error("CSV must contain at least a header row and one data row");
+            }
+
+            // Extract headers
+            const headers = csvArray[0];
+            const expectedXHeader = capitalize(config.chart.x.type);
+            
+            if (headers[0] !== expectedXHeader) {
+                console.warn(`Expected X-axis header "${expectedXHeader}", but found "${headers[0]}"`);
+            }
+
+            // Validate that we have the expected number of columns
+            const expectedColumns = 1 + config.datasets.length; // X + datasets
+            if (headers.length !== expectedColumns) {
+                throw new Error(`CSV has ${headers.length} columns but expected ${expectedColumns} (1 for X-axis + ${config.datasets.length} datasets)`);
+            }
+
+            // Clear existing data
+            clear();
+
+            const startTime = Date.now();
+
+            // Process data rows using the push function
+            for (let i = 1; i < csvArray.length; i++) {
+                const row = csvArray[i];
+                
+                if (row.length !== headers.length) {
+                    console.warn(`Row ${i} has ${row.length} columns but expected ${headers.length}. Skipping row.`);
+                    continue;
+                }
+
+                let timeValue: number;
+                let messageData: string;
+
+                if (config.chart.x.type === 'time') {
+                    const timeConfig = config.chart.x as {
+                        type: "time";
+                        title: string;
+                        manual: boolean;
+                        format: time_format;
+                        max: number;
+                    };
+                    
+                    if (timeConfig.manual) {
+                        // For manual time, revert the formatted time and include it in the message
+                        timeValue = revertTimeFormat(row[0]);
+                        messageData = timeValue.toString() + config.serial.break + row.slice(1).join(config.serial.break);
+                    } else {
+                        // For automatic time, use current elapsed time and exclude the time from message
+                        timeValue = Date.now() - startTime;
+                        messageData = row.slice(1).join(config.serial.break);
+                    }
+                } else {
+                    // For linear type, use current elapsed time and include all data values
+                    timeValue = Date.now() - startTime;
+                    messageData = row.slice(1).join(config.serial.break);
+                }
+
+                // Use the existing push function to process the data
+                push(messageData, timeValue);
+            }
+            
+            console.log(`Successfully imported ${csvArray.length - 1} data points from CSV using push function`);
+
+        } catch (error) {
+            throw new Error(`Failed to import CSV: ${error instanceof Error ? error.message : String(error)}`);
+        }
     }
 }
 

@@ -268,6 +268,7 @@ graph" %}
     </div>
   </div>
 </div>
+<input type="file" id="csv_importer">
 
 <script>
   const config = JSON.parse(sessionStorage.getItem('main_config'));
@@ -291,7 +292,8 @@ graph" %}
       plot_status: {
         icon: document.getElementById('plotStatus'),
         text: document.getElementById('plotText')
-      }
+      },
+      csv_importer: document.getElementById('csv_importer')
     }
     const buttons = {
       connect: document.getElementById('connectBtn'),
@@ -369,7 +371,6 @@ graph" %}
       uPlot_Controller.clear();
       uPlot_Controller.refresh();
     });
-    
 
     buttons.export.json.addEventListener('click', function () {
       download_json(uPlot_Controller.export_json(), `Oscilloscope-Online-json_export-${Date.now()}`);
@@ -386,7 +387,18 @@ graph" %}
 
     buttons.export.csv.addEventListener('click', function () {
       download_csv(uPlot_Controller.export_csv(), `Oscilloscope-Online-csv_export-${Date.now()}`);
-    })
+    });
+
+    buttons.import.addEventListener('click', () => {DOM_Elements.csv_importer.click()});
+
+    DOM_Elements.csv_importer.addEventListener('change', () => {
+      const imported_csv = DOM_Elements.csv_importer.files[0];
+      if (!imported_csv) return;
+
+      const reader = new FileReader();
+      reader.onload = e => { container.innerHTML = ''; uPlot_Controller.init(config, container); uPlot_Controller.import_csv(e.target.result); uPlot_Controller.refresh(); };
+      reader.readAsText(imported_csv);
+    });
 
     function push_sequence(message, time) {
       uPlot_Controller.push(message, time);
