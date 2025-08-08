@@ -21,3 +21,10 @@ if (fs.existsSync(tso_folder)) {
   console.log('Removing output of TSC');
   fs.rmSync(tso_folder, { recursive: true, force: true });
 }
+
+// Deleting scripts output folder
+const scripts_folder = path.resolve('./assets/scripts');
+if (fs.existsSync(scripts_folder)) {
+  console.log('Removing Assets/Scripts');
+  fs.rmSync(scripts_folder, { recursive: true, force: true });
+}

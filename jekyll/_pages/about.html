@@ -10,7 +10,7 @@ dynamic_assets:
 <section class="container-fluid">
   <div class="row d-flex justify-content-center" style="min-height: 90vh;">
     <div class="col-md-6 col-lg-4 d-flex flex-column justify-content-center align-items-center p-3 p-sm-5 p-lg-3">
-      <img class="img-fluid rounded-circle m-5 m-md-0" src="{{ 'assets/img/profile_picture.jpg' | absolute_url }}">
+      <img class="img-fluid rounded-circle m-5 m-md-0" src="{{ '/img/profile_picture.jpg' | prepend: site.dynamic_assets.source.base }}">
     </div>
     <div class="col-md-6 col-lg-5 d-flex flex-column justify-content-center p-2">
       <div>
