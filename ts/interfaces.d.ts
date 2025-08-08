@@ -122,8 +122,6 @@ namespace SVG {
     }
 }
 
-namespace Serial_Controller { }
-
 namespace Forms {
     namespace setup {
         interface Refresher {
