@@ -9,7 +9,8 @@ dynamic_assets:
    - io.min.js::defer-js
 ---
 
-{% assign help_url = site.data.urls.help %}
+{% assign help_url = site.data.urls.help | absolute_url %}
+{% assign plotter_url = site.data.urls.plotter | absolute_url %}
 
 {% include hero.liquid heading="Setup Oscilloscope" bg="danger" text="Configure your serial communication, grid settings, and graph parameters" %}
 
@@ -339,7 +340,7 @@ dynamic_assets:
     if (form.checkValidity()) {
       const config = setup_form.create_config(form);
       sessionStorage.setItem('main_config', JSON.stringify(config));
-      location.href = `{{ '/plotter.html' | absolute_url }}`
+      location.href = `{{ plotter_url }}`
     } else {
       form.classList.add("was-validated");
     }

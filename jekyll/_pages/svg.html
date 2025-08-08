@@ -10,7 +10,7 @@ dynamic_assets:
     - SVG_Plotter_Deprecated<</svg_plotter.min.js
 ---
 
-{% assign help_url = site.data.urls.help %}
+{% assign help_url = site.data.urls.help | absolute_url %}
 
 <!-- Hero Section -->
 {% include hero.liquid heading="SVG Plotter" bg="primary" text="Create beautiful SVG graphs from JSON data with

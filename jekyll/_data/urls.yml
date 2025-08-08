@@ -1,5 +1,7 @@
 setup: "/setup.html"
+plotter: "/plotter.html"
+svg: "/svg.html"
+help: "/help.html"
 github: "https://github.com/MUmarShahbaz/Oscilloscope-Online-V2"
-help: "https://mumarshahbaz.github.io/Oscilloscope-Online-V2/help.html"
 v1: "https://mumarshahbaz.github.io/Oscilloscope-Online/"
 processing_library: "https://github.com/MUmarShahbaz/Graph-Plotter/"
