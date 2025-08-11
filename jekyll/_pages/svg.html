@@ -21,14 +21,14 @@ customizable styling options" %}
     <div class="container">
 
         <!-- File Upload Section -->
-        <div class="card mb-4 shadow-sm">
+        <section aria-label="Upload Data" class="card mb-4 shadow-sm">
             <div class="card-header bg-dark text-white">
                 <h3 class="card-title mb-0">
-                    <i class="fas fa-upload me-2"></i>Upload JSON Data
+                    <i aria-hidden="true" role="presentation" class="fas fa-upload me-2"></i>Upload JSON Data
                 </h3>
             </div>
             <div class="card-body">
-                <div class="row g-3">
+                <div aria-label="Upload File" class="row g-3">
                     <div class="col-12">
                         <label for="jsonFile" class="form-label">Select JSON File</label>
                         <div class="row">
@@ -36,8 +36,8 @@ customizable styling options" %}
                                 <input type="file" class="form-control" id="jsonFile" accept=".json" />
                             </div>
                             <div class="col-md-4 d-flex align-items-center">
-                                <button type="button" class="btn btn-primary" id="loadJson">
-                                    <i class="fas fa-file-import me-2"></i>Load Data
+                                <button aria-label="Load File" type="button" class="btn btn-primary" id="loadJson">
+                                    <i aria-hidden="true" role="presentation" class="fas fa-file-import me-2"></i>Load Data
                                 </button>
                             </div>
                         </div>
@@ -47,10 +47,10 @@ customizable styling options" %}
                 </div>
 
                 <!-- Sample JSON Structure -->
-                <div class="mt-3">
+                <div aria-label="Example Format" class="mt-3">
                     <button class="btn btn-outline-secondary btn-sm" type="button" data-bs-toggle="collapse"
                         data-bs-target="#jsonExample" aria-expanded="false">
-                        <i class="fas fa-info-circle me-1"></i>View JSON Format (in TypeScript)
+                        <i aria-hidden="true" role="presentation" class="fas fa-info-circle me-1"></i>View JSON Format (in TypeScript)
                     </button>
                     <div class="collapse mt-2" id="jsonExample">
                         <div class="card card-body bg-light">
@@ -86,69 +86,69 @@ customizable styling options" %}
                     </div>
                 </div>
             </div>
-        </div>
+        </section>
 
         <!-- Configuration Form -->
-        <div class="card mb-4 shadow-sm">
+        <section aria-label="Configuration Form" class="card mb-4 shadow-sm">
             <div class="card-header bg-dark text-white">
                 <h3 class="card-title mb-0">
-                    <i class="fas fa-cog me-2"></i>SVG Export Configuration
+                    <i aria-hidden="true" role="presentation" class="fas fa-cog me-2"></i>SVG Export Configuration
                 </h3>
             </div>
             <div class="card-body">
                 <form id="svgConfigForm">
 
                     <!-- Dimensions -->
-                    <div class="row g-3 mb-4">
+                    <section aria-label="Dimensions" class="row g-3 mb-4">
                         <div class="col-12">
                             <h5 class="text-primary">Dimensions</h5>
                         </div>
-                        <div class="col-12">
+                        <div aria-label="Background Configuration" class="col-12">
                             <div class="row">
-                                <div class="col-md-6 d-flex align-items-center form-check px-5">
+                                <div aria-label="Transparent" class="col-md-6 d-flex align-items-center form-check px-5">
                                     <input class="form-check-input" type="checkbox" id="bgTransparent"
                                         name="bgTransparent" />
                                     <label class="form-check-label mx-2" for="bgTransparent">
                                         Transparent Background
                                     </label>
                                 </div>
-                                <div class="col-md-6" id="bgColorContainer">
+                                <div aria-label="Color" class="col-md-6" id="bgColorContainer">
                                     <label for="bgColor" class="form-label">BG Color</label>
                                     <input type="color" class="form-control form-control-color w-100" id="bgColor"
                                         name="bgColor" value="#ffffff" />
                                 </div>
                             </div>
                         </div>
-                        <div class="col-12">
+                        <div aria-label="Sizes" class="col-12">
                             <div class="row">
-                                <div class="col-md-3 my-3">
+                                <div aria-label="Width" class="col-md-3 my-3">
                                     <label for="imageWidth" class="form-label">Width</label>
                                     <input type="number" class="form-control" id="imageWidth" name="imageWidth"
                                         value="1280" min="100" max="3000" />
                                 </div>
-                                <div class="col-md-3 my-3">
+                                <div aria-label="Height" class="col-md-3 my-3">
                                     <label for="imageHeight" class="form-label">Height</label>
                                     <input type="number" class="form-control" id="imageHeight" name="imageHeight"
                                         value="720" min="100" max="3000" />
                                 </div>
-                                <div class="col-md-6 my-3">
+                                <div aria-label="Margins" class="col-md-6 my-3">
                                     <div class="row">
-                                        <div class="col-md-3">
+                                        <div aria-label="Left" class="col-md-3">
                                             <label for="marginLeft" class="form-label">Left</label>
                                             <input type="number" class="form-control" id="marginLeft" name="marginLeft"
                                                 value="50" />
                                         </div>
-                                        <div class="col-md-3">
+                                        <div aria-label="Right" class="col-md-3">
                                             <label for="marginRight" class="form-label">Right</label>
                                             <input type="number" class="form-control" id="marginRight"
                                                 name="marginRight" value="50" />
                                         </div>
-                                        <div class="col-md-3">
+                                        <div aria-label="Top" class="col-md-3">
                                             <label for="marginTop" class="form-label">Top</label>
                                             <input type="number" class="form-control" id="marginTop" name="marginTop"
                                                 value="50" />
                                         </div>
-                                        <div class="col-md-3">
+                                        <div aria-label="Bottom" class="col-md-3">
                                             <label for="marginBottom" class="form-label">Bottom</label>
                                             <input type="number" class="form-control" id="marginBottom"
                                                 name="marginBottom" value="50" />
@@ -157,21 +157,21 @@ customizable styling options" %}
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </section>
                     <hr>
                     <!-- Grid -->
-                    <div class="row g-3 mb-4">
+                    <section aria-label="Grid" class="row g-3 mb-4">
                         <div class="col-12">
                             <h5 class="text-primary">Grid</h5>
                         </div>
-                        <div class="col-12">
+                        <div aria-label="Gaps" class="col-12">
                             <div class="row">
-                                <div class="col-md-3 my-3">
+                                <div aria-label="X Gap" class="col-md-3 my-3">
                                     <label for="gridXGap" class="form-label">X Gap</label>
                                     <input type="number" class="form-control" id="gridXGap" name="gridXGap"
                                         value="100" />
                                 </div>
-                                <div class="col-md-3 my-3">
+                                <div aria-label="X Gap Mode" class="col-md-3 my-3">
                                     <label for="gridXGapMode" class="form-label">Gap Value</label>
                                     <select class="form-select" id="gridXGapMode" name="gridXGapMode">
                                         <option value="px">Pixels</option>
@@ -180,12 +180,12 @@ customizable styling options" %}
                                 </div>
                                 <div id="yGapOptions" class="col-md-6">
                                     <div class="row">
-                                        <div class="col-md-6 my-3">
+                                        <div aria-label="Y Gap" class="col-md-6 my-3">
                                             <label for="gridYGap" class="form-label">Y Gap</label>
                                             <input type="number" class="form-control" id="gridYGap" name="gridYGap"
                                                 value="100" />
                                         </div>
-                                        <div class="col-md-6 my-3">
+                                        <div aria-label="Y Gap Mode" class="col-md-6 my-3">
                                             <label for="gridYGapMode" class="form-label">Gap Value</label>
                                             <select class="form-select" id="gridYGapMode" name="gridYGapMode">
                                                 <option value="px">Pixels</option>
@@ -197,28 +197,28 @@ customizable styling options" %}
                             </div>
                         </div>
 
-                        <div class="col-12">
+                        <div aria-label="Axis Lines" class="col-12">
                             <div class="row">
-                                <div class="col-md-6">
+                                <div aria-label="Width" class="col-md-6">
                                     <label for="axesWidth" class="form-label">Axis Width</label>
                                     <input type="number" class="form-control" id="axesWidth" name="axesWidth"
                                         value="2" />
                                 </div>
-                                <div class="col-md-6">
+                                <div aria-label="Color" class="col-md-6">
                                     <label for="axesColor" class="form-label">Axis Color</label>
                                     <input type="color" class="form-control form-control-color w-100" id="axesColor"
                                         name="axesColor" value="#000000" />
                                 </div>
                             </div>
                         </div>
-                        <div class="col-12">
+                        <div aria-label="Grid Lines" class="col-12">
                             <div class="row">
-                                <div class="col-md-6">
+                                <div aria-label="Width" class="col-md-6">
                                     <label for="gridWidth" class="form-label">Grid Width</label>
                                     <input type="number" class="form-control" id="gridWidth" name="gridWidth"
                                         value="1" />
                                 </div>
-                                <div class="col-md-6">
+                                <div aria-label="Color" class="col-md-6">
                                     <label for="gridColor" class="form-label">Grid Color</label>
                                     <input type="color" class="form-control form-control-color w-100" id="gridColor"
                                         name="gridColor" value="#cccccc" />
@@ -226,36 +226,36 @@ customizable styling options" %}
                             </div>
                         </div>
 
-                        <div class="col-12">
+                        <div aria-label="Font" class="col-12">
                             <div class="row">
-                                <div class="col-md-6">
+                                <div aria-label="Size" class="col-md-6">
                                     <label for="fontSize" class="form-label">Font Size</label>
                                     <input type="number" class="form-control" id="fontSize" name="fontSize"
                                         value="10" />
                                 </div>
-                                <div class="col-md-6">
+                                <div aria-label="Color" class="col-md-6">
                                     <label for="fontColor" class="form-label">Font Color</label>
                                     <input type="color" class="form-control form-control-color w-100" id="fontColor"
                                         name="fontColor" value="#000000" />
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </section>
                     <hr>
 
                     <!-- Line/Graph -->
-                    <div class="row g-3 mb-4">
+                    <section aria-label="Graph" class="row g-3 mb-4">
                         <div class="col-12">
                             <h5 class="text-primary">Line/Graph</h5>
                         </div>
-                        <div class="col-12">
+                        <div aria-label="Line" class="col-12">
                             <div class="row">
-                                <div class="col-md-6">
+                                <div aria-label="Width" class="col-md-6">
                                     <label for="seriesWidth" class="form-label">Width</label>
                                     <input type="number" class="form-control" id="seriesWidth" name="seriesWidth"
                                         value="1.5" />
                                 </div>
-                                <div class="col-md-6">
+                                <div aria-label="Opacity" class="col-md-6">
                                     <label for="seriesAlpha" class="form-label">Alpha</label>
                                     <input type="number" class="form-control" id="seriesAlpha" name="seriesAlpha"
                                         value="1" />
@@ -263,9 +263,9 @@ customizable styling options" %}
                             </div>
                         </div>
 
-                        <div class="col-12">
+                        <div aria-label="Points" class="col-12">
                             <div class="row">
-                                <div class="col-md-4">
+                                <div aria-label="Show" class="col-md-4">
                                     <div class="form-check mt-4">
                                         <input class="form-check-input" type="checkbox" id="showPoints"
                                             name="showPoints" />
@@ -276,12 +276,12 @@ customizable styling options" %}
                                 </div>
                                 <div class="col-md-8">
                                     <div class="row mb-4" id="pointOptions" style="display: none;">
-                                        <div class="col-md-6">
+                                        <div aria-label="Radius" class="col-md-6">
                                             <label for="pointRadius" class="form-label">Point Size</label>
                                             <input type="number" class="form-control" id="pointRadius"
                                                 name="pointRadius" value="3" />
                                         </div>
-                                        <div class="col-md-6">
+                                        <div aria-label="Opacity" class="col-md-6">
                                             <label for="pointAlpha" class="form-label">Point Alpha</label>
                                             <input type="number" class="form-control" id="pointAlpha" name="pointAlpha"
                                                 value="1" />
@@ -290,9 +290,9 @@ customizable styling options" %}
                                 </div>
                             </div>
                         </div>
-                        <div class="col-12">
+                        <div aria-label="Fill" class="col-12">
                             <div class="row">
-                                <div class="col-md-4">
+                                <div aria-label="Show" class="col-md-4">
                                     <div class="form-check mt-4">
                                         <input class="form-check-input" type="checkbox" id="showFill" name="showFill" />
                                         <label class="form-check-label" for="showFill">
@@ -302,7 +302,7 @@ customizable styling options" %}
                                 </div>
                                 <div class="col-md-8">
                                     <div class="row g-3 mb-4" id="fillOptions" style="display: none;">
-                                        <div class="col-md-6">
+                                        <div aria-label="Opacity" class="col-md-6">
                                             <label for="fillAlpha" class="form-label">Fill Alpha</label>
                                             <input type="number" class="form-control" id="fillAlpha" name="fillAlpha"
                                                 value="0.3" />
@@ -312,52 +312,52 @@ customizable styling options" %}
                             </div>
                         </div>
 
-                    </div>
+                    </section>
                     <hr>
 
                     <!-- Action Buttons -->
-                    <div class="row g-3 d-flex justify-content-center">
+                    <section aria-label="Action Buttons" class="row g-3 d-flex justify-content-center">
                         <div class="col-lg-2 col-md-4 col-sm-6">
                             <button type="submit" class="btn btn-success btn-lg w-100">
-                                <i class="fas fa-play me-2"></i>Generate
+                                <i aria-hidden="true" role="presentation" class="fas fa-play me-2"></i>Generate
                             </button>
                         </div>
                         <div class="col-lg-2 col-md-4 col-sm-6">
                             <button type="reset" class="btn btn-secondary btn-lg w-100" id="reset_config">
-                                <i class="fas fa-undo me-2"></i>Reset
+                                <i aria-hidden="true" role="presentation" class="fas fa-undo me-2"></i>Reset
                             </button>
                         </div>
                         <div class="col-lg-2 col-md-4 col-sm-6">
                             <button type="button" class="btn btn-dark btn-lg w-100" id="export_config">
-                                <i class="fas fa-upload me-2"></i>Export
+                                <i aria-hidden="true" role="presentation" class="fas fa-upload me-2"></i>Export
                             </button>
                         </div>
                         <div class="col-lg-2 col-md-4 col-sm-6">
                             <button type="button" class="btn btn-dark btn-lg w-100" id="import_config">
-                                <i class="fas fa-download me-2"></i>Import
+                                <i aria-hidden="true" role="presentation" class="fas fa-download me-2"></i>Import
                             </button>
                         </div>
                         <div class="col-lg-2 col-md-4 col-sm-6">
                             <a href="{{ help_url }}" class="btn btn-outline-primary btn-lg w-100">
-                                <i class="fas fa-question-circle me-2"></i>Help
+                                <i aria-hidden="true" role="presentation" class="fas fa-question-circle me-2"></i>Help
                             </a>
                         </div>
-                    </div>
+                    </section>
                 </form>
             </div>
-        </div>
+        </section>
 
         <!-- SVG Preview -->
-        <div class="card mb-4 shadow-sm">
+        <section aria-label="Preview Section" class="card mb-4 shadow-sm">
             <div class="card-header bg-dark text-white">
                 <h3 class="card-title mb-0">
-                    <i class="fas fa-eye me-2"></i>SVG Preview
+                    <i aria-hidden="true" role="presentation" class="fas fa-eye me-2"></i>SVG Preview
                 </h3>
             </div>
             <div class="card-body">
-                <div id="svgPreview" class="text-center p-4 border rounded bg-light">
+                <div aria-label="Preview" id="svgPreview" class="text-center p-4 border rounded bg-light">
                     <div class="text-muted">
-                        <i class="fas fa-chart-line fa-3x mb-3"></i>
+                        <i aria-hidden="true" role="presentation" class="fas fa-chart-line fa-3x mb-3"></i>
                         <p class="mb-0">Upload JSON data and click "Generate SVG" to see your graph here</p>
                     </div>
                 </div>
@@ -365,12 +365,12 @@ customizable styling options" %}
                 <div class="row g-3">
                     <div class="col-12">
                         <button type="button" class="btn btn-primary me-2" id="download_svg" disabled>
-                            <i class="fas fa-download me-2"></i>Download SVG
+                            <i aria-hidden="true" role="presentation" class="fas fa-download me-2"></i>Download SVG
                         </button>
                     </div>
                 </div>
             </div>
-        </div>
+        </section>
     </div>
 </div>
 <input type="file" id="jsonFileInput" style="display: none;" />

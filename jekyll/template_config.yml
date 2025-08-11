@@ -1,7 +1,13 @@
 url: "https://mumarshahbaz.github.io"
 baseurl: "/Oscilloscope-Online-V2"
-title: Oscilloscope Online 2
-description: A web serial plotter with a huge variety of features and customisation
+title: Oscilloscope Online
+description: "Oscilloscope Online is a powerful web serial plotter for electronics, data visualization, and custom signal analysis. Fast, customizable, and feature-rich."
+lang: "en"
+keywords: [oscilloscope, online, web serial, plotter, electronics, data visualization, signal analysis, customisation, open source]
+social:
+  name: "M. Umar Shahbaz"
+  links:
+    - "https://github.com/MUmarShahbaz"
 author: M. Umar Shahbaz
 logo: # `${assets_dir}/img/icon.svg`
 
@@ -13,6 +19,7 @@ plugins:
   - jekyll-sitemap
   - jekyll-seo-tag
   - jekyll_dynamic_assets
+  - jekyll-minifier
 
 exclude:
   - .bundle/
@@ -20,6 +27,9 @@ exclude:
   - Gemfile
   - Gemfile.lock
   - template_config.yml
+
+jekyll-minifier:
+  compress_javascript: false
 
 dynamic_assets:
   absolute: true

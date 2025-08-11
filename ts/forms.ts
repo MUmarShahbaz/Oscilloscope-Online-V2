@@ -181,6 +181,7 @@ namespace setup_form {
 
             for (let i = 1; i <= count; i++) {
                 const graphDiv = document.createElement("div");
+                graphDiv.setAttribute('aria-label', `Graph ${i}`)
                 graphDiv.className = "border rounded p-3 mb-3 graph-config";
                 graphDiv.setAttribute("data-graph", i.toString());
 
@@ -188,11 +189,11 @@ namespace setup_form {
                 graphDiv.innerHTML = `
         <h5 class="mb-3">Graph ${i} Configuration</h5>
         <div class="row g-3">
-          <div class="col-md-6">
+          <div aria-label="Name" class="col-md-6">
             <label for="graph${i}Name" class="form-label">Graph Name</label>
             <input type="text" class="form-control" id="graph${i}Name" name="graph${i}Name" value="Graph ${i}" required>
           </div>
-          <div class="col-md-6">
+          <div aria-label="Color" class="col-md-6">
             <label for="graph${i}Color" class="form-label">Graph Color</label>
             <input type="color" class="form-control form-control-color" id="graph${i}Color" name="graph${i}Color" value="${color}" required>
           </div>

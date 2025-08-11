@@ -14,11 +14,11 @@ nav-order: 6
 
 <div class="container py-5">
   <!-- Quick Start Guide -->
-  <section class="mb-5">
+  <section class="mb-5" aria-labelledby="quickstart-heading">
     <div class="card shadow-sm">
       <div class="card-header bg-success text-white">
-        <h2 class="card-title mb-0">
-          <i class="fas fa-rocket me-2"></i>Quick Start Guide
+        <h2 id="quickstart-heading" class="card-title mb-0">
+          <i aria-hidden="true" role="presentation" class="fas fa-rocket me-2"></i>Quick Start Guide
         </h2>
       </div>
       <div class="card-body">
@@ -53,7 +53,7 @@ nav-order: 6
           </div>
           <div class="col-lg-4">
             <div class="alert alert-info">
-              <h6><i class="fas fa-lightbulb me-2"></i>Pro Tip</h6>
+              <h6><i aria-hidden="true" role="presentation" class="fas fa-lightbulb me-2"></i>Pro Tip</h6>
               <p class="mb-0">Save your configuration using the Export button on the setup page to quickly reuse settings for different projects.</p>
             </div>
           </div>
@@ -63,11 +63,11 @@ nav-order: 6
   </section>
 
   <!-- Data Format Guide -->
-  <section class="mb-5">
+  <section class="mb-5" aria-labelledby="dataformat-heading">
     <div class="card shadow-sm">
       <div class="card-header bg-info text-white">
-        <h2 class="card-title mb-0">
-          <i class="fas fa-code me-2"></i>Data Format Guide
+        <h2 id="dataformat-heading" class="card-title mb-0">
+          <i aria-hidden="true" role="presentation" class="fas fa-code me-2"></i>Data Format Guide
         </h2>
       </div>
       <div class="card-body">
@@ -78,10 +78,10 @@ nav-order: 6
               value1<span class="text-warning">/</span>value2<span class="text-warning">/</span>value3<span class="text-warning">/</span>valueN<span class="text-info">\n</span>
             </div>
             <ul class="list-unstyled">
-              <li><i class="fas fa-check text-success me-2"></i>Numeric values separated by configured break character (default: /)</li>
-              <li><i class="fas fa-check text-success me-2"></i>Each data packet terminated with newline (\n)</li>
-              <li><i class="fas fa-check text-success me-2"></i>Supports integer and floating-point numbers</li>
-              <li><i class="fas fa-check text-success me-2"></i>Invalid values are treated as NaN and handled gracefully</li>
+              <li><i aria-hidden="true" role="presentation" class="fas fa-check text-success me-2"></i>Numeric values separated by configured break character (default: /)</li>
+              <li><i aria-hidden="true" role="presentation" class="fas fa-check text-success me-2"></i>Each data packet terminated with newline (\n)</li>
+              <li><i aria-hidden="true" role="presentation" class="fas fa-check text-success me-2"></i>Supports integer and floating-point numbers</li>
+              <li><i aria-hidden="true" role="presentation" class="fas fa-check text-success me-2"></i>Invalid values are treated as NaN and handled gracefully</li>
             </ul>
           </div>
           <div class="col-md-6">
@@ -112,17 +112,17 @@ void loop() {
   </section>
 
   <!-- Configuration Options -->
-  <section class="mb-5">
+  <section class="mb-5" aria-labelledby="config-heading">
     <div class="card shadow-sm">
       <div class="card-header bg-warning text-dark">
-        <h2 class="card-title mb-0">
-          <i class="fas fa-cogs me-2"></i>Configuration Options
+        <h2 id="config-heading" class="card-title mb-0">
+          <i aria-hidden="true" role="presentation" class="fas fa-cogs me-2"></i>Configuration Options
         </h2>
       </div>
       <div class="card-body">
         <div class="row">
           <div class="col-lg-4 mb-4">
-            <h5><i class="fas fa-plug me-2 text-primary"></i>Serial Settings</h5>
+            <h5><i aria-hidden="true" role="presentation" class="fas fa-plug me-2 text-primary"></i>Serial Settings</h5>
             <table class="table table-sm">
               <tbody>
                 <tr>
@@ -141,7 +141,7 @@ void loop() {
             </table>
           </div>
           <div class="col-lg-4 mb-4">
-            <h5><i class="fas fa-chart-line me-2 text-success"></i>Chart Settings</h5>
+            <h5><i aria-hidden="true" role="presentation" class="fas fa-chart-line me-2 text-success"></i>Chart Settings</h5>
             <table class="table table-sm">
               <tbody>
                 <tr>
@@ -164,7 +164,7 @@ void loop() {
             </table>
           </div>
           <div class="col-lg-4 mb-4">
-            <h5><i class="fas fa-palette me-2 text-info"></i>Visual Options</h5>
+            <h5><i aria-hidden="true" role="presentation" class="fas fa-palette me-2 text-info"></i>Visual Options</h5>
             <table class="table table-sm">
               <tbody>
                 <tr>
@@ -192,11 +192,11 @@ void loop() {
   </section>
 
   <!-- Export & Import Features -->
-  <section class="mb-5">
+  <section class="mb-5" aria-labelledby="exportimport-heading">
     <div class="card shadow-sm">
       <div class="card-header bg-secondary text-white">
-        <h2 class="card-title mb-0">
-          <i class="fas fa-download me-2"></i>Export & Import Features
+        <h2 id="exportimport-heading" class="card-title mb-0">
+          <i aria-hidden="true" role="presentation" class="fas fa-download me-2"></i>Export & Import Features
         </h2>
       </div>
       <div class="card-body">
@@ -205,28 +205,28 @@ void loop() {
             <h5>Export Formats</h5>
             <div class="list-group">
               <div class="list-group-item d-flex align-items-center">
-                <i class="fas fa-file-csv fa-2x text-success me-3"></i>
+                <i aria-hidden="true" role="presentation" class="fas fa-file-csv fa-2x text-success me-3"></i>
                 <div>
                   <h6 class="mb-1">CSV Export</h6>
                   <small class="text-muted">Excel-compatible format with timestamps and data values</small>
                 </div>
               </div>
               <div class="list-group-item d-flex align-items-center">
-                <i class="fas fa-image fa-2x text-primary me-3"></i>
+                <i aria-hidden="true" role="presentation" class="fas fa-image fa-2x text-primary me-3"></i>
                 <div>
                   <h6 class="mb-1">PNG Export</h6>
                   <small class="text-muted">High-quality raster image for presentations</small>
                 </div>
               </div>
               <div class="list-group-item d-flex align-items-center">
-                <i class="fas fa-vector-square fa-2x text-warning me-3"></i>
+                <i aria-hidden="true" role="presentation" class="fas fa-vector-square fa-2x text-warning me-3"></i>
                 <div>
                   <h6 class="mb-1">SVG Export</h6>
                   <small class="text-muted">Scalable vector graphics with customizable styling</small>
                 </div>
               </div>
               <div class="list-group-item d-flex align-items-center">
-                <i class="fas fa-code fa-2x text-info me-3"></i>
+                <i aria-hidden="true" role="presentation" class="fas fa-code fa-2x text-info me-3"></i>
                 <div>
                   <h6 class="mb-1">JSON Export</h6>
                   <small class="text-muted">Raw data and metadata for further analysis</small>
@@ -237,13 +237,13 @@ void loop() {
           <div class="col-md-6">
             <h5>Import Capabilities</h5>
             <div class="alert alert-light border">
-              <h6><i class="fas fa-file-import me-2"></i>CSV Import</h6>
+              <h6><i aria-hidden="true" role="presentation" class="fas fa-file-import me-2"></i>CSV Import</h6>
               <p>Import previously exported CSV files to visualize historical data. The imported data will replace the current chart data.</p>
-              <h6><i class="fas fa-cog me-2"></i>Configuration Import</h6>
+              <h6><i aria-hidden="true" role="presentation" class="fas fa-cog me-2"></i>Configuration Import</h6>
               <p>Load saved configuration files to quickly apply previously used settings for different projects or devices.</p>
             </div>
             <div class="alert alert-warning">
-              <h6><i class="fas fa-exclamation-triangle me-2"></i>MCU Export Commands</h6>
+              <h6><i aria-hidden="true" role="presentation" class="fas fa-exclamation-triangle me-2"></i>MCU Export Commands</h6>
               <p class="mb-0">Your microcontroller can trigger exports by sending special characters:</p>
               <ul class="mb-0 mt-2">
                 <li><code>@</code> - Trigger CSV export</li>
@@ -259,11 +259,11 @@ void loop() {
   </section>
 
   <!-- Browser Compatibility -->
-  <section class="mb-5">
+  <section class="mb-5" aria-labelledby="browsercompat-heading">
     <div class="card shadow-sm">
       <div class="card-header bg-danger text-white">
-        <h2 class="card-title mb-0">
-          <i class="fas fa-browser me-2"></i>Browser Compatibility
+        <h2 id="browsercompat-heading" class="card-title mb-0">
+          <i aria-hidden="true" role="presentation" class="fas fa-browser me-2"></i>Browser Compatibility
         </h2>
       </div>
       <div class="card-body">
@@ -274,14 +274,14 @@ void loop() {
             <div class="row">
               <div class="col-sm-6">
                 <div class="d-flex align-items-center mb-2">
-                  <i class="fab fa-chrome fa-2x text-warning me-3"></i>
+                  <i aria-hidden="true" role="presentation" class="fab fa-chrome fa-2x text-warning me-3"></i>
                   <div>
                     <strong>Google Chrome</strong><br>
                     <small class="text-success">✓ Fully Supported (v89+)</small>
                   </div>
                 </div>
                 <div class="d-flex align-items-center mb-2">
-                  <i class="fab fa-edge fa-2x text-primary me-3"></i>
+                  <i aria-hidden="true" role="presentation" class="fab fa-edge fa-2x text-primary me-3"></i>
                   <div>
                     <strong>Microsoft Edge</strong><br>
                     <small class="text-success">✓ Fully Supported (v89+)</small>
@@ -290,14 +290,14 @@ void loop() {
               </div>
               <div class="col-sm-6">
                 <div class="d-flex align-items-center mb-2">
-                  <i class="fab fa-firefox fa-2x text-warning me-3"></i>
+                  <i aria-hidden="true" role="presentation" class="fab fa-firefox fa-2x text-warning me-3"></i>
                   <div>
                     <strong>Mozilla Firefox</strong><br>
                     <small class="text-danger">✗ Not Supported</small>
                   </div>
                 </div>
                 <div class="d-flex align-items-center mb-2">
-                  <i class="fab fa-safari fa-2x text-info me-3"></i>
+                  <i aria-hidden="true" role="presentation" class="fab fa-safari fa-2x text-info me-3"></i>
                   <div>
                     <strong>Safari</strong><br>
                     <small class="text-danger">✗ Not Supported</small>
@@ -308,7 +308,7 @@ void loop() {
           </div>
           <div class="col-md-4">
             <div class="alert alert-info">
-              <h6><i class="fas fa-info-circle me-2"></i>Security Note</h6>
+              <h6><i aria-hidden="true" role="presentation" class="fas fa-info-circle me-2"></i>Security Note</h6>
               <p class="mb-0">Web Serial API requires HTTPS for security. This application uses HTTPS in both development and production modes.</p>
             </div>
           </div>
@@ -318,19 +318,19 @@ void loop() {
   </section>
 
   <!-- Troubleshooting -->
-  <section class="mb-5">
+  <section class="mb-5" aria-labelledby="troubleshooting-heading">
     <div class="card shadow-sm">
       <div class="card-header bg-dark text-white">
-        <h2 class="card-title mb-0">
-          <i class="fas fa-wrench me-2"></i>Troubleshooting
+        <h2 id="troubleshooting-heading" class="card-title mb-0">
+          <i aria-hidden="true" role="presentation" class="fas fa-wrench me-2"></i>Troubleshooting
         </h2>
       </div>
       <div class="card-body">
-        <div class="accordion" id="troubleshootingAccordion">
+  <div class="accordion" id="troubleshootingAccordion" role="region" aria-label="Troubleshooting">
           <div class="accordion-item">
             <h3 class="accordion-header" id="connectionIssues">
-              <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseConnection" aria-expanded="true" aria-controls="collapseConnection">
-                <i class="fas fa-plug me-2 text-danger"></i>Connection Issues
+              <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseConnection" aria-expanded="true" aria-controls="collapseConnection" aria-label="Expand Connection Issues">
+                <i aria-hidden="true" role="presentation" class="fas fa-plug me-2 text-danger"></i>Connection Issues
               </button>
             </h3>
             <div id="collapseConnection" class="accordion-collapse collapse show" aria-labelledby="connectionIssues" data-bs-parent="#troubleshootingAccordion">
@@ -347,8 +347,8 @@ void loop() {
           
           <div class="accordion-item">
             <h3 class="accordion-header" id="dataIssues">
-              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseData" aria-expanded="false" aria-controls="collapseData">
-                <i class="fas fa-chart-line me-2 text-warning"></i>Data Display Issues
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseData" aria-expanded="false" aria-controls="collapseData" aria-label="Expand Data Display Issues">
+                <i aria-hidden="true" role="presentation" class="fas fa-chart-line me-2 text-warning"></i>Data Display Issues
               </button>
             </h3>
             <div id="collapseData" class="accordion-collapse collapse" aria-labelledby="dataIssues" data-bs-parent="#troubleshootingAccordion">
@@ -365,8 +365,8 @@ void loop() {
           
           <div class="accordion-item">
             <h3 class="accordion-header" id="exportIssues">
-              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExport" aria-expanded="false" aria-controls="collapseExport">
-                <i class="fas fa-download me-2 text-info"></i>Export Issues
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExport" aria-expanded="false" aria-controls="collapseExport" aria-label="Expand Export Issues">
+                <i aria-hidden="true" role="presentation" class="fas fa-download me-2 text-info"></i>Export Issues
               </button>
             </h3>
             <div id="collapseExport" class="accordion-collapse collapse" aria-labelledby="exportIssues" data-bs-parent="#troubleshootingAccordion">
@@ -386,11 +386,11 @@ void loop() {
   </section>
 
   <!-- Advanced Features -->
-  <section class="mb-5">
+  <section class="mb-5" aria-labelledby="advanced-heading">
     <div class="card shadow-sm">
       <div class="card-header bg-success text-white">
-        <h2 class="card-title mb-0">
-          <i class="fas fa-star me-2"></i>Advanced Features
+        <h2 id="advanced-heading" class="card-title mb-0">
+          <i aria-hidden="true" role="presentation" class="fas fa-star me-2"></i>Advanced Features
         </h2>
       </div>
       <div class="card-body">
@@ -433,25 +433,25 @@ void loop() {
   </section>
 
   <!-- Support & Resources -->
-  <section class="mb-5">
+  <section class="mb-5" aria-labelledby="support-heading">
     <div class="card shadow-sm">
       <div class="card-header bg-primary text-white">
-        <h2 class="card-title mb-0">
-          <i class="fas fa-life-ring me-2"></i>Support & Resources
+        <h2 id="support-heading" class="card-title mb-0">
+          <i aria-hidden="true" role="presentation" class="fas fa-life-ring me-2"></i>Support & Resources
         </h2>
       </div>
       <div class="card-body">
         <div class="row text-center">
           <div class="col-md-6 mb-3">
             <a href="{{ github_url }}" class="btn btn-outline-dark btn-lg w-100" target="_blank">
-              <i class="fab fa-github fa-2x mb-2"></i><br>
+              <i aria-hidden="true" role="presentation" class="fab fa-github fa-2x mb-2"></i><br>
               <strong>GitHub Repository</strong><br>
               <small>Source code, issues, and contributions</small>
             </a>
           </div>
           <div class="col-md-6 mb-3">
             <a href="{{ github_url }}/issues" class="btn btn-outline-danger btn-lg w-100" target="_blank">
-              <i class="fas fa-bug fa-2x mb-2"></i><br>
+              <i aria-hidden="true" role="presentation" class="fas fa-bug fa-2x mb-2"></i><br>
               <strong>Report Issues</strong><br>
               <small>Bug reports and feature requests</small>
             </a>
@@ -461,12 +461,12 @@ void loop() {
         <div class="alert alert-light border mt-4">
           <div class="row align-items-center">
             <div class="col-md-8">
-              <h5 class="mb-1"><i class="fas fa-heart text-danger me-2"></i>Enjoying Oscilloscope Online V2?</h5>
+              <h5 class="mb-1"><i aria-hidden="true" role="presentation" class="fas fa-heart text-danger me-2"></i>Enjoying Oscilloscope Online V2?</h5>
               <p class="mb-0">Consider starring the repository on GitHub to support the project and help others discover this tool.</p>
             </div>
             <div class="col-md-4 text-end">
               <a href="{{ github_url }}" class="btn btn-primary" target="_blank">
-                <i class="fas fa-star me-2"></i>Star on GitHub
+                <i aria-hidden="true" role="presentation" class="fas fa-star me-2"></i>Star on GitHub
               </a>
             </div>
           </div>
