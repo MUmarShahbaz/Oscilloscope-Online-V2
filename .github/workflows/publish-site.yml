@@ -32,9 +32,9 @@ jobs:
         run: npm run dependencies
       
       - name: Build production site
-        run: >
-          export JEKYLL_ENV=production
-          npm run build-prod
+        run: npm run build-prod
+        env:
+          JEKYLL_ENV: production
       
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
