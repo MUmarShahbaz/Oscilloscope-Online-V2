@@ -15,75 +15,75 @@ dynamic_assets:
 {% include hero.liquid heading="Setup Oscilloscope" bg="danger" text="Configure your serial communication, grid settings, and graph parameters" %}
 
 <!-- Setup Form -->
-<section class="py-5">
+<div class="py-5">
   <div class="container">
-    <form id="oscilloscopeSetup" class="needs-validation" novalidate>
+    <form aria-label="Configuration Form" id="oscilloscopeSetup" class="needs-validation" novalidate>
       <!-- Serial Configuration -->
-      <div class="card mb-4 shadow-sm">
+      <section aria-label="Serial Configuration" class="card mb-4 shadow-sm">
         <div class="card-header bg-dark text-white">
           <h3 class="card-title mb-0">
-            <i class="fas fa-plug me-2"></i>Serial Configuration
+            <i aria-hidden="true" role="presentation" class="fas fa-plug me-2"></i>Serial Configuration
           </h3>
         </div>
         <div class="card-body">
           <div class="row g-3 d-flex justify-content-between">
-            <div class="col-sm-6 col-md-4 col-lg-2">
+            <div aria-label="Break Character" class="col-sm-6 col-md-4 col-lg-2">
               <label for="breakChar" class="form-label">Break Character</label>
               <input type="text" class="form-control" id="breakChar" name="breakChar" value="/" maxlength="1"
                 required />
               <div class="form-text">Value separator</div>
             </div>
 
-            <div class="col-sm-6 col-md-4 col-lg-2">
+            <div aria-label="Clear Screen Character" class="col-sm-6 col-md-4 col-lg-2">
               <label for="clsChar" class="form-label">CLS Character</label>
               <input type="text" class="form-control" id="clsChar" name="clsChar" value="%" maxlength="1" required />
               <div class="form-text">Clear screen command</div>
             </div>
 
-            <div class="col-sm-6 col-md-4 col-lg-2">
+            <div aria-label="CSV Export Character" class="col-sm-6 col-md-4 col-lg-2">
               <label for="csvChar" class="form-label">CSV Character</label>
               <input type="text" class="form-control" id="csvChar" name="csvChar" value="@" maxlength="1" required />
               <div class="form-text">CSV export trigger</div>
             </div>
 
-            <div class="col-sm-6 col-md-4 col-lg-2">
+            <div aria-label="PNG Export Character" class="col-sm-6 col-md-4 col-lg-2">
               <label for="pngChar" class="form-label">PNG Character</label>
               <input type="text" class="form-control" id="pngChar" name="pngChar" value="&" maxlength="1" required />
               <div class="form-text">PNG export trigger</div>
             </div>
 
-            <div class="col-sm-6 col-md-4 col-lg-2">
+            <div aria-label="JSON Export Character" class="col-sm-6 col-md-4 col-lg-2">
               <label for="jsonChar" class="form-label">JSON Character</label>
               <input type="text" class="form-control" id="jsonChar" name="jsonChar" value="$" maxlength="1" required />
               <div class="form-text">JSON export trigger</div>
             </div>
           </div>
         </div>
-      </div>
+      </section>
 
       <!-- Grid Settings -->
-      <div class="card mb-4 shadow-sm">
+      <section aria-label="Grid Configuration" class="card mb-4 shadow-sm">
         <div class="card-header bg-success text-white">
           <h3 class="card-title mb-0">
-            <i class="fas fa-th me-2"></i>Grid Settings
+            <i aria-hidden="true" role="presentation" class="fas fa-th me-2"></i>Grid Settings
           </h3>
         </div>
         <div class="card-body">
           <div class="row g-3">
-            <div class="col-md-12">
+            <div aria-label="Title Configuration" class="col-md-12">
               <label for="chartTitle" class="form-label">Chart Title</label>
               <input type="text" class="form-control" id="chartTitle" name="chartTitle" value="Oscilloscope" required />
               <div class="form-text">Main title for your plot</div>
             </div>
 
-            <div class="col-md-6">
+            <div aria-label="X Axis Configuration" class="col-md-6">
               <div class="row">
-                <div class="col-12">
+                <div aria-label="X Axis Title" class="col-12">
                   <label for="xAxisTitle" class="form-label">X-Axis Title</label>
                   <input type="text" class="form-control" id="xAxisTitle" name="xAxisTitle" value="Index" required />
                   <div class="form-text">Label for the horizontal axis</div>
                 </div>
-                <div class="col-12">
+                <div aria-label="X Axis Scale Type" class="col-12">
                   <label for="xAxisType" class="form-label">X-Axis Type</label>
                   <select class="form-select" id="xAxisType" name="xAxisType" required>
                     <option value="linear" selected>Linear</option>
@@ -91,16 +91,16 @@ dynamic_assets:
                   </select>
                   <div class="form-text">Scale type for X-axis</div>
                 </div>
-                <div id="linearSettings">
+                <div aria-label="X Axis Range" id="linearSettings">
                   <div class="col-12">
                     <div class="row">
-                      <div class="col-md-6">
+                      <div aria-label="X Axis Minimum" class="col-md-6">
                         <label for="xAxisMin" class="form-label">X-Axis Min</label>
                         <input type="number" class="form-control" id="xAxisMin" name="xAxisMin" value="0" step="any" />
                         <div class="form-text">Minimum X value</div>
                       </div>
 
-                      <div class="col-md-6">
+                      <div aria-label="X Axis Maximum" class="col-md-6">
                         <label for="xAxisMax" class="form-label">X-Axis Max</label>
                         <input type="number" class="form-control" id="xAxisMax" name="xAxisMax" value="500"
                           step="any" />
@@ -110,8 +110,8 @@ dynamic_assets:
                   </div>
                 </div>
                 <!-- Time Settings (shown when X-Axis Type = Time) -->
-                <div id="timeSettings" style="display: none">
-                  <div class="col-12">
+                <div aria-label="X Axis Timescale Settings" id="timeSettings" style="display: none">
+                  <div aria-label="X Axis Manual Time" class="col-12">
                     <div class="form-check form-switch mt-4">
                       <input class="form-check-input" type="checkbox" id="manualTime" name="manualTime" />
                       <label class="form-check-label" for="manualTime">
@@ -122,7 +122,7 @@ dynamic_assets:
                   </div>
                   <div class="col-12">
                     <div class="row g-3">
-                      <div class="col-md-6">
+                      <div aria-label="X Axis Time Format" class="col-md-6">
                         <label for="timeFormat" class="form-label">Time Format</label>
                         <select class="form-select" id="timeFormat" name="timeFormat">
                           <option value="ms" selected>ms</option>
@@ -134,7 +134,7 @@ dynamic_assets:
                         <div class="form-text">Time display format</div>
                       </div>
 
-                      <div class="col-md-6">
+                      <div aria-label="X Axis Length" class="col-md-6">
                         <label for="maxReadings" class="form-label">Max Readings</label>
                         <input type="number" class="form-control" id="maxReadings" name="maxReadings" value="1000"
                           min="1" />
@@ -146,14 +146,14 @@ dynamic_assets:
               </div>
             </div>
 
-            <div class="col-md-6">
+            <div aria-label="Y Axis Configuration" class="col-md-6">
               <div class="row">
-                <div class="col-12">
+                <div aria-label="Y Axis Title" class="col-12">
                   <label for="yAxisTitle" class="form-label">Y-Axis Title</label>
                   <input type="text" class="form-control" id="yAxisTitle" name="yAxisTitle" value="Value" required />
                   <div class="form-text">Label for the vertical axis</div>
                 </div>
-                <div class="col-12">
+                <div aria-label="Y Axis Scale Type" class="col-12">
                   <label for="yAxisType" class="form-label">Y-Axis Type</label>
                   <select class="form-select" id="yAxisType" name="yAxisType" required>
                     <option value="linear" selected>Linear</option>
@@ -162,7 +162,7 @@ dynamic_assets:
                   </select>
                   <div class="form-text">Scale type for Y-axis</div>
                 </div>
-                <div class="col-12">
+                <div aria-label="Y Axis Auto Scale" class="col-12">
                   <div class="form-check form-switch mt-4">
                     <input class="form-check-input" type="checkbox" id="autoScale" name="autoScale" checked />
                     <label class="form-check-label" for="autoScale">
@@ -172,15 +172,15 @@ dynamic_assets:
                   </div>
                 </div>
                 <!-- Manual Y-Axis Range (shown when Auto Scale is disabled and Y-Axis is Linear) -->
-                <div id="manualYRange" class="col-12" style="display: none">
+                <div aria-label="Y Axis Range" id="manualYRange" class="col-12" style="display: none">
                   <div class="row g-3">
-                    <div class="col-md-6">
+                    <div aria-label="Y Axis Maximum" class="col-md-6">
                       <label for="yAxisMin" class="form-label">Y-Axis Min</label>
                       <input type="number" class="form-control" id="yAxisMin" name="yAxisMin" value="0" step="any" />
                       <div class="form-text">Minimum Y value</div>
                     </div>
 
-                    <div class="col-md-6">
+                    <div aria-label="Y Axis Minimum" class="col-md-6">
                       <label for="yAxisMax" class="form-label">Y-Axis Max</label>
                       <input type="number" class="form-control" id="yAxisMax" name="yAxisMax" value="100" step="any" />
                       <div class="form-text">Maximum Y value</div>
@@ -191,18 +191,18 @@ dynamic_assets:
             </div>
           </div>
         </div>
-      </div>
+      </section>
 
       <!-- Graph Settings -->
-      <div class="card mb-4 shadow-sm">
+      <section aria-label="Graph Configuration" class="card mb-4 shadow-sm">
         <div class="card-header bg-info text-white">
           <h3 class="card-title mb-0">
-            <i class="fas fa-chart-line me-2"></i>Graph Settings
+            <i aria-hidden="true" role="presentation" class="fas fa-chart-line me-2"></i>Graph Settings
           </h3>
         </div>
         <div class="card-body">
           <div class="row g-3 mb-4">
-            <div class="col-md-6">
+            <div aria-label="Show Data Points" class="col-md-6">
               <div class="form-check form-switch">
                 <input class="form-check-input" type="checkbox" id="showPoints" name="showPoints" />
                 <label class="form-check-label" for="showPoints">
@@ -212,7 +212,7 @@ dynamic_assets:
               </div>
             </div>
 
-            <div class="col-md-6">
+            <div aria-label="Show Fill Under Curve" class="col-md-6">
               <div class="form-check form-switch">
                 <input class="form-check-input" type="checkbox" id="fillArea" name="fillArea" />
                 <label class="form-check-label" for="fillArea">
@@ -224,7 +224,7 @@ dynamic_assets:
           </div>
 
           <div class="row g-3 mb-3">
-            <div class="col-md-6">
+            <div aria-label="Number of Graphs" class="col-md-6">
               <label for="graphCount" class="form-label">Number of Graphs</label>
               <input type="number" class="form-control" id="graphCount" name="graphCount" value="1" min="1" required />
               <div class="form-text">How many graphs to plot simultaneously</div>
@@ -232,15 +232,15 @@ dynamic_assets:
           </div>
 
           <!-- Dynamic Graph Configuration -->
-          <div id="graphsContainer">
-            <div class="border rounded p-3 mb-3 graph-config" data-graph="1">
+          <div aria-label="Individual Graph Settings" id="graphsContainer">
+            <div aria-label="Graph 1" class="border rounded p-3 mb-3 graph-config" data-graph="1">
               <h5 class="mb-3">Graph 1 Configuration</h5>
               <div class="row g-3">
-                <div class="col-md-6">
+                <div aria-label="Name" class="col-md-6">
                   <label for="graph1Name" class="form-label">Graph Name</label>
                   <input type="text" class="form-control" id="graph1Name" name="graph1Name" value="Graph 1" required />
                 </div>
-                <div class="col-md-6">
+                <div aria-label="Color" class="col-md-6">
                   <label for="graph1Color" class="form-label">Graph Color</label>
                   <input type="color" class="form-control form-control-color" id="graph1Color" name="graph1Color"
                     value="#007bff" required />
@@ -249,43 +249,43 @@ dynamic_assets:
             </div>
           </div>
         </div>
-      </div>
+      </section>
 
       <!-- Action Buttons -->
-      <div class="card shadow-sm">
+      <section aria-label="Action Buttons" class="card shadow-sm">
         <div class="card-body">
           <div class="row g-3 d-flex justify-content-center">
             <div class="col-lg-2 col-md-4 col-sm-6">
               <button type="submit" class="btn btn-success btn-lg w-100">
-                <i class="fas fa-play me-2"></i>Begin
+                <i aria-hidden="true" role="presentation" class="fas fa-play me-2"></i>Begin
               </button>
             </div>
             <div class="col-lg-2 col-md-4 col-sm-6">
               <button type="reset" class="btn btn-secondary btn-lg w-100" id="reset_config">
-                <i class="fas fa-undo me-2"></i>Reset
+                <i aria-hidden="true" role="presentation" class="fas fa-undo me-2"></i>Reset
               </button>
             </div>
             <div class="col-lg-2 col-md-4 col-sm-6">
               <button type="button" class="btn btn-dark btn-lg w-100" id="export_config">
-                <i class="fas fa-upload me-2"></i>Export
+                <i aria-hidden="true" role="presentation" class="fas fa-upload me-2"></i>Export
               </button>
             </div>
             <div class="col-lg-2 col-md-4 col-sm-6">
               <button type="button" class="btn btn-dark btn-lg w-100" id="import_config">
-                <i class="fas fa-download me-2"></i>Import
+                <i aria-hidden="true" role="presentation" class="fas fa-download me-2"></i>Import
               </button>
             </div>
             <div class="col-lg-2 col-md-4 col-sm-6">
               <a href="{{ help_url }}" class="btn btn-outline-primary btn-lg w-100">
-                <i class="fas fa-question-circle me-2"></i>Help
+                <i aria-hidden="true" role="presentation" class="fas fa-question-circle me-2"></i>Help
               </a>
             </div>
           </div>
         </div>
-      </div>
+      </section>
     </form>
   </div>
-</section>
+</div>
 <input type="file" id="jsonFileInput" style="display: none;" />
 
 <!-- JavaScript for Dynamic Graph Configuration -->
