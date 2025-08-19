@@ -1,7 +1,8 @@
 {
   "scripts": {
     "parse": "node ./dev_scripts/typescript_parser.js",
-    "install-all": "node ./dev_scripts/dependency_installer.js"
+    "install-all": "node ./dev_scripts/dependency_installer.js",
+    "serve": "npm run parse && bundle exec jekyll serve"
   },
   "dependencies": {
     "@types/w3c-web-serial": "^1.0.8",

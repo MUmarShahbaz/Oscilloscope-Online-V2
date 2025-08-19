@@ -72,9 +72,6 @@ dynamic_assets:
   absolute: true
   source:
     base: /assets
-    uPlot: https://cdn.jsdelivr.net/npm/uplot/dist
-    SVG_Plotter_Deprecated: https://cdn.jsdelivr.net/gh/MUmarShahbaz/SVG-Plotter-deprecated@dist
-    html2canvas: https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1
   master:
    - master.css
    - status.min.js::defer-js
@@ -83,8 +80,8 @@ dynamic_assets:
     defer-js: <script defer src="%s"></script>
   presets:
     uPlot:
-     - uPlot<</uPlot.min.css
-     - uPlot<</uPlot.iife.min.js
+     - uPlot.css
+     - uPlot.min.js::defer-js
 
 #======================================================================
 #                        Archives & Collection
