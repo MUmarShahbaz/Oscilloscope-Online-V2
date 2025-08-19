@@ -25,8 +25,8 @@
         <h5 class="text-uppercase fw-bold">Follow Me</h5>
         <div class="d-flex gap-3 mt-2 justify-content-center justify-content-md-start">
           {% for social in site.data.socials %}
-            <a href="{{ social[1] }}" class="text-white fs-4">
-              <i class="fa-lg {{ social[0] |  split: '.' | first }} fa-{{ social[0]  |  split: '.' | last }}" aria-label="{{ social[0]  |  split: '.' | last }}"></i>
+            <a href="{{ social.url }}" class="text-white fs-4">
+              <i class="{{ social.icon }}" title="{{ social.name }}"></i>
             </a>
           {% endfor %}
         </div>

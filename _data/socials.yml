@@ -1,0 +1,15 @@
+- name: GitHub
+  icon: fa-lg fab fa-github
+  url: https://github.com/MUmarShahbaz
+
+- name: LinkedIn
+  icon: fa-lg fab fa-linkedin-in
+  url: https://www.linkedin.com/in/m-umar-shahbaz
+
+- name: Gravatar
+  icon: fa-lg fab fa-gravatar
+  url: https://gravatar.com/mumarshahbaz
+
+- name: RSS Feed
+  icon: fa-lg fas fa-rss
+  url: https://m-umar.me/preview/feed.xml

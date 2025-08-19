@@ -41,7 +41,7 @@ exec('ruby -v', (error, stdout, stderr) => {
           console.log(`✅ Bundler was found\n`);
           console.log('Starting Bundler Install and NPM Install\n');
           create_child('NodeJS => NPM', 'npm install', undefined, 16).then(child => children.push(child));
-          create_child('Ruby => Bundler', 'bundle install', './jekyll', 16).then(child => children.push(child));
+          create_child('Ruby => Bundler', 'bundle install', undefined, 16).then(child => children.push(child));
         } else {
           console.log(`❌ Bundler was not found\n`);
           console.log(bundler.error);

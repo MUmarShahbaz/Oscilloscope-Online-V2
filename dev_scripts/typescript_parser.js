@@ -36,7 +36,7 @@ if (process.argv[2] === '--live') {
     console.log('Live Mode');
 
     // Live MINIMAL TS Parser
-    const watch_dir = path.resolve('./ts');
+    const watch_dir = path.resolve('./assets/ts');
 
     const watcher = chokidar.watch(watch_dir, {
         persistent: true,
@@ -57,7 +57,7 @@ if (process.argv[2] === '--live') {
             execSync('tsc');
             if (path.extname(file) === '.ts' && !file.endsWith('.d.ts')) {
                 const file_name = path.parse(file).name;
-                minify(file_name, 'triggered');
+                minify(file_name, -1);
             }
         });
     });
@@ -101,11 +101,7 @@ function minify(file_name, files_length) {
     create_child(`Terser => ${file_name}`, `terser ./ts-output/${file_name}.js -c -m -o ./assets/scripts/${file_name}.min.js`, undefined, 18)
         .then((child) => {
             children.push(child);
-            if (process.argv[2] === '--live' && files_length === 'triggered') {
-                const label = `Terser => ${file_name}`;
-                console.log(`[${label.padEnd(18, ' ')}]\tCopying assets to ./jekyll`);
-                fs.cpSync(path.resolve('./assets'), path.resolve('./jekyll/assets'), { recursive: true });
-            } else if (children.length === files_length) del_tso();
+            if (process.argv[2] !== '--live' && children.length === files_length) del_tso();
         })
         .catch(e => console.log(e));
 }
