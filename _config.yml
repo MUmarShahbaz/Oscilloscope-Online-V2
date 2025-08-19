@@ -28,7 +28,7 @@ plugins:
 url: "https://mumarshahbaz.github.io"
 baseurl: "/Oscilloscope-Online-V2"
 title: Oscilloscope Online
-description: "Oscilloscope Online is a powerful web serial plotter for electronics, data visualization, and custom signal analysis. Fast, customizable, and feature-rich."
+description: "Oscilloscope Online is a web serial plotter, an alternative to Arduino IDE's serial plotter. Feature-rich, clean UI, better charts and tables. It is suitable for data visualization in research work, sensor analysis and plain hobbyist-robotics. It's not limited to Arduino! It can work with any serial device including ESP32, STM and Raspbberry Pi!"
 lang: "en"
 keywords: [oscilloscope, online, web serial, plotter, electronics, data visualization, signal analysis, customisation, open source]
 author: M. Umar Shahbaz
