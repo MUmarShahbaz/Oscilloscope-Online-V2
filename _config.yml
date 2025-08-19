@@ -18,7 +18,8 @@ plugins:
   - jekyll-seo-tag
   - jekyll-minifier
   - jekyll_dynamic_assets
-  #- jekyll-purge-css
+  - jekyll-purge-css
+  - jekyll-terser
 
 #======================================================================
 #                             Information
@@ -97,6 +98,10 @@ collections:
 
 jekyll-minifier:
   compress_javascript: false
+
+terser:
+  compress:
+    drop_console: true
 
 PurgeCSS:
   content: [./_site/**/*.html, ./_site/**/*.js]

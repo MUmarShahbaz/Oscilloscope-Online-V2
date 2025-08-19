@@ -1,3 +1,18 @@
+GIT
+  remote: https://github.com/MUmarShahbaz/jekyll-purge-css.git
+  revision: d49c3a3d47c7079187e36a28404eceaccec21f37
+  specs:
+    jekyll-purge-css (0.1.0)
+      jekyll (>= 3.0, < 5.0)
+
+GIT
+  remote: https://github.com/RobertoJBeltran/jekyll-terser.git
+  revision: 1085bf66d692799af09fe39f8162a1e6e42a3cc4
+  specs:
+    jekyll-terser (0.2.3)
+      jekyll (>= 0.10.0)
+      terser (>= 1.0.0)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -92,6 +107,8 @@ GEM
       google-protobuf (~> 4.31)
     terminal-table (3.0.2)
       unicode-display_width (>= 1.1.1, < 3)
+    terser (1.2.6)
+      execjs (>= 0.3.0, < 3)
     uglifier (4.2.1)
       execjs (>= 0.3.0, < 3)
     unicode-display_width (2.6.0)
@@ -106,8 +123,10 @@ DEPENDENCIES
   bigdecimal
   jekyll
   jekyll-minifier
+  jekyll-purge-css!
   jekyll-seo-tag
   jekyll-sitemap
+  jekyll-terser!
   jekyll_dynamic_assets
   logger
   wdm (>= 0.1.0)
