@@ -70,17 +70,6 @@ exec('tsc', (error, stdout, stdin) => {
         process.exit(1);
     } else {
 
-        if (fs.existsSync(output)) {
-            fs.rmSync(output, { recursive: true, force: true });
-        }
-
-        try {
-            fs.mkdirSync(output, { recursive: true });
-            console.log('Recreated output directory successfully!');
-        } catch (err) {
-            console.error('Error in recreated output directory:', err);
-        }
-
         fs.readdir(input, async (err, files) => {
             if (err) {
                 console.error('Failed to read input directory:', err);
