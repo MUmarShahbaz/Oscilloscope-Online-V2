@@ -96,8 +96,14 @@ collections:
 #                          Asset Optimizers
 #======================================================================
 
+sass:
+  style: compressed
+  sourcemap: never
+  quiet_deps: false
+
 jekyll-minifier:
   compress_javascript: false
+  compress_css: false
 
 terser:
   compress:
