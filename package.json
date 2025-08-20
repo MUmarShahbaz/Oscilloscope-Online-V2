@@ -1,12 +1,9 @@
 {
   "scripts": {
-    "parse": "node ./dev_scripts/typescript_parser.js",
-    "install-all": "node ./dev_scripts/dependency_installer.js",
-    "serve": "npm run parse && bundle exec jekyll serve"
+    "serve": "tsc && bundle exec jekyll serve"
   },
   "dependencies": {
     "@types/w3c-web-serial": "^1.0.8",
-    "chokidar": "^4.0.3",
     "purgecss": "^7.0.2",
     "terser": "^5.36.0",
     "typescript": "^5.7.2"

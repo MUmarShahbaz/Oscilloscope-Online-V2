@@ -75,7 +75,7 @@ dynamic_assets:
     base: /assets
   master:
    - master.css
-   - status.min.js::defer-js
+   - status.js::defer-js
    - bootstrap.min.js::defer-js
   formats:
     defer-js: <script defer src="%s"></script>

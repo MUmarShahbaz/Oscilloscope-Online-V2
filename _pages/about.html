@@ -3,8 +3,6 @@ layout: default
 permalink: /about.html
 title: About
 nav-order: 2
-dynamic_assets:
-  files: dev_icons<</devicon.min.css
 ---
 
 <section aria-label="Dependencies" class="py-5">
@@ -135,7 +133,7 @@ dynamic_assets:
   <h1 class="display-1 text-center fw-bold my-5">About the Author</h1>
   <div class="row d-flex justify-content-center" style="min-height: 90vh;">
     <figure aria-label="Author Profile Picture" class="col-md-6 col-lg-4 d-flex flex-column justify-content-center align-items-center p-3 p-sm-5 p-lg-3">
-      <img class="img-fluid rounded-circle m-5 m-md-0" src="{{ '/img/profile_picture.jpg' | prepend: site.dynamic_assets.source.base }}" alt="Profile Picture">
+      <img class="img-fluid rounded-circle m-5 m-md-0" src="{{ '/assets/img/profile_picture.jpg' | absolute_url }}" alt="Profile Picture">
     </figure>
     <div class="col-md-6 col-lg-5 d-flex flex-column justify-content-center p-2">
       <div>
