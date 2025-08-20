@@ -106,6 +106,7 @@ terser:
 PurgeCSS:
   content: [./_site/**/*.html, ./_site/**/*.js]
   css: [./_site/assets/styles/*.css]
+  exclude: [uPlot.css]
   output: ./_site/assets/styles/
 
 #======================================================================
@@ -121,7 +122,9 @@ exclude:
   - dev_scripts/
   - node_modules/
   - temp/
+  - .dockerignore
   - .gitignore
+  - Dockerfile
   - Gemfile
   - Gemfile.lock
   - package.json

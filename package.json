@@ -1,11 +1,11 @@
 {
   "scripts": {
-    "serve": "tsc && bundle exec jekyll serve"
+    "serve": "tsc && bundle exec jekyll serve",
+    "build": "tsc && bundle exec jekyll build"
   },
   "dependencies": {
     "@types/w3c-web-serial": "^1.0.8",
     "purgecss": "^7.0.2",
-    "terser": "^5.36.0",
     "typescript": "^5.7.2"
   }
 }
