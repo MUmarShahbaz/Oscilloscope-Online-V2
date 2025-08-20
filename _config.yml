@@ -1,0 +1,139 @@
+#=====================================================================#
+#                             Table of Contents                       #
+#=====================================================================#
+#     1       #               Plugins                                 #
+#     2       #               Information                             #
+#     3       #               Head links                              #
+#     4       #               Archives & Collections                  #
+#     5       #               Asset Optimizers                        #
+#     6       #               Include/Exclude                         #
+#=====================================================================#
+
+#======================================================================
+#                               Plugins
+#======================================================================
+
+plugins:
+  - jekyll-sitemap
+  - jekyll-seo-tag
+  - jekyll-minifier
+  - jekyll_dynamic_assets
+  - jekyll-purge-css
+  - jekyll-terser
+
+#======================================================================
+#                             Information
+#======================================================================
+
+url: "https://mumarshahbaz.github.io"
+baseurl: "/Oscilloscope-Online-V2"
+title: Oscilloscope Online
+description: "Oscilloscope Online is a web serial plotter, an alternative to Arduino IDE's serial plotter. Feature-rich, clean UI, better charts and tables. It is suitable for data visualization in research work, sensor analysis and plain hobbyist-robotics. It's not limited to Arduino! It can work with any serial device including ESP32, STM and Raspbberry Pi!"
+lang: "en"
+keywords: [oscilloscope, online, web serial, plotter, electronics, data visualization, signal analysis, customisation, open source]
+author: M. Umar Shahbaz
+image: assets/img/icon.png
+logo: assets/img/icon.svg
+
+#======================================================================
+#                              Shareing
+#======================================================================
+
+share-presets:
+  intro:
+    class: intro
+    sites:
+      - Facebook
+      - X
+      - LinkedIn
+      - Reddit
+      - WhatsApp
+      - Telegram
+      - Messenger
+      - Devto
+      - Mail
+  end:
+    class: end
+    sites:
+      - Facebook
+      - X
+      - LinkedIn
+      - Reddit
+      - WhatsApp
+      - Telegram
+      - Messenger
+      - Devto
+      - Mail
+
+#======================================================================
+#                             Head links
+#======================================================================
+
+dynamic_assets:
+  absolute: true
+  source:
+    base: /assets
+  master:
+   - master.css
+   - status.js::defer-js
+   - bootstrap.min.js::defer-js
+  formats:
+    defer-js: <script defer src="%s"></script>
+  presets:
+    uPlot:
+     - uPlot.css
+     - uPlot.min.js::defer-js
+
+#======================================================================
+#                        Archives & Collection
+#======================================================================
+
+collections:
+  pages:
+    output: true
+
+#======================================================================
+#                          Asset Optimizers
+#======================================================================
+
+sass:
+  style: compressed
+  sourcemap: never
+  quiet_deps: false
+
+jekyll-minifier:
+  compress_javascript: false
+  compress_css: false
+
+terser:
+  compress:
+    drop_console: true
+
+PurgeCSS:
+  content: [./_site/**/*.html, ./_site/**/*.js]
+  css: [./_site/assets/styles/*.css]
+  exclude: [uPlot.css]
+  output: ./_site/assets/styles/
+
+#======================================================================
+#                              Include/Exclude
+#======================================================================
+
+exclude:
+  - .bundle/
+  - .github/
+  - .jekyll-cache/
+  - .vscode/
+  - assets/ts/
+  - dev_scripts/
+  - node_modules/
+  - temp/
+  - .dockerignore
+  - .gitignore
+  - Dockerfile
+  - Gemfile
+  - Gemfile.lock
+  - package.json
+  - package-lock.json
+  - README.md
+  - tsconfig.json

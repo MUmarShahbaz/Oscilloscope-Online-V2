@@ -1,0 +1,485 @@
+---
+layout: default
+permalink: /help.html
+title: Help
+nav-order: 6
+---
+
+{% assign setup_url = site.data.urls.setup | absolute_url %}
+{% assign plotter_url = site.data.urls.plotter | absolute_url %}
+{% assign svg_url = site.data.urls.svg | absolute_url %}
+{% assign github_url = site.data.urls.github %}
+
+{% include hero.liquid heading="Help & Documentation" bg="primary" text="Complete guide to using Oscilloscope Online V2 for serial data visualization" %}
+
+<div class="container py-5">
+  <!-- Quick Start Guide -->
+  <section class="mb-5" aria-labelledby="quickstart-heading">
+    <div class="card shadow-sm">
+      <div class="card-header bg-success text-white">
+        <h2 id="quickstart-heading" class="card-title mb-0">
+          <i aria-hidden="true" role="presentation" class="fas fa-rocket me-2"></i>Quick Start Guide
+        </h2>
+      </div>
+      <div class="card-body">
+        <div class="row">
+          <div class="col-lg-8">
+            <div class="list-group list-group-flush">
+              <div class="list-group-item d-flex align-items-start py-3">
+                <span class="badge bg-primary rounded-pill me-3 mt-1">1</span>
+                <div>
+                  <h5 class="mb-1">Setup Configuration</h5>
+                  <p class="mb-1">Navigate to the <a href="{{ setup_url }}">Setup page</a> to configure your serial communication parameters, chart settings, and graph options.</p>
+                  <small class="text-muted">Configure baud rate, data separator, axis types, and graph colors</small>
+                </div>
+              </div>
+              <div class="list-group-item d-flex align-items-start py-3">
+                <span class="badge bg-primary rounded-pill me-3 mt-1">2</span>
+                <div>
+                  <h5 class="mb-1">Connect Device</h5>
+                  <p class="mb-1">Go to the <a href="{{ plotter_url }}">Plotter page</a> and click "Connect" to select your serial port. Ensure your device is connected and transmitting data.</p>
+                  <small class="text-muted">Requires a browser with Web Serial API support (Chrome, Edge)</small>
+                </div>
+              </div>
+              <div class="list-group-item d-flex align-items-start py-3">
+                <span class="badge bg-primary rounded-pill me-3 mt-1">3</span>
+                <div>
+                  <h5 class="mb-1">Start Plotting</h5>
+                  <p class="mb-1">Click "Start Plotting" to begin real-time data visualization. Use the interactive controls to pause, clear, or export your data.</p>
+                  <small class="text-muted">Data will automatically update based on your configuration</small>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-4">
+            <div class="alert alert-info">
+              <h6><i aria-hidden="true" role="presentation" class="fas fa-lightbulb me-2"></i>Pro Tip</h6>
+              <p class="mb-0">Save your configuration using the Export button on the setup page to quickly reuse settings for different projects.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Data Format Guide -->
+  <section class="mb-5" aria-labelledby="dataformat-heading">
+    <div class="card shadow-sm">
+      <div class="card-header bg-info text-white">
+        <h2 id="dataformat-heading" class="card-title mb-0">
+          <i aria-hidden="true" role="presentation" class="fas fa-code me-2"></i>Data Format Guide
+        </h2>
+      </div>
+      <div class="card-body">
+        <div class="row">
+          <div class="col-md-6">
+            <h5>Expected Serial Data Format</h5>
+            <div class="bg-dark text-light p-3 rounded font-monospace mb-3">
+              value1<span class="text-warning">/</span>value2<span class="text-warning">/</span>value3<span class="text-warning">/</span>valueN<span class="text-info">\n</span>
+            </div>
+            <ul class="list-unstyled">
+              <li><i aria-hidden="true" role="presentation" class="fas fa-check text-success me-2"></i>Numeric values separated by configured break character (default: /)</li>
+              <li><i aria-hidden="true" role="presentation" class="fas fa-check text-success me-2"></i>Each data packet terminated with newline (\n)</li>
+              <li><i aria-hidden="true" role="presentation" class="fas fa-check text-success me-2"></i>Supports integer and floating-point numbers</li>
+              <li><i aria-hidden="true" role="presentation" class="fas fa-check text-success me-2"></i>Invalid values are treated as NaN and handled gracefully</li>
+            </ul>
+          </div>
+          <div class="col-md-6">
+            <h5>Arduino Example Code</h5>
+            <div class="bg-dark text-light p-3 rounded">
+              <pre class="mb-0"><code class="text-light">void setup() {
+  Serial.begin(115200);
+}
+
+void loop() {
+  float sensor1 = analogRead(A0) * 0.01;
+  float sensor2 = analogRead(A1) * 0.02;
+  float sensor3 = random(0, 100) / 10.0;
+  
+  Serial.print(sensor1);
+  Serial.print("/");
+  Serial.print(sensor2);
+  Serial.print("/");
+  Serial.println(sensor3);
+  
+  delay(100);
+}</code></pre>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Configuration Options -->
+  <section class="mb-5" aria-labelledby="config-heading">
+    <div class="card shadow-sm">
+      <div class="card-header bg-warning text-dark">
+        <h2 id="config-heading" class="card-title mb-0">
+          <i aria-hidden="true" role="presentation" class="fas fa-cogs me-2"></i>Configuration Options
+        </h2>
+      </div>
+      <div class="card-body">
+        <div class="row">
+          <div class="col-lg-4 mb-4">
+            <h5><i aria-hidden="true" role="presentation" class="fas fa-plug me-2 text-primary"></i>Serial Settings</h5>
+            <table class="table table-sm">
+              <tbody>
+                <tr>
+                  <td><strong>Break Character</strong></td>
+                  <td>Data value separator (default: /)</td>
+                </tr>
+                <tr>
+                  <td><strong>CLS Command</strong></td>
+                  <td>Clear screen trigger (default: %)</td>
+                </tr>
+                <tr>
+                  <td><strong>Export Commands</strong></td>
+                  <td>CSV (@), PNG (&), JSON ($)</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="col-lg-4 mb-4">
+            <h5><i aria-hidden="true" role="presentation" class="fas fa-chart-line me-2 text-success"></i>Chart Settings</h5>
+            <table class="table table-sm">
+              <tbody>
+                <tr>
+                  <td><strong>X-Axis Types</strong></td>
+                  <td>Linear or Time-based</td>
+                </tr>
+                <tr>
+                  <td><strong>Y-Axis Types</strong></td>
+                  <td>Linear, Log10, Log2</td>
+                </tr>
+                <tr>
+                  <td><strong>Auto Scaling</strong></td>
+                  <td>Automatic or manual range</td>
+                </tr>
+                <tr>
+                  <td><strong>Time Formats</strong></td>
+                  <td>ms, s.ms, m:s, h:m:s, d-h:m</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="col-lg-4 mb-4">
+            <h5><i aria-hidden="true" role="presentation" class="fas fa-palette me-2 text-info"></i>Visual Options</h5>
+            <table class="table table-sm">
+              <tbody>
+                <tr>
+                  <td><strong>Graph Count</strong></td>
+                  <td>Unlimited graphs per plot</td>
+                </tr>
+                <tr>
+                  <td><strong>Colors</strong></td>
+                  <td>Custom color for each graph</td>
+                </tr>
+                <tr>
+                  <td><strong>Points</strong></td>
+                  <td>Show/hide data points</td>
+                </tr>
+                <tr>
+                  <td><strong>Fill</strong></td>
+                  <td>Area under curve filling</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Export & Import Features -->
+  <section class="mb-5" aria-labelledby="exportimport-heading">
+    <div class="card shadow-sm">
+      <div class="card-header bg-secondary text-white">
+        <h2 id="exportimport-heading" class="card-title mb-0">
+          <i aria-hidden="true" role="presentation" class="fas fa-download me-2"></i>Export & Import Features
+        </h2>
+      </div>
+      <div class="card-body">
+        <div class="row">
+          <div class="col-md-6">
+            <h5>Export Formats</h5>
+            <div class="list-group">
+              <div class="list-group-item d-flex align-items-center">
+                <i aria-hidden="true" role="presentation" class="fas fa-file-csv fa-2x text-success me-3"></i>
+                <div>
+                  <h6 class="mb-1">CSV Export</h6>
+                  <small class="text-muted">Excel-compatible format with timestamps and data values</small>
+                </div>
+              </div>
+              <div class="list-group-item d-flex align-items-center">
+                <i aria-hidden="true" role="presentation" class="fas fa-image fa-2x text-primary me-3"></i>
+                <div>
+                  <h6 class="mb-1">PNG Export</h6>
+                  <small class="text-muted">High-quality raster image for presentations</small>
+                </div>
+              </div>
+              <div class="list-group-item d-flex align-items-center">
+                <i aria-hidden="true" role="presentation" class="fas fa-vector-square fa-2x text-warning me-3"></i>
+                <div>
+                  <h6 class="mb-1">SVG Export</h6>
+                  <small class="text-muted">Scalable vector graphics with customizable styling</small>
+                </div>
+              </div>
+              <div class="list-group-item d-flex align-items-center">
+                <i aria-hidden="true" role="presentation" class="fas fa-code fa-2x text-info me-3"></i>
+                <div>
+                  <h6 class="mb-1">JSON Export</h6>
+                  <small class="text-muted">Raw data and metadata for further analysis</small>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <h5>Import Capabilities</h5>
+            <div class="alert alert-light border">
+              <h6><i aria-hidden="true" role="presentation" class="fas fa-file-import me-2"></i>CSV Import</h6>
+              <p>Import previously exported CSV files to visualize historical data. The imported data will replace the current chart data.</p>
+              <h6><i aria-hidden="true" role="presentation" class="fas fa-cog me-2"></i>Configuration Import</h6>
+              <p>Load saved configuration files to quickly apply previously used settings for different projects or devices.</p>
+            </div>
+            <div class="alert alert-warning">
+              <h6><i aria-hidden="true" role="presentation" class="fas fa-exclamation-triangle me-2"></i>MCU Export Commands</h6>
+              <p class="mb-0">Your microcontroller can trigger exports by sending special characters:</p>
+              <ul class="mb-0 mt-2">
+                <li><code>@</code> - Trigger CSV export</li>
+                <li><code>&</code> - Trigger PNG export</li>
+                <li><code>$</code> - Trigger JSON export</li>
+                <li><code>%</code> - Clear current data</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Browser Compatibility -->
+  <section class="mb-5" aria-labelledby="browsercompat-heading">
+    <div class="card shadow-sm">
+      <div class="card-header bg-danger text-white">
+        <h2 id="browsercompat-heading" class="card-title mb-0">
+          <i aria-hidden="true" role="presentation" class="fas fa-browser me-2"></i>Browser Compatibility
+        </h2>
+      </div>
+      <div class="card-body">
+        <div class="row">
+          <div class="col-md-8">
+            <h5>Web Serial API Support</h5>
+            <p>Oscilloscope Online V2 requires the Web Serial API, which is currently supported in:</p>
+            <div class="row">
+              <div class="col-sm-6">
+                <div class="d-flex align-items-center mb-2">
+                  <i aria-hidden="true" role="presentation" class="fab fa-chrome fa-2x text-warning me-3"></i>
+                  <div>
+                    <strong>Google Chrome</strong><br>
+                    <small class="text-success">✓ Fully Supported (v89+)</small>
+                  </div>
+                </div>
+                <div class="d-flex align-items-center mb-2">
+                  <i aria-hidden="true" role="presentation" class="fab fa-edge fa-2x text-primary me-3"></i>
+                  <div>
+                    <strong>Microsoft Edge</strong><br>
+                    <small class="text-success">✓ Fully Supported (v89+)</small>
+                  </div>
+                </div>
+              </div>
+              <div class="col-sm-6">
+                <div class="d-flex align-items-center mb-2">
+                  <i aria-hidden="true" role="presentation" class="fab fa-firefox fa-2x text-warning me-3"></i>
+                  <div>
+                    <strong>Mozilla Firefox</strong><br>
+                    <small class="text-danger">✗ Not Supported</small>
+                  </div>
+                </div>
+                <div class="d-flex align-items-center mb-2">
+                  <i aria-hidden="true" role="presentation" class="fab fa-safari fa-2x text-info me-3"></i>
+                  <div>
+                    <strong>Safari</strong><br>
+                    <small class="text-danger">✗ Not Supported</small>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="alert alert-info">
+              <h6><i aria-hidden="true" role="presentation" class="fas fa-info-circle me-2"></i>Security Note</h6>
+              <p class="mb-0">Web Serial API requires HTTPS for security. This application uses HTTPS in both development and production modes.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Troubleshooting -->
+  <section class="mb-5" aria-labelledby="troubleshooting-heading">
+    <div class="card shadow-sm">
+      <div class="card-header bg-dark text-white">
+        <h2 id="troubleshooting-heading" class="card-title mb-0">
+          <i aria-hidden="true" role="presentation" class="fas fa-wrench me-2"></i>Troubleshooting
+        </h2>
+      </div>
+      <div class="card-body">
+  <div class="accordion" id="troubleshootingAccordion" role="region" aria-label="Troubleshooting">
+          <div class="accordion-item">
+            <h3 class="accordion-header" id="connectionIssues">
+              <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseConnection" aria-expanded="true" aria-controls="collapseConnection" aria-label="Expand Connection Issues">
+                <i aria-hidden="true" role="presentation" class="fas fa-plug me-2 text-danger"></i>Connection Issues
+              </button>
+            </h3>
+            <div id="collapseConnection" class="accordion-collapse collapse show" aria-labelledby="connectionIssues" data-bs-parent="#troubleshootingAccordion">
+              <div class="accordion-body">
+                <ul>
+                  <li><strong>Serial port not detected:</strong> Ensure your device is properly connected and drivers are installed</li>
+                  <li><strong>Connection fails:</strong> Try different baud rates and check if another application is using the port</li>
+                  <li><strong>Inconsistent connection:</strong> Some devices require multiple connection attempts - this is a known issue being worked on</li>
+                  <li><strong>Web Serial API not detected:</strong> Use Chrome or Edge browser with the latest version</li>
+                </ul>
+                <div class="alert alert-danger m-2 shadow-sm" role="alert">
+                  <i class="fas fa-times-circle me-2"></i>
+                  Web Serial API not found. Use a supported browser!
+                </div>
+                <div class="alert alert-success m-2 shadow-sm" role="alert">
+                  <i class="fas fa-check-circle me-2"></i>
+                  Web Serial API detected!
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <div class="accordion-item">
+            <h3 class="accordion-header" id="dataIssues">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseData" aria-expanded="false" aria-controls="collapseData" aria-label="Expand Data Display Issues">
+                <i aria-hidden="true" role="presentation" class="fas fa-chart-line me-2 text-warning"></i>Data Display Issues
+              </button>
+            </h3>
+            <div id="collapseData" class="accordion-collapse collapse" aria-labelledby="dataIssues" data-bs-parent="#troubleshootingAccordion">
+              <div class="accordion-body">
+                <ul>
+                  <li><strong>No data appearing:</strong> Check data format matches expected pattern (values separated by break character)</li>
+                  <li><strong>Incorrect number of graphs:</strong> Ensure the number of values per line matches your graph count configuration</li>
+                  <li><strong>Strange scaling:</strong> Try switching between auto and manual scaling options</li>
+                  <li><strong>Performance issues:</strong> Reduce update rate or limit the number of data points for better performance</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          
+          <div class="accordion-item">
+            <h3 class="accordion-header" id="exportIssues">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExport" aria-expanded="false" aria-controls="collapseExport" aria-label="Expand Export Issues">
+                <i aria-hidden="true" role="presentation" class="fas fa-download me-2 text-info"></i>Export Issues
+              </button>
+            </h3>
+            <div id="collapseExport" class="accordion-collapse collapse" aria-labelledby="exportIssues" data-bs-parent="#troubleshootingAccordion">
+              <div class="accordion-body">
+                <ul>
+                  <li><strong>PNG export not working:</strong> Ensure the chart is fully loaded and visible before exporting</li>
+                  <li><strong>CSV file is empty:</strong> Collect some data points before attempting to export</li>
+                  <li><strong>SVG export formatting:</strong> Check SVG configuration settings on the <a href="{{ svg_url }}">SVG page</a></li>
+                  <li><strong>Import fails:</strong> Ensure the CSV file format matches the expected structure</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Advanced Features -->
+  <section class="mb-5" aria-labelledby="advanced-heading">
+    <div class="card shadow-sm">
+      <div class="card-header bg-success text-white">
+        <h2 id="advanced-heading" class="card-title mb-0">
+          <i aria-hidden="true" role="presentation" class="fas fa-star me-2"></i>Advanced Features
+        </h2>
+      </div>
+      <div class="card-body">
+        <div class="row">
+          <div class="col-md-6">
+            <h5>Time-Based Plotting</h5>
+            <p>When using time-based X-axis, you can choose between:</p>
+            <ul>
+              <li><strong>Automatic time:</strong> Uses elapsed time since connection</li>
+              <li><strong>Manual time:</strong> First value in each data packet is treated as timestamp</li>
+            </ul>
+            
+            <h5>Logarithmic Scaling</h5>
+            <p>For data spanning multiple orders of magnitude:</p>
+            <ul>
+              <li><strong>Log10:</strong> Base-10 logarithmic scale</li>
+              <li><strong>Log2:</strong> Base-2 logarithmic scale</li>
+            </ul>
+          </div>
+          <div class="col-md-6">
+            <h5>Interactive Controls</h5>
+            <p>The chart supports mouse interactions:</p>
+            <ul>
+              <li><strong>Zoom:</strong> Mouse wheel or pinch gestures</li>
+              <li><strong>Pan:</strong> Click and drag to move around</li>
+              <li><strong>Reset:</strong> Double-click to reset view</li>
+            </ul>
+            
+            <h5>Real-time Performance</h5>
+            <p>Optimize performance by:</p>
+            <ul>
+              <li>Limiting maximum data points</li>
+              <li>Adjusting update rate</li>
+              <li>Using auto-update mode for better efficiency</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Support & Resources -->
+  <section class="mb-5" aria-labelledby="support-heading">
+    <div class="card shadow-sm">
+      <div class="card-header bg-primary text-white">
+        <h2 id="support-heading" class="card-title mb-0">
+          <i aria-hidden="true" role="presentation" class="fas fa-life-ring me-2"></i>Support & Resources
+        </h2>
+      </div>
+      <div class="card-body">
+        <div class="row text-center">
+          <div class="col-md-6 mb-3">
+            <a href="{{ github_url }}" class="btn btn-outline-dark btn-lg w-100" target="_blank">
+              <i aria-hidden="true" role="presentation" class="fab fa-github fa-2x mb-2"></i><br>
+              <strong>GitHub Repository</strong><br>
+              <small>Source code, issues, and contributions</small>
+            </a>
+          </div>
+          <div class="col-md-6 mb-3">
+            <a href="{{ github_url }}/issues" class="btn btn-outline-danger btn-lg w-100" target="_blank">
+              <i aria-hidden="true" role="presentation" class="fas fa-bug fa-2x mb-2"></i><br>
+              <strong>Report Issues</strong><br>
+              <small>Bug reports and feature requests</small>
+            </a>
+          </div>
+        </div>
+        
+        <div class="alert alert-light border mt-4">
+          <div class="row align-items-center">
+            <div class="col-md-8">
+              <h5 class="mb-1"><i aria-hidden="true" role="presentation" class="fas fa-heart text-danger me-2"></i>Enjoying Oscilloscope Online V2?</h5>
+              <p class="mb-0">Consider starring the repository on GitHub to support the project and help others discover this tool.</p>
+            </div>
+            <div class="col-md-4 text-end">
+              <a href="{{ github_url }}" class="btn btn-primary" target="_blank">
+                <i aria-hidden="true" role="presentation" class="fas fa-star me-2"></i>Star on GitHub
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
