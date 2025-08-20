@@ -1,7 +1,10 @@
 {
   "scripts": {
     "serve": "tsc && bundle exec jekyll serve",
-    "build": "tsc && bundle exec jekyll build"
+    "build": "tsc && bundle exec jekyll build",
+    "docker-image": "docker build -t oscilloscope-online .",
+    "docker-build": "docker run --rm -v %cd%/_site:/usr/src/app/_site oscilloscope-online npm run build",
+    "docker-build-production": "docker run --rm -v %cd%/_site:/usr/src/app/_site -e JEKYLL_ENV=production oscilloscope-online npm run build"
   },
   "dependencies": {
     "@types/w3c-web-serial": "^1.0.8",

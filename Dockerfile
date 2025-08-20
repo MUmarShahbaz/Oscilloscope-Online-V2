@@ -1,12 +1,11 @@
 FROM mumarshahbaz/jekyll:1.0.0
 
 WORKDIR /usr/src/app
-ENV JEKYLL_ENV=production
 
-COPY Gemfile Gemfile.lock package.json ./
+COPY Gemfile Gemfile.lock ./
 RUN bundle install
+
+COPY package.json ./
 RUN npm install
 
 COPY . .
-
-CMD ["sh", "-c", "npm run build"]
