@@ -1,14 +1,14 @@
 <footer class="bg-dark text-white pt-5 pb-4">
   <div class="container text-md-start text-center">
-    <div class="row">
+    <div class="row d-flex justify-content-between">
       <!-- Brand Column -->
-      <section class="col-md-4 mb-4" aria-label="About this website">
+      <section class="col-md-6 mb-4" aria-label="About this website">
         <h5 class="text-uppercase fw-bold">{{ site.title }}</h5>
         <p>{{ site.description }}</p>
       </section>
 
       <!-- Links Column -->
-      <nav class="col-md-4 mb-4" aria-label="Quick Links">
+      <nav class="col-md-auto mb-4" aria-label="Quick Links">
         <h5 class="text-uppercase fw-bold">Quick Links</h5>
         <ul class="list-unstyled">
           {% assign sorted_pages = site.pages | sort: 'nav-order' %}
@@ -21,7 +21,7 @@
       </nav>
 
       <!-- Social Column -->
-      <nav aria-label="Social Media" class="col-md-4 mb-4">
+      <nav aria-label="Social Media" class="col-md-auto mb-4">
         <h5 class="text-uppercase fw-bold">Follow Me</h5>
         <div class="d-flex gap-3 mt-2 justify-content-center justify-content-md-start">
           {% for social in site.data.socials %}
