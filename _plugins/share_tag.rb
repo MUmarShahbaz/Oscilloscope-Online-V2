@@ -92,4 +92,4 @@ module Jekyll
     end
 end
 
-Liquid::Template.register_tag('sharebar', Jekyll::Share)
+Liquid::Template.register_tag('share_bar', Jekyll::Share)
