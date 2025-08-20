@@ -1,19 +1,14 @@
 {
   "scripts": {
-    "dependencies": "node ./scripts/dependency_installer.js",
-    "parse": "node ./scripts/typescript_parser.js",
-    "build-dev": "node ./scripts/build.js --dev",
-    "build-prod": "node ./scripts/build.js --prod",
-    "clean": "node ./scripts/build_cleanup.js",
-    "host": "npm run parse && npm run build-dev && http-server ./jekyll/_site -p 8080 && npm run clean",
-    "live-host": "npm run parse && node ./scripts/build.js --prep && node ./scripts/live_host.js && npm run clean"
+    "serve": "tsc && bundle exec jekyll serve",
+    "build": "tsc && bundle exec jekyll build",
+    "docker-image": "docker build -t oscilloscope-online .",
+    "docker-build": "docker run --rm -v %cd%/_site:/usr/src/app/_site oscilloscope-online npm run build",
+    "docker-build-production": "docker run --rm -v %cd%/_site:/usr/src/app/_site -e JEKYLL_ENV=production oscilloscope-online npm run build"
   },
   "dependencies": {
     "@types/w3c-web-serial": "^1.0.8",
-    "chokidar": "^4.0.3",
-    "http-server": "^14.1.1",
-    "terser": "^5.36.0",
-    "typescript": "^5.7.2",
-    "yaml": "^2.8.0"
+    "purgecss": "^7.0.2",
+    "typescript": "^5.7.2"
   }
 }
