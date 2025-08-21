@@ -25,4 +25,17 @@ dynamic_assets:
   </div>
 </header>
 
-<hr class="my-5">
+{% capture compatibility-cards %}
+  {% include card-1x1-img.liquid image="/assets/img/mcu/arduino.webp" title="Arduino" %}
+  {% include card-1x1-img.liquid image="/assets/img/mcu/raspberry-pi.webp" title="Rapsberry Pi" %}
+  {% include card-1x1-img.liquid image="/assets/img/mcu/esp32.webp" title="ESP32" %}
+{% endcapture %}
+
+{% capture feature-cards %}
+  {% include card-1x1-img.liquid image="/assets/img/features/customization.png" title="Endless Options" %}
+  {% include card-1x1-img.liquid image="/assets/img/features/plug-and-play.png" title="Plug-and-Play" %}
+  {% include card-1x1-img.liquid image="/assets/img/features/export.png" title="Export Formats" %}
+{% endcapture %}
+
+{% include region-3-card.liquid aria-label="Compatibility" title="Compatible with all Serial Devices" cards=compatibility-cards %}
+{% include region-3-card.liquid aria-label="Features" title="Powerful Features of the Serial Plotter" cards=feature-cards dark="true" %}
