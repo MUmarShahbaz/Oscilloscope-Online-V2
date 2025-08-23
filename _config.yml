@@ -32,8 +32,8 @@ description: "Oscilloscope Online is a web serial plotter, an alternative to Ard
 lang: "en"
 keywords: [oscilloscope, online, web serial, plotter, electronics, data visualization, signal analysis, customisation, open source]
 author: M. Umar Shahbaz
-image: assets/img/icon.png
-logo: assets/img/icon.svg
+image: /assets/img/icon.png
+logo: /assets/img/icon.svg
 
 #======================================================================
 #                              Shareing
@@ -73,16 +73,38 @@ dynamic_assets:
   absolute: true
   source:
     base: /assets
-  master:
-   - master.css
-   - status.js::defer-js
-   - bootstrap.min.js::defer-js
   formats:
     defer-js: <script defer src="%s"></script>
+    preload-css: <link rel="preload" href="%s" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    noscript-css: <noscript><link rel="stylesheet" href="%s"></noscript>
+    preload-img: <link rel="preload" as="image" href="%s">
+  master:
+   - master.css::preload-css
+   - master.css::noscript-css
+   - bootstrap.min.js::defer-js
   presets:
-    uPlot:
-     - uPlot.css
-     - uPlot.min.js::defer-js
+    index:
+      - aos.min.js::defer-js
+      - img/hero.webp::preload-img
+    about:
+      - aos.min.js::defer-js
+    setup:
+      - forms.js::defer-js
+      - io.js::defer-js
+    plotter:
+      - uplot.css
+      - status.js::defer-js
+      - forms.js::defer-js
+      - uplot.min.js::defer-js
+      - io.js::defer-js
+      - serial_controller.js::defer-js
+      - uplot_controller.js::defer-js
+      - html2canvas.min.js::defer-js
+    svg:
+      - status.js::defer-js
+      - forms.js::defer-js
+      - io.js::defer-js
+      - svg_plotter.min.js::defer-js
 
 #======================================================================
 #                        Archives & Collection

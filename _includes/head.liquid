@@ -28,6 +28,7 @@
     document.addEventListener('DOMContentLoaded', function() {
       document.documentElement.style.visibility = 'visible';
       document.documentElement.style.opacity = 1;
+      try { AOS.init() } catch {};
     });
   </script>
 </head>
