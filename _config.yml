@@ -32,8 +32,8 @@ description: "Oscilloscope Online is a web serial plotter, an alternative to Ard
 lang: "en"
 keywords: [oscilloscope, online, web serial, plotter, electronics, data visualization, signal analysis, customisation, open source]
 author: M. Umar Shahbaz
-image: assets/img/icon.png
-logo: assets/img/icon.svg
+image: /assets/img/icon.png
+logo: /assets/img/icon.svg
 
 #======================================================================
 #                              Shareing
@@ -74,11 +74,13 @@ dynamic_assets:
   source:
     base: /assets
   master:
-   - master.css
-   - status.js::defer-js
-   - bootstrap.min.js::defer-js
+   - master.css:::<link rel="preload" href="%s" as="style" onload="this.onload=null;this.rel='stylesheet'">
+   - master.css:::<noscript><link rel="stylesheet" href="%s"></noscript>
+   - status.js::async-js
+   - bootstrap.min.js::async-js
   formats:
     defer-js: <script defer src="%s"></script>
+    async-js: <script async src="%s"></script>
   presets:
     uPlot:
      - uPlot.css

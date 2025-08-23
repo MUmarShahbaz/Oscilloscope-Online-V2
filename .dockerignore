@@ -4,3 +4,9 @@ _site/
 node_modules/
 temp/
 package-lock.json
+# TypeScript Outputs
+assets/scripts/forms.js
+assets/scripts/io.js
+assets/scripts/serial_controller.js
+assets/scripts/status.js
+assets/scripts/uplot_controller.js
