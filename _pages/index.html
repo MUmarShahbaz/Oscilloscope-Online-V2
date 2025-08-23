@@ -37,5 +37,12 @@ dynamic_assets:
   {% include card-1x1-img.liquid image="/assets/img/features/export.webp" title="Export Formats" %}
 {% endcapture %}
 
+{% capture usage-cards %}
+  {% include card-1x1-img.liquid image="/assets/img/usage/research.webp" title="Research Work" %}
+  {% include card-1x1-img.liquid image="/assets/img/usage/testing.webp" title="Electronics Testing" %}
+  {% include card-1x1-img.liquid image="/assets/img/usage/maths.webp" title="Live Math & Variables" %}
+{% endcapture %}
+
 {% include region-3-card.liquid aria-label="Compatibility" title="Compatible with all Serial Devices" cards=compatibility-cards %}
 {% include region-3-card.liquid aria-label="Features" title="Powerful Features of the Serial Plotter" cards=feature-cards dark="true" %}
+{% include region-3-card.liquid aria-label="Usage" title="Where can you use it?" cards=usage-cards %}
