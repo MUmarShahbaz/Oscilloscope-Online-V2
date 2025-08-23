@@ -32,8 +32,8 @@ description: "Oscilloscope Online is a web serial plotter, an alternative to Ard
 lang: "en"
 keywords: [oscilloscope, online, web serial, plotter, electronics, data visualization, signal analysis, customisation, open source]
 author: M. Umar Shahbaz
-image: assets/img/icon.png
-logo: assets/img/icon.svg
+image: /assets/img/icon.png
+logo: /assets/img/icon.svg
 
 #======================================================================
 #                              Shareing
