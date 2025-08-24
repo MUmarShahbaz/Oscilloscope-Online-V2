@@ -4,9 +4,7 @@ permalink: /
 title: Home
 nav-order: 1
 dynamic_assets:
-  files:
-  - aos.min.js::defer-js
-  - img/hero.webp:::<link rel="preload" as="image" href="%s">
+  presets: index
 ---
 
 {% assign setup_url = site.data.urls.setup | absolute_url %}
@@ -17,10 +15,10 @@ dynamic_assets:
 
 <header class="container-fluid d-flex align-items-center justify-content-center text-center p-0 overflow-hidden">
   <div class="row w-100">
-    <figure class="col-md-4 order-md-last d-flex align-items-center postion-relative p-0" data-aos="fade-left" data-aos-delay="500" data-aos-duration="2000">
+    <figure class="col-md-4 order-md-last d-flex align-items-center postion-relative p-0">
       <img src="{{ '/assets/img/hero.webp' | absolute_url }}" alt="Hero" class="img-fluid hero-image">
     </figure>
-    <div class="col-md-8 my-5 d-flex flex-column justify-content-center" data-aos="fade-right" data-aos-delay="500" data-aos-duration="2000">
+    <div class="col-md-8 my-5 d-flex flex-column justify-content-center">
       <h1 class="display-1">Oscilloscope Online</h1>
       <h2 class="display-5">Web Serial Plotter</h2>
     </div>
@@ -49,11 +47,44 @@ dynamic_assets:
 {% include region-3-card.liquid aria-label="Features" title="Powerful Features of the Serial Plotter" cards=feature-cards dark="true" %}
 {% include region-3-card.liquid aria-label="Usage" title="Where can you use it?" cards=usage-cards %}
 
+<article aria-label="Description" class="m-5 p-5 border">
+  <h2 class="display-5 my-3 fw-bold" data-aos="fade-up">What is Oscilloscope Online?</h2>
+  <p class="fs-4" data-aos="fade-up">
+    <span class="lead fs-2">Oscilloscope Online</span> is a lightweight, browser-based serial plotter powered by the Web
+    Serial API.
+    It enables anyone to visualize and monitor signals, sensor data, and other values directly from a microcontroller
+    (MCU) — without needing costly oscilloscopes or complex data loggers.
+  </p>
+  <h2 class="display-5 mt-5 mb-3 fw-bold" data-aos="fade-up">What's Next?</h2>
+  <p class="fs-4" data-aos="fade-up">
+    Oscilloscope Online is evolving into more than just a visualization tool. The goal is to create a collaborative hub
+    for data analysis, research, and experimentation.
+    Here are the major updates currently planned:
+  </p>
+  <h3 class="lead fs-2" data-aos="fade-up">Cloudoscope</h3>
+  <p class="fs-4" data-aos="fade-up">
+    A personal cloud workspace for every user. With online accounts, you'll be able to securely store, organize, and
+    access your data indefinitely.
+    Cloudoscope will also provide APIs for seamless uploading, downloading, and sharing of datasets.
+  </p>
+  <h3 class="lead fs-2" data-aos="fade-up">Datawave</h3>
+  <p class="fs-4" data-aos="fade-up">
+    Building on Cloudoscope, Datawave will introduce plug-and-play AI assistants.
+    These bots will be trainable on your datasets, helping you uncover insights, automate analysis, and accelerate
+    research with minimal setup.
+  </p>
+  <hr class="m-5">
+  <div data-aos="fade-up">
+    {% share_bar end %}
+  </div>
+</article>
+
+
 <section aria-label="Online Oscilloscope" class="container-fluid my-5 p-5 bg-dark text-white">
   <h2 class="display-5 text-center my-3 fw-bold" data-aos="fade-up">Online Oscilloscope</h2>
   <figure class="d-flex justify-content-center align-items-center">
     <img class="img-fluid" src="{{ '/assets/img/comparison.webp' || absolute_url }}" alt="Comparison against traditional Oscilloscopes" data-aos="fade-up" loading="lazy">
-  </figure>  
+  </figure>
 </section>
 
 <section aria-label="Arduino IDE Alternative" class="container-fluid my-5 p-5">
@@ -99,12 +130,12 @@ dynamic_assets:
 
 <section aria-label="Start Using Now!" class="py-5 bg-body-tertiary">
   <div class="container text-center">
-    <h2 class="fw-bold mb-3">Get started with Plotting</h2>
-    <p class="text-body-secondary mb-4">
+    <h2 class="fw-bold mb-3" data-aos="fade-up">Get started with Plotting</h2>
+    <p class="text-body-secondary mb-4" data-aos="fade-up">
       Begin plotting right away, find help if you need it, or dive into the source code.
     </p>
 
-    <div class="d-flex flex-column flex-sm-row gap-3 justify-content-center">
+    <div class="d-flex flex-column flex-sm-row gap-3 justify-content-center" data-aos="fade-up">
       <a href="{{ setup_url }}" class="btn btn-primary btn-lg px-4">
         <i class="fa-solid fa-play me-2"></i> Start
       </a>
@@ -120,12 +151,12 @@ dynamic_assets:
 
 <section aria-label="Other variants" class="py-5">
   <div class="container text-center">
-    <h3 class="fw-bold mb-3">Other Variants</h3>
-    <p class="text-body-secondary mb-4">
+    <h3 class="fw-bold mb-3" data-aos="fade-up">Other Variants</h3>
+    <p class="text-body-secondary mb-4" data-aos="fade-up">
       Explore older or alternative options for using the plotting tools.
     </p>
 
-    <div class="d-flex flex-column flex-sm-row gap-3 justify-content-center">
+    <div class="d-flex flex-column flex-sm-row gap-3 justify-content-center" data-aos="fade-up">
       <a href="{{ v1_url }}" class="btn btn-outline-secondary btn-lg px-4">
         <i class="fa-solid fa-code-branch me-2"></i> Old Variant
       </a>
