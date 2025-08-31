@@ -73,15 +73,20 @@ dynamic_assets:
   absolute: true
   source:
     base: /assets
+    woff2: /webfonts
   formats:
     defer-js: <script defer src="%s"></script>
     preload-css: <link rel="preload" href="%s" as="style" onload="this.onload=null;this.rel='stylesheet'">
     noscript-css: <noscript><link rel="stylesheet" href="%s"></noscript>
     preload-img: <link rel="preload" as="image" href="%s">
+    preload-woff2: <link rel="preload" href="%s" as="font" type="font/woff2" crossorigin>
   master:
    - master.css::preload-css
    - master.css::noscript-css
    - bootstrap.min.js::defer-js
+   - fa-brands-400.woff2::preload-woff2
+   - fa-regular-400.woff2::preload-woff2
+   - fa-solid-900.woff2::preload-woff2
   presets:
     index:
       - aos.min.js::defer-js
