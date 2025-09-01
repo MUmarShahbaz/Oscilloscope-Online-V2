@@ -16,7 +16,7 @@ dynamic_assets:
 <header class="container-fluid d-flex align-items-center justify-content-center text-center p-0 overflow-hidden">
   <div class="row w-100">
     <figure class="col-md-4 order-md-last d-flex align-items-center postion-relative p-0">
-      <img src="{{ '/assets/img/hero.webp' | absolute_url }}" alt="Hero" class="img-fluid hero-image">
+      <img src="{{ '/assets/img/hero.webp' | absolute_url }}" alt="Hero" class="img-fluid hero-image" style="aspect-ratio: 752/1128;">
     </figure>
     <div class="col-md-8 my-5 d-flex flex-column justify-content-center">
       <h1 class="display-1">Oscilloscope Online</h1>
@@ -47,28 +47,28 @@ dynamic_assets:
 {% include region-3-card.liquid aria-label="Features" title="Powerful Features of the Serial Plotter" cards=feature-cards dark="true" %}
 {% include region-3-card.liquid aria-label="Usage" title="Where can you use it?" cards=usage-cards %}
 
-<article aria-label="Description" class="m-5 p-5 border">
+<article aria-label="Description" class="m-1 m-sm-5 p-2 p-sm-5 border">
   <h2 class="display-5 my-3 fw-bold" data-aos="fade-up">What is Oscilloscope Online?</h2>
-  <p class="fs-4" data-aos="fade-up">
+  <p data-aos="fade-up">
     <span class="lead fs-2">Oscilloscope Online</span> is a lightweight, browser-based serial plotter powered by the Web
     Serial API.
     It enables anyone to visualize and monitor signals, sensor data, and other values directly from a microcontroller
     (MCU) — without needing costly oscilloscopes or complex data loggers.
   </p>
   <h2 class="display-5 mt-5 mb-3 fw-bold" data-aos="fade-up">What's Next?</h2>
-  <p class="fs-4" data-aos="fade-up">
+  <p data-aos="fade-up">
     Oscilloscope Online is evolving into more than just a visualization tool. The goal is to create a collaborative hub
     for data analysis, research, and experimentation.
     Here are the major updates currently planned:
   </p>
   <h3 class="lead fs-2" data-aos="fade-up">Cloudoscope</h3>
-  <p class="fs-4" data-aos="fade-up">
+  <p data-aos="fade-up">
     A personal cloud workspace for every user. With online accounts, you'll be able to securely store, organize, and
     access your data indefinitely.
     Cloudoscope will also provide APIs for seamless uploading, downloading, and sharing of datasets.
   </p>
   <h3 class="lead fs-2" data-aos="fade-up">Datawave</h3>
-  <p class="fs-4" data-aos="fade-up">
+  <p data-aos="fade-up">
     Building on Cloudoscope, Datawave will introduce plug-and-play AI assistants.
     These bots will be trainable on your datasets, helping you uncover insights, automate analysis, and accelerate
     research with minimal setup.
@@ -83,7 +83,7 @@ dynamic_assets:
 <section aria-label="Online Oscilloscope" class="container-fluid my-5 p-5 bg-dark text-white">
   <h2 class="display-5 text-center my-3 fw-bold" data-aos="fade-up">Online Oscilloscope</h2>
   <figure class="d-flex justify-content-center align-items-center">
-    <img class="img-fluid" src="{{ '/assets/img/comparison.webp' || absolute_url }}" alt="Comparison against traditional Oscilloscopes" data-aos="fade-up" loading="lazy">
+    <img class="img-fluid" src="{{ '/assets/img/comparison.webp' | absolute_url }}" alt="Comparison against traditional Oscilloscopes" data-aos="fade-up" loading="lazy">
   </figure>
 </section>
 
