@@ -1,10 +1,8 @@
 # Oscilloscope Online V2
 
-Still a work in progress
+Oscilloscope Online is a lightweight, browser-based serial plotter powered by the Web Serial API. It enables anyone to visualize and monitor signals, sensor data, and other values directly from a microcontroller (MCU) — without needing costly oscilloscopes or complex data loggers.
 
 # Demo Videos
-
-Note: The Serial Port can sometimes take multiple attempts to connect, still working on that.
 
 ## Main Example
 <video src="https://github.com/user-attachments/assets/71311716-f0da-418b-abcf-f2bf758aca8b" controls>
